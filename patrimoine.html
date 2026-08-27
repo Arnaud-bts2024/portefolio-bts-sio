@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion du Patrimoine | [PRÉNOM] [NOM]</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-terminal"></i> <span>[PRÉNOM].[NOM]</span></a>
+            <nav class="main-nav" id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="bts-sio.html">BTS SIO</a></li>
+                    <li><a href="parcours.html">Parcours</a></li>
+                    <li><a href="projets.html">Projets</a></li>
+                    <li><a href="stages.html">Stages</a></li>
+                    <li><a href="competences.html">Compétences</a></li>
+                    <li><a href="patrimoine.html" class="active">Patrimoine</a></li>
+                    <li><a href="veille.html">Veille</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <button id="themeToggle" aria-label="Basculer le mode clair/sombre"><i class="fa-solid fa-moon"></i></button>
+                <button class="hamburger" id="hamburger" aria-label="Menu mobile"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" style="max-width: 1200px; margin: 2rem auto; padding: 0 2rem;">
+        <section class="page-header" style="margin-bottom: 3rem;">
+            <h1>Gestion du Patrimoine Informatique</h1>
+            <p class="hero-subtitle">Gestion du parc, supervision et maintien en condition opérationnelle</p>
+        </section>
+
+        <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+            <div style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 10px;">
+                <h3><i class="fa-solid fa-boxes-stacked" style="color: var(--accent-color);"></i> Inventaire & Gestion (GLPI)</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Recensement des équipements, gestion du cycle de vie du matériel et suivi de la billetterie (tickets d'incidents).</p>
+            </div>
+            <div style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 10px;">
+                <h3><i class="fa-solid fa-floppy-disk" style="color: var(--accent-color);"></i> Sauvegardes (Veeam)</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Planification et automatisation des sauvegardes des machines virtuelles et bases de données selon la règle 3-2-1.</p>
+            </div>
+            <div style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 10px;">
+                <h3><i class="fa-solid fa-wrench" style="color: var(--accent-color);"></i> Maintenance Préventive</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Application des correctifs de sécurité (patch management) et vérification périodique des journaux d'évènements.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <p>&copy; 2026 [PRÉNOM] [NOM] — Portfolio BTS SIO SISR</p>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+</html>

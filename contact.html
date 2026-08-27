@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact | [PRÉNOM] [NOM]</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-terminal"></i> <span>[PRÉNOM].[NOM]</span></a>
+            <nav class="main-nav" id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="bts-sio.html">BTS SIO</a></li>
+                    <li><a href="parcours.html">Parcours</a></li>
+                    <li><a href="projets.html">Projets</a></li>
+                    <li><a href="stages.html">Stages</a></li>
+                    <li><a href="competences.html">Compétences</a></li>
+                    <li><a href="patrimoine.html">Patrimoine</a></li>
+                    <li><a href="veille.html">Veille</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <button id="themeToggle" aria-label="Basculer le mode clair/sombre"><i class="fa-solid fa-moon"></i></button>
+                <button class="hamburger" id="hamburger" aria-label="Menu mobile"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" style="max-width: 800px; margin: 2rem auto; padding: 0 2rem;">
+        <section class="page-header" style="margin-bottom: 3rem; text-align: center;">
+            <h1>Me Contacter</h1>
+            <p class="hero-subtitle">N'hésitez pas à me joindre pour toute opportunité professionnelle</p>
+        </section>
+
+        <section style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 2rem; border-radius: 10px;">
+            <form action="mailto:votre.email@exemple.com" method="post" enctype="text/plain" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <div>
+                    <label for="name" style="display: block; margin-bottom: 0.5rem; color: var(--text-main);">Nom / Prénom</label>
+                    <input type="text" id="name" name="name" required style="width: 100%; padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-main);">
+                </div>
+                <div>
+                    <label for="email" style="display: block; margin-bottom: 0.5rem; color: var(--text-main);">Adresse e-mail</label>
+                    <input type="email" id="email" name="email" required style="width: 100%; padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-main);">
+                </div>
+                <div>
+                    <label for="message" style="display: block; margin-bottom: 0.5rem; color: var(--text-main);">Message</label>
+                    <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-main);"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="align-self: flex-start; cursor: pointer;"><i class="fa-solid fa-paper-plane"></i> Envoyer</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <p>&copy; 2026 [PRÉNOM] [NOM] — Portfolio BTS SIO SISR</p>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+</html>

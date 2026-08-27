@@ -1,0 +1,82 @@
+/* ==========================================
+   RESPONSIVE DESIGN (Mobiles & Tablettes)
+   ========================================== */
+
+/* Tablettes (écran < 992px) */
+@media screen and (max-width: 992px) {
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding-top: 3rem;
+        text-align: center;
+    }
+
+    .terminal-badge {
+        margin: 0 auto 1.5rem auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .code-window {
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: left;
+    }
+}
+
+/* Mobiles (écran < 768px) */
+@media screen and (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .main-nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--bg-secondary);
+        border-bottom: 1px solid var(--border-color);
+        padding: 1rem 0;
+        display: none;
+    }
+
+    .main-nav.active {
+        display: block;
+    }
+
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+}
+
+/* Très petits écrans (< 480px) */
+@media screen and (max-width: 480px) {
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le BTS SIO | [PRÉNOM] [NOM]</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-terminal"></i> <span>[PRÉNOM].[NOM]</span>
+            </a>
+            <nav class="main-nav" id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="bts-sio.html" class="active">BTS SIO</a></li>
+                    <li><a href="parcours.html">Parcours</a></li>
+                    <li><a href="projets.html">Projets</a></li>
+                    <li><a href="stages.html">Stages</a></li>
+                    <li><a href="competences.html">Compétences</a></li>
+                    <li><a href="patrimoine.html">Patrimoine</a></li>
+                    <li><a href="veille.html">Veille</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <button id="themeToggle" aria-label="Basculer le mode clair/sombre"><i class="fa-solid fa-moon"></i></button>
+                <button class="hamburger" id="hamburger" aria-label="Menu mobile"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" style="max-width: 1200px; margin: 2rem auto; padding: 0 2rem;">
+        <section class="page-header" style="margin-bottom: 3rem;">
+            <h1>Le BTS Services Informatiques aux Organisations</h1>
+            <p class="hero-subtitle">Présentation du diplôme et de l'option SISR</p>
+        </section>
+
+        <section class="content-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem;">
+            <div class="card" style="background: var(--bg-card); padding: 2rem; border-radius: 10px; border: 1px solid var(--border-color);">
+                <h2><i class="fa-solid fa-network-wired" style="color: var(--accent-color);"></i> Option SISR</h2>
+                <h3 style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1rem;">Solutions d'Infrastructure, Systèmes et Réseaux</h3>
+                <p>L'option SISR forme des spécialistes des réseaux et des équipements informatiques. Le diplômé est capable de gérer le réseau d'une entreprise, d'assurer la sécurité des données, de déployer des serveurs et d'accompagner les utilisateurs.</p>
+            </div>
+
+            <div class="card" style="background: var(--bg-card); padding: 2rem; border-radius: 10px; border: 1px solid var(--border-color);">
+                <h2><i class="fa-solid fa-code" style="color: var(--accent-color);"></i> Option SLAM</h2>
+                <h3 style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1rem;">Solutions Logicielles et Applications Métiers</h3>
+                <p>L'option SLAM forme des développeurs d'applications. Le diplômé conçoit, développe et maintient des solutions logicielles, des sites web et des applications mobiles adaptées aux besoins des entreprises.</p>
+            </div>
+        </section>
+
+        <section class="e5-e6-info" style="background: var(--bg-card); padding: 2rem; border-radius: 10px; border: 1px solid var(--border-color);">
+            <h2>Épreuves professionnelles (SISR)</h2>
+            <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--text-muted);">
+                <li><strong>Épreuve E4 :</strong> Support et mise en disposition de services informatiques.</li>
+                <li><strong>Épreuve E5 :</strong> Administration des systèmes et des réseaux (projet de réalisation d'une solution d'infrastructure).</li>
+                <li><strong>Épreuve E6 :</strong> Cybersécurité des services informatiques.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <p>&copy; 2026 [PRÉNOM] [NOM] — Portfolio BTS SIO SISR</p>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+</html>
