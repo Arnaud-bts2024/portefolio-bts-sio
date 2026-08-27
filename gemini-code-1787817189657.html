@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Parcours | [PRÉNOM] [NOM]</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="nav-container">
+            <a href="index.html" class="logo"><i class="fa-solid fa-terminal"></i> <span>[PRÉNOM].[NOM]</span></a>
+            <nav class="main-nav" id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="bts-sio.html">BTS SIO</a></li>
+                    <li><a href="parcours.html" class="active">Parcours</a></li>
+                    <li><a href="projets.html">Projets</a></li>
+                    <li><a href="stages.html">Stages</a></li>
+                    <li><a href="competences.html">Compétences</a></li>
+                    <li><a href="patrimoine.html">Patrimoine</a></li>
+                    <li><a href="veille.html">Veille</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-actions">
+                <button id="themeToggle" aria-label="Basculer le mode clair/sombre"><i class="fa-solid fa-moon"></i></button>
+                <button class="hamburger" id="hamburger" aria-label="Menu mobile"><i class="fa-solid fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container" style="max-width: 1200px; margin: 2rem auto; padding: 0 2rem;">
+        <section class="page-header" style="margin-bottom: 3rem;">
+            <h1>Mon Parcours Académique & Professionnel</h1>
+            <p class="hero-subtitle">Chronologie de mes formations et expériences</p>
+        </section>
+
+        <section class="timeline" style="border-left: 2px solid var(--accent-color); padding-left: 2rem; margin-left: 1rem;">
+            <div style="margin-bottom: 2.5rem; position: relative;">
+                <div style="position: absolute; left: -2.6rem; top: 0; background: var(--accent-color); width: 1rem; height: 1rem; border-radius: 50%;"></div>
+                <span style="color: var(--accent-color); font-family: 'Fira Code', monospace; font-size: 0.9rem;">2024 — 2026</span>
+                <h3 style="margin-top: 0.3rem;">BTS SIO option SISR</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">Formation axée sur l'administration système, la gestion des réseaux et la cybersécurité des infrastructures.</p>
+            </div>
+
+            <div style="margin-bottom: 2.5rem; position: relative;">
+                <div style="position: absolute; left: -2.6rem; top: 0; background: var(--border-color); width: 1rem; height: 1rem; border-radius: 50%;"></div>
+                <span style="color: var(--text-muted); font-family: 'Fira Code', monospace; font-size: 0.9rem;">2024</span>
+                <h3 style="margin-top: 0.3rem;">Baccalauréat Général / STI2D</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">Obtention du baccalauréat avec spécialités scientifiques / technologiques informatique et numérique.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <p>&copy; 2026 [PRÉNOM] [NOM] — Portfolio BTS SIO SISR</p>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+</body>
+</html>
