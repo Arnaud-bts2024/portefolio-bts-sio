@@ -33,8 +33,12 @@ body {
     color: var(--text-main);
     line-height: 1.6;
     transition: var(--transition);
+    background-image: url('images/fond_écrant.jpg');
+    background-size: cover; /* L'image s'ajuste pour couvrir tout l'écran */
+    background-position: center; /* Centre l'image */
+    background-repeat: no-repeat; /* Empêche l'image de se répéter en mosaïque */
+    background-attachment: fixed; /* Garde l'image fixe lors du défilement */
 }
-
 /* Navbar */
 .site-header {
     position: sticky;
