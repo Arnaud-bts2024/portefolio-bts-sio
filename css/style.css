@@ -33,7 +33,7 @@ body {
     color: var(--text-main);
     line-height: 1.6;
     transition: var(--transition);
-    background-image: url('../images/fond_ecrant.jpg');
+    background-image: url('../images/fond_ecran.jpg');
     background-size: cover; /* L'image s'ajuste pour couvrir tout l'écran */
     background-position: center; /* Centre l'image */
     background-repeat: no-repeat; /* Empêche l'image de se répéter en mosaïque */
