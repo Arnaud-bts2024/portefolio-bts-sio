@@ -8,79 +8,134 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
-    
-    <!-- Script de la bibliothèque Page-Flip -->
-    <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
 
-    <!-- Styles spécifiques au Magazine -->
     <style>
-        .magazine-section {
-            margin-top: 3rem;
-            width: 100%;
-            clear: both;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
+        /* Conteneur principal propre */
+        .page-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Grille des compétences de base */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3.5rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card, #1e293b);
+            border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+            padding: 1.75rem;
             border-radius: 12px;
-            padding: 2rem 1rem;
-            text-align: center;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-color, #38bdf8);
+        }
+
+        .skill-card h3 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+        }
+
+        .skill-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            color: var(--text-muted, #94a3b8);
+            line-height: 2;
+        }
+
+        /* Section Galerie / Portfolio Certifications */
+        .certifs-section {
+            width: 100%;
+            background: var(--bg-card, #1e293b);
+            border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+            border-radius: 12px;
+            padding: 2.5rem 2rem;
             box-sizing: border-box;
         }
 
-        .magazine-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 1.5rem;
+        .certifs-header {
+            text-align: center;
+            margin-bottom: 2rem;
         }
 
-        .magazine-tabs button {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--border-color);
-            color: var(--text-color, #fff);
-            padding: 8px 16px;
-            border-radius: 6px;
+        .certifs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .certif-item {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+            border-radius: 8px;
+            overflow: hidden;
             cursor: pointer;
-            font-family: inherit;
-            font-weight: 500;
             transition: all 0.2s ease;
         }
 
-        .magazine-tabs button:hover {
-            background: var(--accent-color, #007bff);
-            color: #fff;
-            border-color: var(--accent-color, #007bff);
+        .certif-item:hover {
+            border-color: var(--accent-color, #38bdf8);
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
-        .magazine-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .certif-item img {
             width: 100%;
-            max-width: 950px;
-            margin: 0 auto;
-            min-height: 620px;
-            overflow: hidden;
-        }
-
-        /* Styles des pages du livre */
-        .page {
-            background-color: #1e293b;
-            color: #f8fafc;
-            border: 1px solid rgba(255,255,255,0.1);
-            overflow: hidden;
-        }
-
-        .page img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+            height: 160px;
+            object-fit: cover;
             display: block;
         }
 
-        .page-cover {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            border: 2px solid var(--accent-color, #38bdf8);
+        .certif-caption {
+            padding: 0.75rem 1rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-align: center;
+            color: var(--text-color, #f8fafc);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        /* Modal / Visionneuse Grand Écran */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.5);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -108,18 +163,17 @@
         </div>
     </header>
 
-    <main class="container" style="max-width: 1200px; margin: 2rem auto; padding: 0 1rem;">
-        <section class="page-header" style="margin-bottom: 2rem;">
+    <main class="page-wrapper">
+        <section class="page-header" style="margin-bottom: 2.5rem;">
             <h1>Compétences Techniques</h1>
             <p class="hero-subtitle">Savoir-faire acquis durant le cursus BTS SIO SISR</p>
         </section>
 
-        <!-- Grille des compétences de base -->
-        <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
-            <!-- Systèmes -->
-            <div style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 10px;">
-                <h3><i class="fa-brands fa-windows" style="color: var(--accent-color);"></i> Systèmes & Virtualisation</h3>
-                <ul style="color: var(--text-muted); margin-top: 0.8rem; line-height: 1.8;">
+        <!-- Grille des compétences -->
+        <section class="skills-grid">
+            <div class="skill-card">
+                <h3><i class="fa-brands fa-windows" style="color: var(--accent-color, #38bdf8);"></i> Systèmes & Virtualisation</h3>
+                <ul>
                     <li>Windows Server (AD DS, DNS, DHCP, GPO)</li>
                     <li>Linux (Debian, Ubuntu Server)</li>
                     <li>VMware ESXi & Proxmox VE</li>
@@ -127,10 +181,9 @@
                 </ul>
             </div>
 
-            <!-- Réseaux -->
-            <div style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 10px;">
-                <h3><i class="fa-solid fa-network-wired" style="color: var(--accent-color);"></i> Réseaux & Sécurité</h3>
-                <ul style="color: var(--text-muted); margin-top: 0.8rem; line-height: 1.8;">
+            <div class="skill-card">
+                <h3><i class="fa-solid fa-network-wired" style="color: var(--accent-color, #38bdf8);"></i> Réseaux & Sécurité</h3>
+                <ul>
                     <li>Routage & Commutation Cisco (VLAN, STP)</li>
                     <li>Pare-feu pfSense & Fortinet</li>
                     <li>Protocole VPN (OpenVPN, IPsec)</li>
@@ -138,10 +191,9 @@
                 </ul>
             </div>
 
-            <!-- Outils & Scripting -->
-            <div style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 10px;">
-                <h3><i class="fa-solid fa-code" style="color: var(--accent-color);"></i> Outillage & Scripting</h3>
-                <ul style="color: var(--text-muted); margin-top: 0.8rem; line-height: 1.8;">
+            <div class="skill-card">
+                <h3><i class="fa-solid fa-code" style="color: var(--accent-color, #38bdf8);"></i> Outillage & Scripting</h3>
+                <ul>
                     <li>PowerShell & Bash scripting</li>
                     <li>Supervision (Zabbix, Nagios)</li>
                     <li>Gestion de parc (GLPI)</li>
@@ -150,45 +202,63 @@
             </div>
         </section>
 
-        <!-- SECTION MAGAZINE INTERACTIF -->
-        <section class="magazine-section">
-            <h2><i class="fa-solid fa-book-open"></i> Portfolio de Certifications</h2>
-            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Feuilletez le livret officiel de mes diplômes et attestations</p>
-
-            <!-- Onglets de contrôle -->
-            <div class="magazine-tabs">
-                <button onclick="turnToPage(0)"><i class="fa-solid fa-bookmark"></i> Couverture</button>
-                <button onclick="turnToPage(2)"><i class="fa-solid fa-list"></i> Sommaire / CCNA</button>
-                <button onclick="turnToPage(6)"><i class="fa-solid fa-microchip"></i> IBM</button>
-                <button onclick="turnToPage(8)"><i class="fa-solid fa-shield-halved"></i> SecNum & Pix</button>
-                <button onclick="turnToPage(10)"><i class="fa-solid fa-award"></i> Fin</button>
+        <!-- Galerie des Certifications -->
+        <section class="certifs-section">
+            <div class="certifs-header">
+                <h2><i class="fa-solid fa-certificate"></i> Certifications & Attestations</h2>
+                <p style="color: var(--text-muted, #94a3b8); margin-top: 0.5rem;">Cliquez sur un document pour l'agrandir</p>
             </div>
 
-            <!-- Flipbook Container -->
-            <div class="magazine-container">
-                <div id="certifBook">
-                    <!-- Page 1 : Couverture -->
-                    <div class="page page-cover" data-density="hard"><img src="images/page1.jpg" alt="Page 1"></div>
-                    
-                    <!-- Page 2 : Garde neutre -->
-                    <div class="page" style="background: #0f172a;"></div>
-                    
-                    <!-- Pages intérieures -->
-                    <div class="page"><img src="images/page2.jpg" alt="Page 2"></div>
-                    <div class="page"><img src="images/page3.jpg" alt="Page 3"></div>
-                    <div class="page"><img src="images/page4.jpg" alt="Page 4"></div>
-                    <div class="page"><img src="images/page5.jpg" alt="Page 5"></div>
-                    <div class="page"><img src="images/page6.jpg" alt="Page 6"></div>
-                    <div class="page"><img src="images/page7.jpg" alt="Page 7"></div>
-                    <div class="page"><img src="images/page8.jpg" alt="Page 8"></div>
-                    <div class="page"><img src="images/page9.jpg" alt="Page 9"></div>
-                    
-                    <!-- Page 11 : Quatrième de couverture -->
-                    <div class="page page-cover" data-density="hard"><img src="images/page10.jpg" alt="Page 10"></div>
+            <div class="certifs-grid">
+                <div class="certif-item" onclick="openModal('images/page1.jpg')">
+                    <img src="images/page1.jpg" alt="Couverture">
+                    <div class="certif-caption">Couverture</div>
+                </div>
+                <div class="certif-item" onclick="openModal('images/page2.jpg')">
+                    <img src="images/page2.jpg" alt="Attestation 1">
+                    <div class="certif-caption">Attestation 1</div>
+                </div>
+                <div class="certif-item" onclick="openModal('images/page3.jpg')">
+                    <img src="images/page3.jpg" alt="Attestation 2">
+                    <div class="certif-caption">Attestation 2</div>
+                </div>
+                <div class="certif-item" onclick="openModal('images/page4.jpg')">
+                    <img src="images/page4.jpg" alt="Attestation 3">
+                    <div class="certif-caption">Attestation 3</div>
+                </div>
+                <div class="certif-item" onclick="openModal('images/page5.jpg')">
+                    <img src="images/page5.jpg" alt="Attestation 4">
+                    <div class="certif-caption">Attestation 4</div>
+                </div>
+                <div class="certif-item" onclick="openModal('images/page6.jpg')">
+                    <img src="images/page6.jpg" alt="Attestation 5">
+                    <div class="certif-caption">Attestation 5</div>
+                </div>
+                <div class="certif-item" onclick="openModal('images/page7.jpg')">
+                    <img src="images/page7.jpg" alt="Attestation 6">
+                    <div class="certif-caption">Attestation 6</div>
+                </div>
+                <div class="certif-item" onclick="openModal('images/page8.jpg')">
+                    <img src="images/page8.jpg" alt="Attestation 7">
+                    <div class="certif-caption">Attestation 7</div>
+                </div>
+                <div class="certif-item" onclick="openModal('images/page9.jpg')">
+                    <img src="images/page9.jpg" alt="Attestation 8">
+                    <div class="certif-caption">Attestation 8</div>
+                </div>
+                <div class="certif-item" onclick="openModal('images/page10.jpg')">
+                    <img src="images/page10.jpg" alt="Attestation 9">
+                    <div class="certif-caption">Attestation 9</div>
                 </div>
             </div>
         </section>
     </main>
+
+    <!-- Modal pour zoom d'image -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="modal-close">&times;</span>
+        <img id="modalImg" class="modal-content" src="" alt="Agrandissement">
+    </div>
 
     <footer class="site-footer">
         <div class="footer-container">
@@ -196,34 +266,17 @@
         </div>
     </footer>
 
-    <!-- Scripts JavaScript -->
     <script src="js/main.js"></script>
     <script>
-        let myBook;
+        function openModal(src) {
+            const modal = document.getElementById('imageModal');
+            const img = document.getElementById('modalImg');
+            img.src = src;
+            modal.style.display = 'flex';
+        }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const bookElement = document.getElementById('certifBook');
-
-            myBook = new St.PageFlip(bookElement, {
-                width: 450,
-                height: 600,
-                size: 'stretch',
-                minWidth: 300,
-                maxWidth: 480,
-                minHeight: 400,
-                maxHeight: 640,
-                maxShadowOpacity: 0.5,
-                showCover: true,
-                mobileScrollSupport: false
-            });
-
-            myBook.loadFromHTML(document.querySelectorAll('#certifBook .page'));
-        });
-
-        function turnToPage(pageIndex) {
-            if (myBook) {
-                myBook.flip(pageIndex);
-            }
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
         }
     </script>
 </body>
