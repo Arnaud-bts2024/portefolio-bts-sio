@@ -149,20 +149,26 @@
             <h2><i class="fa-solid fa-book-open"></i> Portfolio de Certifications</h2>
             <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Feuilletez le livret officiel de mes diplômes et attestations</p>
 
-            <!-- Onglets de contrôle ajustés aux 10 pages -->
+            <!-- Onglets de contrôle ajustés au nouvel ordonnancement des pages -->
             <div class="magazine-tabs">
                 <button onclick="turnToPage(0)"><i class="fa-solid fa-bookmark"></i> Couverture</button>
                 <button onclick="turnToPage(2)"><i class="fa-solid fa-list"></i> Sommaire</button>
-                <button onclick="turnToPage(3)"><i class="fa-solid fa-network-wired"></i> Cisco CCNA</button>
-                <button onclick="turnToPage(5)"><i class="fa-solid fa-microchip"></i> IBM</button>
-                <button onclick="turnToPage(7)"><i class="fa-solid fa-shield-halved"></i> SecNum & Pix</button>
-                <button onclick="turnToPage(9)"><i class="fa-solid fa-award"></i> Fin</button>
+                <button onclick="turnToPage(2)"><i class="fa-solid fa-network-wired"></i> Cisco CCNA</button>
+                <button onclick="turnToPage(6)"><i class="fa-solid fa-microchip"></i> IBM</button>
+                <button onclick="turnToPage(8)"><i class="fa-solid fa-shield-halved"></i> SecNum & Pix</button>
+                <button onclick="turnToPage(10)"><i class="fa-solid fa-award"></i> Fin</button>
             </div>
 
             <!-- Flipbook Container -->
             <div class="magazine-container">
                 <div id="certifBook">
+                    <!-- Page 1 (Droite) : Couverture -->
                     <div class="page page-cover" data-density="hard"><img src="images/page1.jpg" alt="Page 1"></div>
+                    
+                    <!-- Page 2 (Gauche) : Page neutre de garde pour recaler la double page -->
+                    <div class="page" style="background: #0f172a;"></div>
+                    
+                    <!-- Pages intérieures -->
                     <div class="page"><img src="images/page2.jpg" alt="Page 2"></div>
                     <div class="page"><img src="images/page3.jpg" alt="Page 3"></div>
                     <div class="page"><img src="images/page4.jpg" alt="Page 4"></div>
@@ -171,6 +177,8 @@
                     <div class="page"><img src="images/page7.jpg" alt="Page 7"></div>
                     <div class="page"><img src="images/page8.jpg" alt="Page 8"></div>
                     <div class="page"><img src="images/page9.jpg" alt="Page 9"></div>
+                    
+                    <!-- Page 11 (Droite) : Couverture arrière -->
                     <div class="page page-cover" data-density="hard"><img src="images/page10.jpg" alt="Page 10"></div>
                 </div>
             </div>
