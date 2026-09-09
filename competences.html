@@ -3,16 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compétences | [PRÉNOM] [NOM]</title>
+    <title>Compétences | Arnaud HOLLEBECQUE</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Script de la bibliothèque Page-Flip -->
+    <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+
+    <!-- Styles spécifiques au Magazine -->
+    <style>
+        .magazine-section {
+            margin-top: 4rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .magazine-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .magazine-tabs button {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-color, #fff);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .magazine-tabs button:hover {
+            background: var(--accent-color, #007bff);
+            color: #fff;
+            border-color: var(--accent-color, #007bff);
+        }
+
+        .magazine-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 620px;
+            overflow: hidden;
+        }
+
+        /* Styles des pages HTML du livre */
+        .page {
+            background-color: #1e293b;
+            color: #f8fafc;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .page-content {
+            padding: 2rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            box-sizing: border-box;
+        }
+
+        .page-cover {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border: 2px solid var(--accent-color, #38bdf8);
+        }
+
+        .certif-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid #38bdf8;
+            padding: 10px 14px;
+            margin-top: 12px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .certif-card h4 {
+            margin: 0 0 4px 0;
+            font-size: 0.95rem;
+            color: #38bdf8;
+        }
+
+        .certif-card p {
+            margin: 0;
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+    </style>
 </head>
 <body>
     <header class="site-header">
         <div class="nav-container">
-            <a href="index.html" class="logo"><i class="fa-solid fa-terminal"></i> <span>[PRÉNOM].[NOM]</span></a>
+            <a href="index.html" class="logo"><i class="fa-solid fa-terminal"></i> <span>Arnaud.HOLLEBECQUE</span></a>
             <nav class="main-nav" id="mainNav">
                 <ul>
                     <li><a href="index.html">Accueil</a></li>
@@ -39,6 +129,7 @@
             <p class="hero-subtitle">Savoir-faire acquis durant le cursus BTS SIO SISR</p>
         </section>
 
+        <!-- Grille des compétences de base -->
         <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
             <!-- Systèmes -->
             <div style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 2rem; border-radius: 10px;">
@@ -73,13 +164,168 @@
                 </ul>
             </div>
         </section>
+
+        <!-- SECTION MAGAZINE INTERACTIF DES CERTIFICATIONS -->
+        <section class="magazine-section">
+            <h2><i class="fa-solid fa-book-open"></i> Portfolio de Certifications</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Feuilletez le livret officiel de mes diplômes et attestations</p>
+
+            <!-- Onglets de contrôle -->
+            <div class="magazine-tabs">
+                <button onclick="turnToPage(0)"><i class="fa-solid fa-bookmark"></i> Sommaire</button>
+                <button onclick="turnToPage(1)"><i class="fa-solid fa-network-wired"></i> Cisco CCNA</button>
+                <button onclick="turnToPage(2)"><i class="fa-solid fa-microchip"></i> IBM & Cyber</button>
+                <button onclick="turnToPage(3)"><i class="fa-solid fa-shield-halved"></i> SecNum & Pix</button>
+                <button onclick="turnToPage(4)"><i class="fa-solid fa-file-contract"></i> RGPD</button>
+                <button onclick="turnToPage(5)"><i class="fa-solid fa-envelope"></i> Contact</button>
+            </div>
+
+            <!-- Flipbook Container -->
+            <div class="magazine-container">
+                <div id="certifBook">
+                    
+                    <!-- Page 1 : Sommaire / Couverture -->
+                    <div class="page page-cover" data-density="hard">
+                        <div class="page-content">
+                            <h2 style="color: #38bdf8; margin-bottom: 0.5rem;">Mes Certifications</h2>
+                            <p style="font-size: 0.9rem; opacity: 0.8;">Arnaud HOLLEBECQUE</p>
+                            <hr style="border-color: rgba(255,255,255,0.1); margin: 1.5rem 0;">
+                            <h3 style="font-size: 1rem; margin-bottom: 1rem;">Sommaire :</h3>
+                            <ul style="font-size: 0.85rem; line-height: 1.8; list-style: none; padding: 0;">
+                                <li>📌 <strong>P. 3 :</strong> Certifications Cisco CCNA</li>
+                                <li>📌 <strong>P. 4 :</strong> IBM & Cybersécurité</li>
+                                <li>📌 <strong>P. 5 :</strong> SecNumacadémie & Pix</li>
+                                <li>📌 <strong>P. 6 :</strong> Attestations RGPD / CNIL</li>
+                                <li>📌 <strong>P. 7 :</strong> Contact & Remerciements</li>
+                            </ul>
+                            <p style="margin-top: auto; font-size: 0.75rem; opacity: 0.6;">Cliquez sur un onglet ou attrapez le coin pour tourner ➔</p>
+                        </div>
+                    </div>
+
+                    <!-- Page 2 : Cisco -->
+                    <div class="page">
+                        <div class="page-content">
+                            <h3><i class="fa-solid fa-graduation-cap"></i> Certifications Cisco</h3>
+                            <div class="certif-card">
+                                <h4>CCNA : Présentation des réseaux</h4>
+                                <p>ERP André Maginot</p>
+                            </div>
+                            <div class="certif-card">
+                                <h4>CCNA : Switching, Routing & Wireless Essentials</h4>
+                                <p>ERP André Maginot</p>
+                            </div>
+                            <div class="certif-card">
+                                <h4>CCNA : Enterprise Networking, Security & Automation</h4>
+                                <p>ERP André Maginot</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Page 3 : IBM -->
+                    <div class="page">
+                        <div class="page-content">
+                            <h3><i class="fa-solid fa-brain"></i> IBM & Cybersecurity</h3>
+                            <div class="certif-card">
+                                <h4>Artificial Intelligence Fundamentals</h4>
+                                <p>IBM Professional Skills</p>
+                            </div>
+                            <div class="certif-card">
+                                <h4>Getting Started with Cybersecurity</h4>
+                                <p>IBM Professional Skills</p>
+                            </div>
+                            <div class="certif-card">
+                                <h4>Cybersecurity Fundamentals</h4>
+                                <p>IBM Professional Skills</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Page 4 : SecNum & Pix -->
+                    <div class="page">
+                        <div class="page-content">
+                            <h3><i class="fa-solid fa-user-shield"></i> SecNum & Pix</h3>
+                            <div class="certif-card">
+                                <h4>SecNumacadémie (ANSSI)</h4>
+                                <p>Attestation de réussite aux 4 modules SSI</p>
+                            </div>
+                            <div class="certif-card">
+                                <h4>Certification PIX</h4>
+                                <p>Score : 424 Pix (Niveau Indépendant 2)</p>
+                                <p>Centre ESRP EPNAK Roubaix</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Page 5 : RGPD -->
+                    <div class="page">
+                        <div class="page-content">
+                            <h3><i class="fa-solid fa-lock"></i> Conformité RGPD</h3>
+                            <div class="certif-card">
+                                <h4>Atelier RGPD — CNIL</h4>
+                                <p>Sensibilisation à la protection des données personnelles et sécurité du SI.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Page 6 : Contact -->
+                    <div class="page">
+                        <div class="page-content">
+                            <h3><i class="fa-solid fa-address-card"></i> Crédits & Contact</h3>
+                            <p style="font-size: 0.9rem; margin-top: 10px;"><strong>Arnaud HOLLEBECQUE</strong></p>
+                            <p style="font-size: 0.85rem; margin-top: 15px; color: #94a3b8;">Remerciements particuliers aux formateurs de l’EPNAK de Roubaix pour leur accompagnement.</p>
+                            <a href="contact.html" style="margin-top: auto; display: inline-block; padding: 10px; background: #38bdf8; color: #0f172a; text-align: center; border-radius: 6px; text-decoration: none; font-weight: bold;">Me contacter</a>
+                        </div>
+                    </div>
+
+                    <!-- Page 7 : Back cover -->
+                    <div class="page page-cover" data-density="hard">
+                        <div class="page-content" style="justify-content: center; align-items: center; text-align: center;">
+                            <i class="fa-solid fa-award" style="font-size: 3rem; color: #38bdf8; margin-bottom: 1rem;"></i>
+                            <h3>BTS SIO SISR</h3>
+                            <p style="font-size: 0.85rem; opacity: 0.7;">Dossier de compétences & Certifications</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="site-footer">
         <div class="footer-container">
-            <p>&copy; 2026 [PRÉNOM] [NOM] — Portfolio BTS SIO SISR</p>
+            <p>&copy; 2026 Arnaud HOLLEBECQUE — Portfolio BTS SIO SISR</p>
         </div>
     </footer>
+
+    <!-- Script JavaScript pour le déclenchement -->
     <script src="js/main.js"></script>
+    <script>
+        let myBook;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const bookElement = document.getElementById('certifBook');
+
+            myBook = new St.PageFlip(bookElement, {
+                width: 400,
+                height: 550,
+                size: 'fixed',
+                minWidth: 300,
+                maxWidth: 500,
+                minHeight: 400,
+                maxHeight: 650,
+                maxShadowOpacity: 0.5,
+                showCover: true,
+                mobileScrollSupport: false
+            });
+
+            myBook.loadFromHTML(document.querySelectorAll('#certifBook .page'));
+        });
+
+        function turnToPage(pageIndex) {
+            if (myBook) {
+                myBook.flip(pageIndex);
+            }
+        }
+    </script>
 </body>
 </html>
