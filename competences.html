@@ -57,45 +57,24 @@
             overflow: hidden;
         }
 
-        /* Styles des pages HTML du livre */
+        /* Styles des pages du livre */
         .page {
             background-color: #1e293b;
             color: #f8fafc;
             border: 1px solid rgba(255,255,255,0.1);
+            overflow: hidden;
         }
 
-        .page-content {
-            padding: 2rem;
+        .page img {
+            width: 100%;
             height: 100%;
-            display: flex;
-            flex-direction: column;
-            text-align: left;
-            box-sizing: border-box;
+            object-fit: contain;
+            display: block;
         }
 
         .page-cover {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             border: 2px solid var(--accent-color, #38bdf8);
-        }
-
-        .certif-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-left: 3px solid #38bdf8;
-            padding: 10px 14px;
-            margin-top: 12px;
-            border-radius: 0 6px 6px 0;
-        }
-
-        .certif-card h4 {
-            margin: 0 0 4px 0;
-            font-size: 0.95rem;
-            color: #38bdf8;
-        }
-
-        .certif-card p {
-            margin: 0;
-            font-size: 0.85rem;
-            opacity: 0.8;
         }
     </style>
 </head>
@@ -170,122 +149,29 @@
             <h2><i class="fa-solid fa-book-open"></i> Portfolio de Certifications</h2>
             <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Feuilletez le livret officiel de mes diplômes et attestations</p>
 
-            <!-- Onglets de contrôle -->
+            <!-- Onglets de contrôle ajustés aux 10 pages -->
             <div class="magazine-tabs">
-                <button onclick="turnToPage(0)"><i class="fa-solid fa-bookmark"></i> Sommaire</button>
-                <button onclick="turnToPage(1)"><i class="fa-solid fa-network-wired"></i> Cisco CCNA</button>
-                <button onclick="turnToPage(2)"><i class="fa-solid fa-microchip"></i> IBM & Cyber</button>
-                <button onclick="turnToPage(3)"><i class="fa-solid fa-shield-halved"></i> SecNum & Pix</button>
-                <button onclick="turnToPage(4)"><i class="fa-solid fa-file-contract"></i> RGPD</button>
-                <button onclick="turnToPage(5)"><i class="fa-solid fa-envelope"></i> Contact</button>
+                <button onclick="turnToPage(0)"><i class="fa-solid fa-bookmark"></i> Couverture</button>
+                <button onclick="turnToPage(2)"><i class="fa-solid fa-list"></i> Sommaire</button>
+                <button onclick="turnToPage(3)"><i class="fa-solid fa-network-wired"></i> Cisco CCNA</button>
+                <button onclick="turnToPage(5)"><i class="fa-solid fa-microchip"></i> IBM</button>
+                <button onclick="turnToPage(7)"><i class="fa-solid fa-shield-halved"></i> SecNum & Pix</button>
+                <button onclick="turnToPage(9)"><i class="fa-solid fa-award"></i> Fin</button>
             </div>
 
             <!-- Flipbook Container -->
             <div class="magazine-container">
                 <div id="certifBook">
-                    
-                    <!-- Page 1 : Sommaire / Couverture -->
-                    <div class="page page-cover" data-density="hard">
-                        <div class="page-content">
-                            <h2 style="color: #38bdf8; margin-bottom: 0.5rem;">Mes Certifications</h2>
-                            <p style="font-size: 0.9rem; opacity: 0.8;">Arnaud HOLLEBECQUE</p>
-                            <hr style="border-color: rgba(255,255,255,0.1); margin: 1.5rem 0;">
-                            <h3 style="font-size: 1rem; margin-bottom: 1rem;">Sommaire :</h3>
-                            <ul style="font-size: 0.85rem; line-height: 1.8; list-style: none; padding: 0;">
-                                <li>📌 <strong>P. 3 :</strong> Certifications Cisco CCNA</li>
-                                <li>📌 <strong>P. 4 :</strong> IBM & Cybersécurité</li>
-                                <li>📌 <strong>P. 5 :</strong> SecNumacadémie & Pix</li>
-                                <li>📌 <strong>P. 6 :</strong> Attestations RGPD / CNIL</li>
-                                <li>📌 <strong>P. 7 :</strong> Contact & Remerciements</li>
-                            </ul>
-                            <p style="margin-top: auto; font-size: 0.75rem; opacity: 0.6;">Cliquez sur un onglet ou attrapez le coin pour tourner ➔</p>
-                        </div>
-                    </div>
-
-                    <!-- Page 2 : Cisco -->
-                    <div class="page">
-                        <div class="page-content">
-                            <h3><i class="fa-solid fa-graduation-cap"></i> Certifications Cisco</h3>
-                            <div class="certif-card">
-                                <h4>CCNA : Présentation des réseaux</h4>
-                                <p>ERP André Maginot</p>
-                            </div>
-                            <div class="certif-card">
-                                <h4>CCNA : Switching, Routing & Wireless Essentials</h4>
-                                <p>ERP André Maginot</p>
-                            </div>
-                            <div class="certif-card">
-                                <h4>CCNA : Enterprise Networking, Security & Automation</h4>
-                                <p>ERP André Maginot</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Page 3 : IBM -->
-                    <div class="page">
-                        <div class="page-content">
-                            <h3><i class="fa-solid fa-brain"></i> IBM & Cybersecurity</h3>
-                            <div class="certif-card">
-                                <h4>Artificial Intelligence Fundamentals</h4>
-                                <p>IBM Professional Skills</p>
-                            </div>
-                            <div class="certif-card">
-                                <h4>Getting Started with Cybersecurity</h4>
-                                <p>IBM Professional Skills</p>
-                            </div>
-                            <div class="certif-card">
-                                <h4>Cybersecurity Fundamentals</h4>
-                                <p>IBM Professional Skills</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Page 4 : SecNum & Pix -->
-                    <div class="page">
-                        <div class="page-content">
-                            <h3><i class="fa-solid fa-user-shield"></i> SecNum & Pix</h3>
-                            <div class="certif-card">
-                                <h4>SecNumacadémie (ANSSI)</h4>
-                                <p>Attestation de réussite aux 4 modules SSI</p>
-                            </div>
-                            <div class="certif-card">
-                                <h4>Certification PIX</h4>
-                                <p>Score : 424 Pix (Niveau Indépendant 2)</p>
-                                <p>Centre ESRP EPNAK Roubaix</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Page 5 : RGPD -->
-                    <div class="page">
-                        <div class="page-content">
-                            <h3><i class="fa-solid fa-lock"></i> Conformité RGPD</h3>
-                            <div class="certif-card">
-                                <h4>Atelier RGPD — CNIL</h4>
-                                <p>Sensibilisation à la protection des données personnelles et sécurité du SI.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Page 6 : Contact -->
-                    <div class="page">
-                        <div class="page-content">
-                            <h3><i class="fa-solid fa-address-card"></i> Crédits & Contact</h3>
-                            <p style="font-size: 0.9rem; margin-top: 10px;"><strong>Arnaud HOLLEBECQUE</strong></p>
-                            <p style="font-size: 0.85rem; margin-top: 15px; color: #94a3b8;">Remerciements particuliers aux formateurs de l’EPNAK de Roubaix pour leur accompagnement.</p>
-                            <a href="contact.html" style="margin-top: auto; display: inline-block; padding: 10px; background: #38bdf8; color: #0f172a; text-align: center; border-radius: 6px; text-decoration: none; font-weight: bold;">Me contacter</a>
-                        </div>
-                    </div>
-
-                    <!-- Page 7 : Back cover -->
-                    <div class="page page-cover" data-density="hard">
-                        <div class="page-content" style="justify-content: center; align-items: center; text-align: center;">
-                            <i class="fa-solid fa-award" style="font-size: 3rem; color: #38bdf8; margin-bottom: 1rem;"></i>
-                            <h3>BTS SIO SISR</h3>
-                            <p style="font-size: 0.85rem; opacity: 0.7;">Dossier de compétences & Certifications</p>
-                        </div>
-                    </div>
-
+                    <div class="page page-cover" data-density="hard"><img src="images/page1.jpg" alt="Page 1"></div>
+                    <div class="page"><img src="images/page2.jpg" alt="Page 2"></div>
+                    <div class="page"><img src="images/page3.jpg" alt="Page 3"></div>
+                    <div class="page"><img src="images/page4.jpg" alt="Page 4"></div>
+                    <div class="page"><img src="images/page5.jpg" alt="Page 5"></div>
+                    <div class="page"><img src="images/page6.jpg" alt="Page 6"></div>
+                    <div class="page"><img src="images/page7.jpg" alt="Page 7"></div>
+                    <div class="page"><img src="images/page8.jpg" alt="Page 8"></div>
+                    <div class="page"><img src="images/page9.jpg" alt="Page 9"></div>
+                    <div class="page page-cover" data-density="hard"><img src="images/page10.jpg" alt="Page 10"></div>
                 </div>
             </div>
         </section>
@@ -297,7 +183,7 @@
         </div>
     </footer>
 
-    <!-- Script JavaScript pour le déclenchement -->
+    <!-- Scripts JavaScript -->
     <script src="js/main.js"></script>
     <script>
         let myBook;
