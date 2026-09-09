@@ -19,7 +19,7 @@
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 2rem;
+            padding: 2rem 1rem;
             text-align: center;
         }
 
@@ -49,12 +49,14 @@
             border-color: var(--accent-color, #007bff);
         }
 
+        /* Augmentation de la hauteur minimale du conteneur */
         .magazine-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 620px;
-            overflow: hidden;
+            min-height: 800px;
+            overflow: auto;
+            padding: 1rem 0;
         }
 
         /* Styles des pages du livre */
@@ -102,7 +104,7 @@
         </div>
     </header>
 
-    <main class="container" style="max-width: 1200px; margin: 2rem auto; padding: 0 2rem;">
+    <main class="container" style="max-width: 1300px; margin: 2rem auto; padding: 0 1rem;">
         <section class="page-header" style="margin-bottom: 3rem;">
             <h1>Compétences Techniques</h1>
             <p class="hero-subtitle">Savoir-faire acquis durant le cursus BTS SIO SISR</p>
@@ -149,11 +151,10 @@
             <h2><i class="fa-solid fa-book-open"></i> Portfolio de Certifications</h2>
             <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Feuilletez le livret officiel de mes diplômes et attestations</p>
 
-            <!-- Onglets de contrôle ajustés au nouvel ordonnancement des pages -->
+            <!-- Onglets de contrôle -->
             <div class="magazine-tabs">
                 <button onclick="turnToPage(0)"><i class="fa-solid fa-bookmark"></i> Couverture</button>
-                <button onclick="turnToPage(2)"><i class="fa-solid fa-list"></i> Sommaire</button>
-                <button onclick="turnToPage(2)"><i class="fa-solid fa-network-wired"></i> Cisco CCNA</button>
+                <button onclick="turnToPage(2)"><i class="fa-solid fa-list"></i> Sommaire / CCNA</button>
                 <button onclick="turnToPage(6)"><i class="fa-solid fa-microchip"></i> IBM</button>
                 <button onclick="turnToPage(8)"><i class="fa-solid fa-shield-halved"></i> SecNum & Pix</button>
                 <button onclick="turnToPage(10)"><i class="fa-solid fa-award"></i> Fin</button>
@@ -165,7 +166,7 @@
                     <!-- Page 1 (Droite) : Couverture -->
                     <div class="page page-cover" data-density="hard"><img src="images/page1.jpg" alt="Page 1"></div>
                     
-                    <!-- Page 2 (Gauche) : Page neutre de garde pour recaler la double page -->
+                    <!-- Page 2 (Gauche) : Page neutre de garde -->
                     <div class="page" style="background: #0f172a;"></div>
                     
                     <!-- Pages intérieures -->
@@ -199,14 +200,15 @@
         document.addEventListener('DOMContentLoaded', () => {
             const bookElement = document.getElementById('certifBook');
 
+            // Redimensionnement du livre : 550px de large x 750px de haut par page
             myBook = new St.PageFlip(bookElement, {
-                width: 400,
-                height: 550,
+                width: 550,
+                height: 750,
                 size: 'fixed',
-                minWidth: 300,
-                maxWidth: 500,
-                minHeight: 400,
-                maxHeight: 650,
+                minWidth: 320,
+                maxWidth: 600,
+                minHeight: 450,
+                maxHeight: 850,
                 maxShadowOpacity: 0.5,
                 showCover: true,
                 mobileScrollSupport: false
