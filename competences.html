@@ -15,12 +15,15 @@
     <!-- Styles spécifiques au Magazine -->
     <style>
         .magazine-section {
-            margin-top: 4rem;
+            margin-top: 3rem;
+            width: 100%;
+            clear: both;
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-radius: 12px;
             padding: 2rem 1rem;
             text-align: center;
+            box-sizing: border-box;
         }
 
         .magazine-tabs {
@@ -28,7 +31,7 @@
             justify-content: center;
             gap: 10px;
             flex-wrap: wrap;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .magazine-tabs button {
@@ -49,14 +52,15 @@
             border-color: var(--accent-color, #007bff);
         }
 
-        /* Augmentation de la hauteur minimale du conteneur */
         .magazine-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 800px;
-            overflow: auto;
-            padding: 1rem 0;
+            width: 100%;
+            max-width: 950px;
+            margin: 0 auto;
+            min-height: 620px;
+            overflow: hidden;
         }
 
         /* Styles des pages du livre */
@@ -104,18 +108,18 @@
         </div>
     </header>
 
-    <main class="container" style="max-width: 1300px; margin: 2rem auto; padding: 0 1rem;">
-        <section class="page-header" style="margin-bottom: 3rem;">
+    <main class="container" style="max-width: 1200px; margin: 2rem auto; padding: 0 1rem;">
+        <section class="page-header" style="margin-bottom: 2rem;">
             <h1>Compétences Techniques</h1>
             <p class="hero-subtitle">Savoir-faire acquis durant le cursus BTS SIO SISR</p>
         </section>
 
         <!-- Grille des compétences de base -->
-        <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+        <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
             <!-- Systèmes -->
-            <div style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 2rem; border-radius: 10px;">
+            <div style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 10px;">
                 <h3><i class="fa-brands fa-windows" style="color: var(--accent-color);"></i> Systèmes & Virtualisation</h3>
-                <ul style="color: var(--text-muted); margin-top: 1rem; line-height: 2;">
+                <ul style="color: var(--text-muted); margin-top: 0.8rem; line-height: 1.8;">
                     <li>Windows Server (AD DS, DNS, DHCP, GPO)</li>
                     <li>Linux (Debian, Ubuntu Server)</li>
                     <li>VMware ESXi & Proxmox VE</li>
@@ -124,9 +128,9 @@
             </div>
 
             <!-- Réseaux -->
-            <div style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 2rem; border-radius: 10px;">
+            <div style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 10px;">
                 <h3><i class="fa-solid fa-network-wired" style="color: var(--accent-color);"></i> Réseaux & Sécurité</h3>
-                <ul style="color: var(--text-muted); margin-top: 1rem; line-height: 2;">
+                <ul style="color: var(--text-muted); margin-top: 0.8rem; line-height: 1.8;">
                     <li>Routage & Commutation Cisco (VLAN, STP)</li>
                     <li>Pare-feu pfSense & Fortinet</li>
                     <li>Protocole VPN (OpenVPN, IPsec)</li>
@@ -135,9 +139,9 @@
             </div>
 
             <!-- Outils & Scripting -->
-            <div style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 2rem; border-radius: 10px;">
+            <div style="background: var(--bg-card); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 10px;">
                 <h3><i class="fa-solid fa-code" style="color: var(--accent-color);"></i> Outillage & Scripting</h3>
-                <ul style="color: var(--text-muted); margin-top: 1rem; line-height: 2;">
+                <ul style="color: var(--text-muted); margin-top: 0.8rem; line-height: 1.8;">
                     <li>PowerShell & Bash scripting</li>
                     <li>Supervision (Zabbix, Nagios)</li>
                     <li>Gestion de parc (GLPI)</li>
@@ -146,7 +150,7 @@
             </div>
         </section>
 
-        <!-- SECTION MAGAZINE INTERACTIF DES CERTIFICATIONS -->
+        <!-- SECTION MAGAZINE INTERACTIF -->
         <section class="magazine-section">
             <h2><i class="fa-solid fa-book-open"></i> Portfolio de Certifications</h2>
             <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Feuilletez le livret officiel de mes diplômes et attestations</p>
@@ -163,10 +167,10 @@
             <!-- Flipbook Container -->
             <div class="magazine-container">
                 <div id="certifBook">
-                    <!-- Page 1 (Droite) : Couverture -->
+                    <!-- Page 1 : Couverture -->
                     <div class="page page-cover" data-density="hard"><img src="images/page1.jpg" alt="Page 1"></div>
                     
-                    <!-- Page 2 (Gauche) : Page neutre de garde -->
+                    <!-- Page 2 : Garde neutre -->
                     <div class="page" style="background: #0f172a;"></div>
                     
                     <!-- Pages intérieures -->
@@ -179,7 +183,7 @@
                     <div class="page"><img src="images/page8.jpg" alt="Page 8"></div>
                     <div class="page"><img src="images/page9.jpg" alt="Page 9"></div>
                     
-                    <!-- Page 11 (Droite) : Couverture arrière -->
+                    <!-- Page 11 : Quatrième de couverture -->
                     <div class="page page-cover" data-density="hard"><img src="images/page10.jpg" alt="Page 10"></div>
                 </div>
             </div>
@@ -200,15 +204,14 @@
         document.addEventListener('DOMContentLoaded', () => {
             const bookElement = document.getElementById('certifBook');
 
-            // Redimensionnement du livre : 550px de large x 750px de haut par page
             myBook = new St.PageFlip(bookElement, {
-                width: 550,
-                height: 750,
-                size: 'fixed',
-                minWidth: 320,
-                maxWidth: 600,
-                minHeight: 450,
-                maxHeight: 850,
+                width: 450,
+                height: 600,
+                size: 'stretch',
+                minWidth: 300,
+                maxWidth: 480,
+                minHeight: 400,
+                maxHeight: 640,
                 maxShadowOpacity: 0.5,
                 showCover: true,
                 mobileScrollSupport: false
