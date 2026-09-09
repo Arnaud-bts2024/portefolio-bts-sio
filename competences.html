@@ -92,7 +92,7 @@
             background-color: #0f172a;
         }
 
-        /* Barre d'outils style FlipHTML5 (Navigation sous le livre) */
+        /* Barre d'outils (Navigation sous le livre) */
         .flipbook-controls {
             display: inline-flex;
             align-items: center;
@@ -200,14 +200,16 @@
 
             <div class="flipbook-container">
                 <div id="certifBook">
-                    <!-- Couverture avant -->
+                    <!-- Page 1 : Couverture principale -->
                     <div class="page page-cover" data-density="hard"><img src="images/page1.jpg" alt="Couverture"></div>
                     
-                    <!-- Garde intérieure (page neutre pour caler le vis-à-vis) -->
+                    <!-- Page neutre (intérieur de couverture pour placer le sommaire à droite) -->
                     <div class="page" style="background: #1e293b;"></div>
                     
+                    <!-- Page 2 : Sommaire (positionné à droite) -->
+                    <div class="page"><img src="images/page2.jpg" alt="Sommaire"></div>
+                    
                     <!-- Pages intérieures -->
-                    <div class="page"><img src="images/page2.jpg" alt="Page 2"></div>
                     <div class="page"><img src="images/page3.jpg" alt="Page 3"></div>
                     <div class="page"><img src="images/page4.jpg" alt="Page 4"></div>
                     <div class="page"><img src="images/page5.jpg" alt="Page 5"></div>
@@ -216,15 +218,15 @@
                     <div class="page"><img src="images/page8.jpg" alt="Page 8"></div>
                     <div class="page"><img src="images/page9.jpg" alt="Page 9"></div>
                     
-                    <!-- Couverture arrière -->
-                    <div class="page page-cover" data-density="hard"><img src="images/page10.jpg" alt="Page 10"></div>
+                    <!-- Quatrième de couverture : Remplacée par page11.jpg -->
+                    <div class="page page-cover" data-density="hard"><img src="images/page11.jpg" alt="Page 11"></div>
                 </div>
             </div>
 
             <!-- Barre de navigation -->
             <div class="flipbook-controls">
                 <button onclick="prevPage()" title="Page précédente"><i class="fa-solid fa-chevron-left"></i></button>
-                <span class="page-indicator" id="pageNum">Page 1 / 10</span>
+                <span class="page-indicator" id="pageNum">Page 1 / 11</span>
                 <button onclick="nextPage()" title="Page suivante"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
         </section>
@@ -243,7 +245,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             const book = document.getElementById('certifBook');
 
-            // Initialisation avec des ratios proches du format A4 portrait
             pageFlip = new St.PageFlip(book, {
                 width: 380,
                 height: 530,
@@ -260,7 +261,6 @@
 
             pageFlip.loadFromHTML(document.querySelectorAll('#certifBook .page'));
 
-            // Mise à jour de l'indicateur de page au changement
             pageFlip.on('flip', (e) => {
                 const total = pageFlip.getPageCount();
                 const current = e.data + 1;
