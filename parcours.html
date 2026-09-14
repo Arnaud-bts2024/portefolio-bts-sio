@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="css/style.css">
 
     <style>
-        /* Surcharges spécifiques à la page compétences */
         main.page-wrapper {
             display: block !important;
             width: 100% !important;
@@ -31,8 +30,8 @@
         }
 
         .skill-card {
-            background: var(--bg-card, #1e293b);
-            border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+            background: var(--bg-card, #1e2937);
+            border: 1px solid var(--border-color, #374151);
             padding: 1.5rem;
             border-radius: 12px;
         }
@@ -41,79 +40,78 @@
             list-style: none;
             padding: 0;
             margin-top: 1rem;
-            color: var(--text-muted, #94a3b8);
+            color: var(--text-muted, #9ca3af);
             line-height: 1.8;
         }
 
-        /* Section Liseuse FlipHTML5 */
-        .flipbook-wrapper {
-            width: 100% !important;
-            background: var(--bg-card, #1e293b);
-            border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
+        /* Cadre principal FlipHTML5 */
+        .flipbook-section {
+            width: 100%;
+            background: var(--bg-card, #1f2937);
+            border: 1px solid var(--border-color, #374151);
             border-radius: 16px;
             padding: 2rem 1rem;
             box-sizing: border-box;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
             text-align: center;
             margin-bottom: 3rem;
         }
 
-        .flipbook-iframe-container {
+        .flipbook-container {
             width: 100%;
-            height: 500px;
-            margin-top: 1.5rem;
+            height: 600px;
+            margin: 1.5rem 0;
             border-radius: 8px;
             overflow: hidden;
+            background: #000;
         }
 
-        .flipbook-iframe-container iframe {
+        .flipbook-container iframe {
             width: 100%;
             height: 100%;
             border: none;
         }
 
-        /* Zone de boutons sous le lecteur */
-        .action-buttons {
+        /* Zone de boutons sous la liseuse */
+        .contact-action-bar {
             display: flex !important;
             justify-content: center !important;
             align-items: center !important;
-            gap: 15px !important;
-            margin-top: 2rem !important;
-            flex-wrap: wrap !important;
-            position: relative !important;
-            z-index: 10 !important;
+            gap: 1rem !important;
+            margin-top: 1.5rem !important;
+            padding-top: 1rem !important;
+            border-top: 1px solid var(--border-color, #374151) !important;
         }
 
-        .btn-action {
-            display: inline-flex !important;
-            align-items: center !important;
-            gap: 8px !important;
-            padding: 12px 24px !important;
-            font-weight: 600 !important;
-            border-radius: 8px !important;
-            text-decoration: none !important;
-            transition: all 0.2s ease !important;
-            font-size: 0.95rem !important;
-        }
-
-        .btn-contact {
+        .btn-green {
             background-color: #22c55e !important;
             color: #ffffff !important;
+            padding: 0.8rem 1.5rem !important;
+            border-radius: 8px !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 0.5rem !important;
         }
 
-        .btn-contact:hover {
+        .btn-green:hover {
             background-color: #16a34a !important;
-            transform: translateY(-2px);
         }
 
-        .btn-external-link {
-            background-color: var(--accent-color, #38bdf8) !important;
-            color: #0f172a !important;
+        .btn-blue {
+            background-color: #38bdf8 !important;
+            color: #0b0f19 !important;
+            padding: 0.8rem 1.5rem !important;
+            border-radius: 8px !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 0.5rem !important;
         }
 
-        .btn-external-link:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
+        .btn-blue:hover {
+            background-color: #0ea5e9 !important;
         }
     </style>
 </head>
@@ -181,22 +179,22 @@
             </div>
         </section>
 
-        <!-- Section Lecteur PDF FlipHTML5 -->
-        <section class="flipbook-wrapper">
+        <!-- Section Flipbook -->
+        <section class="flipbook-section">
             <h2><i class="fa-solid fa-book-open"></i> Portfolio de Certifications</h2>
-            <p style="color: var(--text-muted, #94a3b8); margin-top: 0.3rem;">Feuilletez le livret directement ci-dessous</p>
+            <p style="color: var(--text-muted, #9ca3af);">Feuilletez le livret ci-dessous</p>
 
-            <div class="flipbook-iframe-container">
-                <iframe src="https://online.fliphtml5.com/fvfkdx/livret/" seamless="seamless" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true"></iframe>
+            <div class="flipbook-container">
+                <iframe src="https://online.fliphtml5.com/fvfkdx/livret/" allowfullscreen="true"></iframe>
             </div>
 
-            <!-- Boutons sous la liseuse -->
-            <div class="action-buttons">
-                <a href="mailto:ton.adresse@email.com" class="btn-action btn-contact">
+            <!-- Boutons de contact distincts et indépendants du PDF -->
+            <div class="contact-action-bar">
+                <a href="mailto:ton.adresse@email.com" class="btn-green">
                     <i class="fa-solid fa-envelope"></i> Me contacter par e-mail
                 </a>
-                <a href="https://online.fliphtml5.com/fvfkdx/livret/" target="_blank" rel="noopener noreferrer" class="btn-action btn-external-link">
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Plein écran
+                <a href="https://online.fliphtml5.com/fvfkdx/livret/" target="_blank" rel="noopener noreferrer" class="btn-blue">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Ouvrir en plein écran
                 </a>
             </div>
         </section>
