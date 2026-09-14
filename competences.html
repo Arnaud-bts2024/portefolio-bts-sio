@@ -13,9 +13,6 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
 
-    <!-- St.PageFlip Library -->
-    <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
-
     <style>
         /* Neutralisation des contraintes de grille pour forcer la pleine largeur */
         main.container, .page-wrapper {
@@ -47,85 +44,6 @@
             margin-top: 1rem;
             color: var(--text-muted, #94a3b8);
             line-height: 1.8;
-        }
-
-        /* --- SECTION MAGAZINE / FLIPBOOK STYLES --- */
-        .flipbook-wrapper {
-            width: 100% !important;
-            background: #0f172a;
-            border: 1px solid var(--border-color, rgba(255, 255, 255, 0.1));
-            border-radius: 16px;
-            padding: 2.5rem 1rem 1.5rem 1rem;
-            box-sizing: border-box;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            text-align: center;
-        }
-
-        .flipbook-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 580px;
-            margin: 1.5rem 0;
-            position: relative;
-        }
-
-        /* Conteneur Flipbook */
-        #certifBook {
-            margin: 0 auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .page {
-            background-color: #ffffff;
-            overflow: hidden;
-        }
-
-        .page img {
-            width: 100%;
-            height: 100%;
-            object-fit: fill;
-            display: block;
-        }
-
-        .page-cover {
-            background-color: #0f172a;
-        }
-
-        /* Barre d'outils (Navigation sous le livre) */
-        .flipbook-controls {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(30, 41, 59, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 8px 18px;
-            border-radius: 30px;
-            backdrop-filter: blur(8px);
-        }
-
-        .flipbook-controls button {
-            background: transparent;
-            border: none;
-            color: #f8fafc;
-            font-size: 1.1rem;
-            cursor: pointer;
-            padding: 6px 12px;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-        }
-
-        .flipbook-controls button:hover {
-            background: var(--accent-color, #38bdf8);
-            color: #0f172a;
-        }
-
-        .page-indicator {
-            color: #94a3b8;
-            font-size: 0.9rem;
-            font-weight: 500;
-            padding: 0 8px;
-            font-family: 'Fira Code', monospace;
         }
     </style>
 </head>
@@ -192,42 +110,6 @@
                 </ul>
             </div>
         </section>
-
-        <!-- SECTION LECTEUR FLIPBOOK -->
-        <section class="flipbook-wrapper">
-            <h2><i class="fa-solid fa-book-open"></i> Portfolio de Certifications</h2>
-            <p style="color: #94a3b8; margin-top: 0.3rem;">Feuilletez le document ou utilisez les commandes ci-dessous</p>
-
-            <div class="flipbook-container">
-                <div id="certifBook">
-                    <!-- Page 1 : Couverture -->
-                    <div class="page page-cover" data-density="hard"><img src="images/page1.jpg" alt="Couverture"></div>
-                    
-                    <!-- Page 2 : Copie de page9.jpg -->
-                    <div class="page"><img src="images/page9.jpg" alt="Copie Page 9"></div>
-                    
-                    <!-- Suite du document -->
-                    <div class="page"><img src="images/page2.jpg" alt="Page 2 original (Sommaire)"></div>
-                    <div class="page"><img src="images/page3.jpg" alt="Page 3"></div>
-                    <div class="page"><img src="images/page4.jpg" alt="Page 4"></div>
-                    <div class="page"><img src="images/page5.jpg" alt="Page 5"></div>
-                    <div class="page"><img src="images/page6.jpg" alt="Page 6"></div>
-                    <div class="page"><img src="images/page7.jpg" alt="Page 7"></div>
-                    <div class="page"><img src="images/page8.jpg" alt="Page 8"></div>
-                    <div class="page"><img src="images/page9.jpg" alt="Page 9"></div>
-                    
-                    <!-- Quatrième de couverture -->
-                    <div class="page page-cover" data-density="hard"><img src="images/page10.jpg" alt="Quatrième de couverture"></div>
-                </div>
-            </div>
-
-            <!-- Barre de navigation -->
-            <div class="flipbook-controls">
-                <button onclick="prevPage()" title="Page précédente"><i class="fa-solid fa-chevron-left"></i></button>
-                <span class="page-indicator" id="pageNum">Page 1 / 11</span>
-                <button onclick="nextPage()" title="Page suivante"><i class="fa-solid fa-chevron-right"></i></button>
-            </div>
-        </section>
     </main>
 
     <footer class="site-footer">
@@ -237,42 +119,5 @@
     </footer>
 
     <script src="js/main.js"></script>
-    <script>
-        let pageFlip;
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const book = document.getElementById('certifBook');
-
-            pageFlip = new St.PageFlip(book, {
-                width: 380,
-                height: 530,
-                size: 'fixed',
-                minWidth: 280,
-                maxWidth: 420,
-                minHeight: 400,
-                maxHeight: 600,
-                drawShadow: true,
-                maxShadowOpacity: 0.6,
-                showCover: true,
-                usePortrait: false
-            });
-
-            pageFlip.loadFromHTML(document.querySelectorAll('#certifBook .page'));
-
-            pageFlip.on('flip', (e) => {
-                const total = pageFlip.getPageCount();
-                const current = e.data + 1;
-                document.getElementById('pageNum').innerText = `Page ${current} / ${total}`;
-            });
-        });
-
-        function nextPage() {
-            if (pageFlip) pageFlip.flipNext();
-        }
-
-        function prevPage() {
-            if (pageFlip) pageFlip.flipPrev();
-        }
-    </script>
 </body>
 </html>
