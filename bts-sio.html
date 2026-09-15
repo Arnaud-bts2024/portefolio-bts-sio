@@ -3,26 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Le BTS SIO | Arnaud HOLLEBECQUE </title>
+    <title>Compétences | Arnaud HOLLEBECQUE</title>
+    
+    <!-- Polices & Icônes -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS Globaux -->
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+
+    <style>
+        body {
+            background-image: url('images/fond d'écrant.jpg') !important; /* Change 'mon-fond.jpg' par le vrai nom de ton image */
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            background-attachment: fixed !important;
+        }
+
+        main.page-wrapper {
+            display: block !important;
+            width: 100% !important;
+            max-width: 1400px !important;
+            margin: 0 auto !important;
+            padding: 2rem 1rem !important;
+            box-sizing: border-box !important;
+        }
+
+        .skills-grid {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .skill-card {
+            background: var(--bg-card, rgba(31, 41, 55, 0.9)); /* Légère transparence pour voir le fond derrière */
+            border: 1px solid var(--border-color, #374151);
+            padding: 1.5rem;
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+        }
+
+        .skill-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+            color: var(--text-muted, #9ca3af);
+            line-height: 1.8;
+        }
+
+        /* Cadre principal FlipHTML5 en grand */
+        .flipbook-section {
+            width: 100%;
+            background: var(--bg-card, rgba(31, 41, 55, 0.9));
+            border: 1px solid var(--border-color, #374151);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-sizing: border-box;
+            text-align: center;
+            margin-bottom: 3rem;
+            backdrop-filter: blur(5px);
+        }
+
+        /* Ajustement pour un affichage très grand */
+        .flipbook-container {
+            width: 100%;
+            height: 85vh; /* Prend 85% de la hauteur de l'écran */
+            min-height: 700px;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .flipbook-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Barre de boutons sous le lecteur */
+        .contact-action-bar {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            gap: 1rem !important;
+            margin-top: 1.5rem !important;
+            padding-top: 1rem !important;
+            border-top: 1px solid var(--border-color, #374151) !important;
+        }
+
+        .btn-green {
+            background-color: #22c55e !important;
+            color: #ffffff !important;
+            padding: 0.8rem 1.5rem !important;
+            border-radius: 8px !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 0.5rem !important;
+        }
+
+        .btn-green:hover {
+            background-color: #16a34a !important;
+        }
+
+        .btn-blue {
+            background-color: #38bdf8 !important;
+            color: #0b0f19 !important;
+            padding: 0.8rem 1.5rem !important;
+            border-radius: 8px !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            gap: 0.5rem !important;
+        }
+
+        .btn-blue:hover {
+            background-color: #0ea5e9 !important;
+        }
+    </style>
 </head>
 <body>
+
     <header class="site-header">
         <div class="nav-container">
-            <a href="index.html" class="logo">
-                <i class="fa-solid fa-terminal"></i> <span> Arnaud HOLLEBECQUE </span>
-            </a>
+            <a href="index.html" class="logo"><i class="fa-solid fa-terminal"></i> <span>Arnaud.HOLLEBECQUE</span></a>
             <nav class="main-nav" id="mainNav">
                 <ul>
                     <li><a href="index.html">Accueil</a></li>
-                    <li><a href="bts-sio.html" class="active">BTS SIO</a></li>
+                    <li><a href="bts-sio.html">BTS SIO</a></li>
                     <li><a href="parcours.html">Parcours</a></li>
                     <li><a href="projets.html">Projets</a></li>
                     <li><a href="stages.html">Stages</a></li>
-                    <li><a href="competences.html">Compétences</a></li>
+                    <li><a href="competences.html" class="active">Compétences</a></li>
                     <li><a href="patrimoine.html">Patrimoine</a></li>
                     <li><a href="veille.html">Veille</a></li>
                     <li><a href="contact.html">Contact</a></li>
@@ -35,33 +152,63 @@
         </div>
     </header>
 
-    <main class="container" style="max-width: 1200px; margin: 2rem auto; padding: 0 2rem;">
-        <section class="page-header" style="margin-bottom: 3rem;">
-            <h1>Le BTS Services Informatiques aux Organisations</h1>
-            <p class="hero-subtitle">Présentation du diplôme et de l'option SISR</p>
+    <main class="page-wrapper">
+        <section class="page-header" style="margin-bottom: 2rem;">
+            <h1>Compétences Techniques</h1>
+            <p class="hero-subtitle">Savoir-faire acquis durant le cursus BTS SIO SISR</p>
         </section>
 
-        <section class="content-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem;">
-            <div class="card" style="background: var(--bg-card); padding: 2rem; border-radius: 10px; border: 1px solid var(--border-color);">
-                <h2><i class="fa-solid fa-network-wired" style="color: var(--accent-color);"></i> Option SISR</h2>
-                <h3 style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1rem;">Solutions d'Infrastructure, Systèmes et Réseaux</h3>
-                <p>L'option SISR forme des spécialistes des réseaux et des équipements informatiques. Le diplômé est capable de gérer le réseau d'une entreprise, d'assurer la sécurité des données, de déployer des serveurs et d'accompagner les utilisateurs.</p>
+        <!-- Grille des compétences -->
+        <section class="skills-grid">
+            <div class="skill-card">
+                <h3><i class="fa-brands fa-windows" style="color: var(--accent-color, #38bdf8);"></i> Systèmes & Virtualisation</h3>
+                <ul>
+                    <li>Windows Server (AD DS, DNS, DHCP, GPO)</li>
+                    <li>Linux (Debian, Ubuntu Server)</li>
+                    <li>VMware ESXi & Proxmox VE</li>
+                    <li>Docker & Conteneurisation</li>
+                </ul>
             </div>
 
-            <div class="card" style="background: var(--bg-card); padding: 2rem; border-radius: 10px; border: 1px solid var(--border-color);">
-                <h2><i class="fa-solid fa-code" style="color: var(--accent-color);"></i> Option SLAM</h2>
-                <h3 style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1rem;">Solutions Logicielles et Applications Métiers</h3>
-                <p>L'option SLAM forme des développeurs d'applications. Le diplômé conçoit, développe et maintient des solutions logicielles, des sites web et des applications mobiles adaptées aux besoins des entreprises.</p>
+            <div class="skill-card">
+                <h3><i class="fa-solid fa-network-wired" style="color: var(--accent-color, #38bdf8);"></i> Réseaux & Sécurité</h3>
+                <ul>
+                    <li>Routage & Commutation Cisco (VLAN, STP)</li>
+                    <li>Pare-feu pfSense & Fortinet</li>
+                    <li>Protocole VPN (OpenVPN, IPsec)</li>
+                    <li>Analyse de trames (Wireshark)</li>
+                </ul>
+            </div>
+
+            <div class="skill-card">
+                <h3><i class="fa-solid fa-code" style="color: var(--accent-color, #38bdf8);"></i> Outillage & Scripting</h3>
+                <ul>
+                    <li>PowerShell & Bash scripting</li>
+                    <li>Supervision (Zabbix, Nagios)</li>
+                    <li>Gestion de parc (GLPI)</li>
+                    <li>Gestion de versions (Git / GitHub)</li>
+                </ul>
             </div>
         </section>
 
-        <section class="e5-e6-info" style="background: var(--bg-card); padding: 2rem; border-radius: 10px; border: 1px solid var(--border-color);">
-            <h2>Épreuves professionnelles (SISR)</h2>
-            <ul style="margin-top: 1rem; padding-left: 1.5rem; color: var(--text-muted);">
-                <li><strong>Épreuve E4 :</strong> Support et mise en disposition de services informatiques.</li>
-                <li><strong>Épreuve E5 :</strong> Administration des systèmes et des réseaux (projet de réalisation d'une solution d'infrastructure).</li>
-                <li><strong>Épreuve E6 :</strong> Cybersécurité des services informatiques.</li>
-            </ul>
+        <!-- Section Flipbook en Grand Affichage -->
+        <section class="flipbook-section">
+            <h2><i class="fa-solid fa-book-open"></i> Portfolio de Certifications</h2>
+            <p style="color: var(--text-muted, #9ca3af);">Feuilletez le livret ci-dessous</p>
+
+            <div class="flipbook-container">
+                <iframe src="https://online.fliphtml5.com/fvfkdx/uksp/" allowfullscreen="true" style="border: none;"></iframe>
+            </div>
+
+            <!-- Boutons sous le grand lecteur -->
+            <div class="contact-action-bar">
+                <a href="mailto:ton.adresse@email.com" class="btn-green">
+                    <i class="fa-solid fa-envelope"></i> Me contacter par e-mail
+                </a>
+                <a href="https://online.fliphtml5.com/fvfkdx/uksp/" target="_blank" rel="noopener noreferrer" class="btn-blue">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Plein écran
+                </a>
+            </div>
         </section>
     </main>
 
@@ -70,6 +217,7 @@
             <p>&copy; 2026 Arnaud HOLLEBECQUE — Portfolio BTS SIO SISR</p>
         </div>
     </footer>
+
     <script src="js/main.js"></script>
 </body>
 </html>
