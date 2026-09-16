@@ -26,7 +26,7 @@ body {
     position: relative;
 }
 
-/* 1. Gestion de ton élément de fond d'écran */
+/* 1. Gestion de l'arrière-plan fixatif */
 .background-container {
     position: fixed;
     top: 0;
@@ -37,8 +37,8 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    z-index: -1; /* Placé en arrière-plan pour ne pas masquer le contenu */
-    pointer-events: none; /* Évite de bloquer les clics de la souris */
+    z-index: -1;
+    pointer-events: none;
 }
 
 /* 2. Contenu principal transparent */
