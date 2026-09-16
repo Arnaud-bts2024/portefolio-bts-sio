@@ -18,35 +18,29 @@ html, body {
     width: 100%;
 }
 
-/* Fond d'écran appliqué via l'URL complète du dépôt GitHub Pages */
+/* Image de fond sur tout le site */
 body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     color: var(--text-main);
     line-height: 1.6;
     
-    background-color: var(--bg-primary) !important;
-    background-image: url('https://arnaud-bts2024.github.io/portefolio-bts-sio/images/fond-ecrant.jpg') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-attachment: fixed !important;
+    background-color: var(--bg-primary);
+    background-image: url('../images/fond-ecran.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     
     display: flex;
     flex-direction: column;
 }
 
-/* Rend les blocs transparents pour laisser voir l'image de fond */
-div, main, section, header, footer,
-.main-content, .hero, .hero-container, .background-container {
-    background-color: transparent !important;
-}
-
-/* Navigation (Navbar) */
+/* Navbar */
 .site-header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: rgba(11, 15, 25, 0.75) !important;
+    background-color: rgba(11, 15, 25, 0.8);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border-color);
 }
@@ -80,7 +74,7 @@ div, main, section, header, footer,
     text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
 }
 
-/* Section d'accueil (Hero) */
+/* Section centrale */
 .hero {
     max-width: 1200px;
     margin: 0 auto;
@@ -103,9 +97,9 @@ div, main, section, header, footer,
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
-/* Pied de page (Footer) */
+/* Footer */
 .site-footer {
-    background-color: rgba(11, 15, 25, 0.85) !important;
+    background-color: rgba(11, 15, 25, 0.85);
     border-top: 1px solid var(--border-color);
     padding: 2rem 0;
     margin-top: auto;
