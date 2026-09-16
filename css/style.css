@@ -24,21 +24,22 @@ body {
     min-height: 100vh;
 }
 
-/* Gestion du fond d'écran */
+/* Gestion du fond d'écran fixé avec voile sombre pour la lisibilité */
 .background-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-image: url('../images/fond-ecran.jpg');
+    background: linear-gradient(rgba(11, 15, 25, 0.75), rgba(11, 15, 25, 0.75)), 
+                url('../images/fond-ecrant.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     z-index: -1;
 }
 
-/* Navbar */
+/* Header & Nav */
 .site-header {
     position: sticky;
     top: 0;
@@ -53,21 +54,21 @@ body {
     margin: 0 auto;
     padding: 1rem 2rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
 .main-nav ul {
     display: flex;
     list-style: none;
-    gap: 1.5rem;
+    gap: 2rem;
 }
 
 .main-nav a {
     text-decoration: none;
     color: var(--text-muted);
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 1rem;
     transition: var(--transition);
 }
 
@@ -80,17 +81,19 @@ body {
 .hero {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 4rem 2rem;
+    padding: 6rem 2rem;
     text-align: center;
 }
 
 .hero h1 {
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    color: #ffffff;
 }
 
 .hero h2 {
     color: var(--accent-color);
-    font-size: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: 600;
 }
