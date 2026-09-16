@@ -1,10 +1,8 @@
 :root {
     --bg-primary: #0b0f19;
-    --bg-secondary: #111827;
     --text-main: #ffffff;
     --text-muted: #cbd5e1;
     --accent-color: #38bdf8;
-    --accent-hover: #0ea5e9;
     --border-color: rgba(255, 255, 255, 0.15);
     --transition: all 0.3s ease;
 }
@@ -15,26 +13,18 @@
     box-sizing: border-box;
 }
 
+/* Image de fond appliquée directement sur le body */
 body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     color: var(--text-main);
     line-height: 1.6;
     background-color: var(--bg-primary);
-    min-height: 100vh;
-}
-
-/* Arrière-plan fixed sans filtre trop sombre */
-.background-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
     background-image: url('../images/fond-ecrant.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    z-index: -1;
+    background-attachment: fixed;
+    min-height: 100vh;
 }
 
 /* Barre de navigation */
