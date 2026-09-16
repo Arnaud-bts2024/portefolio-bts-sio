@@ -18,19 +18,34 @@ html, body {
     width: 100%;
 }
 
-/* Image de fond sur tout le site */
 body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     color: var(--text-main);
     line-height: 1.6;
-    
     background-color: var(--bg-primary);
+    position: relative;
+}
+
+/* 1. Gestion de ton élément de fond d'écran */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     background-image: url('../images/fond-ecran.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
-    
+    z-index: 1; /* Placée sous le contenu */
+}
+
+/* 2. Rendre le contenu transparent pour voir l'image derrière */
+.main-content {
+    position: relative;
+    z-index: 2; /* Placée au-dessus de l'image */
+    background: transparent;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
@@ -40,7 +55,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: rgba(11, 15, 25, 0.8);
+    background-color: rgba(11, 15, 25, 0.85);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border-color);
 }
@@ -74,12 +89,13 @@ body {
     text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
 }
 
-/* Section centrale */
+/* Hero Section */
 .hero {
     max-width: 1200px;
     margin: 0 auto;
     padding: 8rem 2rem 4rem;
     text-align: center;
+    width: 100%;
 }
 
 .hero h1 {
@@ -95,21 +111,4 @@ body {
     font-size: 2rem;
     font-weight: 700;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-}
-
-/* Footer */
-.site-footer {
-    background-color: rgba(11, 15, 25, 0.85);
-    border-top: 1px solid var(--border-color);
-    padding: 2rem 0;
-    margin-top: auto;
-}
-
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    text-align: center;
-    color: var(--text-muted);
-    font-size: 0.9rem;
 }
