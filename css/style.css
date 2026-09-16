@@ -37,13 +37,14 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    z-index: 1; /* Placée sous le contenu */
+    z-index: -1; /* Placé en arrière-plan pour ne pas masquer le contenu */
+    pointer-events: none; /* Évite de bloquer les clics de la souris */
 }
 
-/* 2. Rendre le contenu transparent pour voir l'image derrière */
+/* 2. Contenu principal transparent */
 .main-content {
     position: relative;
-    z-index: 2; /* Placée au-dessus de l'image */
+    z-index: 2;
     background: transparent;
     min-height: 100vh;
     display: flex;
