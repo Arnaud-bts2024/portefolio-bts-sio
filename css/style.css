@@ -13,31 +13,36 @@
     box-sizing: border-box;
 }
 
-/* Image de fond appliquée sur le body avec priorité */
+/* Application de l'image de fond sur l'ensemble du site */
+html, body {
+    min-height: 100vh;
+    width: 100%;
+}
+
 body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     color: var(--text-main);
     line-height: 1.6;
-    background-image: url('../images/fond-ecran.jpg') !important;
+    
+    /* On force l'affichage de l'image avec un chemin absolu */
+    background-color: var(--bg-primary) !important;
+    background-image: url('/images/fond-ecran.jpg') !important;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-attachment: fixed !important;
-    min-height: 100vh;
+    
     display: flex;
     flex-direction: column;
 }
 
-/* Transparence forcée des blocs pour laisser voir le fond */
-.main-content, 
-.hero, 
-.hero-container, 
-.background-container {
-    background: transparent !important;
+/* Annulation des fonds opaques sur tous les conteneurs principaux */
+div, main, section, header, footer,
+.main-content, .hero, .hero-container, .background-container {
     background-color: transparent !important;
 }
 
-/* Barre de navigation */
+/* En-tête (Navbar) semi-transparente avec flou */
 .site-header {
     position: sticky;
     top: 0;
@@ -76,7 +81,7 @@ body {
     text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
 }
 
-/* Hero Section */
+/* Section d'accueil (Hero) */
 .hero {
     max-width: 1200px;
     margin: 0 auto;
@@ -97,4 +102,21 @@ body {
     font-size: 2rem;
     font-weight: 700;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Pied de page */
+.site-footer {
+    background-color: rgba(11, 15, 25, 0.85) !important;
+    border-top: 1px solid var(--border-color);
+    padding: 2rem 0;
+    margin-top: auto;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
 }
