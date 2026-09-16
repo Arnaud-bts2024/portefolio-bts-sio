@@ -19,7 +19,7 @@ body {
     color: var(--text-main);
     line-height: 1.6;
     background-color: var(--bg-primary);
-    background-image: url('../images/fond-ecrant.jpg');
+    background-image: url('../images/fond-ecran.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
