@@ -1,115 +1,54 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio professionnel de [NOM] [Prenoms] - Étudiant en BTS SIO option SISR. Administration systèmes, réseaux et cybersécurité.">
-    <title>Accueil | Arnaud HOLLEBECQUE - Portfolio BTS SIO SISR</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Styles CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <title>Arnaud HOLLEBECQUE - Portfolio BTS SIO SISR</title>
+    <!-- Lien vers ta police (optionnel mais recommandé pour un look pro) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Header / Navbar -->
-    <header class="site-header">
-        <div class="nav-container">
-            <a href="index.html" class="logo">
-                <i class="fa-solid fa-terminal"></i> <span> Arnaud.HOLLEBECQUE </span>
-            </a>
-            <nav class="main-nav" id="mainNav">
-                <ul>
-                    <li><a href="index.html" class="active">Accueil</a></li>
-                    <li><a href="bts-sio.html">BTS SIO</a></li>
-                    <li><a href="parcours.html">Parcours</a></li>
-                    <li><a href="projets.html">Projets</a></li>
-                    <li><a href="stages.html">Stages</a></li>
-                    <li><a href="competences.html">Compétences</a></li>
-                    <li><a href="patrimoine.html">Patrimoine</a></li>
-                    <li><a href="veille.html">Veille</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+    <!-- Conteneur pour l'image de fond (permet de gérer le zoom/défilement) -->
+    <div class="background-container"></div>
+
+    <!-- Contenu principal superposé -->
+    <div class="main-content">
+        
+        <!-- Barre de navigation -->
+        <header class="site-header">
+            <nav class="nav-container">
+                <ul class="main-nav">
+                    <li><a href="#accueil" class="active">Accueil</a></li>
+                    <li><a href="#bts-sio">BTS SIO</a></li>
+                    <li><a href="#parcours">Mon parcours</a></li>
+                    <li><a href="#projet">Mon Projet</a></li>
+                    <li><a href="#competences">Compétences</a></li>
+                    <li><a href="#veille">Veille technique</a></li>
+                    <li><a href="#contact">me contacter</a></li>
                 </ul>
             </nav>
-            <div class="nav-actions">
-                <button id="themeToggle" aria-label="Basculer le mode clair/sombre">
-                    <i class="fa-solid fa-moon"></i>
-                </button>
-                <button class="hamburger" id="hamburger" aria-label="Menu mobile">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-            </div>
-        </div>
-    </header>
+        </header>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="hero-content">
-                <div class="terminal-badge">
-                    <i class="fa-solid fa-shield-halved"></i> Option SISR — Solutions d'Infrastructure, Systèmes et Réseaux
+        <!-- Section Héro / Contenu principal -->
+        <main class="hero">
+            <div class="hero-container">
+                <p class="hero-name">Arnaud HOLLEBECQUE</p>
+                
+                <div class="hero-title-group">
+                    <h1>BTS SIO SISR</h1>
+                    <h2>Solution s’Infrastructure, Systèmes et Réseaux</h2>
                 </div>
-                <h1>Bonjour, je suis <span class="highlight"> Arnaud HOLLEBECQUE </span></h1>
-                <p class="hero-subtitle">Étudiant en BTS Services Informatiques aux Organisations (SIO)</p>
-                <p class="hero-description">
-                    Passionné par l'administration des systèmes, les réseaux informatiques, la virtualisation et la cybersécurité. Bienvenue sur mon portfolio professionnel.
-                </p>
-                <div class="hero-buttons">
-                    <a href="parcours.html" class="btn btn-primary">
-                        <i class="fa-solid fa-user-graduate"></i> Découvrir mon parcours
-                    </a>
-                    <a href="projets.html" class="btn btn-secondary">
-                        <i class="fa-solid fa-code-branch"></i> Voir mes projets
-                    </a>
-                    <a href="documents/cv.pdf" target="_blank" class="btn btn-outline">
-                        <i class="fa-solid fa-file-arrow-down"></i> Télécharger mon CV
-                    </a>
-                    <a href="contact.html" class="btn btn-outline">
-                        <i class="fa-solid fa-envelope"></i> Me contacter
-                    </a>
+
+                <div class="hero-description-block">
+                    <p>Passionné par l'administration des systèmes, les réseaux informatiques, la virtualisation et la cybersécurité.</p>
+                    <p>Bienvenue sur mon porte folio professionnel.</p>
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="code-window">
-                    <div class="window-header">
-                        <span class="dot red"></span>
-                        <span class="dot yellow"></span>
-                        <span class="dot green"></span>
-                        <span class="window-title">sys-admin@bts-sio:~</span>
-                    </div>
-                    <div class="window-body">
-                        <p><span class="prompt">$</span> whoami</p>
-                        <p class="output">[Prénom] [Nom] - Admin Sys & Réseaux Junior</p>
-                        <p><span class="prompt">$</span> status --active</p>
-                        <p class="output">Recherche stage / alternance - Prêt pour le jury E5</p>
-                        <p><span class="prompt">$</span> <span class="cursor">_</span></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+        </main>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="footer-container">
-            <p>&copy; 2026 [PRÉNOM] [NOM] — Portfolio BTS SIO SISR</p>
-            <div class="social-links">
-                <a href="[LIEN LINKEDIN]" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-                <a href="[LIEN GITHUB]" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-                <a href="mailto:[EMAIL]" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-            </div>
-            <div class="legal-links">
-                <a href="contact.html">Mentions légales</a>
-            </div>
-        </div>
-    </footer>
+    </div>
 
-    <!-- Scripts -->
-    <script src="js/main.js"></script>
-    <script src="js/animations.js"></script>
 </body>
 </html>
