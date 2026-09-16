@@ -13,18 +13,28 @@
     box-sizing: border-box;
 }
 
-/* Image de fond appliquée directement sur le body */
+/* Image de fond appliquée sur le body avec priorité */
 body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     color: var(--text-main);
     line-height: 1.6;
-    background-color: var(--bg-primary);
-    background-image: url('../images/fond-ecran.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-image: url('../images/fond-ecran.jpg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Transparence forcée des blocs pour laisser voir le fond */
+.main-content, 
+.hero, 
+.hero-container, 
+.background-container {
+    background: transparent !important;
+    background-color: transparent !important;
 }
 
 /* Barre de navigation */
@@ -32,7 +42,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: rgba(11, 15, 25, 0.75);
+    background-color: rgba(11, 15, 25, 0.75) !important;
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border-color);
 }
