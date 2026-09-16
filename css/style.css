@@ -1,24 +1,9 @@
+/* --- Variables et Reset --- */
 :root {
-    --bg-primary: #0b0f19;
-    --bg-secondary: #111827;
-    --bg-card: #1f2937;
-    --text-main: #f3f4f6;
-    --text-muted: #9ca3af;
-    --accent-color: #38bdf8;
-    --accent-hover: #0ea5e9;
-    --border-color: #374151;
+    --text-main: #ffffff; /* Texte blanc partout */
+    --accent-color: #38bdf8; /* Optionnel : bleu pour les liens actifs */
+    --font-family: 'Inter', sans-serif; /* Ta police */
     --transition: all 0.3s ease;
-}
-
-[data-theme="light"] {
-    --bg-primary: #f8fafc;
-    --bg-secondary: #f1f5f9;
-    --bg-card: #ffffff;
-    --text-main: #0f172a;
-    --text-muted: #64748b;
-    --accent-color: #0284c7;
-    --accent-hover: #0369a1;
-    --border-color: #cbd5e1;
 }
 
 * {
@@ -27,208 +12,136 @@
     box-sizing: border-box;
 }
 
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--bg-primary);
+html, body {
+    height: 100%;
+    width: 100%;
+    font-family: var(--font-family);
     color: var(--text-main);
-    line-height: 1.6;
-    transition: var(--transition);
-    background-image: url('../fond-ecrant.jpg');
-    background-size: cover;
-    background-position: center;
+    line-height: 1.5;
+    overflow-x: hidden; /* Évite les barres de défilement horizontales */
+}
+
+/* --- Gestion du Fond --- */
+.background-container {
+    position: fixed; /* Reste fixe au défilement */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    
+    /* REMPLACE PAR TON IMAGE ! */
+    background-image: url('images/ton-image-reseau.jpg'); 
+    
+    background-size: cover; /* Couvre tout l'écran */
+    background-position: center; /* Centre l'image */
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    z-index: -1; /* Place derrière le contenu */
+}
+
+/* --- Contenu Principal --- */
+.main-content {
+    position: relative;
+    z-index: 1; /* Place devant le fond */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-/* Navbar */
+/* --- Navbar (comme dans l'exemple) --- */
 .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background-color: rgba(11, 15, 25, 0.9);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border-color);
-}
-
-[data-theme="light"] .site-header {
-    background-color: rgba(248, 250, 252, 0.9);
+    width: 100%;
+    padding: 2rem 0; /* Espace en haut */
 }
 
 .nav-container {
-    max-width: 1200px;
+    max-width: 1200px; /* Centre la barre */
     margin: 0 auto;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 0 2rem;
 }
 
-.logo {
-    font-family: 'Fira Code', monospace;
-    font-weight: 700;
-    font-size: 1.2rem;
-    color: var(--accent-color);
-    text-decoration: none;
+.main-nav {
     display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.main-nav ul {
-    display: flex;
+    justify-content: center; /* Centre les liens */
     list-style: none;
-    gap: 1.5rem;
+    gap: 1.5rem; /* Espace entre les liens */
 }
 
 .main-nav a {
     text-decoration: none;
-    color: var(--text-muted);
+    color: var(--text-main);
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 0.9rem; /* Taille de police plus petite */
     transition: var(--transition);
+    text-transform: capitalize; /* Première lettre en majuscule */
 }
 
-.main-nav a:hover, .main-nav a.active {
-    color: var(--accent-color);
+.main-nav a:hover,
+.main-nav a.active {
+    opacity: 0.8; /* Légère transparence au survol */
+    /* Option : utiliser var(--accent-color) pour le lien actif */
 }
 
-.nav-actions {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-#themeToggle {
-    background: none;
-    border: 1px solid var(--border-color);
-    color: var(--text-main);
-    padding: 0.5rem;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-#themeToggle:hover {
-    border-color: var(--accent-color);
-    color: var(--accent-color);
-}
-
-.hamburger {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--text-main);
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-/* Hero Section */
+/* --- Section Héro / Contenu Principal --- */
 .hero {
-    max-width: 1200px;
-    margin: 0 auto;
-    min-height: calc(100vh - 80px);
+    flex: 1; /* Prend tout l'espace restant */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centre verticalement */
     padding: 2rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: center;
 }
 
-.terminal-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background-color: rgba(56, 189, 248, 0.1);
-    color: var(--accent-color);
-    padding: 0.4rem 1rem;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-family: 'Fira Code', monospace;
-    margin-bottom: 1.5rem;
-    border: 1px solid rgba(56, 189, 248, 0.2);
+.hero-container {
+    text-align: center; /* Centre tout le texte */
+    max-width: 900px;
 }
 
-.hero h1 {
-    font-size: 3rem;
+/* Nom en haut à gauche */
+.hero-name {
+    font-size: 2rem;
     font-weight: 700;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-}
-
-.highlight {
-    color: var(--accent-color);
-}
-
-.hero-subtitle {
-    font-size: 1.25rem;
-    color: var(--text-muted);
-    margin-bottom: 1rem;
-    font-weight: 500;
-}
-
-.hero-description {
-    color: var(--text-muted);
     margin-bottom: 2rem;
-    font-size: 1rem;
-}
-
-.hero-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: var(--transition);
-    cursor: pointer;
-    font-size: 0.95rem;
-}
-
-.btn-primary {
-    background-color: var(--accent-color);
-    color: #0b0f19;
-}
-
-.btn-primary:hover {
-    background-color: var(--accent-hover);
-}
-
-.btn-secondary {
-    background-color: var(--bg-card);
-    color: var(--text-main);
-    border: 1px solid var(--border-color);
-}
-
-.btn-secondary:hover {
-    border-color: var(--accent-color);
-    color: var(--accent-color);
-}
-
-/* Footer */
-.site-footer {
-    background-color: var(--bg-secondary);
-    border-top: 1px solid var(--border-color);
-    padding: 2rem 0;
-    margin-top: auto;
-}
-
-.footer-container {
+    letter-spacing: -0.5px;
+    /* Pour placer le nom en haut à gauche comme dans l'exemple : */
+    text-align: left;
+    width: 100%;
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--text-muted);
-    font-size: 0.9rem;
+    margin: 0 auto 3rem auto;
+}
+
+/* Groupe Titre Central */
+.hero-title-group {
+    margin-bottom: 3rem;
+}
+
+.hero-title-group h1 {
+    font-size: 3.5rem; /* Très grand titre */
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+}
+
+.hero-title-group h2 {
+    font-size: 1.5rem;
+    font-weight: 400; /* Plus fin */
+    opacity: 0.9;
+}
+
+/* Bloc de Description en Bas */
+.hero-description-block {
+    margin-top: auto; /* Pousse vers le bas */
+    padding: 2rem 1rem;
+    width: 100%;
+    /* Pour le look de l'exemple (rectangle opaque en bas) : */
+    background: rgba(255, 255, 255, 0.05); /* Fond très léger et transparent */
+    backdrop-filter: blur(5px); /* Effet de flou derrière */
+    border-radius: 12px;
+}
+
+.hero-description-block p {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero-description-block p:last-child {
+    margin-bottom: 0;
 }
