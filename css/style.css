@@ -1,12 +1,11 @@
 :root {
     --bg-primary: #0b0f19;
     --bg-secondary: #111827;
-    --bg-card: #1f2937;
-    --text-main: #f3f4f6;
-    --text-muted: #9ca3af;
+    --text-main: #ffffff;
+    --text-muted: #cbd5e1;
     --accent-color: #38bdf8;
     --accent-hover: #0ea5e9;
-    --border-color: #374151;
+    --border-color: rgba(255, 255, 255, 0.15);
     --transition: all 0.3s ease;
 }
 
@@ -17,42 +16,41 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
     color: var(--text-main);
     line-height: 1.6;
     background-color: var(--bg-primary);
     min-height: 100vh;
 }
 
-/* Gestion du fond d'écran fixé avec voile sombre pour la lisibilité */
+/* Arrière-plan fixed sans filtre trop sombre */
 .background-container {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(rgba(11, 15, 25, 0.75), rgba(11, 15, 25, 0.75)), 
-                url('../images/fond-ecrant.jpg');
+    background-image: url('../images/fond-ecrant.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     z-index: -1;
 }
 
-/* Header & Nav */
+/* Barre de navigation */
 .site-header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background-color: rgba(11, 15, 25, 0.85);
-    backdrop-filter: blur(10px);
+    background-color: rgba(11, 15, 25, 0.75);
+    backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border-color);
 }
 
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1rem 2rem;
+    padding: 1.2rem 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,39 +59,42 @@ body {
 .main-nav ul {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: 2.5rem;
 }
 
 .main-nav a {
     text-decoration: none;
     color: var(--text-muted);
-    font-weight: 500;
-    font-size: 1rem;
+    font-weight: 600;
+    font-size: 1.1rem;
     transition: var(--transition);
 }
 
 .main-nav a:hover, 
 .main-nav a.active {
     color: var(--accent-color);
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
 }
 
 /* Hero Section */
 .hero {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 6rem 2rem;
+    padding: 8rem 2rem 4rem;
     text-align: center;
 }
 
 .hero h1 {
     font-size: 3.5rem;
-    font-weight: 700;
+    font-weight: 800;
     margin-bottom: 1rem;
     color: #ffffff;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
 }
 
 .hero h2 {
     color: var(--accent-color);
-    font-size: 1.8rem;
-    font-weight: 600;
+    font-size: 2rem;
+    font-weight: 700;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
