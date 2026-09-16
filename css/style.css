@@ -13,20 +13,19 @@
     box-sizing: border-box;
 }
 
-/* Application de l'image de fond sur l'ensemble du site */
 html, body {
     min-height: 100vh;
     width: 100%;
 }
 
+/* Fond d'écran appliqué via l'URL complète du dépôt GitHub Pages */
 body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     color: var(--text-main);
     line-height: 1.6;
     
-    /* On force l'affichage de l'image avec un chemin absolu */
     background-color: var(--bg-primary) !important;
-    background-image: url('/images/fond-ecran.jpg') !important;
+    background-image: url('https://arnaud-bts2024.github.io/portefolio-bts-sio/images/fond-ecrant.jpg') !important;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
@@ -36,13 +35,13 @@ body {
     flex-direction: column;
 }
 
-/* Annulation des fonds opaques sur tous les conteneurs principaux */
+/* Rend les blocs transparents pour laisser voir l'image de fond */
 div, main, section, header, footer,
 .main-content, .hero, .hero-container, .background-container {
     background-color: transparent !important;
 }
 
-/* En-tête (Navbar) semi-transparente avec flou */
+/* Navigation (Navbar) */
 .site-header {
     position: sticky;
     top: 0;
@@ -104,7 +103,7 @@ div, main, section, header, footer,
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
-/* Pied de page */
+/* Pied de page (Footer) */
 .site-footer {
     background-color: rgba(11, 15, 25, 0.85) !important;
     border-top: 1px solid var(--border-color);
