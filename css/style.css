@@ -26,7 +26,7 @@ body {
     position: relative;
 }
 
-/* 1. Gestion de l'arrière-plan fixatif */
+/* 1. Arrière-plan fixe */
 .background-container {
     position: fixed;
     top: 0;
@@ -41,7 +41,7 @@ body {
     pointer-events: none;
 }
 
-/* 2. Contenu principal transparent */
+/* 2. Contenu principal */
 .main-content {
     position: relative;
     z-index: 2;
@@ -51,7 +51,7 @@ body {
     flex-direction: column;
 }
 
-/* Navbar */
+/* 3. Navigation */
 .site-header {
     position: sticky;
     top: 0;
@@ -90,26 +90,104 @@ body {
     text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
 }
 
-/* Hero Section */
-.hero {
+/* 4. Section Hero & En-tête de page */
+.hero,
+.page-header {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 8rem 2rem 4rem;
+    padding: 4rem 2rem 2rem;
     text-align: center;
     width: 100%;
 }
 
-.hero h1 {
+.hero h1,
+.page-header h1 {
     font-size: 3.5rem;
     font-weight: 800;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     color: #ffffff;
     text-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
 }
 
-.hero h2 {
+.hero h2,
+.hero-subtitle {
     color: var(--accent-color);
-    font-size: 2rem;
-    font-weight: 700;
+    font-size: 1.5rem;
+    font-weight: 600;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* 5. Carte du Formulaire de Contact (Dégradé bleu électrique vers blanc) */
+.contact-card {
+    background: linear-gradient(180deg, #0052cc 0%, #0033aa 40%, #ffffff 100%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #ffffff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    background-color: rgba(255, 255, 255, 0.95);
+    color: #0f172a;
+    font-size: 1rem;
+    outline: none;
+    transition: var(--transition);
+}
+
+.form-control:focus {
+    border-color: #0052cc;
+    box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.3);
+    background-color: #ffffff;
+}
+
+/* 6. Bouton d'envoi */
+.btn-submit {
+    align-self: flex-start;
+    padding: 0.75rem 1.75rem;
+    background-color: #0052cc;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-submit:hover {
+    background-color: #003d99;
+    transform: translateY(-2px);
+}
+
+/* 7. Footer */
+.site-footer {
+    margin-top: auto;
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    background-color: rgba(11, 15, 25, 0.85);
+    color: var(--text-muted);
 }
