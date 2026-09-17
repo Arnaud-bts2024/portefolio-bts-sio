@@ -91,7 +91,7 @@ body {
     text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
 }
 
-/* 4. Hero Section (Page d'accueil) */
+/* 4. Page d'accueil (Hero) */
 .hero {
     flex: 1;
     display: flex;
@@ -221,7 +221,57 @@ body {
     transform: translateY(-2px);
 }
 
-/* 6. Footer */
+/* 6. Page BTS SIO */
+.sio-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+    width: 100%;
+}
+
+.sio-description {
+    background: rgba(11, 15, 25, 0.75);
+    border: 1px solid var(--border-color);
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(4px);
+}
+
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.option-card {
+    background: linear-gradient(180deg, rgba(30, 58, 138, 0.8) 0%, rgba(11, 15, 25, 0.9) 100%);
+    border: 1px solid var(--border-color);
+    padding: 1.75rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.option-card h2 {
+    color: var(--accent-color);
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.option-card h3 {
+    color: #ffffff;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.option-card p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* 7. Footer */
 .site-footer {
     padding: 1rem;
     text-align: center;
