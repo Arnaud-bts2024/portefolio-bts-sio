@@ -28,34 +28,38 @@
             </div>
         </header>
 
-        <main class="contact-container">
-            <section class="page-header">
+        <!-- Container bridé à 500px centré -->
+        <main class="contact-container" style="max-width: 500px !important; margin: 2rem auto !important; width: 100% !important; padding: 0 1rem !important;">
+            <section class="page-header" style="text-align: center !important; margin-bottom: 2rem !important;">
                 <h1>Me Contacter</h1>
                 <p class="hero-subtitle">N'hésitez pas à me joindre pour toute opportunité professionnelle</p>
             </section>
 
-            <section class="contact-card">
-                <form action="mailto:votre.email@exemple.com" method="post" enctype="text/plain" class="contact-form">
-                    <div class="form-group">
-                        <label for="name">Nom / Prénom</label>
-                        <input type="text" id="name" name="name" class="form-control" required>
+            <section class="contact-card" style="background: linear-gradient(180deg, #0052cc 0%, #ffffff 100%) !important; padding: 2rem !important; border-radius: 12px !important;">
+                <form action="mailto:votre.email@exemple.com" method="post" enctype="text/plain" class="contact-form" style="display: flex !important; flex-direction: column !important; gap: 1.25rem !important; text-align: left !important;">
+                    
+                    <div class="form-group" style="display: flex !important; flex-direction: column !important; align-items: flex-start !important;">
+                        <label for="name" style="color: #ffffff !important; font-weight: bold !important; margin-bottom: 0.4rem !important;">Nom / Prénom</label>
+                        <input type="text" id="name" name="name" class="form-control" required style="width: 100% !important; padding: 0.75rem !important; border-radius: 6px !important; border: 1px solid #ccc !important;">
                     </div>
 
-                    <div class="form-group">
-                        <label for="email">Adresse e-mail</label>
-                        <input type="email" id="email" name="email" class="form-control" required>
+                    <div class="form-group" style="display: flex !important; flex-direction: column !important; align-items: flex-start !important;">
+                        <label for="email" style="color: #ffffff !important; font-weight: bold !important; margin-bottom: 0.4rem !important;">Adresse e-mail</label>
+                        <input type="email" id="email" name="email" class="form-control" required style="width: 100% !important; padding: 0.75rem !important; border-radius: 6px !important; border: 1px solid #ccc !important;">
                     </div>
 
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="5" class="form-control" required></textarea>
+                    <div class="form-group" style="display: flex !important; flex-direction: column !important; align-items: flex-start !important;">
+                        <label for="message" style="color: #ffffff !important; font-weight: bold !important; margin-bottom: 0.4rem !important;">Message</label>
+                        <textarea id="message" name="message" rows="5" class="form-control" required style="width: 100% !important; padding: 0.75rem !important; border-radius: 6px !important; border: 1px solid #ccc !important;"></textarea>
                     </div>
 
-                    <div class="form-actions">
-                        <button type="submit" class="btn-submit">
+                    <!-- Div pour forcer le bouton tout à droite -->
+                    <div style="display: flex !important; justify-content: flex-end !important; width: 100% !important; margin-top: 0.5rem !important;">
+                        <button type="submit" class="btn-submit" style="padding: 0.75rem 1.75rem !important; background-color: #0044b3 !important; color: #ffffff !important; border: none !important; border-radius: 6px !important; font-weight: bold !important; cursor: pointer !important;">
                             <i class="fa-solid fa-paper-plane"></i> Envoyer
                         </button>
                     </div>
+
                 </form>
             </section>
         </main>
