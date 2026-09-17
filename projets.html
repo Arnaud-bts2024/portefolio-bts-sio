@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Portfolio BTS SIO</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Projets - Portfolio BTS SIO</title>
+    <link rel="stylesheet" href="css/style.css?v=2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
@@ -20,47 +20,32 @@
                         <li><a href="bts-sio.html">BTS-SIO</a></li>
                         <li><a href="parcours.html">Parcours</a></li>
                         <li><a href="competences.html">Compétences</a></li>
-                        <li><a href="projets.html">Projets</a></li>
-                        <li><a href="veille techologique.html">Veille</a></li>
-                        <li><a href="contact.html" class="active">Contact</a></li>
+                        <li><a href="projets.html" class="active">Projets</a></li>
+                        <li><a href="veille.html">Veille</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
             </div>
         </header>
 
-        <!-- Container bridé à 500px centré -->
-        <main class="contact-container" style="max-width: 500px !important; margin: 2rem auto !important; width: 100% !important; padding: 0 1rem !important;">
-            <section class="page-header" style="text-align: center !important; margin-bottom: 2rem !important;">
-                <h1>Me Contacter</h1>
-                <p class="hero-subtitle">N'hésitez pas à me joindre pour toute opportunité professionnelle</p>
+        <main class="sio-container">
+            <section class="page-header">
+                <h1>Mes Projets</h1>
+                <p class="hero-subtitle">Réalisations académiques et personnelles</p>
             </section>
 
-            <section class="contact-card" style="background: linear-gradient(180deg, #0052cc 0%, #ffffff 100%) !important; padding: 2rem !important; border-radius: 12px !important;">
-                <form action="mailto:votre.email@exemple.com" method="post" enctype="text/plain" class="contact-form" style="display: flex !important; flex-direction: column !important; gap: 1.25rem !important; text-align: left !important;">
-                    
-                    <div class="form-group" style="display: flex !important; flex-direction: column !important; align-items: flex-start !important;">
-                        <label for="name" style="color: #ffffff !important; font-weight: bold !important; margin-bottom: 0.4rem !important;">Nom / Prénom</label>
-                        <input type="text" id="name" name="name" class="form-control" required style="width: 100% !important; padding: 0.75rem !important; border-radius: 6px !important; border: 1px solid #ccc !important;">
-                    </div>
+            <section class="options-grid">
+                <div class="option-card">
+                    <h2><i class="fa-solid fa-folder-open"></i> Projet 1</h2>
+                    <h3>Portfolio Personnel</h3>
+                    <p>Création d'un site web dynamique et responsive présentant mon parcours et mes réalisations en BTS SIO.</p>
+                </div>
 
-                    <div class="form-group" style="display: flex !important; flex-direction: column !important; align-items: flex-start !important;">
-                        <label for="email" style="color: #ffffff !important; font-weight: bold !important; margin-bottom: 0.4rem !important;">Adresse e-mail</label>
-                        <input type="email" id="email" name="email" class="form-control" required style="width: 100% !important; padding: 0.75rem !important; border-radius: 6px !important; border: 1px solid #ccc !important;">
-                    </div>
-
-                    <div class="form-group" style="display: flex !important; flex-direction: column !important; align-items: flex-start !important;">
-                        <label for="message" style="color: #ffffff !important; font-weight: bold !important; margin-bottom: 0.4rem !important;">Message</label>
-                        <textarea id="message" name="message" rows="5" class="form-control" required style="width: 100% !important; padding: 0.75rem !important; border-radius: 6px !important; border: 1px solid #ccc !important;"></textarea>
-                    </div>
-
-                    <!-- Div pour forcer le bouton tout à droite -->
-                    <div style="display: flex !important; justify-content: flex-end !important; width: 100% !important; margin-top: 0.5rem !important;">
-                        <button type="submit" class="btn-submit" style="padding: 0.75rem 1.75rem !important; background-color: #0044b3 !important; color: #ffffff !important; border: none !important; border-radius: 6px !important; font-weight: bold !important; cursor: pointer !important;">
-                            <i class="fa-solid fa-paper-plane"></i> Envoyer
-                        </button>
-                    </div>
-
-                </form>
+                <div class="option-card">
+                    <h2><i class="fa-solid fa-network-wired"></i> Projet 2</h2>
+                    <h3>Mise en place d'infrastructure</h3>
+                    <p>Déploiement et configuration d'un réseau d'entreprise virtuel avec gestion des droits d'accès.</p>
+                </div>
             </section>
         </main>
 
