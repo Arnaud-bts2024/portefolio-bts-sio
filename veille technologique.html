@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - BTS SIO</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Veille Technologique - Portfolio BTS SIO</title>
+    <link rel="stylesheet" href="css/style.css?v=2">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
-    <!-- Élément pour charger le fond d'écran CSS -->
     <div class="background-container"></div>
 
     <div class="main-content">
@@ -16,27 +16,60 @@
             <div class="nav-container">
                 <nav class="main-nav">
                     <ul>
-                        <li><a href="index.html" class="active">Accueil</a></li>
-                         <li><a href="bts-sio.html">Parcours</a></li>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="bts-sio.html">BTS-SIO</a></li>
                         <li><a href="parcours.html">Parcours</a></li>
                         <li><a href="competences.html">Compétences</a></li>
-                        <li><a href="projets.html">Patrimoine</a></li>
-                        <li><a href="veille technologique.html">Projets</a></li>
+                        <li><a href="projets.html">Projets</a></li>
+                        <li><a href="veille techologique.html" class="active">Veille</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
             </div>
         </header>
 
-        <main class="hero">
-            <div class="hero-container">
-                <div class="hero-title-group">
-                    <h1>Bienvenue sur mon Portfolio</h1>
-                    <h2>BTS SIO</h2>
-                </div>
-            </div>
+        <main class="veille-container">
+            <section class="page-header">
+                <h1>Veille Technologique</h1>
+                <p class="hero-subtitle">Suivi des évolutions et tendances informatiques</p>
+            </section>
+
+            <!-- Définition rapide -->
+            <section class="veille-intro">
+                <p>La veille technologique consiste à s'informer systématiquement sur les innovations, outils et menaces du secteur informatique afin d'anticiper les mutations du métier.</p>
+            </section>
+
+            <!-- Grille des sujets -->
+            <section class="veille-grid">
+                <!-- Sujet 1 -->
+                <article class="veille-card">
+                    <div class="veille-badge"><i class="fa-solid fa-shield-halved"></i> Cybersécurité</div>
+                    <h2>L'impact de l'IA générative sur la cybersécurité</h2>
+                    <p>Étude des nouvelles attaques basées sur l'intelligence artificielle et des solutions de défense automatisées modernes.</p>
+                    <div class="veille-footer">
+                        <span><i class="fa-solid fa-rss"></i> Feedly, Google Alerts</span>
+                    </div>
+                </article>
+
+                <!-- Sujet 2 -->
+                <article class="veille-card">
+                    <div class="veille-badge"><i class="fa-solid fa-cloud"></i> Cloud & DevOps</div>
+                    <h2>L'évolution des architectures Serverless</h2>
+                    <p>Suivi de l'adoption du Cloud-Native, du déploiement continu et des pratiques DevOps au sein des PME.</p>
+                    <div class="veille-footer">
+                        <span><i class="fa-solid fa-rss"></i> ZDNet, Le Lemonde Informatique</span>
+                    </div>
+                </article>
+            </section>
         </main>
+
+        <footer class="site-footer">
+            <div class="footer-container">
+                <p>&copy; 2026 [PRÉNOM] [NOM] — Portfolio BTS SIO</p>
+            </div>
+        </footer>
     </div>
 
+    <script src="js/main.js"></script>
 </body>
 </html>
