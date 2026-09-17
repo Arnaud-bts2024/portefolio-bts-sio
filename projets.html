@@ -1,79 +1,76 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projets | [PRÉNOM] [NOM]</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Contact - Portfolio BTS SIO</title>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <header class="site-header">
-        <div class="nav-container">
-            <a href="index.html" class="logo"><i class="fa-solid fa-terminal"></i> <span>[PRÉNOM].[NOM]</span></a>
-            <nav class="main-nav" id="mainNav">
-                <ul>
-                    <li><a href="index.html">Accueil</a></li>
-                    <li><a href="bts-sio.html">BTS SIO</a></li>
-                    <li><a href="parcours.html">Parcours</a></li>
-                    <li><a href="projets.html" class="active">Projets</a></li>
-                    <li><a href="stages.html">Stages</a></li>
-                    <li><a href="competences.html">Compétences</a></li>
-                    <li><a href="patrimoine.html">Patrimoine</a></li>
-                    <li><a href="veille.html">Veille</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-            <div class="nav-actions">
-                <button id="themeToggle" aria-label="Basculer le mode clair/sombre"><i class="fa-solid fa-moon"></i></button>
-                <button class="hamburger" id="hamburger" aria-label="Menu mobile"><i class="fa-solid fa-bars"></i></button>
+
+    <div class="background-container"></div>
+
+    <div class="main-content">
+        <header class="site-header">
+            <div class="nav-container">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="bts-sio.html">BTS-SIO</a></li>
+                        <li><a href="parcours.html">Parcours</a></li>
+                        <li><a href="competences.html">Compétences</a></li>
+                        <li><a href="projets.html">Projets</a></li>
+                        <li><a href="veille techologique.html">Veille</a></li>
+                        <li><a href="contact.html" class="active">Contact</a></li>
+                    </ul>
+                </nav>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <main class="container" style="max-width: 1200px; margin: 2rem auto; padding: 0 2rem;">
-        <section class="page-header" style="margin-bottom: 3rem;">
-            <h1>Mes Projets Réalisés</h1>
-            <p class="hero-subtitle">Projets d'école (AP) et réalisations personnelles SISR</p>
-        </section>
+        <!-- Container bridé à 500px centré -->
+        <main class="contact-container" style="max-width: 500px !important; margin: 2rem auto !important; width: 100% !important; padding: 0 1rem !important;">
+            <section class="page-header" style="text-align: center !important; margin-bottom: 2rem !important;">
+                <h1>Me Contacter</h1>
+                <p class="hero-subtitle">N'hésitez pas à me joindre pour toute opportunité professionnelle</p>
+            </section>
 
-        <section class="projects-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-            <!-- Projet 1 -->
-            <div class="project-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 1.5rem;">
-                <div style="color: var(--accent-color); font-size: 2rem; margin-bottom: 1rem;"><i class="fa-solid fa-server"></i></div>
-                <h3>Déploiement d'un Active Directory & DNS</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0.5rem 0 1rem 0;">Mise en place d'un domaine Windows Server 2022 avec gestion des GPO, utilisateurs et partage de fichiers sécurisé.</p>
-                <span class="badge" style="background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem;">Windows Server</span>
-                <span class="badge" style="background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem;">Active Directory</span>
+            <section class="contact-card" style="background: linear-gradient(180deg, #0052cc 0%, #ffffff 100%) !important; padding: 2rem !important; border-radius: 12px !important;">
+                <form action="mailto:votre.email@exemple.com" method="post" enctype="text/plain" class="contact-form" style="display: flex !important; flex-direction: column !important; gap: 1.25rem !important; text-align: left !important;">
+                    
+                    <div class="form-group" style="display: flex !important; flex-direction: column !important; align-items: flex-start !important;">
+                        <label for="name" style="color: #ffffff !important; font-weight: bold !important; margin-bottom: 0.4rem !important;">Nom / Prénom</label>
+                        <input type="text" id="name" name="name" class="form-control" required style="width: 100% !important; padding: 0.75rem !important; border-radius: 6px !important; border: 1px solid #ccc !important;">
+                    </div>
+
+                    <div class="form-group" style="display: flex !important; flex-direction: column !important; align-items: flex-start !important;">
+                        <label for="email" style="color: #ffffff !important; font-weight: bold !important; margin-bottom: 0.4rem !important;">Adresse e-mail</label>
+                        <input type="email" id="email" name="email" class="form-control" required style="width: 100% !important; padding: 0.75rem !important; border-radius: 6px !important; border: 1px solid #ccc !important;">
+                    </div>
+
+                    <div class="form-group" style="display: flex !important; flex-direction: column !important; align-items: flex-start !important;">
+                        <label for="message" style="color: #ffffff !important; font-weight: bold !important; margin-bottom: 0.4rem !important;">Message</label>
+                        <textarea id="message" name="message" rows="5" class="form-control" required style="width: 100% !important; padding: 0.75rem !important; border-radius: 6px !important; border: 1px solid #ccc !important;"></textarea>
+                    </div>
+
+                    <!-- Div pour forcer le bouton tout à droite -->
+                    <div style="display: flex !important; justify-content: flex-end !important; width: 100% !important; margin-top: 0.5rem !important;">
+                        <button type="submit" class="btn-submit" style="padding: 0.75rem 1.75rem !important; background-color: #0044b3 !important; color: #ffffff !important; border: none !important; border-radius: 6px !important; font-weight: bold !important; cursor: pointer !important;">
+                            <i class="fa-solid fa-paper-plane"></i> Envoyer
+                        </button>
+                    </div>
+
+                </form>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-container">
+                <p>&copy; 2026 [PRÉNOM] [NOM] — Portfolio BTS SIO</p>
             </div>
+        </footer>
+    </div>
 
-            <!-- Projet 2 -->
-            <div class="project-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 1.5rem;">
-                <div style="color: var(--accent-color); font-size: 2rem; margin-bottom: 1rem;"><i class="fa-solid fa-shield-halved"></i></div>
-                <h3>Supervision d'Infrastructure avec Zabbix</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0.5rem 0 1rem 0;">Installation d'un serveur Zabbix sous Linux Debian pour surveiller l'état des switchs, routeurs et serveurs du réseau.</p>
-                <span class="badge" style="background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem;">Linux Debian</span>
-                <span class="badge" style="background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem;">Zabbix</span>
-            </div>
-
-            <!-- Projet 3 -->
-            <div class="project-card" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 1.5rem;">
-                <div style="color: var(--accent-color); font-size: 2rem; margin-bottom: 1rem;"><i class="fa-solid fa-lock"></i></div>
-                <h3>Pare-feu pfSense & VLANs Cisco</h3>
-                <p style="color: var(--text-muted); font-size: 0.9rem; margin: 0.5rem 0 1rem 0;">Segmentation d'un réseau d'entreprise via des VLANs sur matériel Cisco et filtrage du trafic avec pfSense.</p>
-                <span class="badge" style="background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem;">pfSense</span>
-                <span class="badge" style="background: rgba(56, 189, 248, 0.1); color: var(--accent-color); padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.8rem;">Cisco Packet Tracer</span>
-            </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="footer-container">
-            <p>&copy; 2026 [PRÉNOM] [NOM] — Portfolio BTS SIO SISR</p>
-        </div>
-    </footer>
     <script src="js/main.js"></script>
 </body>
 </html>
