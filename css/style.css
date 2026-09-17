@@ -14,14 +14,15 @@
 }
 
 html, body {
-    min-height: 100vh;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
 }
 
 body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     color: var(--text-main);
-    line-height: 1.6;
+    line-height: 1.4;
     background-color: var(--bg-primary);
     position: relative;
 }
@@ -41,20 +42,20 @@ body {
     pointer-events: none;
 }
 
-/* 2. Conteneur principal */
+/* 2. Conteneur principal plein écran */
 .main-content {
     position: relative;
     z-index: 2;
     background: transparent;
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 }
 
 /* 3. Navigation */
 .site-header {
-    position: sticky;
-    top: 0;
+    position: relative;
     z-index: 1000;
     background-color: rgba(11, 15, 25, 0.85);
     backdrop-filter: blur(8px);
@@ -64,7 +65,7 @@ body {
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1.2rem 2rem;
+    padding: 1rem 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,7 +81,7 @@ body {
     text-decoration: none;
     color: var(--text-muted);
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     transition: var(--transition);
 }
 
@@ -90,40 +91,42 @@ body {
     text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
 }
 
-/* 4. Structure restreinte de la page Contact */
+/* 4. Centrage vertical et réduction de la taille */
 .contact-container {
-    max-width: 550px;
-    margin: 2rem auto;
-    padding: 0 1.5rem;
+    max-width: 520px;
+    margin: auto;
+    padding: 0 1rem;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .page-header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .page-header h1 {
-    font-size: 3rem;
+    font-size: 2.4rem;
     font-weight: 800;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
     color: #ffffff;
     text-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
 }
 
 .hero-subtitle {
     color: var(--accent-color);
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     font-weight: 500;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-    text-align: center;
 }
 
 /* 5. Carte du Formulaire (Dégradé Bleu -> Blanc) */
 .contact-card {
     background: linear-gradient(180deg, #0052cc 0%, #ffffff 100%);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 2rem;
+    padding: 1.5rem 2rem;
     border-radius: 12px;
     box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
 }
@@ -131,33 +134,32 @@ body {
 .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1rem;
     text-align: left;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.3rem;
     text-align: left;
 }
 
 .form-group label {
     font-weight: 600;
     color: #ffffff;
-    font-size: 1rem;
+    font-size: 0.95rem;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
-    text-align: left;
 }
 
 .form-control {
     width: 100%;
-    padding: 0.75rem 0.9rem;
+    padding: 0.6rem 0.8rem;
     border-radius: 6px;
     border: 1px solid #94a3b8;
     background-color: #ffffff;
     color: #0f172a;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     outline: none;
     transition: var(--transition);
 }
@@ -172,16 +174,16 @@ body {
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    margin-top: 0.5rem;
+    margin-top: 0.2rem;
 }
 
 .btn-submit {
-    padding: 0.75rem 1.75rem;
+    padding: 0.65rem 1.5rem;
     background-color: #0044b3;
     color: #ffffff;
     border: none;
     border-radius: 6px;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
@@ -194,15 +196,14 @@ body {
 .btn-submit:hover {
     background-color: #003380;
     transform: translateY(-2px);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
 }
 
-/* 7. Footer */
+/* 7. Footer compact */
 .site-footer {
-    margin-top: auto;
-    padding: 2rem;
+    padding: 1rem;
     text-align: center;
     border-top: 1px solid var(--border-color);
     background-color: rgba(11, 15, 25, 0.85);
     color: var(--text-muted);
+    font-size: 0.85rem;
 }
