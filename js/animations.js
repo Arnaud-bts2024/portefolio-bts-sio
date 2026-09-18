@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }, observerOptions);
 
-        // Application de l'effet d'apparition sur les conteneurs principaux
-        const animatedElements = document.querySelectorAll('.card, .timeline-item, .page-header');
+        // Ajout de .contact-form-section pour animer aussi le formulaire
+        const animatedElements = document.querySelectorAll('.card, .timeline-item, .page-header, .contact-form-section');
         animatedElements.forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
