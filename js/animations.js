@@ -1,13 +1,7 @@
-/* ==========================================================================
-   ANIMATIONS DISCRÈTES ET ACCESSIBILITÉ
-   ========================================================================== */
-
 document.addEventListener('DOMContentLoaded', () => {
-    // Vérification des préférences utilisateur concernant les animations
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (!prefersReducedMotion) {
-        // Animation au survol des cartes
         const cards = document.querySelectorAll('.card');
         cards.forEach(card => {
             card.addEventListener('mouseenter', () => {
@@ -15,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Intersection Observer pour faire apparaître les sections au défilement
         const observerOptions = {
             root: null,
             rootMargin: '0px',
@@ -32,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }, observerOptions);
 
-        // Ajout de .contact-form-section pour animer aussi le formulaire
         const animatedElements = document.querySelectorAll('.card, .timeline-item, .page-header, .contact-form-section');
         animatedElements.forEach(el => {
             el.style.opacity = '0';
