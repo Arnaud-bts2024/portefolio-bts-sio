@@ -1,8 +1,35 @@
 /* ==========================================
-   STYLE GENERAL ET NAVIGATION
+   STYLE GENERAL
    ========================================== */
 
-/* Suppression des puces et des marges par défaut */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.main-content {
+    display: flex;
+    min-height: 100vh;
+}
+
+.site-header {
+    width: 250px;
+    background-color: #1e1e1e;
+    padding: 20px;
+}
+
+.container {
+    flex: 1;
+    padding: 40px;
+}
+
+/* ==========================================
+   NAVIGATION
+   ========================================== */
+
 .main-nav ul {
     list-style: none;
     padding: 0;
@@ -10,58 +37,56 @@
 }
 
 .main-nav li {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .main-nav a {
     color: #ffffff;
     text-decoration: none;
-    font-size: 1em;
+    font-size: 1rem;
     display: block;
-    padding: 5px 0;
+    padding: 6px 0;
     transition: color 0.2s ease;
 }
 
-/* Lien actif (page en cours) */
 .main-nav a.active {
     color: #e57373;
     font-weight: bold;
 }
 
+.main-nav a:hover {
+    color: #e57373;
+}
+
 /* ==========================================
-   STYLE DU SOUS-MENU (Dropdown)
+   SOUS-MENU (Dropdown)
    ========================================== */
 
-/* Positionnement du menu parent */
 .dropdown {
     position: relative;
 }
 
-/* Masquage du sous-menu par défaut */
 .dropdown .submenu {
     display: none;
-    padding-left: 20px; /* Décalage vers la droite (indentation) */
+    padding-left: 20px;
     margin-top: 5px;
     margin-bottom: 10px;
 }
 
-/* Affichage du sous-menu au survol de l'élément parent */
 .dropdown:hover .submenu {
     display: block;
 }
 
-/* Style des liens du sous-menu */
-.dropdown .submenu li a {
-    color: #ffffff;
-    font-size: 0.9em;
-    opacity: 0.85;
-    padding: 4px 0;
-    display: block;
-    text-decoration: none;
-    transition: all 0.2s ease;
+.dropdown .submenu li {
+    margin-bottom: 6px;
 }
 
-/* Survol des éléments du sous-menu */
+.dropdown .submenu li a {
+    color: #dddddd;
+    font-size: 0.9rem;
+    opacity: 0.85;
+}
+
 .dropdown .submenu li a:hover {
     color: #e57373;
     opacity: 1;
