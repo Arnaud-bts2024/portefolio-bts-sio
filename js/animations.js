@@ -2,13 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (!prefersReducedMotion) {
-        const cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transition = 'transform 0.3s ease, border-color 0.3s ease';
-            });
-        });
-
         const observerOptions = {
             root: null,
             rootMargin: '0px',
