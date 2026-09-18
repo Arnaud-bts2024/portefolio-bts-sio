@@ -2,25 +2,23 @@
    FORMULAIRE STYLE GLACIER
    ========================================== */
 
-/* Carte principale du formulaire (Effet verre & dégradé glacier) */
 .contact-form-section {
     max-width: 650px;
     margin: 40px auto;
     padding: 40px;
     border-radius: 16px;
-    background: linear-gradient(135deg, rgba(14, 26, 53, 0.85) 0%, rgba(180, 215, 255, 0.25) 100%);
+    background: linear-gradient(135deg, rgba(14, 26, 53, 0.85) 0%, rgba(180, 215, 255, 0.2) 100%);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 15px 35px rgba(0, 10, 30, 0.6),
                 inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-/* Alignement vertical propre des champs */
 .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 22px;
+    gap: 20px;
 }
 
 .contact-form .form-group {
@@ -35,20 +33,19 @@
     margin-bottom: 8px;
     color: #e0f2fe;
     letter-spacing: 0.5px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
-/* Champs de saisie */
 .contact-form input,
 .contact-form textarea {
     width: 100%;
     padding: 14px 18px;
     border-radius: 8px;
-    border: 1px solid rgba(220, 240, 255, 0.3);
+    border: 1px solid rgba(220, 240, 255, 0.25);
     background: rgba(10, 20, 40, 0.6);
     color: #ffffff;
     font-size: 1rem;
     font-family: inherit;
+    box-sizing: border-box;
     transition: all 0.3s ease;
 }
 
@@ -57,7 +54,6 @@
     color: #94a3b8;
 }
 
-/* Focus sur les champs (effet lumineux givré) */
 .contact-form input:focus,
 .contact-form textarea:focus {
     outline: none;
@@ -66,42 +62,41 @@
     box-shadow: 0 0 15px rgba(125, 211, 252, 0.4);
 }
 
-/* Désactiver le redimensionnement anarchique du textarea */
 .contact-form textarea {
     resize: vertical;
     min-height: 120px;
 }
 
-/* Alignement du bouton à droite */
 .btn-container {
     display: flex;
     justify-content: flex-end;
     margin-top: 10px;
 }
 
-/* Bouton Envoyé (Dégradé Glacial + Effet survol) */
 .btn-submit {
-    align-self: flex-end;
-    padding: 14px 32px;
+    padding: 14px 28px;
     font-size: 1rem;
     font-weight: 700;
     color: #030712;
-    background: linear-gradient(135deg, #38bdf8 0%, #e0f2fe 100%);
+    background: linear-gradient(135deg, #38bdf8 0%, #ffffff 100%);
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Effet au survol du bouton */
 .btn-submit:hover {
     background: linear-gradient(135deg, #e0f2fe 0%, #ffffff 100%);
     transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 8px 25px rgba(186, 230, 253, 0.7);
+    box-shadow: 0 8px 25px rgba(186, 230, 253, 0.6);
     color: #0284c7;
 }
 
-.btn-submit:active {
-    transform: translateY(-1px);
+.btn-submit:hover i {
+    transform: translateX(4px);
+    transition: transform 0.3s ease;
 }
