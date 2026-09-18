@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Portfolio BTS SIO</title>
-    <link rel="stylesheet" href="css/style.css?v=4">
+    <link rel="stylesheet" href="css/style.css?v=5">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
@@ -42,7 +42,6 @@
                 <p class="hero-subtitle">N'hésitez pas à me transmettre vos messages</p>
             </section>
 
-            <!-- LE FORMULAIRE DE CONTACT -->
             <section class="contact-form-section">
                 <form action="https://formspree.io/f/ton_id_formspree" method="POST" class="contact-form">
                     <div class="form-group">
@@ -61,7 +60,11 @@
                         <label for="message">Message</label>
                         <textarea id="message" name="message" rows="5" required placeholder="Votre message..."></textarea>
                     </div>
-                    <button type="submit" class="btn-submit">Envoyer le message</button>
+                    <div class="btn-container">
+                        <button type="submit" class="btn-submit">
+                            Envoyer le message <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
                 </form>
             </section>
         </main>
