@@ -14,17 +14,8 @@
     <div class="main-content">
         <header class="site-header">
             <div class="nav-container">
-                <nav class="main-nav">
-                    <ul>
-                        <li><a href="index.html">Accueil</a></li>
-                        <li><a href="bts-sio.html">BTS-SIO</a></li>
-                        <li><a href="parcours.html">Parcours</a></li>
-                        <li><a href="competences.html">Compétences</a></li>
-                        <li><a href="projets.html" class="active">Projets</a></li>
-                        <li><a href="veille.html">Veille</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </nav>
+                <!-- Le menu unique sera injecté ici -->
+                <div id="navbar-container"></div>
             </div>
         </header>
 
@@ -36,10 +27,18 @@
         </main>
 
         <footer class="site-footer">
-            <p>&copy; 2026 [PRÉNOM] [NOM] — Portfolio BTS SIO</p>
+            <p>&copy; 2026 Arnaud HOLLEBECQUE — Portfolio BTS SIO</p>
         </footer>
     </div>
 
+    <!-- Script qui charge le fichier navbar.html -->
+    <script>
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-container').innerHTML = data;
+            });
+    </script>
     <script src="js/main.js"></script>
 </body>
 </html>
