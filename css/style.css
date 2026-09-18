@@ -1,41 +1,69 @@
 /* ==========================================
-   STYLE DU SOUS-MENU (Dropdown)
+   STYLE GENERAL ET NAVIGATION
    ========================================== */
 
-/* Alignement et suppression des puces par défaut */
+/* Suppression des puces et des marges par défaut */
 .main-nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-/* Retrait et masquage du sous-menu */
+.main-nav li {
+    margin-bottom: 10px;
+}
+
+.main-nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1em;
+    display: block;
+    padding: 5px 0;
+    transition: color 0.2s ease;
+}
+
+/* Lien actif (page en cours) */
+.main-nav a.active {
+    color: #e57373;
+    font-weight: bold;
+}
+
+/* ==========================================
+   STYLE DU SOUS-MENU (Dropdown)
+   ========================================== */
+
+/* Positionnement du menu parent */
+.dropdown {
+    position: relative;
+}
+
+/* Masquage du sous-menu par défaut */
 .dropdown .submenu {
     display: none;
     padding-left: 20px; /* Décalage vers la droite (indentation) */
     margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+/* Affichage du sous-menu au survol de l'élément parent */
+.dropdown:hover .submenu {
+    display: block;
 }
 
 /* Style des liens du sous-menu */
 .dropdown .submenu li a {
-    color: #ffffff;             /* Couleur du texte */
-    font-size: 0.9em;           /* Légèrement plus petit que le menu principal */
-    opacity: 0.85;              /* Légère transparence pour créer une hiérarchie */
-    padding: 6px 0;
+    color: #ffffff;
+    font-size: 0.9em;
+    opacity: 0.85;
+    padding: 4px 0;
     display: block;
     text-decoration: none;
-    transition: all 0.2s ease; /* Animation douce au survol */
+    transition: all 0.2s ease;
 }
 
 /* Survol des éléments du sous-menu */
 .dropdown .submenu li a:hover {
-    color: #e57373;             /* Couleur rouge/rose accentuée au survol */
+    color: #e57373;
     opacity: 1;
-    transform: translateX(5px); /* Léger glissement vers la droite */
-}
-
-/* Affichage du sous-menu lors du survol de l'onglet parent */
-.dropdown:hover .submenu {
-    display: block;
+    transform: translateX(5px);
 }
