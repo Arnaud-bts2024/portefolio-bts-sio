@@ -1,0 +1,17 @@
+<nav class="navbar">
+  <ul>
+    <li><a href="index.html">Accueil</a></li>
+    <li class="dropdown">
+      <a href="parcours.html">Mon parcours</a>
+      <ul class="submenu">
+        <li><a href="documents/cv.pdf" target="_blank">Mon CV</a></li>
+        <li><a href="projets.html">Mes TP</a></li>
+        <li><a href="bts-sio.html">Mes certifications</a></li>
+        <li><a href="stages.html">Mes stages</a></li>
+        <li><a href="documents/tableau-de-synthese.pdf" target="_blank">Tableau de Synthèse</a></li>
+      </ul>
+    </li>
+    <li><a href="competences.html">Compétences</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
