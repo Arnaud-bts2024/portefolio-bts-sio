@@ -1,187 +1,41 @@
-:root {
-    --bg-primary: #0b0f19;
-    --text-main: #ffffff;
-    --text-muted: #cbd5e1;
-    --accent-color: #38bdf8;
-    --border-color: rgba(255, 255, 255, 0.15);
-    --transition: all 0.3s ease;
-}
+/* ==========================================
+   STYLE DU SOUS-MENU (Dropdown)
+   ========================================== */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    min-height: 100vh;
-    width: 100%;
-}
-
-body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    color: var(--text-main);
-    line-height: 1.6;
-    background-color: var(--bg-primary);
-    position: relative;
-}
-
-.background-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-image: url('../images/fond-ecran.jpg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    z-index: -1;
-    pointer-events: none;
-}
-
-.main-content {
-    position: relative;
-    z-index: 2;
-    background: transparent;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-.site-header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    background-color: rgba(11, 15, 25, 0.85);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border-color);
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1.2rem 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
+/* Alignement et suppression des puces par défaut */
 .main-nav ul {
-    display: flex;
     list-style: none;
-    gap: 2.5rem;
+    padding: 0;
+    margin: 0;
 }
 
-.main-nav a {
+/* Retrait et masquage du sous-menu */
+.dropdown .submenu {
+    display: none;
+    padding-left: 20px; /* Décalage vers la droite (indentation) */
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/* Style des liens du sous-menu */
+.dropdown .submenu li a {
+    color: #ffffff;             /* Couleur du texte */
+    font-size: 0.9em;           /* Légèrement plus petit que le menu principal */
+    opacity: 0.85;              /* Légère transparence pour créer une hiérarchie */
+    padding: 6px 0;
+    display: block;
     text-decoration: none;
-    color: var(--text-muted);
-    font-weight: 600;
-    font-size: 1.1rem;
-    transition: var(--transition);
+    transition: all 0.2s ease; /* Animation douce au survol */
 }
 
-.main-nav a:hover, 
-.main-nav a.active {
-    color: var(--accent-color);
-    text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+/* Survol des éléments du sous-menu */
+.dropdown .submenu li a:hover {
+    color: #e57373;             /* Couleur rouge/rose accentuée au survol */
+    opacity: 1;
+    transform: translateX(5px); /* Léger glissement vers la droite */
 }
 
-.container {
-    max-width: 900px;
-    margin: 2rem auto;
-    padding: 0 2rem;
-    width: 100%;
-}
-
-.page-header {
-    margin-bottom: 3rem;
-    text-align: center;
-}
-
-.page-header h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    margin-bottom: 0.5rem;
-    color: #ffffff;
-    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-}
-
-.hero-subtitle {
-    color: var(--accent-color);
-    font-size: 1.3rem;
-    font-weight: 600;
-}
-
-/* Formulaire avec dégradé bleu électrique vers blanc */
-.contact-card {
-    background: linear-gradient(180deg, #0052cc 0%, #0033aa 40%, #ffffff 100%);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 2.5rem;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-}
-
-.contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.form-group label {
-    font-weight: 600;
-    color: #ffffff;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-}
-
-.form-control {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border-radius: 6px;
-    border: 1px solid #cbd5e1;
-    background-color: rgba(255, 255, 255, 0.95);
-    color: #0f172a;
-    font-size: 1rem;
-    outline: none;
-    transition: var(--transition);
-}
-
-.form-control:focus {
-    border-color: #0052cc;
-    box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.3);
-    background-color: #ffffff;
-}
-
-.btn-submit {
-    align-self: flex-start;
-    padding: 0.75rem 1.75rem;
-    background-color: #0052cc;
-    color: #ffffff;
-    border: none;
-    border-radius: 6px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.btn-submit:hover {
-    background-color: #002d7a;
-    transform: translateY(-2px);
-}
-
-.site-footer {
-    margin-top: auto;
-    padding: 2rem;
-    text-align: center;
-    border-top: 1px solid var(--border-color);
-    background-color: rgba(11, 15, 25, 0.85);
-    color: var(--text-muted);
+/* Affichage du sous-menu lors du survol de l'onglet parent */
+.dropdown:hover .submenu {
+    display: block;
 }
