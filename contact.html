@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Portfolio BTS SIO</title>
+    <title>Mes Projets - Portfolio BTS SIO</title>
     <link rel="stylesheet" href="css/style.css?v=2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
@@ -14,35 +14,32 @@
     <div class="main-content">
         <header class="site-header">
             <div class="nav-container">
-                <!-- Le menu unique sera injecté ici -->
-                <div id="navbar-container"></div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="bts-sio.html">BTS-SIO</a></li>
+                        <li class="dropdown">
+                            <a href="parcours.html">Mon parcours</a>
+                            <ul class="submenu">
+                                <li><a href="documents/cv.pdf" target="_blank">Mon CV</a></li>
+                                <li><a href="projets.html">Mes TP</a></li>
+                                <li><a href="bts-sio.html">Mes Certifications</a></li>
+                                <li><a href="stages.html">Mes Stages</a></li>
+                                <li><a href="documents/tableau-de-synthese.pdf" target="_blank">Tableau de Synthèse</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="projets.html" class="active">Projets</a></li>
+                        <li><a href="veille.html">Veille</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
             </div>
         </header>
 
         <main class="container">
             <section class="page-header">
-                <h1>Me Contacter</h1>
-                <p class="hero-subtitle">N'hésitez pas à me joindre pour toute opportunité professionnelle</p>
-            </section>
-
-            <section class="contact-card">
-                <form action="mailto:votre.email@exemple.com" method="post" enctype="text/plain" class="contact-form">
-                    <div class="form-group">
-                        <label for="name">Nom / Prénom</label>
-                        <input type="text" id="name" name="name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Adresse e-mail</label>
-                        <input type="email" id="email" name="email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="5" class="form-control" required></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit">
-                        <i class="fa-solid fa-paper-plane"></i> Envoyer
-                    </button>
-                </form>
+                <h1>Mes Projets</h1>
+                <p class="hero-subtitle">Réalisations académiques et personnelles</p>
             </section>
         </main>
 
@@ -51,14 +48,6 @@
         </footer>
     </div>
 
-    <!-- Script qui charge le fichier navbar.html -->
-    <script>
-        fetch('navbar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navbar-container').innerHTML = data;
-            });
-    </script>
     <script src="js/main.js"></script>
 </body>
 </html>
