@@ -10,8 +10,8 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* Image de fond fixe avec filtre sombre pour garantir la lisibilité du texte */
-    background-image: linear-gradient(rgba(11, 15, 25, 0.75), rgba(11, 15, 25, 0.75)), url('../images/fond-ecran.jpg');
+    /* Image brute d'origine sans aucun filtre sombre */
+    background-image: url('../images/fond-ecran.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -39,7 +39,7 @@ body {
    ========================================================================== */
 
 .site-header {
-    background: rgba(11, 15, 25, 0.90);
+    background: rgba(11, 15, 25, 0.85);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     position: sticky;
     top: 0;
@@ -137,7 +137,7 @@ body {
 }
 
 /* ==========================================================================
-   4. FORMULAIRE DE CONTACT (DÉGRADÉ BLEU VERS BLANC)
+   4. FORMULAIRE DE CONTACT
    ========================================================================== */
 
 .contact-form-section {
@@ -145,7 +145,6 @@ body {
     margin: 30px auto 50px;
     padding: 40px;
     border-radius: 20px;
-    /* Dégradé vertical : Bleu foncé -> Bleu clair -> Blanc */
     background: linear-gradient(180deg, #0284c7 0%, #38bdf8 35%, #e0f2fe 75%, #ffffff 100%);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 
                 0 0 30px rgba(56, 189, 248, 0.3);
