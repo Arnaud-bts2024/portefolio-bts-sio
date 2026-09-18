@@ -1,13 +1,28 @@
 /* ==========================================
-   STYLE GENERAL
+   STYLE GÉNÉRAL & LAYOUT
    ========================================== */
+
+* {
+    box-sizing: border-box;
+}
 
 body {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #121212;
     color: #ffffff;
+}
+
+/* Image de fond ou overlay */
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top left, #1a1a2e, #121212);
+    z-index: -1;
 }
 
 .main-content {
@@ -15,19 +30,42 @@ body {
     min-height: 100vh;
 }
 
+/* Barre latérale (Menu) */
 .site-header {
-    width: 250px;
-    background-color: #1e1e1e;
-    padding: 20px;
+    width: 260px;
+    background-color: #181818;
+    padding: 40px 20px;
+    border-right: 1px solid #2a2a2a;
+    flex-shrink: 0;
 }
 
+/* Zone de contenu principal */
 .container {
     flex: 1;
-    padding: 40px;
+    padding: 50px;
+}
+
+.page-header h1 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.hero-subtitle {
+    color: #a0a0a0;
+    font-size: 1.1rem;
+}
+
+.site-footer {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid #2a2a2a;
+    color: #777777;
+    font-size: 0.9rem;
 }
 
 /* ==========================================
-   NAVIGATION
+   NAVIGATION PRINCIPALE
    ========================================== */
 
 .main-nav ul {
@@ -36,8 +74,8 @@ body {
     margin: 0;
 }
 
-.main-nav li {
-    margin-bottom: 12px;
+.main-nav > ul > li {
+    margin-bottom: 14px;
 }
 
 .main-nav a {
@@ -46,9 +84,10 @@ body {
     font-size: 1rem;
     display: block;
     padding: 6px 0;
-    transition: color 0.2s ease;
+    transition: all 0.2s ease;
 }
 
+/* Lien actif */
 .main-nav a.active {
     color: #e57373;
     font-weight: bold;
@@ -66,29 +105,33 @@ body {
     position: relative;
 }
 
+/* Masqué par défaut */
 .dropdown .submenu {
     display: none;
-    padding-left: 20px;
-    margin-top: 5px;
+    padding-left: 18px;
+    margin-top: 6px;
     margin-bottom: 10px;
+    border-left: 2px solid #2a2a2a; /* Ligne verticale indicative */
 }
 
+/* Affichage au survol de l'élément parent */
 .dropdown:hover .submenu {
     display: block;
 }
 
 .dropdown .submenu li {
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 }
 
 .dropdown .submenu li a {
-    color: #dddddd;
+    color: #cccccc;
     font-size: 0.9rem;
     opacity: 0.85;
+    padding: 4px 0 4px 8px;
 }
 
 .dropdown .submenu li a:hover {
     color: #e57373;
     opacity: 1;
-    transform: translateX(5px);
+    transform: translateX(4px);
 }
