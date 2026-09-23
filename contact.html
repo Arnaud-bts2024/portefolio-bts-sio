@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Portfolio BTS SIO</title>
-    <link rel="stylesheet" href="css/style.css?v=2">
+    <title>Contact - Portfolio</title>
+    <link rel="stylesheet" href="css/style.css?v=7">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-<body>
+<body class="page-contact">
 
     <div class="background-container"></div>
 
     <div class="main-content">
-        <!-- Conteneur pour injecter la navbar via main.js -->
+        <!-- Navbar injectée via JS -->
         <div id="navbar-container"></div>
 
         <main class="container">
             <section class="page-header">
                 <h1>Me Contacter</h1>
-                <p class="hero-subtitle">N'hésitez pas à me transmettre vos messages</p>
+                <p class="hero-subtitle">Une question ou une opportunité ? N'hésitez pas à m'envoyer un message.</p>
             </section>
 
             <section class="contact-form-section">
@@ -29,13 +29,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Votre adresse email" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="subject">Sujet</label>
-                        <input type="text" id="subject" name="subject" placeholder="Sujet de votre message" required>
+                        <label for="email">Adresse E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="votre.email@exemple.com" required>
                     </div>
 
                     <div class="form-group">
@@ -45,7 +40,7 @@
 
                     <div class="btn-container">
                         <button type="submit" class="btn-submit">
-                            Envoyer le message <i class="fa-solid fa-paper-plane"></i>
+                            Envoyer <i class="fa-solid fa-paper-plane"></i>
                         </button>
                     </div>
                 </form>
@@ -57,7 +52,6 @@
         </footer>
     </div>
 
-    <!-- Script permettant d'afficher la barre de navigation -->
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=7"></script>
 </body>
 </html>
