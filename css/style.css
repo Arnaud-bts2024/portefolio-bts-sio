@@ -44,7 +44,7 @@ html, body {
 }
 
 /* ==========================================================================
-   2. HEADER & NAVIGATION (SOUS-MENU LISIBLE ET LUMINEUX)
+   2. HEADER & NAVIGATION (MENU DÉROULANT AVEC OPACITÉ SOMBRE)
    ========================================================================== */
 
 .site-header {
@@ -84,7 +84,7 @@ html, body {
     color: #38bdf8;
 }
 
-/* --- Sous-menu Déroulant (Lisible avec fond sombre & flou) --- */
+/* --- Sous-menu Déroulant (Cadre sombre semi-transparent) --- */
 .dropdown {
     position: relative;
 }
@@ -131,20 +131,27 @@ html, body {
 }
 
 /* ==========================================================================
-   3. TITRES & EN-TÊTES DE PAGE
+   3. TITRES & EN-TÊTES DE PAGE (CORRIGÉ POUR TOUTES LES PAGES DU SITE)
    ========================================================================== */
 
-.page-header {
+/* S'applique à toutes les manières d'écrire le titre principal selon la page */
+.page-header,
+.hero-section,
+main h1,
+.main-content h1 {
     text-align: center;
-    margin: 80px 0 30px 0; /* Espace suffisant sous la navigation */
+    margin-top: 120px !important; /* Décale le titre vers le bas sur toutes les pages */
+    margin-bottom: 30px;
     position: relative;
     z-index: 1;
 }
 
-.page-header h1 {
+.page-header h1,
+.hero-section h1 {
     font-size: 2.8rem;
     font-weight: 700;
     color: #ffffff;
+    margin-top: 0 !important; /* Évite de doubler la marge si h1 est dans .page-header */
 }
 
 .hero-subtitle {
