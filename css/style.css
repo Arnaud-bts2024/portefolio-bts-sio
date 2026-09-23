@@ -1,18 +1,164 @@
 /* ==========================================================================
-   3. SECTION BTS SIO (AJUSTÉE ET CENTRÉE)
+   1. RESET & STRUCTURE GÉNÉRALE
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Image de fond : vérifie bien l'extension de ton fichier dans le dossier images */
+    background-image: url('../images/fond-ecran.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #ffffff;
+    min-height: 100vh;
+}
+
+.main-content {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================================================
+   2. HEADER & NAVIGATION CENTRÉE
+   ========================================================================== */
+
+.site-header {
+    background: rgba(11, 15, 25, 0.85);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.main-nav a {
+    color: #e2e8f0;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: #38bdf8;
+}
+
+/* --- Sous-menu Déroulant (Dropdown) --- */
+.dropdown {
+    position: relative;
+}
+
+.dropdown .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transform: none;
+    background: rgba(11, 15, 25, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    min-width: 200px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    flex-direction: column;
+    gap: 4px;
+    padding: 10px;
+    z-index: 101;
+}
+
+.dropdown:hover .submenu {
+    display: flex;
+}
+
+.dropdown .submenu li {
+    width: 100%;
+    text-align: left;
+}
+
+.dropdown .submenu li a {
+    display: block;
+    padding: 8px 12px;
+    border-radius: 4px;
+    color: #ffffff;
+    white-space: nowrap;
+}
+
+.dropdown .submenu li a:hover {
+    background: rgba(56, 189, 248, 0.15);
+    color: #38bdf8;
+}
+
+/* ==========================================================================
+   3. TITRES & PAGES CLASSIQUES (ACCUEIL)
+   ========================================================================== */
+
+.page-header,
+.hero-section {
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 40px;
+}
+
+.page-header h1,
+.hero-section h1 {
+    font-size: 2.5rem;
+    color: #ffffff;
+}
+
+.hero-subtitle {
+    color: #94a3b8;
+    margin-top: 12px;
+    font-size: 1.1rem;
+}
+
+/* ==========================================================================
+   4. SECTION BTS SIO (GRILLE & CARTES NÉON ANIMÉES)
    ========================================================================== */
 
 .bts-grid {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
     gap: 40px;
-    margin-top: 40px; /* Réduit pour éviter de pousser le texte trop bas */
+    margin-top: 40px;
     margin-bottom: 40px;
     align-items: start;
 }
 
 .bts-intro h1 {
-    font-size: 1.8rem; /* Taille ajustée pour un long titre */
+    font-size: 1.8rem;
     line-height: 1.4;
     margin-bottom: 20px;
     font-weight: 600;
@@ -45,13 +191,15 @@
 }
 
 .card {
-    background: rgba(13, 18, 36, 0.85); /* Fond légèrement plus opaque pour la lisibilité */
+    background: rgba(13, 18, 36, 0.85);
     border: 1px solid rgba(56, 189, 248, 0.3);
     border-radius: 16px;
     padding: 20px;
     backdrop-filter: blur(12px);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    
+    /* Animation d'apparition */
     animation: fadeInUp 0.8s ease-out forwards;
     opacity: 0;
 }
@@ -62,6 +210,7 @@
     box-shadow: 0 12px 35px rgba(56, 189, 248, 0.25);
 }
 
+/* Apparition progressive des cartes */
 .cards-layout .card:nth-child(1) { animation-delay: 0.1s; }
 .cards-layout .card:nth-child(2) { animation-delay: 0.2s; }
 .cards-layout .card:nth-child(3) { animation-delay: 0.3s; }
@@ -109,4 +258,115 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* ==========================================================================
+   5. FORMULAIRE DE CONTACT
+   ========================================================================== */
+
+.contact-form-section {
+    max-width: 650px;
+    margin: 30px auto 50px;
+    padding: 40px;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #0284c7 0%, #38bdf8 35%, #e0f2fe 75%, #ffffff 100%);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 
+                0 0 30px rgba(56, 189, 248, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-form .form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.contact-form label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #0f172a;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 10px;
+    border: 2px solid rgba(15, 23, 42, 0.15);
+    background: rgba(255, 255, 255, 0.95);
+    color: #0f172a;
+    font-size: 1rem;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: #64748b;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #0284c7;
+    background: #ffffff;
+    box-shadow: 0 0 12px rgba(2, 132, 199, 0.4);
+}
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.btn-submit {
+    padding: 14px 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffffff !important;
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    background: linear-gradient(135deg, #0369a1 0%, #0c4a6e 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(2, 132, 199, 0.6);
+}
+
+.btn-submit i {
+    color: #ffffff;
+}
+
+/* ==========================================================================
+   6. PIED DE PAGE (FOOTER)
+   ========================================================================== */
+
+.site-footer {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+    background: rgba(11, 15, 25, 0.80);
+    margin-top: auto;
 }
