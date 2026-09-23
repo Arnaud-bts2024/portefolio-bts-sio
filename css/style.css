@@ -30,7 +30,6 @@ html, body {
 
 .main-content {
     min-height: 100vh;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -41,11 +40,10 @@ html, body {
     width: 95%;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 10px 20px;
+    padding: 10px 20px 40px 20px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    overflow: hidden;
 }
 
 /* ==========================================================================
@@ -136,14 +134,14 @@ html, body {
 }
 
 /* ==========================================================================
-   3. TITRES & EN-TÊTES DE PAGE (ALIGNEMENT HARMONISÉ SUR TOUT LE SITE)
+   3. TITRES & EN-TÊTES DE PAGE
    ========================================================================== */
 
 .page-header,
 .hero-section,
 .contact-form-section h1 {
     text-align: center;
-    margin-top: 30px !important; /* Marge identique pour TOUTES les pages */
+    margin-top: 30px !important;
     margin-bottom: 20px !important;
     position: relative;
     z-index: 1;
@@ -226,7 +224,7 @@ main h1 {
 }
 
 /* ==========================================================================
-   5. FORMULAIRE DE CONTACT
+   5. FORMULAIRE DE CONTACT & BOUTONS
    ========================================================================== */
 
 .contact-form-section {
@@ -272,7 +270,6 @@ main h1 {
     color: #0f172a;
     font-size: 0.95rem;
     font-family: inherit;
-    box-sizing: border-box;
     transition: all 0.3s ease;
 }
 
@@ -317,13 +314,27 @@ main h1 {
     box-shadow: 0 6px 16px rgba(2, 132, 199, 0.6);
 }
 
+/* --- Section Prise de Rendez-vous --- */
+.booking-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-booking {
+    text-decoration: none;
+}
+
 /* ==========================================================================
    6. PIED DE PAGE (FOOTER)
    ========================================================================== */
 
 .site-footer {
     text-align: center;
-    padding: 10px;
+    padding: 12px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     color: #94a3b8;
     background: rgba(11, 15, 25, 0.80);
