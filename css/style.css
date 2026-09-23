@@ -122,7 +122,7 @@ body {
 
 .page-header {
     text-align: center;
-    margin: 40px 0 20px;
+    margin: 120px 0 20px; /* Marge supérieure augmentée pour dégager le sous-menu */
 }
 
 .page-header h1 {
