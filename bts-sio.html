@@ -12,34 +12,98 @@
     <div class="background-container"></div>
 
     <div class="main-content">
-        <header class="site-header">
-            <div class="nav-container">
-                <nav class="main-nav">
-                    <ul>
-                        <li><a href="index.html">Accueil</a></li>
-                        <li><a href="bts-sio.html" class="active">BTS-SIO</a></li>
-                        <li class="dropdown">
-                            <a href="parcours.html">Mon parcours</a>
-                            <ul class="submenu">
-                                <li><a href="documents/cv.pdf" target="_blank">Mon CV</a></li>
-                                <li><a href="projets.html">Mes TP</a></li>
-                                <li><a href="bts-sio.html">Mes Certifications</a></li>
-                                <li><a href="stages.html">Mes Stages</a></li>
-                                <li><a href="documents/tableau-de-synthese.pdf" target="_blank">Tableau de Synthèse</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="projets.html">Projets</a></li>
-                        <li><a href="veille.html">Veille</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </nav>      
-            </div>
-        </header>
+        <!-- Conteneur pour injecter la navbar via main.js -->
+        <div id="navbar-container"></div>
 
         <main class="container">
+            <!-- En-tête de page -->
             <section class="page-header">
-                <h1>Le BTS SIO</h1>
-                <p class="hero-subtitle">Services Informatiques aux Organisations</p>
+                <h1>BTS Services aux Organisations</h1>
+                <p class="hero-subtitle">Élève en BTS Services Informatiques aux Organisations</p>
+            </section>
+
+            <!-- Grille des 6 cartes BTS SIO -->
+            <section class="bts-cards-grid">
+
+                <!-- Carte 1 : SLAM -->
+                <article class="sio-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <h3>Option SLAM<br><span>(Solutions Logicielles et Applications Métier)</span></h3>
+                    <ul>
+                        <li>Solutions Logicielles</li>
+                        <li>Applications Métier</li>
+                    </ul>
+                    <a href="projets.html" class="card-btn">Découvrir</a>
+                </article>
+
+                <!-- Carte 2 : SISR -->
+                <article class="sio-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-network-wired"></i>
+                    </div>
+                    <h3>Option SISR<br><span>(Solutions d'Infrastructure, Systèmes et Réseaux)</span></h3>
+                    <ul>
+                        <li>Étudiant en SISR et Réseaux</li>
+                        <li>Solutions d'Infrastructure, Systèmes et Réseaux</li>
+                    </ul>
+                    <a href="parcours.html" class="card-btn">Découvrir</a>
+                </article>
+
+                <!-- Carte 3 : Stages & Alternance -->
+                <article class="sio-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-briefcase"></i>
+                    </div>
+                    <h3>Stages & Alternance</h3>
+                    <ul>
+                        <li>Expériences professionnelles</li>
+                        <li>Stages & Alternance</li>
+                    </ul>
+                    <a href="stages.html" class="card-btn">Découvrir</a>
+                </article>
+
+                <!-- Carte 4 : Projets Académiques -->
+                <article class="sio-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-folder-open"></i>
+                    </div>
+                    <h3>Projets Académiques</h3>
+                    <ul>
+                        <li>Projets académiques réalisés</li>
+                        <li>Travaux Pratiques en laboratoire</li>
+                    </ul>
+                    <a href="projets.html" class="card-btn highlighted">Voir les Projets</a>
+                </article>
+
+                <!-- Carte 5 : Compétences Acquises -->
+                <article class="sio-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <h3>Compétences Acquises</h3>
+                    <ul>
+                        <li>Administration système</li>
+                        <li>Gestion des réseaux et sécurité</li>
+                        <li>Virtualisation et cloud computing</li>
+                    </ul>
+                    <a href="parcours.html" class="card-btn">En savoir plus</a>
+                </article>
+
+                <!-- Carte 6 : Veille Technologique -->
+                <article class="sio-card">
+                    <div class="card-icon">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <h3>Veille Technologique</h3>
+                    <ul>
+                        <li>Suivi des innovations informatiques</li>
+                        <li>Cybersécurité et nouvelles menaces</li>
+                    </ul>
+                    <a href="veille.html" class="card-btn">Consulter</a>
+                </article>
+
             </section>
         </main>
 
@@ -48,6 +112,7 @@
         </footer>
     </div>
 
+    <!-- Script de gestion du menu dynamique -->
     <script src="js/main.js"></script>
 </body>
 </html>
