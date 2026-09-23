@@ -10,7 +10,7 @@
 
 html, body {
     height: 100%;
-    overflow: hidden; /* Empêche le défilement pour un rendu plein écran */
+    overflow: hidden; /* Empêche le défilement général pour un rendu plein écran */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #ffffff;
 }
@@ -43,7 +43,7 @@ html, body {
     padding: 10px 20px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start; /* Aligne le contenu vers le haut */
 }
 
 /* ==========================================================================
@@ -130,23 +130,24 @@ html, body {
 }
 
 /* ==========================================================================
-   3. TITRES DE PAGE
+   3. TITRES & EN-TÊTES DE PAGE
    ========================================================================== */
 
 .page-header {
     text-align: center;
-    margin: 5px 0 15px 0;
+    /* Marge ajustée à 220px pour placer le titre sous le dernier élément du menu déroulant */
+    margin: 220px 0 20px 0; 
 }
 
 .page-header h1 {
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     color: #ffffff;
 }
 
 .hero-subtitle {
     color: #94a3b8;
-    font-size: 0.9rem;
-    margin-top: 2px;
+    font-size: 1rem;
+    margin-top: 6px;
 }
 
 /* ==========================================================================
