@@ -25,11 +25,11 @@ function initNavbar() {
                         <li class="dropdown">
                             <a href="parcours.html">Mon parcours</a>
                             <ul class="submenu">
-                                <li><a href="documents/cv.pdf" target="_blank" rel="noopener">Mon CV</a></li>
+                                <li><a href="documents/CV Arnaud HOLLEBECQUE.pdf" target="_blank" rel="noopener noreferrer">Mon CV</a></li>
                                 <li><a href="projets.html">Mes TP</a></li>
                                 <li><a href="https://online.fliphtml5.com/fvfkdx/uksp/" target="_blank" rel="noopener noreferrer">Mes Certifications</a></li>
                                 <li><a href="stages.html">Mes Stages</a></li>
-                                <li><a href="documents/tableau-de-synthese.pdf" target="_blank" rel="noopener">Tableau de Synthèse</a></li>
+                                <li><a href="documents/tableau-de-synthese.pdf" target="_blank" rel="noopener noreferrer">Tableau de Synthèse</a></li>
                             </ul>
                         </li>
                         <li><a href="projets.html">Projets</a></li>
