@@ -43,6 +43,7 @@ html, body {
     padding: 10px 20px 40px 20px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: flex-start;
 }
 
@@ -55,6 +56,7 @@ html, body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     position: sticky;
     top: 0;
+    width: 100%;
     z-index: 9999;
     backdrop-filter: blur(8px);
 }
@@ -145,6 +147,7 @@ html, body {
     margin-bottom: 20px !important;
     position: relative;
     z-index: 1;
+    width: 100%;
 }
 
 .page-header h1,
@@ -172,6 +175,7 @@ main h1 {
     grid-template-columns: repeat(3, 1fr);
     gap: 15px;
     margin-top: 5px;
+    width: 100%;
     position: relative;
     z-index: 1;
     overflow-y: auto;
@@ -230,7 +234,7 @@ main h1 {
 .contact-form-section {
     width: 100%;
     max-width: 600px;
-    margin: 10px auto 20px auto;
+    margin: 10px auto 0 auto;
     padding: 25px 30px;
     border-radius: 20px;
     background: linear-gradient(180deg, #0284c7 0%, #38bdf8 40%, #e0f2fe 80%, #ffffff 100%);
@@ -314,14 +318,16 @@ main h1 {
     box-shadow: 0 6px 16px rgba(2, 132, 199, 0.6);
 }
 
-/* --- Section Prise de Rendez-vous --- */
+/* --- Section Prise de Rendez-vous (CENTRÉE ET ESPACÉE) --- */
 .booking-section {
+    width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 25px;
-    margin-bottom: 25px;
+    align-items: center;
+    margin-top: 40px;    /* Espace entre le formulaire et le bouton */
+    margin-bottom: 30px; /* Espace au-dessus du footer */
     position: relative;
-    z-index: 1;
+    z-index: 10;
 }
 
 .btn-booking {
@@ -341,6 +347,7 @@ main h1 {
     font-size: 0.8rem;
     position: relative;
     z-index: 1;
+    width: 100%;
 }
 
 /* ==========================================================================
