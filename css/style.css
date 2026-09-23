@@ -31,8 +31,9 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    padding-top: 220px; /* Augmenté pour descendre le contenu de la page */
     flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 /* ==========================================================================
@@ -59,7 +60,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 50px; /* Écarte les onglets de la navbar */
 }
 
 .main-nav a {
@@ -85,15 +86,15 @@ body {
     display: none;
     position: absolute;
     top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0; /* Aligne exactement sous l'onglet "Mon parcours" */
+    transform: none; /* Supprime le décalage centré */
     background: transparent;
     border: none;
-    min-width: 220px;
+    min-width: 200px;
     box-shadow: none;
     flex-direction: column;
-    gap: 0;
-    padding: 8px 0;
+    gap: 8px;
+    padding: 10px 0;
 }
 
 .dropdown:hover .submenu {
@@ -107,9 +108,10 @@ body {
 
 .dropdown .submenu li a {
     display: block;
-    padding: 10px 16px;
+    padding: 6px 0;
     border-radius: 0;
     color: #ffffff;
+    white-space: nowrap;
 }
 
 .dropdown .submenu li a:hover {
@@ -118,23 +120,30 @@ body {
 }
 
 /* ==========================================================================
-   3. TITRES & EN-TÊTES DE PAGE
+   3. TITRES & EN-TÊTES DE PAGE CENTRÉS
    ========================================================================== */
 
-.page-header {
+.page-header,
+.hero-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centre verticalement */
+    align-items: center;     /* Centre horizontalement */
     text-align: center;
-    margin-top: 180px; /* Espace suffissant pour dégager les 5 éléments du sous-menu */
-    margin-bottom: 20px;
+    padding: 60px 0;
 }
 
-.page-header h1 {
-    font-size: 2.5rem;
+.page-header h1,
+.hero-section h1 {
+    font-size: 2.8rem;
     color: #ffffff;
 }
 
 .hero-subtitle {
     color: #94a3b8;
-    margin-top: 10px;
+    margin-top: 12px;
+    font-size: 1.1rem;
 }
 
 /* ==========================================================================
