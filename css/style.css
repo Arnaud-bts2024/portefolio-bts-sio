@@ -10,7 +10,7 @@
 
 html, body {
     height: 100%;
-    overflow: hidden; /* Empêche le défilement général pour un rendu plein écran */
+    overflow: hidden; /* Empêche le défilement pour un rendu plein écran */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #ffffff;
 }
@@ -47,7 +47,7 @@ html, body {
 }
 
 /* ==========================================================================
-   2. HEADER & NAVIGATION (MENU SANS CADRE NI FOND)
+   2. HEADER & NAVIGATION (MENU SANS CADRE)
    ========================================================================== */
 
 .site-header {
@@ -87,7 +87,7 @@ html, body {
     color: #38bdf8;
 }
 
-/* --- Sous-menu Déroulant (Dropdown Pure Texte) --- */
+/* --- Sous-menu Déroulant --- */
 .dropdown {
     position: relative;
 }
@@ -130,7 +130,7 @@ html, body {
 }
 
 /* ==========================================================================
-   3. TITRES & EN-TÊTES DE PAGE
+   3. TITRES DE PAGE
    ========================================================================== */
 
 .page-header {
@@ -150,7 +150,7 @@ html, body {
 }
 
 /* ==========================================================================
-   4. GRILLE DES CARTES BTS SIO (DISPOSITION 3x2 PLEIN ÉCRAN)
+   4. GRILLE DES CARTES BTS SIO (3x2 PLEIN ÉCRAN)
    ========================================================================== */
 
 .bts-cards-grid {
@@ -206,7 +206,97 @@ html, body {
 }
 
 /* ==========================================================================
-   5. PIED DE PAGE (FOOTER)
+   5. FORMULAIRE DE CONTACT (COMPACT PLEIN ÉCRAN)
+   ========================================================================== */
+
+.contact-form-section {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px 25px;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #0284c7 0%, #38bdf8 40%, #e0f2fe 80%, #ffffff 100%);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 
+                0 0 20px rgba(56, 189, 248, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contact-form .form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.contact-form label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: #0f172a;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 2px solid rgba(15, 23, 42, 0.15);
+    background: rgba(255, 255, 255, 0.95);
+    color: #0f172a;
+    font-size: 0.9rem;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.contact-form textarea {
+    resize: none;
+    height: 80px;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #0284c7;
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(2, 132, 199, 0.4);
+}
+
+.btn-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 5px;
+}
+
+.btn-submit {
+    padding: 10px 22px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #ffffff !important;
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    background: linear-gradient(135deg, #0369a1 0%, #0c4a6e 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(2, 132, 199, 0.6);
+}
+
+/* ==========================================================================
+   6. PIED DE PAGE (FOOTER)
    ========================================================================== */
 
 .site-footer {
