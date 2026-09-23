@@ -10,7 +10,6 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* Image de fond : vérifie bien l'extension de ton fichier dans le dossier images */
     background-image: url('../images/fond-ecran.jpg');
     background-size: cover;
     background-position: center;
@@ -60,7 +59,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 50px;
+    gap: 40px;
 }
 
 .main-nav a {
@@ -77,7 +76,7 @@ body {
     color: #38bdf8;
 }
 
-/* --- Sous-menu Déroulant (Dropdown) --- */
+/* --- Sous-menu Déroulant Épuré --- */
 .dropdown {
     position: relative;
 }
@@ -86,16 +85,15 @@ body {
     display: none;
     position: absolute;
     top: 100%;
-    left: 0;
-    transform: none;
-    background: rgba(11, 15, 25, 0.95);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    min-width: 200px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    left: 50%;
+    transform: translateX(-50%);
+    background: transparent;
+    border: none;
+    min-width: 220px;
+    box-shadow: none;
     flex-direction: column;
     gap: 4px;
-    padding: 10px;
+    padding: 12px 0 0 0;
     z-index: 101;
 }
 
@@ -105,158 +103,168 @@ body {
 
 .dropdown .submenu li {
     width: 100%;
-    text-align: left;
+    text-align: center;
 }
 
 .dropdown .submenu li a {
     display: block;
     padding: 8px 12px;
-    border-radius: 4px;
+    border-radius: 0;
     color: #ffffff;
     white-space: nowrap;
+    background: transparent;
 }
 
 .dropdown .submenu li a:hover {
-    background: rgba(56, 189, 248, 0.15);
+    background: transparent;
     color: #38bdf8;
 }
 
 /* ==========================================================================
-   3. TITRES & PAGES CLASSIQUES (ACCUEIL)
+   3. TITRES DE PAGE
    ========================================================================== */
 
-.page-header,
-.hero-section {
+.page-header {
     text-align: center;
-    margin-top: 60px;
+    margin-top: 100px; /* Décalage pour dégager le menu */
     margin-bottom: 40px;
 }
 
-.page-header h1,
-.hero-section h1 {
+.page-header h1 {
     font-size: 2.5rem;
     color: #ffffff;
+    font-weight: 700;
 }
 
 .hero-subtitle {
     color: #94a3b8;
-    margin-top: 12px;
+    margin-top: 10px;
     font-size: 1.1rem;
 }
 
 /* ==========================================================================
-   4. SECTION BTS SIO (GRILLE & CARTES NÉON ANIMÉES)
+   4. SECTION BTS SIO (GRILLE DE CARTES NÉON)
    ========================================================================== */
 
-.bts-grid {
+.bts-cards-grid {
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: 40px;
-    margin-top: 40px;
-    margin-bottom: 40px;
-    align-items: start;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-bottom: 60px;
 }
 
-.bts-intro h1 {
-    font-size: 1.8rem;
-    line-height: 1.4;
-    margin-bottom: 20px;
-    font-weight: 600;
-}
-
-.bts-intro .highlight {
-    color: #38bdf8;
-    text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
-    font-weight: bold;
-}
-
-.bts-intro p {
-    color: #cbd5e1;
-    font-size: 1rem;
-    line-height: 1.6;
-}
-
-.section-title {
-    color: #38bdf8;
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    font-weight: 600;
-    text-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
-}
-
-.cards-layout {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-.card {
-    background: rgba(13, 18, 36, 0.85);
-    border: 1px solid rgba(56, 189, 248, 0.3);
+.sio-card {
+    background: rgba(11, 20, 38, 0.75);
+    border: 1px solid rgba(56, 189, 248, 0.25);
     border-radius: 16px;
-    padding: 20px;
+    padding: 30px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     backdrop-filter: blur(12px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     
-    /* Animation d'apparition */
-    animation: fadeInUp 0.8s ease-out forwards;
     opacity: 0;
+    animation: cardFadeIn 0.6s ease-out forwards;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(56, 189, 248, 0.7);
-    box-shadow: 0 12px 35px rgba(56, 189, 248, 0.25);
+.sio-card:nth-child(1) { animation-delay: 0.1s; }
+.sio-card:nth-child(2) { animation-delay: 0.2s; }
+.sio-card:nth-child(3) { animation-delay: 0.3s; }
+.sio-card:nth-child(4) { animation-delay: 0.4s; }
+.sio-card:nth-child(5) { animation-delay: 0.5s; }
+.sio-card:nth-child(6) { animation-delay: 0.6s; }
+
+.sio-card:hover {
+    transform: translateY(-8px);
+    border-color: #38bdf8;
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.4),
+                inset 0 0 15px rgba(56, 189, 248, 0.1);
 }
 
-/* Apparition progressive des cartes */
-.cards-layout .card:nth-child(1) { animation-delay: 0.1s; }
-.cards-layout .card:nth-child(2) { animation-delay: 0.2s; }
-.cards-layout .card:nth-child(3) { animation-delay: 0.3s; }
-
-.card-wide {
-    grid-column: span 2;
-}
-
-.card h3 {
+.sio-card .card-icon {
+    font-size: 2.2rem;
     color: #38bdf8;
-    font-size: 1.1rem;
-    margin-bottom: 12px;
-    line-height: 1.4;
+    margin-bottom: 18px;
+    text-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
 }
 
-.card p {
+.sio-card h3 {
+    color: #ffffff;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    line-height: 1.3;
+}
+
+.sio-card h3 span {
+    font-size: 0.85rem;
     color: #94a3b8;
+    font-weight: 400;
+}
+
+.sio-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 24px 0;
+    width: 100%;
+    flex: 1;
+}
+
+.sio-card ul li {
+    color: #cbd5e1;
     font-size: 0.9rem;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     line-height: 1.4;
 }
 
-.card-footer-text {
-    margin-top: 12px;
+.sio-card ul li::before {
+    content: "•";
+    color: #38bdf8;
+    margin-right: 6px;
 }
 
-.card ul {
-    list-style-type: disc;
-    padding-left: 20px;
+.card-btn {
+    color: #38bdf8;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
-.card ul li {
-    color: #e2e8f0;
-    font-size: 0.9rem;
-    margin-bottom: 6px;
-    line-height: 1.4;
+.card-btn:hover {
+    color: #ffffff;
+    text-shadow: 0 0 10px #38bdf8;
 }
 
-@keyframes fadeInUp {
+.card-btn.highlighted {
+    color: #38bdf8;
+    font-weight: 700;
+}
+
+@keyframes cardFadeIn {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(25px);
     }
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* Responsive Grid */
+@media (max-width: 992px) {
+    .bts-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .bts-cards-grid {
+        grid-template-columns: 1fr;
     }
 }
 
