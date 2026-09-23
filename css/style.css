@@ -44,15 +44,15 @@ html, body {
 }
 
 /* ==========================================================================
-   2. HEADER & NAVIGATION (AVEC Z-INDEX PRIORITAIRE AU PREMIER PLAN)
+   2. HEADER & NAVIGATION (SOUS-MENU LISIBLE ET LUMINEUX)
    ========================================================================== */
 
 .site-header {
-    background: rgba(11, 15, 25, 0.85);
+    background: rgba(11, 15, 25, 0.95);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     position: sticky;
     top: 0;
-    z-index: 9999; /* Garantit que tout le header reste au-dessus du contenu */
+    z-index: 9999;
     backdrop-filter: blur(8px);
 }
 
@@ -84,7 +84,7 @@ html, body {
     color: #38bdf8;
 }
 
-/* --- Sous-menu Déroulant --- */
+/* --- Sous-menu Déroulant (Lisible avec fond sombre & flou) --- */
 .dropdown {
     position: relative;
 }
@@ -95,14 +95,16 @@ html, body {
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    background: transparent !important;
-    border: none !important;
-    min-width: 220px;
-    box-shadow: none !important;
+    background: rgba(15, 23, 42, 0.95) !important;
+    border: 1px solid rgba(56, 189, 248, 0.3) !important;
+    border-radius: 12px;
+    min-width: 230px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8) !important;
+    backdrop-filter: blur(12px);
     flex-direction: column;
     gap: 0;
-    padding: 8px 0;
-    z-index: 10000; /* Assure au sous-menu d'être au tout premier plan */
+    padding: 10px 0;
+    z-index: 10000;
 }
 
 .dropdown:hover .submenu {
@@ -116,14 +118,15 @@ html, body {
 
 .dropdown .submenu li a {
     display: block;
-    padding: 8px 12px;
+    padding: 10px 16px;
     border-radius: 0;
     color: #ffffff;
     background: transparent !important;
+    transition: background 0.2s ease, color 0.2s ease;
 }
 
 .dropdown .submenu li a:hover {
-    background: transparent !important;
+    background: rgba(56, 189, 248, 0.2) !important;
     color: #38bdf8;
 }
 
@@ -133,7 +136,7 @@ html, body {
 
 .page-header {
     text-align: center;
-    margin: 20px 0 25px 0;
+    margin: 80px 0 30px 0; /* Espace suffisant sous la navigation */
     position: relative;
     z-index: 1;
 }
@@ -151,7 +154,7 @@ html, body {
 }
 
 /* ==========================================================================
-   4. GRILLE DES CARTES BTS SIO (AÉRÉE & ESPACÉE)
+   4. GRILLE DES CARTES BTS SIO
    ========================================================================== */
 
 .bts-cards-grid {
@@ -161,7 +164,7 @@ html, body {
     gap: 30px;
     margin-top: 15px;
     position: relative;
-    z-index: 1; /* Reste sous le menu déroulant */
+    z-index: 1;
 }
 
 .sio-card {
@@ -209,7 +212,7 @@ html, body {
 }
 
 /* ==========================================================================
-   5. FORMULAIRE DE CONTACT (PAGE CONTACT)
+   5. FORMULAIRE DE CONTACT
    ========================================================================== */
 
 .contact-form-section {
