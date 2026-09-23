@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - Portfolio BTS SIO</title>
-    <link rel="stylesheet" href="css/style.css?v=6">
+    <link rel="stylesheet" href="css/style.css?v=2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
+    <div class="background-container"></div>
+
     <div class="main-content">
+        <!-- Conteneur pour injecter la navbar via main.js -->
         <div id="navbar-container"></div>
 
         <main class="container">
@@ -19,23 +22,27 @@
             </section>
 
             <section class="contact-form-section">
-                <form action="https://formspree.io/f/ton_id_formspree" method="POST" class="contact-form">
+                <form class="contact-form" action="#" method="POST">
                     <div class="form-group">
                         <label for="name">Nom / Prénom</label>
-                        <input type="text" id="name" name="name" required placeholder="Votre nom">
+                        <input type="text" id="name" name="name" placeholder="Votre nom" required>
                     </div>
+
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required placeholder="Votre adresse email">
+                        <input type="email" id="email" name="email" placeholder="Votre adresse email" required>
                     </div>
+
                     <div class="form-group">
                         <label for="subject">Sujet</label>
-                        <input type="text" id="subject" name="subject" required placeholder="Sujet de votre message">
+                        <input type="text" id="subject" name="subject" placeholder="Sujet de votre message" required>
                     </div>
+
                     <div class="form-group">
                         <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="5" required placeholder="Votre message..."></textarea>
+                        <textarea id="message" name="message" placeholder="Votre message..." required></textarea>
                     </div>
+
                     <div class="btn-container">
                         <button type="submit" class="btn-submit">
                             Envoyer le message <i class="fa-solid fa-paper-plane"></i>
@@ -50,6 +57,7 @@
         </footer>
     </div>
 
-    <script src="js/animations.js"></script>
+    <!-- Script permettant d'afficher la barre de navigation -->
+    <script src="js/main.js"></script>
 </body>
 </html>
