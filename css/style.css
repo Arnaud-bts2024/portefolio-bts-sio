@@ -324,3 +324,12 @@ main h1,
     position: relative;
     z-index: 1;
 }
+
+/* ==========================================================================
+   7. GESTION DU SCROLL
+   ========================================================================== */
+
+/* Bloque le scroll uniquement si la balise <body> contient la classe "no-scroll" */
+body.no-scroll {
+    overflow: hidden !important;
+}
