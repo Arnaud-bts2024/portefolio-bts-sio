@@ -7,11 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initCardAnimations();
 });
 
-// Racine du site :
-//  - "/" si ton site est sur https://TON-PSEUDO.github.io/
-//  - "/NOM-DU-REPO/" si c'est un site de projet (https://TON-PSEUDO.github.io/NOM-DU-REPO/)
-const BASE = "/";
-
 /**
  * Génère et injecte la barre de navigation principale
  */
@@ -24,18 +19,12 @@ function initNavbar() {
             <div class="nav-container">
                 <nav class="main-nav">
                     <ul>
-                        <li><a href="${BASE}index.html">Accueil</a></li>
-                        <li class="dropdown">
-                            <a href="${BASE}bts-sio.html">BTS-SIO</a>
-                            <ul class="submenu">
-                                <li><a href="${BASE}sisr.html">Option SISR</a></li>
-                                <li><a href="${BASE}slam.html">Option SLAM</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="${BASE}parcours.html">Mon parcours</a></li>
-                        <li><a href="${BASE}projets.html">Projets</a></li>
-                        <li><a href="${BASE}veille.html">Veille</a></li>
-                        <li><a href="${BASE}contact.html">Contact</a></li>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="bts-sio.html">BTS-SIO</a></li>
+                        <li><a href="parcours.html">Mon parcours</a></li>
+                        <li><a href="projets.html">Projets</a></li>
+                        <li><a href="veille.html">Veille</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
             </div>
@@ -45,7 +34,7 @@ function initNavbar() {
     // Met en surbrillance la page courante
     const currentPage = window.location.pathname.split("/").pop() || "index.html";
     navbarContainer.querySelectorAll(".main-nav a").forEach(link => {
-        if (link.getAttribute("href").split("/").pop() === currentPage) {
+        if (link.getAttribute("href") === currentPage) {
             link.classList.add("active");
         }
     });
