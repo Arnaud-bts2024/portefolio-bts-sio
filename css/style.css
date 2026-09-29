@@ -3,7 +3,6 @@
    ========================================================================== */
 
 :root {
-    /* Couleurs principales */
     --bg-dark: #0b0f19;
     --card-bg: rgba(13, 18, 36, 0.85);
     --primary: #38bdf8;
@@ -12,14 +11,12 @@
     --text-muted: #94a3b8;
     --text-sub: #cbd5e1;
     
-    /* Bordures & Ombrages */
     --border-light: rgba(255, 255, 255, 0.1);
     --border-accent: rgba(56, 189, 248, 0.3);
     --border-accent-hover: rgba(56, 189, 248, 0.7);
     --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.5);
     --shadow-hover: 0 12px 30px rgba(56, 189, 248, 0.25);
     
-    /* Rayons de bordure */
     --radius-sm: 6px;
     --radius-md: 12px;
     --radius-lg: 20px;
@@ -33,17 +30,12 @@
 }
 
 html, body {
-    height: 100%;
+    min-height: 100vh;
     overflow-x: hidden;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--text-main);
 }
 
-body.no-scroll {
-    overflow: hidden !important;
-}
-
-/* Arrière-plan fixe */
 .background-container {
     position: fixed;
     inset: 0;
@@ -53,7 +45,6 @@ body.no-scroll {
     z-index: -1;
 }
 
-/* Layout principal */
 .main-content {
     min-height: 100vh;
     display: flex;
@@ -115,7 +106,7 @@ body.no-scroll {
     color: var(--primary);
 }
 
-/* --- Sous-menu Déroulant --- */
+/* Sous-menu Déroulant */
 .dropdown {
     position: relative;
 }
@@ -197,7 +188,7 @@ main h1 {
 .bts-cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem; /* Espacement aéré entre les cartes */
+    gap: 2rem;
     margin-top: 15px;
     width: 100%;
     position: relative;
@@ -205,7 +196,6 @@ main h1 {
     padding: 10px 5px 20px;
 }
 
-/* Carte : État initial pour l'animation */
 .sio-card {
     background: var(--card-bg);
     border: 1px solid var(--border-accent);
@@ -217,24 +207,18 @@ main h1 {
     flex-direction: column;
     justify-content: flex-start;
     
-    /* Propriétés de transition pour l'effet moderne */
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 0.3s ease,
-                box-shadow 0.3s ease;
+    transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Carte : Classe appliquée par le JS lors de l'apparition */
 .sio-card.visible {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1 !important;
+    transform: translateY(0) !important;
 }
 
-/* Effet au survol */
 .sio-card:hover {
-    transform: translateY(-6px);
+    transform: translateY(-6px) !important;
     border-color: var(--border-accent-hover);
     box-shadow: var(--shadow-hover);
 }
@@ -354,7 +338,6 @@ main h1 {
     box-shadow: 0 6px 16px rgba(2, 132, 199, 0.6);
 }
 
-/* --- Section Prise de Rendez-vous --- */
 .booking-section {
     width: 100%;
     display: flex;
