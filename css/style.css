@@ -10,13 +10,13 @@
     --text-main: #ffffff;
     --text-muted: #94a3b8;
     --text-sub: #cbd5e1;
-    
+
     --border-light: rgba(255, 255, 255, 0.1);
     --border-accent: rgba(56, 189, 248, 0.3);
     --border-accent-hover: rgba(56, 189, 248, 0.7);
     --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.5);
     --shadow-hover: 0 12px 30px rgba(56, 189, 248, 0.25);
-    
+
     --radius-sm: 6px;
     --radius-md: 12px;
     --radius-lg: 20px;
@@ -29,20 +29,20 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     min-height: 100vh;
     overflow-x: hidden;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-dark);
     color: var(--text-main);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .background-container {
     position: fixed;
     inset: 0;
-    width: 100vw;
-    height: 100vh;
-    background: url('../images/fond-ecran.jpg') center/cover no-repeat;
     z-index: -1;
+    background: url('../images/fond-ecran.jpg') center / cover no-repeat;
 }
 
 .main-content {
@@ -68,13 +68,17 @@ html, body {
    2. HEADER & NAVIGATION
    ========================================================================== */
 
-.site-header {
-    background: rgba(11, 15, 25, 0.95);
-    border-bottom: 1px solid var(--border-light);
+#navbar-container {
     position: sticky;
     top: 0;
-    width: 100%;
     z-index: 9999;
+    width: 100%;
+}
+
+.site-header {
+    width: 100%;
+    background: rgba(11, 15, 25, 0.95);
+    border-bottom: 1px solid var(--border-light);
     backdrop-filter: blur(8px);
 }
 
@@ -87,17 +91,18 @@ html, body {
 .main-nav ul {
     list-style: none;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 20px;
 }
 
 .main-nav a {
-    color: #e2e8f0;
-    text-decoration: none;
-    font-weight: 500;
     padding: 6px 12px;
     border-radius: var(--radius-sm);
+    color: #e2e8f0;
+    font-weight: 500;
+    text-decoration: none;
     transition: color 0.3s ease;
 }
 
@@ -106,7 +111,7 @@ html, body {
     color: var(--primary);
 }
 
-/* Sous-menu Déroulant */
+/* Sous-menu déroulant */
 .dropdown {
     position: relative;
 }
@@ -117,18 +122,20 @@ html, body {
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
+    z-index: 10000;
+    flex-direction: column;
+    gap: 0;
+    min-width: 230px;
+    padding: 8px 0;
     background: rgba(15, 23, 42, 0.95);
     border: 1px solid var(--border-accent);
     border-radius: var(--radius-md);
-    min-width: 230px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(12px);
-    flex-direction: column;
-    padding: 8px 0;
-    z-index: 10000;
 }
 
-.dropdown:hover .submenu {
+.dropdown:hover .submenu,
+.dropdown:focus-within .submenu {
     display: flex;
 }
 
@@ -158,94 +165,98 @@ html, body {
 .page-header,
 .hero-section,
 .contact-form-section h1 {
-    text-align: center;
-    margin-top: 30px;
-    margin-bottom: 20px;
     position: relative;
     z-index: 1;
     width: 100%;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 .page-header h1,
 .hero-section h1,
 main h1 {
+    margin: 0 0 5px;
     font-size: 2.2rem;
     font-weight: 700;
     color: var(--text-main);
-    margin: 0 0 5px;
 }
 
 .hero-subtitle {
-    color: var(--text-muted);
-    font-size: 1rem;
     margin-top: 4px;
+    font-size: 1rem;
+    color: var(--text-muted);
 }
 
 /* ==========================================================================
-   4. GRILLE DES CARTES BTS SIO (AÉRÉE & ANIMATIONS)
+   4. GRILLE DES CARTES BTS SIO
    ========================================================================== */
 
 .bts-cards-grid {
+    position: relative;
+    z-index: 1;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 2rem;
-    margin-top: 15px;
     width: 100%;
-    position: relative;
-    z-index: 1;
+    margin-top: 15px;
     padding: 10px 5px 20px;
 }
 
 .sio-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border-accent);
-    border-radius: var(--radius-md);
-    padding: 20px 22px;
-    backdrop-filter: blur(12px);
-    box-shadow: var(--shadow-card);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    
+    padding: 20px 22px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-accent);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    backdrop-filter: blur(12px);
+
+    /* État initial : masquée, révélée par main.js (.visible) */
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: opacity 0.6s ease,
+                transform 0.6s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
 }
 
 .sio-card.visible {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.sio-card:hover {
-    transform: translateY(-6px) !important;
+.sio-card.visible:hover {
+    transform: translateY(-6px);
     border-color: var(--border-accent-hover);
     box-shadow: var(--shadow-hover);
 }
 
 .sio-card .card-icon {
+    margin-bottom: 10px;
     font-size: 1.4rem;
     color: var(--primary);
-    margin-bottom: 10px;
 }
 
 .sio-card h3 {
-    color: var(--primary);
-    font-size: 1.1rem;
     margin-bottom: 10px;
+    font-size: 1.1rem;
     line-height: 1.2;
+    color: var(--primary);
 }
 
 .sio-card ul {
-    list-style-type: disc;
     padding-left: 20px;
+    list-style-type: disc;
 }
 
 .sio-card ul li {
-    color: var(--text-sub);
+    margin-bottom: 6px;
     font-size: 0.88rem;
     line-height: 1.4;
-    margin-bottom: 6px;
+    color: var(--text-sub);
 }
 
 /* ==========================================================================
@@ -253,16 +264,17 @@ main h1 {
    ========================================================================== */
 
 .contact-form-section {
+    position: relative;
+    z-index: 1;
     width: 100%;
     max-width: 600px;
     margin: 10px auto 0;
     padding: 25px 30px;
-    border-radius: var(--radius-lg);
     background: linear-gradient(180deg, #0284c7 0%, #38bdf8 40%, #e0f2fe 80%, #ffffff 100%);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(56, 189, 248, 0.3);
     border: 1px solid rgba(255, 255, 255, 0.8);
-    position: relative;
-    z-index: 1;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(56, 189, 248, 0.3);
 }
 
 .contact-form {
@@ -278,9 +290,9 @@ main h1 {
 }
 
 .contact-form label {
+    margin-bottom: 4px;
     font-size: 0.95rem;
     font-weight: 700;
-    margin-bottom: 4px;
     color: #0f172a;
 }
 
@@ -288,25 +300,27 @@ main h1 {
 .contact-form textarea {
     width: 100%;
     padding: 10px 14px;
-    border-radius: 10px;
-    border: 2px solid rgba(15, 23, 42, 0.15);
-    background: rgba(255, 255, 255, 0.95);
-    color: #0f172a;
-    font-size: 0.95rem;
     font-family: inherit;
-    transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    font-size: 0.95rem;
+    color: #0f172a;
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgba(15, 23, 42, 0.15);
+    border-radius: 10px;
+    transition: border-color 0.3s ease,
+                background-color 0.3s ease,
+                box-shadow 0.3s ease;
 }
 
 .contact-form textarea {
-    resize: vertical;
     min-height: 100px;
+    resize: vertical;
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
     outline: none;
-    border-color: var(--primary-hover);
     background: #ffffff;
+    border-color: var(--primary-hover);
     box-shadow: 0 0 10px rgba(2, 132, 199, 0.4);
 }
 
@@ -317,6 +331,9 @@ main h1 {
 }
 
 .btn-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     padding: 10px 24px;
     font-size: 0.95rem;
     font-weight: 700;
@@ -324,12 +341,11 @@ main h1 {
     background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
     border: none;
     border-radius: var(--radius-full);
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
     box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
-    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    transition: transform 0.3s ease,
+                background 0.3s ease,
+                box-shadow 0.3s ease;
 }
 
 .btn-submit:hover {
@@ -339,13 +355,13 @@ main h1 {
 }
 
 .booking-section {
-    width: 100%;
+    position: relative;
+    z-index: 10;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
     margin: 40px 0 30px;
-    position: relative;
-    z-index: 10;
 }
 
 .btn-booking {
@@ -357,13 +373,44 @@ main h1 {
    ========================================================================== */
 
 .site-footer {
-    text-align: center;
-    padding: 12px;
-    border-top: 1px solid var(--border-light);
-    color: var(--text-muted);
-    background: rgba(11, 15, 25, 0.80);
-    font-size: 0.8rem;
     position: relative;
     z-index: 1;
     width: 100%;
+    padding: 12px;
+    font-size: 0.8rem;
+    text-align: center;
+    color: var(--text-muted);
+    background: rgba(11, 15, 25, 0.8);
+    border-top: 1px solid var(--border-light);
+}
+
+/* ==========================================================================
+   7. RESPONSIVE & ACCESSIBILITÉ
+   ========================================================================== */
+
+@media (max-width: 600px) {
+    .main-nav ul {
+        gap: 6px 10px;
+    }
+
+    .page-header h1,
+    .hero-section h1,
+    main h1 {
+        font-size: 1.7rem;
+    }
+
+    .bts-cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-form-section {
+        padding: 20px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sio-card,
+    .btn-submit {
+        transition: none;
+    }
 }
