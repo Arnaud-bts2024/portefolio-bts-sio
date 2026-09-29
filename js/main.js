@@ -15,5 +15,4 @@ function initNavbar() {
 
     if (!navbarContainer) return;
 
-    // Structure HTML de la navigation
     navbarContainer.innerHTML = `
