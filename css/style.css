@@ -206,7 +206,22 @@ main h1 {
 
 .sio-card {
     display: flex;
-    flex-direction:
+    flex-direction: column;
+    background: var(--card-bg);
+    border: 1px solid var(--border-accent);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    box-shadow: var(--shadow-card);
+    backdrop-filter: blur(8px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.sio-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--border-accent-hover);
+    box-shadow: var(--shadow-hover);
+}
+
 /* ==========================================================================
    5. FORMULAIRE DE CONTACT & BOUTONS
    ========================================================================== */
@@ -403,26 +418,7 @@ main h1 {
     }
 }
 
-@media (max-width: 600px) {
-    .contact-form-section {
-        padding: 22px 18px;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .btn-booking {
-        animation: none;
-    }
-
-    .btn-submit::before {
-        display: none;
-    }
-}
-  /* ==========================================================================
+/* ==========================================================================
    6. FOOTER
    ========================================================================== */
 
@@ -456,11 +452,25 @@ main h1 {
     .bts-cards-grid {
         grid-template-columns: 1fr;
     }
+
+    .contact-form-section {
+        padding: 22px 18px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
     .sio-card,
-    .btn-submit {
+    .btn-submit,
+    .btn-booking {
+        animation: none;
         transition: none;
     }
-} 
+
+    .btn-submit::before {
+        display: none;
+    }
+}
