@@ -207,3 +207,260 @@ main h1 {
 .sio-card {
     display: flex;
     flex-direction:
+/* ==========================================================================
+   5. FORMULAIRE DE CONTACT & BOUTONS
+   ========================================================================== */
+
+.contact-form-section {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 640px;
+    margin: 10px auto 0;
+    padding: 30px 32px;
+    /* Dégradé : bleu néon en haut -> blanc en bas */
+    background: linear-gradient(180deg, #00c8ff 0%, #38bdf8 35%, #bae6fd 70%, #ffffff 100%);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5),
+                0 0 30px rgba(0, 200, 255, 0.45);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.contact-form label {
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: #0f172a;
+    background: rgba(255, 255, 255, 0.92);
+    border: 2px solid rgba(15, 23, 42, 0.12);
+    border-radius: 12px;
+    transition: border-color 0.3s ease,
+                background-color 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: #64748b;
+}
+
+.contact-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    background: #ffffff;
+    border-color: var(--primary-hover);
+    box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.2),
+                0 0 14px rgba(0, 200, 255, 0.5);
+}
+
+.btn-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 6px;
+}
+
+/* Bouton Envoyer : reflet lumineux + avion qui décolle au survol */
+.btn-submit {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 28px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #ffffff;
+    background: linear-gradient(135deg, #0284c7 0%, #0c4a6e 100%);
+    border: none;
+    border-radius: var(--radius-full);
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.5);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-submit::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(2, 132, 199, 0.7);
+}
+
+.btn-submit:hover::before {
+    left: 130%;
+}
+
+.btn-submit i {
+    transition: transform 0.3s ease;
+}
+
+.btn-submit:hover i {
+    transform: translate(4px, -3px) rotate(8deg);
+}
+
+.btn-submit:active {
+    transform: translateY(0) scale(0.97);
+}
+
+/* Bouton rendez-vous : contour néon qui s'illumine au survol */
+.booking-section {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 40px 0 30px;
+}
+
+.btn-booking {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 36px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-decoration: none;
+    background: rgba(13, 18, 36, 0.7);
+    border: 2px solid var(--primary);
+    border-radius: var(--radius-full);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.5),
+                inset 0 0 12px rgba(56, 189, 248, 0.15);
+    animation: glow-pulse 2.6s ease-in-out infinite;
+    transition: transform 0.3s ease,
+                background 0.3s ease,
+                border-color 0.3s ease;
+}
+
+.btn-booking:hover {
+    background: linear-gradient(135deg, #00c8ff 0%, #0284c7 100%);
+    border-color: #ffffff;
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 0 30px rgba(0, 200, 255, 0.9);
+    animation: none;
+}
+
+.btn-booking i {
+    transition: transform 0.3s ease;
+}
+
+.btn-booking:hover i {
+    transform: rotate(-12deg) scale(1.25);
+}
+
+@keyframes glow-pulse {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(56, 189, 248, 0.4),
+                    inset 0 0 10px rgba(56, 189, 248, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 22px rgba(56, 189, 248, 0.8),
+                    inset 0 0 14px rgba(56, 189, 248, 0.25);
+    }
+}
+
+@media (max-width: 600px) {
+    .contact-form-section {
+        padding: 22px 18px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn-booking {
+        animation: none;
+    }
+
+    .btn-submit::before {
+        display: none;
+    }
+}
+  /* ==========================================================================
+   6. FOOTER
+   ========================================================================== */
+
+.site-footer {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding: 12px;
+    font-size: 0.8rem;
+    text-align: center;
+    color: var(--text-muted);
+    background: rgba(11, 15, 25, 0.8);
+    border-top: 1px solid var(--border-light);
+}
+
+/* ==========================================================================
+   7. RESPONSIVE & ACCESSIBILITÉ
+   ========================================================================== */
+
+@media (max-width: 600px) {
+    .main-nav > ul {
+        gap: 6px 10px;
+    }
+
+    .page-header h1,
+    .hero-section h1,
+    main h1 {
+        font-size: 1.7rem;
+    }
+
+    .bts-cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sio-card,
+    .btn-submit {
+        transition: none;
+    }
+} 
