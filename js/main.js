@@ -26,7 +26,7 @@ function initNavbar() {
                             <ul class="submenu">
                                 <li><a href="documents/cv.pdf" target="_blank">Mon CV</a></li>
                                 <li><a href="projets.html">Mes TP</a></li>
-                                <li><a href="bts-sio.html">Mes Certifications</a></li>
+                                <li><a href="https://online.fliphtml5.com/fvfkdx/uksp/">Mes Certifications</a></li>
                                 <li><a href="stages.html">Mes Stages</a></li>
                                 <li><a href="documents/tableau-de-synthese.pdf" target="_blank">Tableau de Synthèse</a></li>
                             </ul>
