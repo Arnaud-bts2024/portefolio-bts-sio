@@ -21,7 +21,16 @@ function initNavbar() {
                     <ul>
                         <li><a href="index.html">Accueil</a></li>
                         <li><a href="bts-sio.html">BTS-SIO</a></li>
-                        <li><a href="parcours.html">Mon parcours</a></li>
+                        <li class="dropdown">
+                            <a href="parcours.html">Mon parcours</a>
+                            <ul class="submenu">
+                                <li><a href="documents/cv.pdf" target="_blank">Mon CV</a></li>
+                                <li><a href="projets.html">Mes TP</a></li>
+                                <li><a href="bts-sio.html">Mes Certifications</a></li>
+                                <li><a href="stages.html">Mes Stages</a></li>
+                                <li><a href="documents/tableau-de-synthese.pdf" target="_blank">Tableau de Synthèse</a></li>
+                            </ul>
+                        </li>
                         <li><a href="projets.html">Projets</a></li>
                         <li><a href="veille.html">Veille</a></li>
                         <li><a href="contact.html">Contact</a></li>
@@ -31,9 +40,9 @@ function initNavbar() {
         </header>
     `;
 
-    // Met en surbrillance la page courante
+    // Met en surbrillance la page courante (liens principaux uniquement)
     const currentPage = window.location.pathname.split("/").pop() || "index.html";
-    navbarContainer.querySelectorAll(".main-nav a").forEach(link => {
+    navbarContainer.querySelectorAll(".main-nav > ul > li > a").forEach(link => {
         if (link.getAttribute("href") === currentPage) {
             link.classList.add("active");
         }
