@@ -62,6 +62,26 @@ body {
     padding: 10px 20px 40px;
 }
 
+/* Centralisation automatique des en-têtes de pages */
+.page-title,
+.page-header,
+.section-title,
+main h1,
+main h2 {
+    text-align: center;
+}
+
+main p {
+    text-align: center;
+}
+
+/* Exception pour le formulaire de contact */
+.contact-form label,
+.contact-form input,
+.contact-form textarea {
+    text-align: left;
+}
+
 /* ==========================================================================
    2. HEADER & NAVIGATION
    ========================================================================== */
@@ -156,7 +176,7 @@ body {
 }
 
 /* ==========================================================================
-   3. HERO SECTION (ACCUEIL AÉRÉE)
+   3. HERO SECTION (ACCUEIL)
    ========================================================================== */
 
 .hero-container {
@@ -168,7 +188,6 @@ body {
     padding: 40px 20px;
 }
 
-/* Titre en haut */
 .hero-top {
     margin-top: 20px;
     text-align: center;
@@ -179,9 +198,9 @@ body {
     font-weight: 700;
     color: var(--text-main);
     letter-spacing: 1px;
+    text-align: center;
 }
 
-/* Nom + Sous-titre au centre */
 .hero-center {
     text-align: center;
     margin: auto 0;
@@ -193,14 +212,15 @@ body {
     font-weight: 700;
     margin-bottom: 12px;
     text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+    text-align: center;
 }
 
 .hero-subtitle {
     font-size: 1.2rem;
     color: var(--text-muted);
+    text-align: center;
 }
 
-/* Bouton au 3/4 du bas */
 .hero-bottom {
     margin-bottom: 60px;
     text-align: center;
@@ -281,7 +301,7 @@ body {
     z-index: 1;
     width: 100%;
     max-width: 640px;
-    margin: 10px auto 0;
+    margin: 20px auto 0;
     padding: 30px 32px;
     background: linear-gradient(180deg, #00c8ff 0%, #38bdf8 35%, #bae6fd 70%, #ffffff 100%);
     border: 1px solid rgba(255, 255, 255, 0.8);
@@ -313,6 +333,7 @@ body {
     font-size: 0.9rem;
     font-weight: 700;
     color: #0f172a;
+    text-align: left;
 }
 
 .contact-form input,
@@ -325,6 +346,7 @@ body {
     background: rgba(255, 255, 255, 0.92);
     border: 2px solid rgba(15, 23, 42, 0.12);
     border-radius: 12px;
+    text-align: left;
     transition: border-color 0.3s ease,
                 background-color 0.3s ease,
                 box-shadow 0.3s ease;
