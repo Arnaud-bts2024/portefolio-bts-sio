@@ -183,14 +183,66 @@ main h1 {
     color: var(--text-main);
 }
 
+.hero-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-main);
+    margin-bottom: 10px;
+}
+
 .hero-subtitle {
     margin-top: 4px;
     font-size: 1rem;
     color: var(--text-muted);
 }
 
+.hero-actions {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+}
+
 /* ==========================================================================
-   4. GRILLE DES CARTES BTS SIO
+   4. BOUTON MODERNE (HERO SECTION)
+   ========================================================================== */
+
+.btn-modern {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 28px;
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    background: rgba(0, 119, 255, 0.2);
+    border: 1px solid rgba(0, 183, 255, 0.6);
+    border-radius: var(--radius-sm);
+    backdrop-filter: blur(8px);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 140, 255, 0.2);
+}
+
+.btn-modern:hover {
+    background: rgba(0, 119, 255, 0.5);
+    border-color: #00d2ff;
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(0, 183, 255, 0.6);
+    color: var(--text-main);
+}
+
+.btn-modern i {
+    transition: transform 0.3s ease;
+}
+
+.btn-modern:hover i {
+    transform: translateX(4px);
+}
+
+/* ==========================================================================
+   5. GRILLE DES CARTES BTS SIO
    ========================================================================== */
 
 .bts-cards-grid {
@@ -223,7 +275,7 @@ main h1 {
 }
 
 /* ==========================================================================
-   5. FORMULAIRE DE CONTACT & BOUTONS
+   6. FORMULAIRE DE CONTACT & BOUTONS
    ========================================================================== */
 
 .contact-form-section {
@@ -419,7 +471,7 @@ main h1 {
 }
 
 /* ==========================================================================
-   6. FOOTER
+   7. FOOTER
    ========================================================================== */
 
 .site-footer {
@@ -435,7 +487,7 @@ main h1 {
 }
 
 /* ==========================================================================
-   7. RESPONSIVE & ACCESSIBILITÉ
+   8. RESPONSIVE & ACCESSIBILITÉ
    ========================================================================== */
 
 @media (max-width: 600px) {
@@ -447,6 +499,10 @@ main h1 {
     .hero-section h1,
     main h1 {
         font-size: 1.7rem;
+    }
+
+    .hero-title {
+        font-size: 2rem;
     }
 
     .bts-cards-grid {
@@ -465,7 +521,8 @@ main h1 {
 @media (prefers-reduced-motion: reduce) {
     .sio-card,
     .btn-submit,
-    .btn-booking {
+    .btn-booking,
+    .btn-modern {
         animation: none;
         transition: none;
     }
