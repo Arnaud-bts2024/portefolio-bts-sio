@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Portfolio</title>
-    <link rel="stylesheet" href="css/style.css?v=10">
+    <title>Contact - Portfolio BTS SIO</title>
+    <link rel="stylesheet" href="css/style.css?v=14">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
@@ -16,52 +16,46 @@
         <div id="navbar-container"></div>
 
         <main class="container">
-            <section class="page-header">
-                <h1>Me Contacter</h1>
-                <p class="hero-subtitle">Une question ou une opportunité ? N'hésitez pas à m'envoyer un message ou prendre rendez-vous.</p>
-            </section>
+            <h1 class="page-title">Me Contacter</h1>
+            <p class="hero-subtitle">Une question ou une opportunité ? N'hésitez pas à m'envoyer un message ou prendre rendez-vous.</p>
 
-            <!-- Formulaire -->
             <section class="contact-form-section">
-                <form class="contact-form" id="contact-form">
+                <form action="#" method="POST" class="contact-form">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="nom">Nom</label>
-                            <input type="text" id="nom" name="nom" placeholder="Votre nom" autocomplete="family-name" required>
+                            <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
                         </div>
                         <div class="form-group">
                             <label for="prenom">Prénom</label>
-                            <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" autocomplete="given-name" required>
+                            <input type="text" id="prenom" name="prenom" placeholder="Votre prénom" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="email">Adresse e-mail</label>
-                        <input type="email" id="email" name="email" placeholder="votre.email@exemple.com" autocomplete="email" required>
+                        <input type="email" id="email" name="email" placeholder="votre.email@exemple.com" required>
                     </div>
 
                     <div class="form-group">
                         <label for="message">Commentaire</label>
-                        <textarea id="message" name="message" rows="5" placeholder="Votre commentaire..." required></textarea>
+                        <textarea id="message" name="message" placeholder="Votre commentaire..." required></textarea>
                     </div>
 
                     <div class="btn-container">
                         <button type="submit" class="btn-submit">
-                            <span>Envoyer</span> <i class="fa-solid fa-paper-plane"></i>
+                            Envoyer <i class="fa-solid fa-paper-plane"></i>
                         </button>
                     </div>
                 </form>
             </section>
 
-            <!-- Bouton agenda -->
-            <section class="booking-section">
-                <a href="https://calendar.app.google/jHNjbFMhdt6eRt1P6"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="btn-booking">
-                    <span>Prendre un rendez-vous</span> <i class="fa-solid fa-calendar-days"></i>
+            <!-- Bouton de prise de rendez-vous -->
+            <div class="booking-section">
+                <a href="#" class="btn-booking" target="_blank" rel="noopener noreferrer">
+                    Prendre un rendez-vous <i class="fa-solid fa-calendar-days"></i>
                 </a>
-            </section>
+            </div>
         </main>
 
         <footer class="site-footer">
@@ -71,17 +65,5 @@
 
     <script src="js/main.js?v=2"></script>
     <script src="js/animations.js"></script>
-    <script>
-        // Remplace par ton adresse e-mail
-        const CONTACT_EMAIL = "VOTRE.ADRESSE@EXEMPLE.COM";
-
-        document.getElementById("contact-form").addEventListener("submit", (e) => {
-            e.preventDefault();
-            const f = e.target;
-            const subject = `Contact portfolio - ${f.prenom.value} ${f.nom.value}`;
-            const body = `Nom : ${f.nom.value}\nPrénom : ${f.prenom.value}\nE-mail : ${f.email.value}\n\n${f.message.value}`;
-            window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        });
-    </script>
 </body>
 </html>
