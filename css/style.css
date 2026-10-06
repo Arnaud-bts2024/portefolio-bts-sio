@@ -62,13 +62,14 @@ body {
     padding: 10px 20px 40px;
 }
 
-/* Centralisation automatique des en-têtes de pages */
+/* Centralisation et abaissement des en-têtes de pages (aligné avec la page d'accueil) */
 .page-title,
 .page-header,
 .section-title,
 main h1,
 main h2 {
     text-align: center;
+    margin-top: 40px;
 }
 
 main p {
@@ -199,6 +200,7 @@ main p {
     color: var(--text-main);
     letter-spacing: 1px;
     text-align: center;
+    margin-top: 20px;
 }
 
 .hero-center {
@@ -211,6 +213,7 @@ main p {
     font-size: 3rem;
     font-weight: 700;
     margin-bottom: 12px;
+    margin-top: 0;
     text-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
     text-align: center;
 }
@@ -439,110 +442,4 @@ main p {
     margin: 40px 0 30px;
 }
 
-.btn-booking {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 36px;
-    font-size: 1rem;
-    font-weight: 700;
-    color: #ffffff;
-    text-decoration: none;
-    background: rgba(13, 18, 36, 0.7);
-    border: 2px solid var(--primary);
-    border-radius: var(--radius-full);
-    backdrop-filter: blur(8px);
-    box-shadow: 0 0 12px rgba(56, 189, 248, 0.5),
-                inset 0 0 12px rgba(56, 189, 248, 0.15);
-    animation: glow-pulse 2.6s ease-in-out infinite;
-    transition: transform 0.3s ease,
-                background 0.3s ease,
-                border-color 0.3s ease;
-}
-
-.btn-booking:hover {
-    background: linear-gradient(135deg, #00c8ff 0%, #0284c7 100%);
-    border-color: #ffffff;
-    transform: translateY(-3px) scale(1.04);
-    box-shadow: 0 0 30px rgba(0, 200, 255, 0.9);
-    animation: none;
-}
-
-.btn-booking i {
-    transition: transform 0.3s ease;
-}
-
-.btn-booking:hover i {
-    transform: rotate(-12deg) scale(1.25);
-}
-
-@keyframes glow-pulse {
-    0%, 100% {
-        box-shadow: 0 0 10px rgba(56, 189, 248, 0.4),
-                    inset 0 0 10px rgba(56, 189, 248, 0.1);
-    }
-    50% {
-        box-shadow: 0 0 22px rgba(56, 189, 248, 0.8),
-                    inset 0 0 14px rgba(56, 189, 248, 0.25);
-    }
-}
-
-/* ==========================================================================
-   6. FOOTER
-   ========================================================================== */
-
-.site-footer {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    padding: 12px;
-    font-size: 0.8rem;
-    text-align: center;
-    color: var(--text-muted);
-    background: rgba(11, 15, 25, 0.8);
-    border-top: 1px solid var(--border-light);
-}
-
-/* ==========================================================================
-   7. RESPONSIVE & ACCESSIBILITÉ
-   ========================================================================== */
-
-@media (max-width: 600px) {
-    .main-nav > ul {
-        gap: 6px 10px;
-    }
-
-    .hero-title-top {
-        font-size: 1.7rem;
-    }
-
-    .hero-name {
-        font-size: 2rem;
-    }
-
-    .bts-cards-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .contact-form-section {
-        padding: 22px 18px;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .sio-card,
-    .btn-submit,
-    .btn-booking,
-    .btn-modern {
-        animation: none;
-        transition: none;
-    }
-
-    .btn-submit::before {
-        display: none;
-    }
-}
+.btn-
