@@ -25,6 +25,11 @@ html, body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Fix Fond d'écran : assure-toi que le fichier est bien dans css/../images/fond-ecran.jpg */
+body {
+    background: url('../images/fond-ecran.jpg') center / cover no-repeat fixed;
+}
+
 .background-container {
     position: fixed;
     inset: 0;
@@ -48,7 +53,7 @@ html, body {
 }
 
 /* ==========================================================================
-   2. NAVIGATION
+   2. NAVIGATION BAR (Rétablie sur toutes les pages)
    ========================================================================== */
 
 #navbar-container {
@@ -84,6 +89,7 @@ html, body {
     color: #e2e8f0;
     font-weight: 500;
     text-decoration: none;
+    transition: color 0.2s ease;
 }
 
 .main-nav a:hover, .main-nav a.active {
@@ -106,7 +112,10 @@ html, body {
     min-width: 200px;
 }
 
-.dropdown:hover .submenu { display: flex; flex-direction: column; }
+.dropdown:hover .submenu { 
+    display: flex; 
+    flex-direction: column; 
+}
 
 .submenu a {
     display: block;
@@ -119,13 +128,14 @@ html, body {
 }
 
 /* ==========================================================================
-   3. TITRES DES PAGES
+   3. TITRES & TEXTES
    ========================================================================== */
 
 .page-title, main h1 {
     text-align: center;
     margin-top: 30px;
     font-size: 2rem;
+    color: #ffffff;
 }
 
 .hero-subtitle, main p {
@@ -135,13 +145,121 @@ html, body {
 }
 
 /* ==========================================================================
-   4. FORMULAIRE DE CONTACT
+   4. ACCUEIL / HERO SECTION
+   ========================================================================== */
+
+.hero-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 160px);
+    text-align: center;
+    gap: 20px;
+    padding: 40px 20px;
+}
+
+.hero-title-top {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.hero-name {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+}
+
+.btn-modern {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 28px;
+    color: #ffffff !important;
+    text-decoration: none;
+    font-weight: 600;
+    background: rgba(0, 119, 255, 0.3);
+    border: 1px solid #00d2ff;
+    border-radius: 8px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 15px rgba(0, 183, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-modern:hover {
+    background: rgba(0, 119, 255, 0.7);
+    box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
+}
+
+/* ==========================================================================
+   5. VEILLE TECHNOLOGIQUE
+   ========================================================================== */
+
+.veille-section {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 15px;
+}
+
+.veille-title {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.4rem;
+    color: #ffffff;
+}
+
+.lightning-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.lightning-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: 1.5px solid #00d2ff;
+    background: linear-gradient(90deg, rgba(0, 102, 255, 0.9) 0%, rgba(0, 210, 255, 0.8) 50%, rgba(255, 255, 255, 0.95) 100%);
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lightning-item span {
+    flex: 1;
+    margin-left: 12px;
+    color: #0f172a;
+    font-weight: 700;
+    text-align: left;
+}
+
+.lightning-item i {
+    color: #ffffff;
+    font-size: 1.2rem;
+}
+
+.lightning-item .arrow-icon {
+    color: #0f172a;
+}
+
+.lightning-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
+}
+
+/* ==========================================================================
+   6. CONTACT
    ========================================================================== */
 
 .contact-form-section {
     width: 100%;
     max-width: 600px;
-    margin: 50px auto 0;
+    margin: 40px auto;
     padding: 30px;
     background: linear-gradient(180deg, rgba(0, 119, 255, 0.5) 0%, rgba(255, 255, 255, 0.85) 100%);
     border: 2px solid #00d2ff;
@@ -165,6 +283,8 @@ html, body {
     font-size: 0.9rem;
     font-weight: bold;
     color: #ffffff;
+    margin-bottom: 4px;
+    display: block;
 }
 
 .contact-form input, .contact-form textarea {
@@ -197,75 +317,7 @@ html, body {
 }
 
 /* ==========================================================================
-   5. PAGE VEILLE TECHNOLOGIQUE (FORCE L'AFFICHAGE)
-   ========================================================================== */
-
-.veille-section {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 0 15px;
-}
-
-.veille-title {
-    text-align: center;
-    margin-bottom: 25px;
-    font-size: 1.4rem;
-    color: #ffffff;
-}
-
-.lightning-list {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 14px !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-}
-
-.lightning-item {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important;
-    padding: 16px 20px !important;
-    text-decoration: none !important;
-    font-size: 1rem !important;
-    border-radius: 10px !important;
-    border: 1.5px solid #00d2ff !important;
-    
-    /* Visible immédiatement sans animation */
-    visibility: visible !important;
-    opacity: 1 !important;
-    transform: none !important;
-    
-    /* Dégradé Bleu -> Blanc */
-    background: linear-gradient(90deg, rgba(0, 102, 255, 0.9) 0%, rgba(0, 210, 255, 0.8) 50%, rgba(255, 255, 255, 0.95) 100%) !important;
-    box-shadow: 0 0 15px rgba(0, 210, 255, 0.4) !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
-}
-
-.lightning-item span {
-    flex: 1;
-    margin-left: 12px;
-    color: #0f172a !important;
-    font-weight: 700 !important;
-    text-align: left;
-}
-
-.lightning-item i {
-    color: #ffffff;
-    font-size: 1.2rem;
-}
-
-.lightning-item .arrow-icon {
-    color: #0f172a !important;
-}
-
-.lightning-item:hover {
-    transform: scale(1.02) !important;
-    box-shadow: 0 0 25px rgba(0, 210, 255, 0.8) !important;
-}
-
-/* ==========================================================================
-   6. FOOTER
+   7. FOOTER
    ========================================================================== */
 
 .site-footer {
