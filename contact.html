@@ -1,46 +1,26 @@
-<!DOCTYPE html>
+c<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact — Portfolio BTS SIO</title>
-    <link rel="stylesheet" href="./css/style.css"> 
+    <title>Contact - Portfolio BTS SIO</title>
+    <link rel="stylesheet" href="css/style.css?v=20">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
     <div class="background-container"></div>
 
     <div class="main-content">
-        
-        <div id="navbar-container">
-            <header class="site-header">
-                <div class="nav-container">
-                    <nav class="main-nav">
-                        <ul>
-                            <li><a href="index.html">Accueil</a></li>
-                            <li><a href="bts-sio.html">BTS-SIO</a></li>
-                            <li><a href="parcours.html">Mon parcours</a></li>
-                            <li class="dropdown">
-                                <a href="#">Projets ▾</a>
-                                <ul class="submenu">
-                                    <li><a href="projets-ecole.html">Écoles</a></li>
-                                    <li><a href="projets-entreprise.html">Entreprise</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="veille.html">Veille</a></li>
-                            <li><a href="contact.html" class="active">Contact</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </header>
-        </div>
+        <!-- Navbar injectée via JS -->
+        <div id="navbar-container"></div>
 
-        <main class="content-container">
+        <main class="container">
             <h1 class="page-title">Me Contacter</h1>
-            <p class="hero-subtitle">Une question ou une opportunité ? N'hésitez pas à m'envoyer un message.</p>
+            <p class="hero-subtitle">Une question ou une opportunité ? N'hésitez pas à m'envoyer un message ou prendre rendez-vous.</p>
 
-            <div class="contact-card">
-                <form class="contact-form" action="#" method="POST">
+            <section class="contact-form-section">
+                <form action="#" method="POST" class="contact-form">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="nom">Nom</label>
@@ -59,21 +39,31 @@
 
                     <div class="form-group">
                         <label for="message">Commentaire</label>
-                        <textarea id="message" name="message" rows="5" placeholder="Votre commentaire..." required></textarea>
+                        <textarea id="message" name="message" placeholder="Votre commentaire..." required></textarea>
                     </div>
 
-                    <button type="submit" class="btn-modern btn-submit">
-                        Envoyer ✈
-                    </button>
+                    <div class="btn-container">
+                        <button type="submit" class="btn-submit">
+                            Envoyer <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
                 </form>
+            </section>
+
+            <!-- Bouton de prise de rendez-vous -->
+            <div class="booking-section">
+                <a href="#" class="btn-booking" target="_blank" rel="noopener noreferrer">
+                    Prendre un rendez-vous <i class="fa-solid fa-calendar-days"></i>
+                </a>
             </div>
         </main>
 
         <footer class="site-footer">
-            <p>© 2026 Arnaud HOLLEBECQUE — Portfolio BTS SIO</p>
+            <p>&copy; 2026 Arnaud HOLLEBECQUE — Portfolio BTS SIO</p>
         </footer>
-
     </div>
 
+    <script src="js/main.js?v=2"></script>
+    <script src="js/animations.js"></script>
 </body>
 </html>
