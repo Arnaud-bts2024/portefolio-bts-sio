@@ -1,46 +1,15 @@
 /* ==========================================================================
-   RESET & VARIABLES
-   ========================================================================== */
-:root {
-    --bg-dark: #0b0f19;
-    --card-bg: rgba(11, 15, 25, 0.85);
-    --primary: #38bdf8;
-    --text-main: #ffffff;
-    --text-muted: #94a3b8;
-    --border-accent: rgba(56, 189, 248, 0.3);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background: url('../images/fond-ecran.jpg') center / cover no-repeat fixed var(--bg-dark) !important;
-    color: var(--text-main);
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    min-height: 100vh;
-}
-
-.main-content {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-/* ==========================================================================
-   BARRE DE NAVIGATION
+   BARRE DE NAVIGATION & CORRECTIONS D'AFFICHAGE
    ========================================================================== */
 #navbar-container {
     position: sticky;
     top: 0;
-    z-index: 99999;
+    z-index: 1000;
+    width: 100%;
 }
 
 .site-header {
-    background: rgba(11, 15, 25, 0.9) !important;
+    background: rgba(11, 15, 25, 0.95) !important;
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border-accent);
 }
@@ -56,14 +25,22 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+/* Positionnement strict des liens et du sous-menu */
+.main-nav li {
+    position: relative; /* Indispensable pour que le sous-menu se cale sous 'Mon parcours' */
 }
 
 .main-nav a {
     color: #e2e8f0;
     text-decoration: none;
     font-weight: 500;
-    padding: 6px 12px;
+    padding: 8px 12px;
+    display: inline-block;
     transition: color 0.2s;
 }
 
@@ -71,29 +48,45 @@ body {
     color: var(--primary) !important;
 }
 
-.dropdown { position: relative; }
-.submenu {
-    display: none;
+/* Masquer le sous-menu par défaut et le positionner correctement */
+.dropdown .submenu {
+    display: none !important;
     position: absolute;
     top: 100%;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%); /* Centre le sous-menu sous 'Mon parcours' */
     background: #0f172a;
     border: 1px solid var(--border-accent);
     padding: 10px;
-    border-radius: 6px;
-    list-style: none;
-    min-width: 180px;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    min-width: 200px;
+    z-index: 1001;
 }
 
-.dropdown:hover .submenu { display: block; }
+/* Affichage uniquement au survol */
+.dropdown:hover .submenu {
+    display: flex !important;
+    flex-direction: column;
+    gap: 6px;
+}
 
-/* ==========================================================================
-   LAYOUT & CARTES (BTS SIO / CONTACT)
-   ========================================================================== */
-.content-container, .container {
+.submenu li {
+    width: 100%;
+}
+
+.submenu a {
+    display: block;
+    padding: 6px 12px;
+    white-space: nowrap;
+    font-size: 0.9rem;
+}
+
+/* Espacement du contenu principal sous la navbar */
+.content-container, .container, main {
     max-width: 1000px;
     margin: 40px auto;
-    padding: 0 20px;
+    padding: 40px 20px 20px 20px; /* Le padding-top évite le chevauchement avec le titre */
     flex: 1;
 }
 
@@ -101,121 +94,6 @@ body {
     text-align: center;
     font-size: 2.2rem;
     color: #fff;
-    margin-bottom: 8px;
-}
-
-.hero-subtitle {
-    text-align: center;
-    color: var(--text-muted);
-    margin-bottom: 30px;
-}
-
-/* Grille BTS SIO */
-.grid-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 20px;
-}
-
-.card-box, .card {
-    background: var(--card-bg);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--border-accent);
-    border-radius: 12px;
-    padding: 24px;
-}
-
-.card-box h2 {
-    color: var(--primary);
-    font-size: 1.2rem;
+    margin-top: 20px;
     margin-bottom: 12px;
-}
-
-.card-box ul {
-    list-style: none;
-}
-
-.card-box li {
-    position: relative;
-    padding-left: 18px;
-    margin-bottom: 8px;
-    color: #cbd5e1;
-}
-
-.card-box li::before {
-    content: "•";
-    color: var(--primary);
-    position: absolute;
-    left: 0;
-}
-
-/* Formulaire Contact */
-.contact-card {
-    max-width: 600px;
-    margin: 0 auto;
-    background: var(--card-bg);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--border-accent);
-    border-radius: 12px;
-    padding: 30px;
-}
-
-.contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.form-row {
-    display: flex;
-    gap: 15px;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    flex: 1;
-}
-
-.form-group label {
-    color: var(--primary);
-    font-size: 0.9rem;
-}
-
-.form-group input, .form-group textarea {
-    width: 100%;
-    padding: 10px 14px;
-    background: rgba(15, 23, 42, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 6px;
-    color: #fff;
-    font-family: inherit;
-}
-
-.btn-modern, .btn-submit {
-    background: rgba(0, 119, 255, 0.4);
-    border: 1px solid #00d2ff;
-    color: #fff;
-    padding: 12px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    text-decoration: none;
-    display: inline-block;
-    transition: background 0.2s;
-}
-
-.btn-modern:hover, .btn-submit:hover {
-    background: rgba(0, 119, 255, 0.8);
-}
-
-/* Footer */
-.site-footer {
-    text-align: center;
-    padding: 20px;
-    background: rgba(11, 15, 25, 0.95);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: var(--text-muted);
-    font-size: 0.85rem;
 }
