@@ -4,38 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BTS SIO — Portfolio</title>
-    <!-- Le v=4 force la mise à jour du CSS en cache -->
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/style.css?v=25">
 </head>
 <body>
 
-    <!-- Arrière-plan réseau -->
     <div class="background-container"></div>
 
     <div class="main-content">
-        <!-- Barre de navigation -->
-        <div id="navbar-container">
-            <header class="site-header">
-                <div class="nav-container">
-                    <nav class="main-nav">
-                        <ul>
-                            <li><a href="index.html">Accueil</a></li>
-                            <li><a href="bts-sio.html" class="active">BTS-SIO</a></li>
-                            <li><a href="parcours.html">Mon parcours</a></li>
-                            <li class="dropdown">
-                                <a href="#">Projets ▾</a>
-                                <ul class="submenu">
-                                    <li><a href="projets-ecole.html">Écoles</a></li>
-                                    <li><a href="projets-entreprise.html">Entreprise</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="veille.html">Veille</a></li>
-                            <li><a href="contact.html">Contact</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </header>
-        </div>
+        <!-- Barre de navigation injectée par JS -->
+        <div id="navbar-container"></div>
 
         <!-- Contenu principal -->
         <main class="container">
@@ -69,5 +46,6 @@
         </footer>
     </div>
 
+    <script src="js/main.js?v=25"></script>
 </body>
 </html>
