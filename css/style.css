@@ -75,12 +75,6 @@ main p {
     text-align: center;
 }
 
-.contact-form label,
-.contact-form input,
-.contact-form textarea {
-    text-align: left;
-}
-
 /* ==========================================================================
    2. HEADER & NAVIGATION
    ========================================================================== */
@@ -293,7 +287,7 @@ main p {
 }
 
 /* ==========================================================================
-   5. FORMULAIRE DE CONTACT & BOUTONS
+   5. FORMULAIRE DE CONTACT
    ========================================================================== */
 
 .contact-form-section {
@@ -301,26 +295,25 @@ main p {
     z-index: 1;
     width: 100%;
     max-width: 640px;
-    
-    /* MODIFICATION ICI : augmente la valeur pour le descendre */
-    margin: 60px auto 0; /* Passe de 20px à 60px (ou 80px selon ton envie) */
-    
+    margin: 60px auto 0;
     padding: 30px 32px;
     
-    /* Le reste du style ne change pas */
     background: linear-gradient(
         180deg, 
         rgba(0, 119, 255, 0.5) 0%, 
         rgba(56, 189, 248, 0.4) 45%, 
         rgba(255, 255, 255, 0.85) 100%
     );
+    
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    
     border: 2px solid #00d2ff;
     border-radius: 20px;
     box-shadow: 0 0 25px rgba(0, 210, 255, 0.7),
                 0 0 50px rgba(0, 119, 255, 0.35);
 }
+
 .contact-form {
     display: flex;
     flex-direction: column;
@@ -344,213 +337,4 @@ main p {
     font-size: 0.9rem;
     font-weight: 700;
     color: #ffffff;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-    text-align: left;
-}
-
-.contact-form input,
-.contact-form textarea {
-    width: 100%;
-    padding: 12px 14px;
-    font-family: inherit;
-    font-size: 0.95rem;
-    color: #0f172a;
-    background: rgba(255, 255, 255, 0.35);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 12px;
-    text-align: left;
-    backdrop-filter: blur(4px);
-    transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
-    color: #334155;
-}
-
-.contact-form textarea {
-    min-height: 120px;
-    resize: vertical;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-    outline: none;
-    background: rgba(255, 255, 255, 0.85);
-    border-color: #00d2ff;
-    box-shadow: 0 0 12px rgba(0, 210, 255, 0.8);
-}
-
-.btn-container {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 6px;
-}
-
-.btn-submit {
-    position: relative;
-    overflow: hidden;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 11px 28px;
-    font-family: inherit;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #ffffff;
-    background: linear-gradient(135deg, #0284c7 0%, #0c4a6e 100%);
-    border: 1px solid #00d2ff;
-    border-radius: var(--radius-full);
-    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.5);
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.btn-submit::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -75%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.45), transparent);
-    transform: skewX(-20deg);
-    transition: left 0.6s ease;
-}
-
-.btn-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 22px rgba(0, 210, 255, 0.8);
-}
-
-.btn-submit:hover::before {
-    left: 130%;
-}
-
-.btn-submit i {
-    transition: transform 0.3s ease;
-}
-
-.btn-submit:hover i {
-    transform: translate(4px, -3px) rotate(8deg);
-}
-
-.btn-submit:active {
-    transform: translateY(0) scale(0.97);
-}
-
-.booking-section {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin: 30px 0;
-}
-
-.btn-booking {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 36px;
-    font-size: 1rem;
-    font-weight: 700;
-    color: #ffffff;
-    text-decoration: none;
-    background: rgba(13, 18, 36, 0.7);
-    border: 2px solid var(--primary);
-    border-radius: var(--radius-full);
-    backdrop-filter: blur(8px);
-    box-shadow: 0 0 12px rgba(56, 189, 248, 0.5),
-                inset 0 0 12px rgba(56, 189, 248, 0.15);
-    animation: glow-pulse 2.6s ease-in-out infinite;
-    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
-}
-
-.btn-booking:hover {
-    background: linear-gradient(135deg, #00c8ff 0%, #0284c7 100%);
-    border-color: #ffffff;
-    transform: translateY(-3px) scale(1.04);
-    box-shadow: 0 0 30px rgba(0, 200, 255, 0.9);
-    animation: none;
-}
-
-.btn-booking i {
-    transition: transform 0.3s ease;
-}
-
-.btn-booking:hover i {
-    transform: rotate(-12deg) scale(1.25);
-}
-
-@keyframes glow-pulse {
-    0%, 100% {
-        box-shadow: 0 0 10px rgba(56, 189, 248, 0.4),
-                    inset 0 0 10px rgba(56, 189, 248, 0.1);
-    }
-    50% {
-        box-shadow: 0 0 22px rgba(56, 189, 248, 0.8),
-                    inset 0 0 14px rgba(56, 189, 248, 0.25);
-    }
-}
-
-/* ==========================================================================
-   6. FOOTER
-   ========================================================================== */
-
-.site-footer {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    padding: 12px;
-    font-size: 0.8rem;
-    text-align: center;
-    color: var(--text-muted);
-    background: rgba(11, 15, 25, 0.8);
-    border-top: 1px solid var(--border-light);
-}
-
-/* ==========================================================================
-   7. RESPONSIVE & ACCESSIBILITÉ
-   ========================================================================== */
-
-@media (max-width: 600px) {
-    .main-nav > ul {
-        gap: 6px 10px;
-    }
-
-    .hero-title-top {
-        font-size: 1.7rem;
-    }
-
-    .hero-name {
-        font-size: 2rem;
-    }
-
-    .bts-cards-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .contact-form-section {
-        padding: 22px 18px;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .sio-card,
-    .btn-submit,
-    .btn-booking,
-    .btn-modern {
-        animation: none;
-        transition: none;
-    }
-
-    .btn-submit::before {
-        display: none;
-    }
-}
+    text-shadow: 0 1px 3px rgba
