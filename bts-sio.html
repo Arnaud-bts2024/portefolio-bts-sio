@@ -3,118 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BTS SIO - Portfolio</title>
-    <link rel="stylesheet" href="css/style.css?v=2">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>BTS SIO — Portfolio</title>
+    <!-- Le v=4 force la mise à jour du CSS en cache -->
+    <link rel="stylesheet" href="css/style.css?v=4">
 </head>
 <body>
 
+    <!-- Arrière-plan réseau -->
     <div class="background-container"></div>
 
     <div class="main-content">
-        <!-- Navbar injectée via JS -->
-        <div id="navbar-container"></div>
+        <!-- Barre de navigation -->
+        <div id="navbar-container">
+            <header class="site-header">
+                <div class="nav-container">
+                    <nav class="main-nav">
+                        <ul>
+                            <li><a href="index.html">Accueil</a></li>
+                            <li><a href="bts-sio.html" class="active">BTS-SIO</a></li>
+                            <li><a href="parcours.html">Mon parcours</a></li>
+                            <li class="dropdown">
+                                <a href="#">Projets ▾</a>
+                                <ul class="submenu">
+                                    <li><a href="projets-ecole.html">Écoles</a></li>
+                                    <li><a href="projets-entreprise.html">Entreprise</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="veille.html">Veille</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+        </div>
 
+        <!-- Contenu principal -->
         <main class="container">
-            <!-- En-tête de la page -->
-            <section class="page-header">
-                <h1>Le BTS SIO option SISR</h1>
-                <p class="hero-subtitle">Solutions d'Infrastructure, Systèmes et Réseaux — EPNAK</p>
-            </section>
+            <h1 class="page-title">Le BTS SIO option SISR</h1>
+            <p class="hero-subtitle">Solutions d'Infrastructure, Systèmes et Réseaux — EPNAK</p>
 
-            <!-- Grille des cartes -->
-            <section class="bts-cards-grid">
-
-                <!-- Carte 1 -->
-                <article class="sio-card">
-                    <div class="card-icon">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                    </div>
-                    <h3>Présentation de la Formation</h3>
+            <div class="grid-cards">
+                <div class="card-box">
+                    <h2>🎓 Présentation de la Formation</h2>
                     <ul>
                         <li>Formation de deux ans</li>
-                        <li>Préparation aux métiers de spécialistes des infrastructures réseau et systèmes informatiques</li>
-                        <li>Enseignement complet pour l'administration et la gestion des réseaux</li>
+                        <li>Spécialisation dans les infrastructures réseau et systèmes</li>
+                        <li>Administration et gestion des services informatiques</li>
                     </ul>
-                </article>
+                </div>
 
-                <!-- Carte 2 -->
-                <article class="sio-card">
-                    <div class="card-icon">
-                        <i class="fa-solid fa-bullseye"></i>
-                    </div>
-                    <h3>Objectifs de la Formation</h3>
+                <div class="card-box">
+                    <h2>🎯 Objectifs de la Formation</h2>
                     <ul>
-                        <li>Concevoir, installer et gérer des infrastructures réseaux et systèmes</li>
-                        <li>Assurer la sécurité et la maintenance des SI</li>
-                        <li>Superviser et administrer les réseaux pour une connectivité optimale</li>
-                        <li>Mettre en place des solutions de virtualisation et cloud computing</li>
+                        <li>Concevoir, installer et gérer des réseaux</li>
+                        <li>Assurer la sécurité des systèmes d'information</li>
+                        <li>Superviser la connectivité et la virtualisation</li>
                     </ul>
-                </article>
-
-                <!-- Carte 3 -->
-                <article class="sio-card">
-                    <div class="card-icon">
-                        <i class="fa-solid fa-laptop-code"></i>
-                    </div>
-                    <h3>Compétences Développées</h3>
-                    <ul>
-                        <li>Administration de serveurs (Windows, Linux)</li>
-                        <li>Gestion des réseaux (routage, commutation, VLAN)</li>
-                        <li>Sécurité informatique (pare-feu, VPN, protection)</li>
-                        <li>Virtualisation, cloud et supervision d'infrastructure</li>
-                    </ul>
-                </article>
-
-                <!-- Carte 4 -->
-                <article class="sio-card">
-                    <div class="card-icon">
-                        <i class="fa-solid fa-user-gear"></i>
-                    </div>
-                    <h3>Débouchés Professionnels</h3>
-                    <ul>
-                        <li>Administrateur systèmes et réseaux</li>
-                        <li>Technicien d'infrastructure / Support informatique</li>
-                        <li>Responsable de la sécurité informatique</li>
-                        <li>Ingénieur réseau junior</li>
-                    </ul>
-                </article>
-
-                <!-- Carte 5 -->
-                <article class="sio-card">
-                    <div class="card-icon">
-                        <i class="fa-solid fa-diagram-project"></i>
-                    </div>
-                    <h3>Poursuite d'Études</h3>
-                    <ul>
-                        <li>Licence professionnelle (réseaux, sécurité, SI)</li>
-                        <li>Écoles d'ingénieurs spécialisées en informatique</li>
-                        <li>Certifications professionnelles (CISCO, Microsoft, etc.)</li>
-                    </ul>
-                </article>
-
-                <!-- Carte 6 -->
-                <article class="sio-card">
-                    <div class="card-icon">
-                        <i class="fa-solid fa-award"></i>
-                    </div>
-                    <h3>Compétences Recherchées</h3>
-                    <ul>
-                        <li>Compétences très recherchées dans le monde professionnel</li>
-                        <li>Gestion d'environnements variés (entreprises, administrations)</li>
-                        <li>Anticipation et résolution d'incidents informatiques</li>
-                    </ul>
-                </article>
-
-            </section>
+                </div>
+            </div>
         </main>
 
+        <!-- Pied de page -->
         <footer class="site-footer">
-            <p>&copy; 2026 Arnaud HOLLEBECQUE — Portfolio BTS SIO</p>
+            <p>© 2026 Arnaud HOLLEBECQUE — Portfolio BTS SIO</p>
         </footer>
     </div>
 
-    <script src="js/main.js?v=2"></script>
-    <script src="js/animations.js"></script>
 </body>
 </html>
