@@ -338,3 +338,97 @@ main p {
     font-weight: 700;
     color: #ffffff;
     text-shadow: 0 1px 3px rgba
+       
+/* ==========================================================================
+   6. VEILLE TECHNOLOGIQUE (CORRIGÉ)
+   ========================================================================== */
+
+.veille-section {
+    max-width: 800px;
+    margin: 40px auto 30px;
+    padding: 20px;
+    text-align: center;
+}
+
+.veille-title {
+    font-size: 1.5rem;
+    color: var(--text-main);
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+}
+
+.lightning-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.lightning-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    color: #ffffff;
+    
+    /* Dégradé bleu vers blanc */
+    background: linear-gradient(
+        90deg, 
+        rgba(0, 102, 255, 0.85) 0%, 
+        rgba(0, 210, 255, 0.75) 55%, 
+        rgba(255, 255, 255, 0.95) 100%
+    );
+    
+    border: 1.5px solid #00d2ff;
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+    
+    /* Animation d'apparition simple */
+    opacity: 0;
+    animation: lightning-appear 0.4s ease-out forwards;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lightning-item span {
+    flex: 1;
+    text-align: left;
+    margin-left: 15px;
+    color: #0f172a;
+    font-weight: 700;
+}
+
+.lightning-item i {
+    font-size: 1.2rem;
+    color: #ffffff;
+}
+
+.lightning-item .arrow-icon {
+    color: #0f172a;
+}
+
+.lightning-item:hover {
+    transform: scale(1.02) translateX(6px);
+    box-shadow: 0 0 25px rgba(0, 210, 255, 0.9);
+}
+
+/* Délais successifs pour l'effet de cascade */
+.item-1 { animation-delay: 0.1s; }
+.item-2 { animation-delay: 0.2s; }
+.item-3 { animation-delay: 0.3s; }
+.item-4 { animation-delay: 0.4s; }
+.item-5 { animation-delay: 0.5s; }
+.item-6 { animation-delay: 0.6s; }
+
+@keyframes lightning-appear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
