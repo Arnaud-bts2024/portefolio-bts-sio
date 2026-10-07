@@ -306,11 +306,12 @@ main p {
     max-width: 640px;
     margin: 20px auto 0;
     padding: 30px 32px;
-    background: linear-gradient(180deg, #00c8ff 0%, #38bdf8 35%, #bae6fd 70%, #ffffff 100%);
+    /* Nouveau dégradé : du bleu royal du bouton jusqu'au blanc */
+    background: linear-gradient(180deg, #0077ff 0%, #38bdf8 45%, #e0f2fe 80%, #ffffff 100%);
     border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: 20px;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5),
-                0 0 30px rgba(0, 200, 255, 0.45);
+                0 0 30px rgba(0, 119, 255, 0.45);
 }
 
 .contact-form {
