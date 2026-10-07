@@ -1,10 +1,10 @@
 /* ==========================================================================
-   1. RESET & DEFAUTS
+   1. RESET & VARIABLES GLOBALES
    ========================================================================== */
 
 :root {
     --bg-dark: #0b0f19;
-    --card-bg: rgba(13, 18, 36, 0.85);
+    --card-bg: rgba(11, 15, 25, 0.8);
     --primary: #38bdf8;
     --text-main: #ffffff;
     --text-muted: #94a3b8;
@@ -25,9 +25,9 @@ html, body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Fix Fond d'écran : assure-toi que le fichier est bien dans css/../images/fond-ecran.jpg */
+/* Application prioritaire du fond d'écran réseau */
 body {
-    background: url('../images/fond-ecran.jpg') center / cover no-repeat fixed;
+    background: url('../images/fond-ecran.jpg') center / cover no-repeat fixed !important;
 }
 
 .background-container {
@@ -47,33 +47,33 @@ body {
 .container {
     flex: 1;
     width: 95%;
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 20px;
 }
 
 /* ==========================================================================
-   2. NAVIGATION BAR (Rétablie sur toutes les pages)
+   2. BARRE DE NAVIGATION (HEADER)
    ========================================================================== */
 
 #navbar-container {
     position: sticky;
     top: 0;
-    z-index: 9999;
+    z-index: 99999;
     width: 100%;
 }
 
 .site-header {
     width: 100%;
-    background: rgba(11, 15, 25, 0.95);
-    border-bottom: 1px solid var(--border-light);
-    backdrop-filter: blur(8px);
+    background: rgba(11, 15, 25, 0.85) !important;
+    backdrop-filter: blur(12px) !important;
+    border-bottom: 1px solid var(--border-accent) !important;
 }
 
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 12px 20px;
+    padding: 14px 20px;
 }
 
 .main-nav > ul {
@@ -81,22 +81,27 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 24px;
 }
 
 .main-nav a {
     padding: 6px 12px;
     color: #e2e8f0;
     font-weight: 500;
+    font-size: 0.95rem;
     text-decoration: none;
-    transition: color 0.2s ease;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
 }
 
 .main-nav a:hover, .main-nav a.active {
-    color: var(--primary);
+    color: var(--primary) !important;
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.6);
 }
 
-.dropdown { position: relative; }
+.dropdown {
+    position: relative;
+}
 
 .submenu {
     display: none;
@@ -110,11 +115,12 @@ body {
     padding: 8px 0;
     list-style: none;
     min-width: 200px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
-.dropdown:hover .submenu { 
-    display: flex; 
-    flex-direction: column; 
+.dropdown:hover .submenu {
+    display: flex;
+    flex-direction: column;
 }
 
 .submenu a {
@@ -128,24 +134,27 @@ body {
 }
 
 /* ==========================================================================
-   3. TITRES & TEXTES
+   3. TITRES & SOUS-TITRES GLOBAUX
    ========================================================================== */
 
 .page-title, main h1 {
     text-align: center;
     margin-top: 30px;
-    font-size: 2rem;
+    font-size: 2.2rem;
+    font-weight: 700;
     color: #ffffff;
+    text-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
 }
 
-.hero-subtitle, main p {
+.hero-subtitle, main p.subtitle {
     text-align: center;
     color: var(--text-muted);
     margin-top: 8px;
+    font-size: 1rem;
 }
 
 /* ==========================================================================
-   4. ACCUEIL / HERO SECTION
+   4. PAGE ACCUEIL (HERO SECTION)
    ========================================================================== */
 
 .hero-container {
@@ -160,16 +169,16 @@ body {
 }
 
 .hero-title-top {
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: 700;
     color: #ffffff;
 }
 
 .hero-name {
-    font-size: 2.8rem;
-    font-weight: 700;
+    font-size: 3rem;
+    font-weight: 800;
     color: #ffffff;
-    text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+    text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
 }
 
 .btn-modern {
@@ -181,7 +190,7 @@ body {
     text-decoration: none;
     font-weight: 600;
     background: rgba(0, 119, 255, 0.3);
-    border: 1px solid #00d2ff;
+    border: 1.5px solid #00d2ff;
     border-radius: 8px;
     backdrop-filter: blur(8px);
     box-shadow: 0 0 15px rgba(0, 183, 255, 0.3);
@@ -191,10 +200,64 @@ body {
 .btn-modern:hover {
     background: rgba(0, 119, 255, 0.7);
     box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
+    transform: translateY(-2px);
 }
 
 /* ==========================================================================
-   5. VEILLE TECHNOLOGIQUE
+   5. CARTE DE CONTENU / BTS SIO (Glassmorphism)
+   ========================================================================== */
+
+.content-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.grid-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.card-box {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-accent);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.card-box h2 {
+    color: var(--primary);
+    font-size: 1.3rem;
+    margin-bottom: 14px;
+}
+
+.card-box ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.card-box li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 10px;
+    color: #e2e8f0;
+    line-height: 1.5;
+}
+
+.card-box li::before {
+    content: "•";
+    color: var(--primary);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+/* ==========================================================================
+   6. PAGE VEILLE TECHNOLOGIQUE
    ========================================================================== */
 
 .veille-section {
@@ -225,8 +288,8 @@ body {
     font-size: 1rem;
     border-radius: 10px;
     border: 1.5px solid #00d2ff;
-    background: linear-gradient(90deg, rgba(0, 102, 255, 0.9) 0%, rgba(0, 210, 255, 0.8) 50%, rgba(255, 255, 255, 0.95) 100%);
-    box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+    background: linear-gradient(90deg, rgba(0, 102, 255, 0.85) 0%, rgba(0, 210, 255, 0.75) 50%, rgba(255, 255, 255, 0.9) 100%);
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -249,82 +312,4 @@ body {
 
 .lightning-item:hover {
     transform: scale(1.02);
-    box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
-}
-
-/* ==========================================================================
-   6. CONTACT
-   ========================================================================== */
-
-.contact-form-section {
-    width: 100%;
-    max-width: 600px;
-    margin: 40px auto;
-    padding: 30px;
-    background: linear-gradient(180deg, rgba(0, 119, 255, 0.5) 0%, rgba(255, 255, 255, 0.85) 100%);
-    border: 2px solid #00d2ff;
-    border-radius: 16px;
-    box-shadow: 0 0 25px rgba(0, 210, 255, 0.5);
-}
-
-.contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-.form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-}
-
-.contact-form label {
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: #ffffff;
-    margin-bottom: 4px;
-    display: block;
-}
-
-.contact-form input, .contact-form textarea {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #00d2ff;
-    background: rgba(255, 255, 255, 0.9);
-    color: #0f172a;
-}
-
-.btn-container {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.btn-submit {
-    padding: 10px 24px;
-    background: #0284c7;
-    color: #ffffff;
-    border: 1px solid #00d2ff;
-    border-radius: 20px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.btn-submit:hover {
-    background: #00d2ff;
-    color: #0f172a;
-}
-
-/* ==========================================================================
-   7. FOOTER
-   ========================================================================== */
-
-.site-footer {
-    padding: 15px;
-    text-align: center;
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    background: rgba(11, 15, 25, 0.9);
-    border-top: 1px solid var(--border-light);
-}
+    box-shadow: 0 0 25px rgba(0, 210, 255, 0.
