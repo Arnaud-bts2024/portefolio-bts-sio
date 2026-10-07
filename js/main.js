@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
         </header>
     `;
 
-    // Active le lien correspondant à la page actuelle
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
     const navLinks = navbarContainer.querySelectorAll('a');
 
