@@ -301,27 +301,26 @@ main p {
     z-index: 1;
     width: 100%;
     max-width: 640px;
-    margin: 20px auto 0;
+    
+    /* MODIFICATION ICI : augmente la valeur pour le descendre */
+    margin: 60px auto 0; /* Passe de 20px à 60px (ou 80px selon ton envie) */
+    
     padding: 30px 32px;
     
-    /* Dégradé bleu transparent vers le blanc */
+    /* Le reste du style ne change pas */
     background: linear-gradient(
         180deg, 
         rgba(0, 119, 255, 0.5) 0%, 
         rgba(56, 189, 248, 0.4) 45%, 
         rgba(255, 255, 255, 0.85) 100%
     );
-    
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    
-    /* Contour lumineux néon bleu */
     border: 2px solid #00d2ff;
     border-radius: 20px;
     box-shadow: 0 0 25px rgba(0, 210, 255, 0.7),
                 0 0 50px rgba(0, 119, 255, 0.35);
 }
-
 .contact-form {
     display: flex;
     flex-direction: column;
