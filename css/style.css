@@ -82,20 +82,22 @@ body {
     padding: 10px;
     border-radius: 6px;
     list-style: none;
+    min-width: 180px;
 }
+
 .dropdown:hover .submenu { display: block; }
 
 /* ==========================================================================
    LAYOUT & CARTES (BTS SIO / CONTACT)
    ========================================================================== */
-.content-container {
+.content-container, .container {
     max-width: 1000px;
     margin: 40px auto;
     padding: 0 20px;
     flex: 1;
 }
 
-.page-title {
+.page-title, .page-header h1 {
     text-align: center;
     font-size: 2.2rem;
     color: #fff;
@@ -115,7 +117,7 @@ body {
     gap: 20px;
 }
 
-.card-box {
+.card-box, .card {
     background: var(--card-bg);
     backdrop-filter: blur(10px);
     border: 1px solid var(--border-accent);
@@ -191,18 +193,20 @@ body {
     font-family: inherit;
 }
 
-.btn-submit {
+.btn-modern, .btn-submit {
     background: rgba(0, 119, 255, 0.4);
     border: 1px solid #00d2ff;
     color: #fff;
-    padding: 12px;
+    padding: 12px 20px;
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
     transition: background 0.2s;
 }
 
-.btn-submit:hover {
+.btn-modern:hover, .btn-submit:hover {
     background: rgba(0, 119, 255, 0.8);
 }
 
