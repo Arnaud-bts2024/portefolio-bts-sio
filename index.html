@@ -1,52 +1,43 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio BTS SIO - Arnaud HOLLEBECQUE</title>
-  <!-- Lien vers le bon chemin CSS -->
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accueil - Portfolio BTS SIO</title>
+    <link rel="stylesheet" href="css/style.css?v=20">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
- 
-  <!-- Navigation -->
-  <header class="navbar">
-    <nav>
-      <ul>
-        <li><a href="index.html" class="active">Accueil</a></li>
-        <li><a href="bts-sio.html">BTS-SIO</a></li>
-        <li class="dropdown">
-          <a href="#">Mon parcours ▾</a>
-          <ul class="submenu">
-            <li><a href="cv.html">Mon CV</a></li>
-            <li><a href="tp.html">Mes TP</a></li>
-            <li><a href="certifications.html">Mes Certifications</a></li>
-            <li><a href="stages.html">Mes Stages</a></li>
-            <li><a href="synthese.html">Tableau de Synthèse</a></li>
-          </ul>
-        </li>
-        <li><a href="projets.html">Projets</a></li>
-        <li><a href="veille.html">Veille</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
 
-  <!-- Hero Section -->
-  <main class="hero">
-    <div class="hero-content">
-      <h1>PORTFOLIO BTS SIO</h1>
-      <h2>Arnaud HOLLEBECQUE</h2>
-      <p>Étudiant en Brevet de Technicien Supérieur - Services Informatiques aux Organisations</p>
-      <a href="bts-sio.html" class="btn">Découvrir mon profil &rarr;</a>
+    <div class="background-container"></div>
+
+    <div class="main-content">
+        <!-- Barre de navigation -->
+        <div id="navbar-container"></div>
+
+        <main class="container hero-container">
+            <div class="hero-top">
+                <h1 class="hero-title-top">PORTFOLIO BTS SIO</h1>
+            </div>
+
+            <div class="hero-center">
+                <h2 class="hero-name">Arnaud HOLLEBECQUE</h2>
+                <p class="hero-subtitle">Étudiant en Brevet de Technicien Supérieur - Services Informatiques aux Organisations</p>
+            </div>
+
+            <div class="hero-bottom">
+                <a href="bts-sio.html" class="btn-modern">
+                    Découvrir mon profil <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </main>
+
+        <footer class="site-footer">
+            <p>&copy; 2026 Arnaud HOLLEBECQUE — Portfolio BTS SIO</p>
+        </footer>
     </div>
-  </main>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2026 Arnaud HOLLEBECQUE — Portfolio BTS SIO</p>
-  </footer>
-
+    <script src="js/main.js?v=20"></script>
+    <script src="js/animations.js"></script>
 </body>
 </html>
