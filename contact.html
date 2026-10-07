@@ -1,4 +1,4 @@
-c<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -19,6 +19,14 @@ c<!DOCTYPE html>
             <h1 class="page-title">Me Contacter</h1>
             <p class="hero-subtitle">Une question ou une opportunité ? N'hésitez pas à m'envoyer un message ou prendre rendez-vous.</p>
 
+            <!-- Bouton de prise de rendez-vous -->
+            <div style="text-align: center;">
+                <a href="TON_LIEN_DE_RENDEZ_VOUS" class="btn-rdv" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-solid fa-calendar-days"></i> Prendre un rendez-vous
+                </a>
+            </div>
+
+            <!-- Formulaire de contact -->
             <section class="contact-form-section">
                 <form action="#" method="POST" class="contact-form">
                     <div class="form-row">
@@ -39,7 +47,7 @@ c<!DOCTYPE html>
 
                     <div class="form-group">
                         <label for="message">Commentaire</label>
-                        <textarea id="message" name="message" placeholder="Votre commentaire..." required></textarea>
+                        <textarea id="message" name="message" rows="5" placeholder="Votre commentaire..." required></textarea>
                     </div>
 
                     <div class="btn-container">
@@ -49,13 +57,6 @@ c<!DOCTYPE html>
                     </div>
                 </form>
             </section>
-
-            <!-- Bouton de prise de rendez-vous -->
-            <div class="booking-section">
-                <a href="#" class="btn-booking" target="_blank" rel="noopener noreferrer">
-                    Prendre un rendez-vous <i class="fa-solid fa-calendar-days"></i>
-                </a>
-            </div>
         </main>
 
         <footer class="site-footer">
