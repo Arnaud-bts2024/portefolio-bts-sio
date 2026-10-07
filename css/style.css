@@ -1,102 +1,330 @@
+/* ==========================================================================
+   1. RESET & DEFAUTS
+   ========================================================================== */
+
+:root {
+    --bg-dark: #0b0f19;
+    --card-bg: rgba(13, 18, 36, 0.85);
+    --primary: #38bdf8;
+    --text-main: #ffffff;
+    --text-muted: #94a3b8;
+    --border-light: rgba(255, 255, 255, 0.1);
+    --border-accent: rgba(56, 189, 248, 0.3);
+}
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+html, body {
+    min-height: 100vh;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Fix Fond d'écran : assure-toi que le fichier est bien dans css/../images/fond-ecran.jpg */
 body {
-  background-color: #030712;
-  color: #ffffff;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+    background: url('../images/fond-ecran.jpg') center / cover no-repeat fixed;
 }
 
-/* Navbar */
-.navbar {
-  padding: 20px 0;
-  display: flex;
-  justify-content: center;
+.background-container {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: url('../images/fond-ecran.jpg') center / cover no-repeat;
 }
 
-.navbar ul {
-  list-style: none;
-  display: flex;
-  gap: 30px;
+.main-content {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.navbar a {
-  color: #9ca3af;
-  text-decoration: none;
-  font-size: 0.95rem;
-  transition: color 0.3s;
+.container {
+    flex: 1;
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-.navbar a.active,
-.navbar a:hover {
-  color: #ffffff;
+/* ==========================================================================
+   2. NAVIGATION BAR (Rétablie sur toutes les pages)
+   ========================================================================== */
+
+#navbar-container {
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    width: 100%;
 }
 
-/* Hero Section */
-.hero {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0 20px;
-  /* Remplacez l'URL ci-dessous par votre image de fond réseau/mesh */
-  background: radial-gradient(circle at center, rgba(14, 165, 233, 0.15) 0%, transparent 70%),
-              url('background-mesh.jpg') no-repeat center center/cover;
+.site-header {
+    width: 100%;
+    background: rgba(11, 15, 25, 0.95);
+    border-bottom: 1px solid var(--border-light);
+    backdrop-filter: blur(8px);
 }
 
-.hero-content {
-  max-width: 800px;
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 20px;
 }
 
-.hero h1 {
-  font-size: 2.2rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
+.main-nav > ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 
-.hero h2 {
-  font-size: 1.4rem;
-  font-weight: 600;
-  margin-bottom: 12px;
+.main-nav a {
+    padding: 6px 12px;
+    color: #e2e8f0;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
 }
 
-.hero p {
-  color: #9ca3af;
-  font-size: 1rem;
-  margin-bottom: 28px;
+.main-nav a:hover, .main-nav a.active {
+    color: var(--primary);
 }
 
-/* Bouton */
-.btn {
-  display: inline-block;
-  padding: 10px 22px;
-  background-color: rgba(15, 23, 42, 0.8);
-  border: 1px solid #1d4ed8;
-  color: #ffffff;
-  text-decoration: none;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
+.dropdown { position: relative; }
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px solid var(--border-accent);
+    border-radius: 8px;
+    padding: 8px 0;
+    list-style: none;
+    min-width: 200px;
 }
 
-.btn:hover {
-  background-color: #1d4ed8;
-  box-shadow: 0 0 15px rgba(29, 78, 216, 0.5);
+.dropdown:hover .submenu { 
+    display: flex; 
+    flex-direction: column; 
 }
 
-/* Footer */
-footer {
-  text-align: center;
-  padding: 15px 0;
-  font-size: 0.8rem;
-  color: #6b7280;
-  background-color: rgba(3, 7, 18, 0.9);
+.submenu a {
+    display: block;
+    padding: 8px 16px;
+    text-align: center;
+}
+
+.submenu a:hover {
+    background: rgba(56, 189, 248, 0.2);
+}
+
+/* ==========================================================================
+   3. TITRES & TEXTES
+   ========================================================================== */
+
+.page-title, main h1 {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 2rem;
+    color: #ffffff;
+}
+
+.hero-subtitle, main p {
+    text-align: center;
+    color: var(--text-muted);
+    margin-top: 8px;
+}
+
+/* ==========================================================================
+   4. ACCUEIL / HERO SECTION
+   ========================================================================== */
+
+.hero-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 160px);
+    text-align: center;
+    gap: 20px;
+    padding: 40px 20px;
+}
+
+.hero-title-top {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.hero-name {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+}
+
+.btn-modern {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 28px;
+    color: #ffffff !important;
+    text-decoration: none;
+    font-weight: 600;
+    background: rgba(0, 119, 255, 0.3);
+    border: 1px solid #00d2ff;
+    border-radius: 8px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 15px rgba(0, 183, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-modern:hover {
+    background: rgba(0, 119, 255, 0.7);
+    box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
+}
+
+/* ==========================================================================
+   5. VEILLE TECHNOLOGIQUE
+   ========================================================================== */
+
+.veille-section {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 15px;
+}
+
+.veille-title {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 1.4rem;
+    color: #ffffff;
+}
+
+.lightning-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.lightning-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: 1.5px solid #00d2ff;
+    background: linear-gradient(90deg, rgba(0, 102, 255, 0.9) 0%, rgba(0, 210, 255, 0.8) 50%, rgba(255, 255, 255, 0.95) 100%);
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lightning-item span {
+    flex: 1;
+    margin-left: 12px;
+    color: #0f172a;
+    font-weight: 700;
+    text-align: left;
+}
+
+.lightning-item i {
+    color: #ffffff;
+    font-size: 1.2rem;
+}
+
+.lightning-item .arrow-icon {
+    color: #0f172a;
+}
+
+.lightning-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
+}
+
+/* ==========================================================================
+   6. CONTACT
+   ========================================================================== */
+
+.contact-form-section {
+    width: 100%;
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background: linear-gradient(180deg, rgba(0, 119, 255, 0.5) 0%, rgba(255, 255, 255, 0.85) 100%);
+    border: 2px solid #00d2ff;
+    border-radius: 16px;
+    box-shadow: 0 0 25px rgba(0, 210, 255, 0.5);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.contact-form label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #00d2ff;
+    background: rgba(255, 255, 255, 0.9);
+    color: #0f172a;
+}
+
+.btn-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-submit {
+    padding: 10px 24px;
+    background: #0284c7;
+    color: #ffffff;
+    border: 1px solid #00d2ff;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background: #00d2ff;
+    color: #0f172a;
+}
+
+/* ==========================================================================
+   7. FOOTER
+   ========================================================================== */
+
+.site-footer {
+    padding: 15px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    background: rgba(11, 15, 25, 0.9);
+    border-top: 1px solid var(--border-light);
 }
