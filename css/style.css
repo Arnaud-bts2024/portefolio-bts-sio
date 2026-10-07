@@ -1,5 +1,5 @@
 /* ==========================================================================
-   RESET & VARIABLES
+   RESET & BASE
    ========================================================================== */
 :root {
     --bg-dark: #0b0f19;
@@ -83,7 +83,7 @@ body {
     color: var(--primary);
 }
 
-/* Sous-menu déroulant */
+/* Sous-menu */
 .dropdown .submenu {
     display: none;
     position: absolute;
@@ -111,7 +111,7 @@ body {
 }
 
 /* ==========================================================================
-   CONTENU & CARTES
+   CONTENUS & FORMULAIRES
    ========================================================================== */
 .container {
     max-width: 1000px;
@@ -133,42 +133,63 @@ body {
     margin-bottom: 30px;
 }
 
-.grid-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 20px;
-}
-
-.card-box {
+/* Formulaire Contact */
+.contact-card {
+    max-width: 600px;
+    margin: 0 auto;
     background: var(--card-bg);
     backdrop-filter: blur(10px);
     border: 1px solid var(--border-accent);
     border-radius: 12px;
-    padding: 24px;
+    padding: 30px;
 }
 
-.card-box h2 {
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.form-group label {
     color: var(--primary);
-    font-size: 1.2rem;
-    margin-bottom: 12px;
+    font-size: 0.9rem;
 }
 
-.card-box ul {
-    list-style: none;
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    color: #fff;
+    font-family: inherit;
 }
 
-.card-box li {
-    position: relative;
-    padding-left: 18px;
-    margin-bottom: 8px;
-    color: #cbd5e1;
+.btn-modern {
+    background: rgba(0, 119, 255, 0.4);
+    border: 1px solid #00d2ff;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
 }
 
-.card-box li::before {
-    content: "•";
-    color: var(--primary);
-    position: absolute;
-    left: 0;
+.btn-modern:hover {
+    background: rgba(0, 119, 255, 0.8);
 }
 
 /* Footer */
