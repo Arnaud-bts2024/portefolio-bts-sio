@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio BTS SIO - Arnaud HOLLEBECQUE</title>
-  <link rel="stylesheet" href="style.css">
+  <!-- Lien vers le bon chemin CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
@@ -12,14 +14,21 @@
   <header class="navbar">
     <nav>
       <ul>
-        <li><a href="#" class="active">Accueil</a></li>
-        <li><a href="#">BTS-SIO</a></li>
-        <li>
+        <li><a href="index.html" class="active">Accueil</a></li>
+        <li><a href="bts-sio.html">BTS-SIO</a></li>
+        <li class="dropdown">
           <a href="#">Mon parcours ▾</a>
+          <ul class="submenu">
+            <li><a href="cv.html">Mon CV</a></li>
+            <li><a href="tp.html">Mes TP</a></li>
+            <li><a href="certifications.html">Mes Certifications</a></li>
+            <li><a href="stages.html">Mes Stages</a></li>
+            <li><a href="synthese.html">Tableau de Synthèse</a></li>
+          </ul>
         </li>
-        <li><a href="#">Projets</a></li>
-        <li><a href="#">Veille</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="projets.html">Projets</a></li>
+        <li><a href="veille.html">Veille</a></li>
+        <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
   </header>
@@ -30,7 +39,7 @@
       <h1>PORTFOLIO BTS SIO</h1>
       <h2>Arnaud HOLLEBECQUE</h2>
       <p>Étudiant en Brevet de Technicien Supérieur - Services Informatiques aux Organisations</p>
-      <a href="#profil" class="btn">Découvrir mon profil &rarr;</a>
+      <a href="bts-sio.html" class="btn">Découvrir mon profil &rarr;</a>
     </div>
   </main>
 
