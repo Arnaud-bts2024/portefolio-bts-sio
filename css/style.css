@@ -57,7 +57,7 @@ body {
 }
 
 /* ==========================================================================
-   2. NAVIGATION
+   2. NAVIGATION BAR
    ========================================================================== */
 
 #navbar-container {
@@ -135,7 +135,7 @@ body {
 }
 
 /* ==========================================================================
-   3. TYPOGRAPHIE & TITRES
+   3. TITRES & TYPOGRAPHIE
    ========================================================================== */
 
 .page-title,
@@ -181,7 +181,6 @@ main p {
   text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
 }
 
-/* Boutons d'action généraux */
 .btn-modern {
   display: inline-flex;
   align-items: center;
@@ -201,34 +200,6 @@ main p {
 .btn-modern:hover {
   background: rgba(0, 119, 255, 0.7);
   box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
-}
-
-/* Bouton Spécifique "Prendre rendez-vous" */
-.btn-rdv {
-  display: inline-block;
-  padding: 12px 28px;
-  margin: 15px 0 25px 0;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #ffffff;
-  background: linear-gradient(135deg, #0072ff, #00c6ff);
-  border: 1px solid rgba(0, 198, 255, 0.5);
-  border-radius: 30px;
-  text-decoration: none;
-  cursor: pointer;
-  box-shadow: 0 0 15px rgba(0, 198, 255, 0.4);
-  transition: all 0.3s ease;
-}
-
-.btn-rdv:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 25px rgba(0, 198, 255, 0.8), 0 0 40px rgba(0, 114, 255, 0.6);
-  background: linear-gradient(135deg, #00c6ff, #0072ff);
-}
-
-.btn-rdv:active {
-  transform: translateY(-1px);
-  box-shadow: 0 0 10px rgba(0, 198, 255, 0.5);
 }
 
 /* ==========================================================================
@@ -296,73 +267,134 @@ main p {
 }
 
 /* ==========================================================================
-   6. CONTACT & FORMULAIRE
+   6. CONTACT, FORMULAIRE & BOUTONS MODERNES
    ========================================================================== */
 
 .contact-form-section {
   width: 100%;
   max-width: 600px;
-  margin: 40px auto;
+  margin: 30px auto 20px auto;
   padding: 30px;
   background: linear-gradient(
     180deg,
-    rgba(0, 119, 255, 0.5) 0%,
-    rgba(255, 255, 255, 0.85) 100%
+    rgba(0, 119, 255, 0.4) 0%,
+    rgba(15, 23, 42, 0.85) 100%
   );
-  border: 2px solid var(--primary-hover);
+  border: 1.5px solid var(--primary-hover);
   border-radius: 16px;
+  backdrop-filter: blur(10px);
   box-shadow: 0 0 25px var(--glow-color);
 }
 
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 14px;
 }
 
 .contact-form label {
   font-size: 0.9rem;
-  font-weight: bold;
+  font-weight: 600;
   color: var(--text-main);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   display: block;
 }
 
 .contact-form input,
 .contact-form textarea {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   border-radius: 8px;
-  border: 1px solid var(--primary-hover);
-  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 210, 255, 0.4);
+  background: rgba(255, 255, 255, 0.95);
   color: #0f172a;
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--primary-hover);
+  box-shadow: 0 0 10px var(--glow-color);
 }
 
 .btn-container {
   display: flex;
   justify-content: flex-end;
+  margin-top: 5px;
 }
 
+/* Bouton ENVOYER (Effet Néon / Glow) */
 .btn-submit {
-  padding: 10px 24px;
-  background: #0284c7;
-  color: var(--text-main);
-  border: 1px solid var(--primary-hover);
-  border-radius: 20px;
-  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(135deg, #0052d4, #4364f7, #6fb1fc);
+  background-size: 200% auto;
+  border: 1px solid #00d2ff;
+  border-radius: 30px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+  transition: all 0.3s ease;
 }
 
 .btn-submit:hover {
-  background: var(--primary-hover);
-  color: #0f172a;
+  background-position: right center;
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(0, 210, 255, 0.8), 0 0 35px rgba(0, 114, 255, 0.5);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
+}
+
+/* Container du bouton Prendre Rendez-vous */
+.booking-container {
+  text-align: center;
+  margin: 30px 0 50px 0;
+}
+
+/* Bouton PRENDRE RENDEZ-VOUS (Grand Bouton Bas de Page) */
+.btn-rdv {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 15px 36px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  background-size: 200% auto;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 40px;
+  box-shadow: 0 0 20px rgba(0, 198, 255, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.2);
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-rdv:hover {
+  transform: translateY(-4px) scale(1.03);
+  background-position: right center;
+  box-shadow: 0 0 30px rgba(0, 198, 255, 0.9), 0 0 50px rgba(0, 114, 255, 0.7);
+  color: #ffffff;
+}
+
+.btn-rdv:active {
+  transform: translateY(-1px) scale(0.98);
+  box-shadow: 0 0 15px rgba(0, 198, 255, 0.6);
 }
 
 /* ==========================================================================
@@ -379,7 +411,7 @@ main p {
 }
 
 /* ==========================================================================
-   8. MEDIA QUERIES (RESPONSIVE)
+   8. RESPONSIVE
    ========================================================================== */
 
 @media (max-width: 768px) {
