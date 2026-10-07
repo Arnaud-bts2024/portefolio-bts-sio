@@ -1,69 +1,47 @@
-/**
- * main.js - Navigation dynamique & Animations d'interface
- */
-
-document.addEventListener("DOMContentLoaded", () => {
-    initNavbar();
-    initCardAnimations();
-});
-
-/**
- * Génère et injecte la barre de navigation principale
- */
-function initNavbar() {
-    const navbarContainer = document.getElementById("navbar-container");
+document.addEventListener('DOMContentLoaded', () => {
+    const navbarContainer = document.getElementById('navbar-container');
+    
     if (!navbarContainer) return;
 
+    // 1. Structure HTML de la barre de navigation
     navbarContainer.innerHTML = `
         <header class="site-header">
-            <div class="nav-container">
-                <nav class="main-nav">
-                    <ul>
-                        <li><a href="index.html">Accueil</a></li>
-                        <li><a href="bts-sio.html">BTS-SIO</a></li>
-                        <li class="dropdown">
-                            <a href="parcours.html">Mon parcours</a>
-                            <ul class="submenu">
-                                <li><a href="documents/cv.pdf" target="_blank">Mon CV</a></li>
-                                <li><a href="projets.html" target="_blank">Mes TP</a></li>
-                                <li><a href="https://online.fliphtml5.com/fvfkdx/uksp/" target="_blank">Mes Certifications</a></li>
-                                <li><a href="stages.html" target="_blank">Mes Stages</a></li>
-                                <li><a href="documents/tableau-de-synthese.pdf" target="_blank">Tableau de Synthèse</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="projets.html">Projets</a></li>
-                        <li><a href="veille.html">Veille</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </nav>
-            </div>
+            <nav class="nav-container main-nav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="bts-sio.html">BTS-SIO</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-trigger">Mon parcours ▾</a>
+                        <ul class="submenu">
+                            <li><a href="cv.html">Mon CV</a></li>
+                            <li><a href="tp.html">Mes TP</a></li>
+                            <li><a href="certifications.html">Mes Certifications</a></li>
+                            <li><a href="stages.html">Mes Stages</a></li>
+                            <li><a href="synthese.html">Tableau de Synthèse</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="projets.html">Projets</a></li>
+                    <li><a href="veille.html">Veille</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
         </header>
     `;
 
-    // Met en surbrillance la page courante (liens principaux uniquement)
-    const currentPage = window.location.pathname.split("/").pop() || "index.html";
-    navbarContainer.querySelectorAll(".main-nav > ul > li > a").forEach(link => {
-        if (link.getAttribute("href") === currentPage) {
-            link.classList.add("active");
+    // 2. Gestion automatique du lien actif (page courante)
+    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = navbarContainer.querySelectorAll('a');
+
+    navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === currentPath) {
+            link.classList.add('active');
+            
+            // Si le lien est dans le sous-menu, active aussi le parent "Mon parcours"
+            const parentDropdown = link.closest('.dropdown');
+            if (parentDropdown) {
+                parentDropdown.querySelector('.dropdown-trigger').classList.add('active');
+            }
         }
     });
-}
-
-/**
- * Fait apparaître les cartes au scroll
- */
-function initCardAnimations() {
-    const cards = document.querySelectorAll(".sio-card");
-    if (!cards.length) return;
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.15 });
-
-    cards.forEach(card => observer.observe(card));
-}
+});
