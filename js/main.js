@@ -1,9 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const navbarContainer = document.getElementById('navbar-container');
-    
     if (!navbarContainer) return;
 
-    // 1. Structure HTML de la barre de navigation
     navbarContainer.innerHTML = `
         <header class="site-header">
             <nav class="nav-container main-nav">
@@ -28,16 +26,13 @@ document.addEventListener('DOMContentLoaded', () => {
         </header>
     `;
 
-    // 2. Gestion automatique du lien actif (page courante)
+    // Active le lien correspondant à la page actuelle
     const currentPath = window.location.pathname.split('/').pop() || 'index.html';
     const navLinks = navbarContainer.querySelectorAll('a');
 
     navLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        if (href === currentPath) {
+        if (link.getAttribute('href') === currentPath) {
             link.classList.add('active');
-            
-            // Si le lien est dans le sous-menu, active aussi le parent "Mon parcours"
             const parentDropdown = link.closest('.dropdown');
             if (parentDropdown) {
                 parentDropdown.querySelector('.dropdown-trigger').classList.add('active');
