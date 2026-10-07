@@ -1,5 +1,41 @@
 /* ==========================================================================
-   BARRE DE NAVIGATION & CORRECTIONS D'AFFICHAGE
+   RESET & VARIABLES
+   ========================================================================== */
+:root {
+    --bg-dark: #0b0f19;
+    --card-bg: rgba(11, 15, 25, 0.85);
+    --primary: #38bdf8;
+    --text-main: #ffffff;
+    --text-muted: #94a3b8;
+    --border-accent: rgba(56, 189, 248, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    background-image: url('../images/fond-ecran.jpg');
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    color: var(--text-main);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+}
+
+.main-content {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* ==========================================================================
+   BARRE DE NAVIGATION
    ========================================================================== */
 #navbar-container {
     position: sticky;
@@ -9,7 +45,7 @@
 }
 
 .site-header {
-    background: rgba(11, 15, 25, 0.95) !important;
+    background: rgba(11, 15, 25, 0.95);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border-accent);
 }
@@ -30,9 +66,8 @@
     padding: 0;
 }
 
-/* Positionnement strict des liens et du sous-menu */
 .main-nav li {
-    position: relative; /* Indispensable pour que le sous-menu se cale sous 'Mon parcours' */
+    position: relative;
 }
 
 .main-nav a {
@@ -45,16 +80,16 @@
 }
 
 .main-nav a:hover, .main-nav a.active {
-    color: var(--primary) !important;
+    color: var(--primary);
 }
 
-/* Masquer le sous-menu par défaut et le positionner correctement */
+/* Sous-menu déroulant */
 .dropdown .submenu {
-    display: none !important;
+    display: none;
     position: absolute;
     top: 100%;
     left: 50%;
-    transform: translateX(-50%); /* Centre le sous-menu sous 'Mon parcours' */
+    transform: translateX(-50%);
     background: #0f172a;
     border: 1px solid var(--border-accent);
     padding: 10px;
@@ -64,36 +99,84 @@
     z-index: 1001;
 }
 
-/* Affichage uniquement au survol */
 .dropdown:hover .submenu {
-    display: flex !important;
+    display: flex;
     flex-direction: column;
     gap: 6px;
 }
 
-.submenu li {
-    width: 100%;
-}
-
 .submenu a {
-    display: block;
-    padding: 6px 12px;
-    white-space: nowrap;
     font-size: 0.9rem;
+    white-space: nowrap;
 }
 
-/* Espacement du contenu principal sous la navbar */
-.content-container, .container, main {
+/* ==========================================================================
+   CONTENU & CARTES
+   ========================================================================== */
+.container {
     max-width: 1000px;
     margin: 40px auto;
-    padding: 40px 20px 20px 20px; /* Le padding-top évite le chevauchement avec le titre */
+    padding: 0 20px;
     flex: 1;
 }
 
-.page-title, .page-header h1 {
+.page-title {
     text-align: center;
     font-size: 2.2rem;
     color: #fff;
-    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+.hero-subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+}
+
+.grid-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.card-box {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-accent);
+    border-radius: 12px;
+    padding: 24px;
+}
+
+.card-box h2 {
+    color: var(--primary);
+    font-size: 1.2rem;
     margin-bottom: 12px;
+}
+
+.card-box ul {
+    list-style: none;
+}
+
+.card-box li {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 8px;
+    color: #cbd5e1;
+}
+
+.card-box li::before {
+    content: "•";
+    color: var(--primary);
+    position: absolute;
+    left: 0;
+}
+
+/* Footer */
+.site-footer {
+    text-align: center;
+    padding: 20px;
+    background: rgba(11, 15, 25, 0.95);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+    font-size: 0.85rem;
 }
