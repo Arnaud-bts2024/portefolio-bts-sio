@@ -23,7 +23,7 @@ function initNavbar() {
                         <li class="dropdown">
                             <a href="parcours.html">Mon parcours</a>
                             <ul class="submenu">
-                                <li><a href="documents/cv.pdf" target="_blank">Mon CV</a></li>
+                                <li><a href="documents/cv.pdf#zoom=78" target="_blank">Mon CV</a></li>
                                 <li><a href="projets.html" target="_blank">Mes TP</a></li>
                                 <li><a href="https://online.fliphtml5.com/fvfkdx/uksp/" target="_blank">Mes Certifications</a></li>
                                 <li><a href="stages.html" target="_blank">Mes Stages</a></li>
