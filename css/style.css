@@ -141,6 +141,12 @@ body {
    3. TITRES & TYPOGRAPHIE
    ========================================================================== */
 
+.page-header {
+  text-align: center;
+  margin-bottom: 3.5rem; /* Espace aéré pour ne pas cacher le titre */
+  width: 100%;
+}
+
 .page-title,
 main h1 {
   text-align: center;
@@ -272,7 +278,115 @@ main p {
 }
 
 /* ==========================================================================
-   6. FORMULAIRE DE CONTACT & BOUTONS ULTRA-MODERNES
+   6. PAGE BTS SIO (GRILLE DE CARTES & ANIMATION EN PROFONDEUR)
+   ========================================================================== */
+
+.grid-cards {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2.5rem; /* Espacement large et aéré entre les cartes */
+    margin-bottom: 2rem;
+}
+
+.card-box {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-accent);
+    border-radius: 16px;
+    padding: 2rem;
+    color: var(--text-main);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    
+    /* État initial pour l'animation d'apparition depuis le fond */
+    opacity: 0;
+    transform: scale(0.5) translateZ(-200px);
+    animation: appearFromDepth 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.card-box:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: var(--primary-hover);
+    box-shadow: 0 12px 35px rgba(0, 210, 255, 0.3);
+}
+
+.card-box h2 {
+    font-size: 1.35rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.card-subtitle {
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: #cbd5e1;
+    font-size: 0.95rem;
+}
+
+.card-box p {
+    text-align: left;
+    color: #e2e8f0;
+    line-height: 1.6;
+    margin-top: 0;
+}
+
+.card-box ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.card-box ul li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.7rem;
+    line-height: 1.5;
+    color: #e2e8f0;
+    text-align: left;
+}
+
+.card-box ul li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Carte spéciale de mise en avant (En résumé) */
+.card-highlight {
+    background: linear-gradient(135deg, rgba(0, 162, 255, 0.2) 0%, rgba(13, 18, 36, 0.9) 100%);
+    border: 1px solid rgba(0, 210, 255, 0.5);
+}
+
+/* Keyframes de l'animation d'apparition (Zoom depuis le fond) */
+@keyframes appearFromDepth {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translateZ(-200px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateZ(0);
+    }
+}
+
+/* Décalage en cascade pour chaque carte (effet l'une après l'autre) */
+.card-box:nth-child(1) { animation-delay: 0.15s; }
+.card-box:nth-child(2) { animation-delay: 0.30s; }
+.card-box:nth-child(3) { animation-delay: 0.45s; }
+.card-box:nth-child(4) { animation-delay: 0.60s; }
+.card-box:nth-child(5) { animation-delay: 0.75s; }
+.card-box:nth-child(6) { animation-delay: 0.90s; }
+
+
+/* ==========================================================================
+   7. FORMULAIRE DE CONTACT & BOUTONS ULTRA-MODERNES
    ========================================================================== */
 
 .contact-form-section {
@@ -343,7 +457,7 @@ main p {
   margin-top: 10px;
 }
 
-/* --- BOUTON ENVOYER (Effet dégradé arc-en-ciel de gauche à droite et ultra-percutant) --- */
+/* --- BOUTON ENVOYER --- */
 .btn-submit {
   position: relative;
   display: inline-flex;
@@ -355,7 +469,6 @@ main p {
   font-weight: 700;
   letter-spacing: 0.5px;
   color: #ffffff;
-  /* Dégradé aux teintes arc-en-ciel étiré pour l'animation */
   background: linear-gradient(270deg, #ff007f, #7f00ff, #00d2ff, #00ff87, #ff007f);
   background-size: 400% 400%;
   border: none;
@@ -368,15 +481,9 @@ main p {
 }
 
 @keyframes rainbowAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .btn-submit i {
@@ -397,7 +504,7 @@ main p {
   transform: translateY(-2px) scale(0.98);
 }
 
-/* --- BOUTON PRENDRE RENDEZ-VOUS (Style d'origine) --- */
+/* --- BOUTON PRENDRE RENDEZ-VOUS --- */
 .booking-container {
   width: 100%;
   display: flex;
@@ -448,7 +555,7 @@ main p {
 }
 
 /* ==========================================================================
-   7. FOOTER
+   8. FOOTER
    ========================================================================== */
 
 .site-footer {
@@ -462,7 +569,7 @@ main p {
 }
 
 /* ==========================================================================
-   8. RESPONSIVE
+   9. RESPONSIVE
    ========================================================================== */
 
 @media (max-width: 768px) {
