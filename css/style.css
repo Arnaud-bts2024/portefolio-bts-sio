@@ -1,3 +1,7 @@
+/* ==========================================================================
+   1. VARIABLES & RESET
+   ========================================================================== */
+
 :root {
   --bg-dark: #0b0f19;
   --card-bg: rgba(13, 18, 36, 0.85);
@@ -54,6 +58,10 @@ body {
   flex-direction: column;
   align-items: center;
 }
+
+/* ==========================================================================
+   2. NAVIGATION BAR
+   ========================================================================== */
 
 #navbar-container {
   position: sticky;
@@ -129,6 +137,10 @@ body {
   background: rgba(56, 189, 248, 0.2);
 }
 
+/* ==========================================================================
+   3. TITRES, TYPOGRAPHIE & BOUTON LOGO EPNAK
+   ========================================================================== */
+
 .page-header {
   text-align: center;
   margin-bottom: 1.5rem;
@@ -191,6 +203,10 @@ main p {
   transform: translateY(-1px) scale(0.98);
 }
 
+/* ==========================================================================
+   4. ACCUEIL / HERO SECTION
+   ========================================================================== */
+
 .hero-container {
   display: flex;
   flex-direction: column;
@@ -236,34 +252,38 @@ main p {
   box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
 }
 
+/* ==========================================================================
+   5. VEILLE TECHNOLOGIQUE (Espacée harmonieusement)
+   ========================================================================== */
+
 .veille-section {
   width: 100%;
-  max-width: 800px;
-  margin: 30px auto;
+  max-width: 900px;
+  margin: 35px auto;
   padding: 0 15px;
 }
 
 .veille-title {
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 1.3rem;
+  margin-bottom: 25px;
+  font-size: 1.35rem;
   color: var(--text-main);
 }
 
 .lightning-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 18px;
 }
 
 .lightning-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 18px;
+  padding: 18px 22px;
   text-decoration: none;
-  font-size: 0.95rem;
-  border-radius: 10px;
+  font-size: 1rem;
+  border-radius: 12px;
   border: 1.5px solid var(--primary-hover);
   background: linear-gradient(
     90deg,
@@ -277,7 +297,7 @@ main p {
 
 .lightning-item span {
   flex: 1;
-  margin-left: 12px;
+  margin-left: 15px;
   color: #0f172a;
   font-weight: 700;
   text-align: left;
@@ -285,7 +305,7 @@ main p {
 
 .lightning-item i {
   color: var(--text-main);
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 
 .lightning-item .arrow-icon {
@@ -296,6 +316,10 @@ main p {
   transform: scale(1.02);
   box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
 }
+
+/* ==========================================================================
+   6. PAGE BTS SIO (CARTES COMPACTES OPTIMISÉES)
+   ========================================================================== */
 
 .grid-cards {
   width: 100%;
@@ -376,6 +400,10 @@ main p {
   background: linear-gradient(135deg, rgba(14, 165, 233, 0.25) 0%, rgba(15, 23, 42, 0.75) 100%);
   border: 1px solid rgba(56, 189, 248, 0.4);
 }
+
+/* ==========================================================================
+   7. FORMULAIRE DE CONTACT & BOUTONS
+   ========================================================================== */
 
 .contact-form-section {
   width: 100%;
@@ -540,6 +568,10 @@ main p {
   transform: translateY(-1px);
 }
 
+/* ==========================================================================
+   8. FOOTER
+   ========================================================================== */
+
 .site-footer {
   width: 100%;
   padding: 14px 15px;
@@ -549,6 +581,10 @@ main p {
   background: rgba(11, 15, 25, 0.9);
   border-top: 1px solid var(--border-light);
 }
+
+/* ==========================================================================
+   9. RESPONSIVE
+   ========================================================================== */
 
 @media (max-width: 768px) {
   .form-row {
