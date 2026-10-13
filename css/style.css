@@ -279,7 +279,6 @@ main p {
   max-width: 650px;
   margin: 35px auto 15px auto;
   padding: 35px;
-  /* Opacité augmentée pour un meilleur confort visuel */
   background: linear-gradient(
     180deg,
     rgba(13, 22, 48, 0.75) 0%,
@@ -343,7 +342,7 @@ main p {
   margin-top: 10px;
 }
 
-/* --- BOUTON ENVOYER (ANIMATION ULTRA-PERCUTANTE) --- */
+/* --- BOUTON ENVOYER (Effet dégradé arc-en-ciel de gauche à droite et ultra-percutant) --- */
 .btn-submit {
   position: relative;
   display: inline-flex;
@@ -355,14 +354,28 @@ main p {
   font-weight: 700;
   letter-spacing: 0.5px;
   color: #ffffff;
-  background: linear-gradient(135deg, #00d2ff 0%, #0052d4 50%, #4364f7 100%);
-  background-size: 200% auto;
+  /* Dégradé aux teintes arc-en-ciel étiré pour l'animation */
+  background: linear-gradient(270deg, #ff007f, #7f00ff, #00d2ff, #00ff87, #ff007f);
+  background-size: 400% 400%;
   border: none;
   border-radius: 50px;
   cursor: pointer;
   overflow: hidden;
   box-shadow: 0 0 25px rgba(0, 210, 255, 0.5);
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: rainbowAnimation 6s ease infinite;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+
+@keyframes rainbowAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .btn-submit i {
@@ -371,17 +384,66 @@ main p {
 }
 
 .btn-submit:hover {
-  background-position: right center;
-  transform: translateY(-5px) scale(1.05); /* Effet de rebond et d'agrandissement percutant */
-  box-shadow: 0 0 40px rgba(0, 210, 255, 0.9), 0 0 20px rgba(67, 100, 247, 0.8);
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 0 40px rgba(255, 0, 127, 0.8), 0 0 20px rgba(0, 210, 255, 0.9);
 }
 
 .btn-submit:hover i {
-  transform: translateX(8px) translateY(-3px) rotate(15deg); /* L'icône s'envole franchement */
+  transform: translateX(8px) translateY(-3px) rotate(15deg);
 }
 
 .btn-submit:active {
   transform: translateY(-2px) scale(0.98);
+}
+
+/* --- BOUTON PRENDRE RENDEZ-VOUS (Style d'origine) --- */
+.booking-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 35px 0 60px 0;
+}
+
+.btn-rdv {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 16px 40px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+  background: rgba(15, 23, 42, 0.8);
+  border: 2px solid #00d2ff;
+  border-radius: 50px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+  transition: all 0.4s ease;
+}
+
+.btn-rdv i {
+  color: #00d2ff;
+  font-size: 1.2rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.btn-rdv:hover {
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  border-color: transparent;
+  transform: translateY(-4px);
+  box-shadow: 0 0 35px rgba(0, 210, 255, 0.8), 0 10px 25px rgba(0, 114, 255, 0.5);
+  color: #ffffff;
+}
+
+.btn-rdv:hover i {
+  color: #ffffff;
+  transform: scale(1.2) rotate(-10deg);
+}
+
+.btn-rdv:active {
+  transform: translateY(-1px);
 }
 
 /* ==========================================================================
