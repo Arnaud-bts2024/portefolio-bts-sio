@@ -204,7 +204,7 @@ main p {
 }
 
 /* ==========================================================================
-   4. ACCUEIL / HERO SECTION
+   4. ACCUEIL / HERO SECTION (Aérée & Agrandie)
    ========================================================================== */
 
 .hero-container {
@@ -212,44 +212,81 @@ main p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 140px);
+  min-height: calc(100vh - 160px);
   text-align: center;
-  gap: 20px;
-  padding: 40px 20px;
+  gap: 2.5rem; /* Augmente l'espace entre le titre, le nom et le bouton */
+  padding: 60px 20px;
+}
+
+.hero-top {
+  margin-bottom: 0.5rem;
 }
 
 .hero-title-top {
-  font-size: 2.2rem;
-  font-weight: 700;
+  font-size: 2.4rem;
+  font-weight: 800;
   color: var(--text-main);
+  letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(0, 162, 255, 0.6);
+}
+
+.hero-center {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem; /* Espacement aéré entre le Nom et la description */
+  max-width: 800px;
 }
 
 .hero-name {
-  font-size: 2.8rem;
-  font-weight: 700;
-  color: var(--text-main);
-  text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+  font-size: 3.2rem; /* Nom plus imposant et lisible */
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 0 25px rgba(56, 189, 248, 0.6);
+  letter-spacing: 1px;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.hero-bottom {
+  margin-top: 1rem; /* Décolle le bouton du reste du texte */
 }
 
 .btn-modern {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 28px;
-  color: var(--text-main) !important;
+  gap: 12px;
+  padding: 16px 36px; /* Bouton agrandi et bien aéré */
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff !important;
   text-decoration: none;
-  font-weight: 600;
-  background: rgba(0, 119, 255, 0.3);
-  border: 1px solid var(--primary-hover);
-  border-radius: 8px;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 0 15px rgba(0, 183, 255, 0.3);
-  transition: all 0.3s ease;
+  background: rgba(13, 22, 48, 0.85);
+  border: 1.5px solid var(--primary-hover);
+  border-radius: 50px; /* Bords polis arrondis pour un style moderne */
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-modern i {
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
 }
 
 .btn-modern:hover {
-  background: rgba(0, 119, 255, 0.7);
-  box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  border-color: transparent;
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 0 35px rgba(0, 210, 255, 0.8), 0 10px 25px rgba(0, 114, 255, 0.5);
+}
+
+.btn-modern:hover i {
+  transform: translateX(6px);
 }
 
 /* ==========================================================================
