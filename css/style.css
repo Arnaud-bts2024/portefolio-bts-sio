@@ -603,3 +603,85 @@ main p {
     font-size: 0.95rem;
   }
 }
+/* ==========================================================================
+   10. PAGE MON PARCOURS (Cartes interactives modernes)
+   ========================================================================== */
+
+.parcours-grid {
+  width: 100%;
+  max-width: 850px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 15px auto 30px auto;
+}
+
+.parcours-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  background: rgba(13, 18, 36, 0.85);
+  border: 1.5px solid rgba(56, 189, 248, 0.3);
+  border-radius: 14px;
+  text-decoration: none;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.parcours-icon {
+  font-size: 1.5rem;
+  color: var(--primary);
+  background: rgba(56, 189, 248, 0.1);
+  padding: 12px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.parcours-info {
+  flex: 1;
+  margin-left: 20px;
+  text-align: left;
+}
+
+.parcours-info h2 {
+  font-size: 1.15rem;
+  color: var(--text-main);
+  margin-bottom: 3px;
+  font-weight: 600;
+}
+
+.parcours-info p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin: 0;
+  text-align: left;
+}
+
+.arrow-indicator {
+  color: var(--primary);
+  font-size: 1.1rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.parcours-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  border-color: #00d2ff;
+  box-shadow: 0 10px 30px rgba(0, 210, 255, 0.3);
+  background: rgba(18, 26, 52, 0.95);
+}
+
+.parcours-card:hover .parcours-icon {
+  background: var(--primary);
+  color: #0f172a;
+}
+
+.parcours-card:hover .arrow-indicator {
+  transform: translateX(6px);
+  color: #00d2ff;
+}
