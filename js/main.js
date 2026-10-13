@@ -1,10 +1,9 @@
 /**
- * main.js - Navigation dynamique & Animations d'interface
+ * main.js - Navigation dynamique & Gestion globale
  */
 
 document.addEventListener("DOMContentLoaded", () => {
     initNavbar();
-    initCardAnimations();
 });
 
 /**
@@ -40,30 +39,11 @@ function initNavbar() {
         </header>
     `;
 
-    // Met en surbrillance la page courante (liens principaux uniquement)
+    // Met en surbrillance la page courante dans le menu
     const currentPage = window.location.pathname.split("/").pop() || "index.html";
     navbarContainer.querySelectorAll(".main-nav > ul > li > a").forEach(link => {
         if (link.getAttribute("href") === currentPage) {
             link.classList.add("active");
         }
     });
-}
-
-/**
- * Fait apparaître les cartes au scroll
- */
-function initCardAnimations() {
-    const cards = document.querySelectorAll(".sio-card");
-    if (!cards.length) return;
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.15 });
-
-    cards.forEach(card => observer.observe(card));
 }
