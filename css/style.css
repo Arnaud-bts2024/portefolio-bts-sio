@@ -1,4 +1,7 @@
-/* 1. VARIABLES ET RESET */
+/* ==========================================================================
+   1. VARIABLES & RESET
+   ========================================================================== */
+
 :root {
   --bg-dark: #0b0f19;
   --card-bg: rgba(13, 18, 36, 0.85);
@@ -50,13 +53,16 @@ body {
   width: 95%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1.5rem 5rem 1.5rem;
+  padding: 1rem 1.5rem 3rem 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* 2. NAVIGATION BAR */
+/* ==========================================================================
+   2. NAVIGATION BAR
+   ========================================================================== */
+
 #navbar-container {
   position: sticky;
   top: 0;
@@ -74,7 +80,7 @@ body {
 .nav-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 12px 20px;
+  padding: 10px 20px;
 }
 
 .main-nav > ul {
@@ -131,18 +137,21 @@ body {
   background: rgba(56, 189, 248, 0.2);
 }
 
-/* 3. TITRES ET TYPOGRAPHIE */
+/* ==========================================================================
+   3. TITRES & TYPOGRAPHIE
+   ========================================================================== */
+
 .page-header {
   text-align: center;
-  margin-bottom: 3.5rem;
+  margin-bottom: 1.5rem;
   width: 100%;
 }
 
 .page-title,
 main h1 {
   text-align: center;
-  margin-top: 30px;
-  font-size: 2.5rem;
+  margin-top: 15px;
+  font-size: 2.2rem;
   color: var(--text-main);
   text-shadow: 0 0 15px rgba(0, 162, 255, 0.5);
 }
@@ -151,16 +160,20 @@ main h1 {
 main p {
   text-align: center;
   color: var(--text-muted);
-  margin-top: 8px;
+  margin-top: 5px;
+  font-size: 0.95rem;
 }
 
-/* 4. ACCUEIL HERO SECTION */
+/* ==========================================================================
+   4. ACCUEIL / HERO SECTION
+   ========================================================================== */
+
 .hero-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 160px);
+  min-height: calc(100vh - 140px);
   text-align: center;
   gap: 20px;
   padding: 40px 20px;
@@ -200,34 +213,37 @@ main p {
   box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
 }
 
-/* 5. VEILLE TECHNOLOGIQUE */
+/* ==========================================================================
+   5. VEILLE TECHNOLOGIQUE
+   ========================================================================== */
+
 .veille-section {
   width: 100%;
   max-width: 800px;
-  margin: 40px auto;
+  margin: 30px auto;
   padding: 0 15px;
 }
 
 .veille-title {
   text-align: center;
-  margin-bottom: 25px;
-  font-size: 1.4rem;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
   color: var(--text-main);
 }
 
 .lightning-list {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 .lightning-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px;
+  padding: 14px 18px;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 0.95rem;
   border-radius: 10px;
   border: 1.5px solid var(--primary-hover);
   background: linear-gradient(
@@ -250,7 +266,7 @@ main p {
 
 .lightning-item i {
   color: var(--text-main);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .lightning-item .arrow-icon {
@@ -262,13 +278,16 @@ main p {
   box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
 }
 
-/* 6. PAGE BTS SIO */
+/* ==========================================================================
+   6. PAGE BTS SIO (CARTES COMPACTES OPTIMISÉES)
+   ========================================================================== */
+
 .grid-cards {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 2rem;
-  margin-bottom: 2rem;
+  gap: 1.1rem;
+  margin-bottom: 1rem;
 }
 
 .card-box {
@@ -276,22 +295,22 @@ main p {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-accent);
-  border-radius: 16px;
-  padding: 1.8rem;
+  border-radius: 14px;
+  padding: 1.1rem 1.3rem;
   color: var(--text-main);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card-box:hover {
-  transform: translateY(-8px) scale(1.02);
+  transform: translateY(-5px) scale(1.01);
   border-color: rgba(56, 189, 248, 0.6);
   box-shadow: 0 12px 30px rgba(56, 189, 248, 0.25);
 }
 
 .card-box h2 {
-  font-size: 1.35rem;
-  margin-bottom: 1rem;
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
   color: var(--primary);
   display: flex;
   align-items: center;
@@ -300,14 +319,16 @@ main p {
 
 .card-subtitle {
   font-weight: 600;
-  margin-bottom: 0.8rem;
+  font-size: 0.88rem;
+  margin-bottom: 0.4rem;
   color: #cbd5e1;
 }
 
 .card-box p {
   text-align: left;
   color: #e2e8f0;
-  line-height: 1.6;
+  font-size: 0.88rem;
+  line-height: 1.35;
   margin-top: 0;
 }
 
@@ -318,9 +339,10 @@ main p {
 
 .card-box ul li {
   position: relative;
-  padding-left: 1.5rem;
-  margin-bottom: 0.6rem;
-  line-height: 1.5;
+  padding-left: 1.2rem;
+  margin-bottom: 0.3rem;
+  line-height: 1.3;
+  font-size: 0.85rem;
   color: #e2e8f0;
   text-align: left;
 }
@@ -331,7 +353,7 @@ main p {
   left: 0;
   color: var(--primary);
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .card-highlight {
@@ -339,12 +361,15 @@ main p {
   border: 1px solid rgba(56, 189, 248, 0.4);
 }
 
-/* 7. FORMULAIRE ET BOUTONS */
+/* ==========================================================================
+   7. FORMULAIRE DE CONTACT & BOUTONS
+   ========================================================================== */
+
 .contact-form-section {
   width: 100%;
   max-width: 650px;
-  margin: 35px auto 15px auto;
-  padding: 35px;
+  margin: 25px auto 10px auto;
+  padding: 25px;
   background: linear-gradient(
     180deg,
     rgba(13, 22, 48, 0.75) 0%,
@@ -359,33 +384,33 @@ main p {
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 15px;
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 15px;
 }
 
 .contact-form label {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 600;
   color: #e2e8f0;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   display: block;
 }
 
 .contact-form input,
 .contact-form textarea {
   width: 100%;
-  padding: 14px;
-  border-radius: 10px;
+  padding: 11px;
+  border-radius: 8px;
   border: 1px solid rgba(0, 210, 255, 0.3);
   background: rgba(15, 23, 42, 0.8);
   color: #ffffff;
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   outline: none;
   transition: all 0.3s ease;
 }
@@ -405,7 +430,7 @@ main p {
 .btn-container {
   display: flex;
   justify-content: flex-end;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .btn-submit {
@@ -413,9 +438,9 @@ main p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  padding: 14px 32px;
-  font-size: 1rem;
+  gap: 10px;
+  padding: 12px 28px;
+  font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: 0.5px;
   color: #ffffff;
@@ -437,21 +462,21 @@ main p {
 }
 
 .btn-submit i {
-  font-size: 1.1rem;
+  font-size: 1rem;
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .btn-submit:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 0 40px rgba(255, 0, 127, 0.8), 0 0 20px rgba(0, 210, 255, 0.9);
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 0 35px rgba(255, 0, 127, 0.8), 0 0 20px rgba(0, 210, 255, 0.9);
 }
 
 .btn-submit:hover i {
-  transform: translateX(8px) translateY(-3px) rotate(15deg);
+  transform: translateX(6px) translateY(-2px) rotate(15deg);
 }
 
 .btn-submit:active {
-  transform: translateY(-2px) scale(0.98);
+  transform: translateY(-1px) scale(0.98);
 }
 
 .booking-container {
@@ -459,16 +484,16 @@ main p {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 35px 0 60px 0;
+  margin: 25px 0 30px 0;
 }
 
 .btn-rdv {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  padding: 16px 40px;
-  font-size: 1.1rem;
+  gap: 12px;
+  padding: 14px 35px;
+  font-size: 1rem;
   font-weight: 700;
   color: #ffffff;
   text-decoration: none;
@@ -482,39 +507,45 @@ main p {
 
 .btn-rdv i {
   color: #00d2ff;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .btn-rdv:hover {
   background: linear-gradient(135deg, #00c6ff, #0072ff);
   border-color: transparent;
-  transform: translateY(-4px);
-  box-shadow: 0 0 35px rgba(0, 210, 255, 0.8), 0 10px 25px rgba(0, 114, 255, 0.5);
+  transform: translateY(-3px);
+  box-shadow: 0 0 30px rgba(0, 210, 255, 0.8), 0 8px 20px rgba(0, 114, 255, 0.5);
   color: #ffffff;
 }
 
 .btn-rdv:hover i {
   color: #ffffff;
-  transform: scale(1.2) rotate(-10deg);
+  transform: scale(1.15) rotate(-10deg);
 }
 
 .btn-rdv:active {
   transform: translateY(-1px);
 }
 
-/* 8. FOOTER */
+/* ==========================================================================
+   8. FOOTER
+   ========================================================================== */
+
 .site-footer {
   width: 100%;
-  padding: 18px 15px;
+  padding: 14px 15px;
   text-align: center;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
   background: rgba(11, 15, 25, 0.9);
   border-top: 1px solid var(--border-light);
 }
 
-/* 9. RESPONSIVE */
+/* ==========================================================================
+   9. RESPONSIVE
+   ========================================================================== */
+
 @media (max-width: 768px) {
   .form-row {
     grid-template-columns: 1fr;
@@ -528,7 +559,7 @@ main p {
   .btn-rdv {
     width: 100%;
     max-width: 350px;
-    padding: 14px 20px;
-    font-size: 1rem;
+    padding: 12px 20px;
+    font-size: 0.95rem;
   }
 }
