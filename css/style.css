@@ -1,53 +1,306 @@
-/* --- Conteneur et Titres --- */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem 5rem 1.5rem;
+/* ==========================================================================
+   1. VARIABLES & RESET
+   ========================================================================== */
+
+:root {
+  --bg-dark: #0b0f19;
+  --card-bg: rgba(13, 18, 36, 0.85);
+  --primary: #38bdf8;
+  --primary-hover: #00d2ff;
+  --text-main: #ffffff;
+  --text-muted: #94a3b8;
+  --border-light: rgba(255, 255, 255, 0.1);
+  --border-accent: rgba(56, 189, 248, 0.3);
+  --glow-color: rgba(0, 210, 255, 0.5);
 }
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100vh;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: url('../images/fond-ecran.jpg') center / cover no-repeat fixed;
+}
+
+.background-container {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: url('../images/fond-ecran.jpg') center / cover no-repeat fixed;
+}
+
+.main-content {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.container {
+  flex: 1;
+  width: 95%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ==========================================================================
+   2. NAVIGATION BAR
+   ========================================================================== */
+
+#navbar-container {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  width: 100%;
+}
+
+.site-header {
+  width: 100%;
+  background: rgba(11, 15, 25, 0.95);
+  border-bottom: 1px solid var(--border-light);
+  backdrop-filter: blur(8px);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 20px;
+}
+
+.main-nav > ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.main-nav a {
+  padding: 6px 12px;
+  color: #e2e8f0;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+  color: var(--primary);
+}
+
+.dropdown {
+  position: relative;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid var(--border-accent);
+  border-radius: 8px;
+  padding: 8px 0;
+  list-style: none;
+  min-width: 200px;
+}
+
+.dropdown:hover .submenu {
+  display: flex;
+  flex-direction: column;
+}
+
+.submenu a {
+  display: block;
+  padding: 8px 16px;
+  text-align: center;
+}
+
+.submenu a:hover {
+  background: rgba(56, 189, 248, 0.2);
+}
+
+/* ==========================================================================
+   3. TITRES & TYPOGRAPHIE
+   ========================================================================== */
 
 .page-header {
-    text-align: center;
-    margin-bottom: 3.5rem; /* Espace suffisant pour ne pas être masqué par les cartes */
+  text-align: center;
+  margin-bottom: 3.5rem;
+  width: 100%;
 }
 
-.page-title {
-    font-size: 2.5rem;
-    color: #ffffff;
-    margin-bottom: 0.5rem;
-    text-shadow: 0 0 15px rgba(0, 162, 255, 0.5);
+.page-title,
+main h1 {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 2.5rem;
+  color: var(--text-main);
+  text-shadow: 0 0 15px rgba(0, 162, 255, 0.5);
 }
 
-.hero-subtitle {
-    font-size: 1.1rem;
-    color: #94a3b8;
+.hero-subtitle,
+main p {
+  text-align: center;
+  color: var(--text-muted);
+  margin-top: 8px;
 }
 
-/* --- Grille Aérée --- */
+/* ==========================================================================
+   4. ACCUEIL / HERO SECTION
+   ========================================================================== */
+
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 160px);
+  text-align: center;
+  gap: 20px;
+  padding: 40px 20px;
+}
+
+.hero-title-top {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.hero-name {
+  font-size: 2.8rem;
+  font-weight: 700;
+  color: var(--text-main);
+  text-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+}
+
+.btn-modern {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  color: var(--text-main) !important;
+  text-decoration: none;
+  font-weight: 600;
+  background: rgba(0, 119, 255, 0.3);
+  border: 1px solid var(--primary-hover);
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 15px rgba(0, 183, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.btn-modern:hover {
+  background: rgba(0, 119, 255, 0.7);
+  box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
+}
+
+/* ==========================================================================
+   5. VEILLE TECHNOLOGIQUE
+   ========================================================================== */
+
+.veille-section {
+  width: 100%;
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 15px;
+}
+
+.veille-title {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 1.4rem;
+  color: var(--text-main);
+}
+
+.lightning-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.lightning-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  text-decoration: none;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1.5px solid var(--primary-hover);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 102, 255, 0.9) 0%,
+    rgba(0, 210, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0.95) 100%
+  );
+  box-shadow: 0 0 15px var(--glow-color);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lightning-item span {
+  flex: 1;
+  margin-left: 12px;
+  color: #0f172a;
+  font-weight: 700;
+  text-align: left;
+}
+
+.lightning-item i {
+  color: var(--text-main);
+  font-size: 1.2rem;
+}
+
+.lightning-item .arrow-icon {
+  color: #0f172a;
+}
+
+.lightning-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
+}
+
+/* ==========================================================================
+   6. PAGE BTS SIO (GRILLE DE CARTES & ANIMATION EN PROFONDEUR)
+   ========================================================================== */
+
 .grid-cards {
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem; /* Espacement large entre les cartes */
+    gap: 2rem;
+    margin-bottom: 2rem;
 }
 
-/* --- Style Moderne des Cartes (Effet Verre / Glassmorphism) --- */
 .card-box {
-    background: rgba(15, 23, 42, 0.65);
+    background: var(--card-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(56, 189, 248, 0.2);
+    border: 1px solid var(--border-accent);
     border-radius: 16px;
     padding: 1.8rem;
-    color: #f8fafc;
+    color: var(--text-main);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-    
-    /* Animation au chargement : départ depuis le fond (scale réduit et opacité 0) */
-    opacity: 0;
-    transform: scale(0.6) translateZ(-100px);
-    animation: appearFromDepth 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-/* Survol des cartes */
 .card-box:hover {
     transform: translateY(-8px) scale(1.02);
     border-color: rgba(56, 189, 248, 0.6);
@@ -57,7 +310,7 @@
 .card-box h2 {
     font-size: 1.35rem;
     margin-bottom: 1rem;
-    color: #38bdf8;
+    color: var(--primary);
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -67,6 +320,13 @@
     font-weight: 600;
     margin-bottom: 0.8rem;
     color: #cbd5e1;
+}
+
+.card-box p {
+    text-align: left;
+    color: #e2e8f0;
+    line-height: 1.6;
+    margin-top: 0;
 }
 
 .card-box ul {
@@ -80,39 +340,222 @@
     margin-bottom: 0.6rem;
     line-height: 1.5;
     color: #e2e8f0;
+    text-align: left;
 }
 
 .card-box ul li::before {
     content: "•";
     position: absolute;
     left: 0;
-    color: #38bdf8;
+    color: var(--primary);
     font-weight: bold;
     font-size: 1.2rem;
 }
 
-/* Carte mise en avant (En résumé) */
 .card-highlight {
     background: linear-gradient(135deg, rgba(14, 165, 233, 0.25) 0%, rgba(15, 23, 42, 0.75) 100%);
     border: 1px solid rgba(56, 189, 248, 0.4);
 }
 
-/* --- Keyframes : Animation qui vient du fond de l'écran --- */
-@keyframes appearFromDepth {
-    0% {
-        opacity: 0;
-        transform: scale(0.5) translateZ(-200px);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1) translateZ(0);
-    }
+/* ==========================================================================
+   7. FORMULAIRE DE CONTACT & BOUTONS ULTRA-MODERNES
+   ========================================================================== */
+
+.contact-form-section {
+  width: 100%;
+  max-width: 650px;
+  margin: 35px auto 15px auto;
+  padding: 35px;
+  background: linear-gradient(
+    180deg,
+    rgba(13, 22, 48, 0.75) 0%,
+    rgba(8, 12, 24, 0.85) 100%
+  );
+  border: 1px solid rgba(0, 210, 255, 0.4);
+  border-radius: 20px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 210, 255, 0.15);
 }
 
-/* --- Décalage progressif (apparition une à une) --- */
-.card-box:nth-child(1) { animation-delay: 0.2s; }
-.card-box:nth-child(2) { animation-delay: 0.4s; }
-.card-box:nth-child(3) { animation-delay: 0.6s; }
-.card-box:nth-child(4) { animation-delay: 0.8s; }
-.card-box:nth-child(5) { animation-delay: 1.0s; }
-.card-box:nth-child(6) { animation-delay: 1.2s; }
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.contact-form label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 210, 255, 0.3);
+  background: rgba(15, 23, 42, 0.8);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #64748b;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #00d2ff;
+  background: rgba(15, 23, 42, 0.95);
+  box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
+}
+
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.btn-submit {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px 32px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  background: linear-gradient(270deg, #ff007f, #7f00ff, #00d2ff, #00ff87, #ff007f);
+  background-size: 400% 400%;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(0, 210, 255, 0.5);
+  animation: rainbowAnimation 6s ease infinite;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+
+@keyframes rainbowAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.btn-submit i {
+  font-size: 1.1rem;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-submit:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 0 40px rgba(255, 0, 127, 0.8), 0 0 20px rgba(0, 210, 255, 0.9);
+}
+
+.btn-submit:hover i {
+  transform: translateX(8px) translateY(-3px) rotate(15deg);
+}
+
+.btn-submit:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+.booking-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 35px 0 60px 0;
+}
+
+.btn-rdv {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 16px 40px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+  background: rgba(15, 23, 42, 0.8);
+  border: 2px solid #00d2ff;
+  border-radius: 50px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+  transition: all 0.4s ease;
+}
+
+.btn-rdv i {
+  color: #00d2ff;
+  font-size: 1.2rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.btn-rdv:hover {
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  border-color: transparent;
+  transform: translateY(-4px);
+  box-shadow: 0 0 35px rgba(0, 210, 255, 0.8), 0 10px 25px rgba(0, 114, 255, 0.5);
+  color: #ffffff;
+}
+
+.btn-rdv:hover i {
+  color: #ffffff;
+  transform: scale(1.2) rotate(-10deg);
+}
+
+.btn-rdv:active {
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   8. FOOTER
+   ========================================================================== */
+
+.site-footer {
+  width: 100%;
+  padding: 18px 15px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  background: rgba(11, 15, 25, 0.9);
+  border-top: 1px solid var(--border-light);
+}
+
+/* ==========================================================================
+   9. RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .main-nav > ul {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .btn-rdv {
+    width: 100%;
+    max-width: 350px;
+    padding: 14px 20px;
+    font-size: 1rem;
+  }
+}
