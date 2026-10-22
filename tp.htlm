@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes TP - Portfolio BTS SIO</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <div class="background-container"></div>
+
+    <div class="main-content">
+        <!-- Barre de navigation dynamique -->
+        <div id="navbar-container"></div>
+
+        <!-- Contenu Principal -->
+        <main class="container">
+            <section class="page-header">
+                <h1 class="page-title">Mes Travaux Pratiques (TP)</h1>
+                <p class="hero-subtitle">Retrouvez ici l'ensemble des TP réalisés dans le cadre de mon BTS SIO</p>
+            </section>
+
+            <!-- Grille de présentation de vos TP -->
+            <div class="grid-cards">
+                <div class="card-box">
+                    <h2><i class="fa-solid fa-code"></i> TP 1 : Exemple de TP</h2>
+                    <p class="card-subtitle">Technologies : HTML, CSS, JavaScript</p>
+                    <p>Description rapide de ce que vous avez accompli lors de ce TP.</p>
+                </div>
+
+                <div class="card-box">
+                    <h2><i class="fa-solid fa-database"></i> TP 2 : Exemple de TP</h2>
+                    <p class="card-subtitle">Technologies : PHP, SQL</p>
+                    <p>Description rapide d'un autre TP réalisé.</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <p>&copy; 2026 Arnaud HOLLEBECQUE — Portfolio BTS SIO</p>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
