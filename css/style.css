@@ -214,7 +214,7 @@ main p {
   align-items: center;
   min-height: calc(100vh - 160px);
   text-align: center;
-  gap: 2.5rem; /* Augmente l'espace entre le titre, le nom et le bouton */
+  gap: 2.5rem; 
   padding: 60px 20px;
 }
 
@@ -233,12 +233,12 @@ main p {
 .hero-center {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem; /* Espacement aéré entre le Nom et la description */
+  gap: 1.2rem; 
   max-width: 800px;
 }
 
 .hero-name {
-  font-size: 3.2rem; /* Nom plus imposant et lisible */
+  font-size: 3.2rem; 
   font-weight: 800;
   color: #ffffff;
   text-shadow: 0 0 25px rgba(56, 189, 248, 0.6);
@@ -253,21 +253,21 @@ main p {
 }
 
 .hero-bottom {
-  margin-top: 1rem; /* Décolle le bouton du reste du texte */
+  margin-top: 1rem; 
 }
 
 .btn-modern {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  padding: 16px 36px; /* Bouton agrandi et bien aéré */
+  padding: 16px 36px; 
   font-size: 1.05rem;
   font-weight: 700;
   color: #ffffff !important;
   text-decoration: none;
   background: rgba(13, 22, 48, 0.85);
   border: 1.5px solid var(--primary-hover);
-  border-radius: 50px; /* Bords polis arrondis pour un style moderne */
+  border-radius: 50px; 
   backdrop-filter: blur(12px);
   box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
   transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -355,7 +355,7 @@ main p {
 }
 
 /* ==========================================================================
-   6. PAGE BTS SIO (Design Futuriste Glassmorphism)
+   6. PAGE BTS SIO & CARTES GÉNÉRALES
    ========================================================================== */
 
 .grid-cards {
@@ -366,6 +366,27 @@ main p {
   margin-top: 15px;
   margin-bottom: 1.5rem;
 }
+
+/* ==========================================================================
+   6-BIS. SECTION SPÉCIFIQUE MES TP (Centrée et aérée)
+   ========================================================================== */
+
+.tp-grid {
+    width: 100%;
+    max-width: 850px;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem; /* Espace vertical important et aéré entre les deux cartes */
+    margin: 30px auto;
+    align-items: center; /* Centre parfaitement les cartes horizontalement */
+}
+
+.tp-grid .card-box {
+    width: 100%;
+    padding: 2rem; /* Plus d'espace à l'intérieur des cartes */
+}
+
+/* ========================================================================== */
 
 .card-box {
   position: relative;
@@ -385,7 +406,6 @@ main p {
   overflow: hidden;
 }
 
-/* Ligne supérieure lumineuse sur chaque carte */
 .card-box::before {
   content: '';
   position: absolute;
@@ -461,7 +481,6 @@ main p {
   font-size: 0.95rem;
 }
 
-/* Carte spéciale "En Résumé" mise en valeur */
 .card-highlight {
   background: linear-gradient(
     135deg,
@@ -678,6 +697,7 @@ main p {
     font-size: 0.95rem;
   }
 }
+
 /* ==========================================================================
    10. PAGE MON PARCOURS (Cartes interactives modernes)
    ========================================================================== */
