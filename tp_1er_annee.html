@@ -9,7 +9,6 @@
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
-        /* Styles spécifiques pour intégrer proprement le carrousel Swiper */
         .swiper {
             width: 100%;
             max-width: 800px;
@@ -28,7 +27,8 @@
         .swiper-slide img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; /* Évite de couper les images de schémas/captures */
+            background: #0b0f19;
         }
         .swiper-button-next, .swiper-button-prev {
             color: var(--primary);
@@ -56,35 +56,35 @@
             <!-- Carrousel Swiper.js -->
             <div class="swiper">
                 <div class="swiper-wrapper">
-                    <!-- Slide 1 : Remplace 'images/compétence.jpg' par le nom de tes images de TP -->
+                    <!-- Slide 1 -->
                     <div class="swiper-slide">
-                        <img src="images/1er_anne_IMAGE VOIP.png" alt="TP 1">
+                        <img src="images/1er_anne_IMAGE VOIP.png" alt="TP VOIP 1">
                     </div>
                     <!-- Slide 2 -->
                     <div class="swiper-slide">
-                        <img src="images/1er_annnee_SYNTHESE TP VOIP.png" alt="TP 1">
+                        <img src="images/1er_annnee_SYNTHESE TP VOIP.png" alt="TP VOIP Synthèse">
                     </div>
-                    <!-- Slide 3 (Tu peux en rajouter d'autres de la même manière) -->
+                    <!-- Slide 3 -->
                     <div class="swiper-slide">
-                        <img src="images/1er_année_image tp_asa_dmz.png" alt="TP 1">
+                        <img src="images/1er_année_image tp_asa_dmz.png" alt="TP ASA DMZ">
                     </div>
                     <!-- Slide 4 -->
                     <div class="swiper-slide">
-                        <img src="images/1er_annéee_Fiche_synthèse_ASA_DMZ.png" alt="TP 1">
+                        <img src="images/1er_annéee_Fiche_synthèse_ASA_DMZ.png" alt="TP ASA Synthèse">
                     </div>
                     <!-- Slide 5 -->
                     <div class="swiper-slide">
-                        <img src="images/1er_annee_image_tp_pfsense.jpg" alt="TP 1">
+                        <img src="images/1er_annee_image_tp_pfsense.jpg" alt="TP pfSense">
                     </div>
                     <!-- Slide 6 -->
                     <div class="swiper-slide">
-                        <img src="images/1er_annee-SYNTH7SE_pfsense.png" alt="TP 3">
-                    </div>    
+                        <img src="images/1er_annee-SYNTH7SE_pfsense.png" alt="TP pfSense Synthèse">
+                    </div>
                 </div>
                 <!-- Boutons de navigation -->
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
-                <!-- Pagination (les petits points en bas) -->
+                <!-- Pagination -->
                 <div class="swiper-pagination"></div>
             </div>
 
@@ -106,7 +106,6 @@
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // Initialisation du carrousel Swiper
         const swiper = new Swiper('.swiper', {
             loop: true,
             pagination: {
