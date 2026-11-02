@@ -9,15 +9,44 @@
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
+        html, body {
+            height: 100%;
+            overflow: hidden; /* Empêche tout scroll global de la page */
+        }
+        .main-content {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0.5rem 1rem;
+        }
+        .page-header {
+            margin-bottom: 0.5rem;
+        }
+        .page-title {
+            font-size: 1.8rem;
+            margin-top: 5px;
+        }
+        .hero-subtitle {
+            font-size: 0.85rem;
+            margin-top: 2px;
+        }
         .swiper {
             width: 100%;
-            max-width: 1400px;
-            height: 70vh; /* Grand format en hauteur */
-            border-radius: 16px;
+            max-width: 1300px;
+            height: 52vh; /* Hauteur ajustée pour un affichage 100% sans scroll */
+            border-radius: 14px;
             border: 1px solid rgba(56, 189, 248, 0.3);
             background: rgba(13, 18, 36, 0.85);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            margin: 20px auto;
+            margin: 10px auto;
         }
         .swiper-slide {
             display: flex;
@@ -27,7 +56,7 @@
         .swiper-slide img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Évite de couper les schémas */
+            object-fit: contain;
             background: #0b0f19;
         }
         .swiper-button-next, .swiper-button-prev {
@@ -46,7 +75,7 @@
         <!-- Barre de navigation dynamique -->
         <div id="navbar-container"></div>
 
-        <!-- Contenu Principal en Pleine Largeur -->
+        <!-- Contenu Principal -->
         <main class="container" style="max-width: 95%; width: 100%;">
             <section class="page-header">
                 <h1 class="page-title">TP de 2eme Année</h1>
@@ -74,8 +103,8 @@
             </div>
 
             <!-- Bouton de retour -->
-            <div style="text-align: center; margin-top: 30px;">
-                <a href="tp.html" class="btn-modern" style="padding: 10px 25px; font-size: 0.9rem;">
+            <div style="text-align: center; margin-top: 10px;">
+                <a href="tp.html" class="btn-modern" style="padding: 8px 20px; font-size: 0.85rem;">
                     <i class="fa-solid fa-arrow-left"></i>
                     <span>Retour aux TP</span>
                 </a>
