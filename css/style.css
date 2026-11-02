@@ -368,22 +368,22 @@ main p {
 }
 
 /* ==========================================================================
-   6-BIS. SECTION SPÉCIFIQUE MES TP (Centrée et aérée)
+   6-BIS. SECTION SPÉCIFIQUE MES TP (Largeur réduite et proportionnée)
    ========================================================================== */
 
 .tp-grid {
     width: 100%;
-    max-width: 850px;
+    max-width: 600px; /* Réduit pour éviter que les cartes ne s'étirent trop par rapport au texte */
     display: flex;
     flex-direction: column;
-    gap: 2.5rem; /* Espace vertical important et aéré entre les deux cartes */
+    gap: 1.5rem;
     margin: 30px auto;
-    align-items: center; /* Centre parfaitement les cartes horizontalement */
+    align-items: center;
 }
 
 .tp-grid .card-box {
     width: 100%;
-    padding: 2rem; /* Plus d'espace à l'intérieur des cartes */
+    padding: 1.5rem 2rem;
 }
 
 /* ========================================================================== */
