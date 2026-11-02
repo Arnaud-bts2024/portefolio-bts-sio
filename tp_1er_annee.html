@@ -9,61 +9,92 @@
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
-        html, body {
-            height: 100%;
-            overflow: hidden; /* Empêche tout scroll global de la page */
-        }
-        .main-content {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 0.5rem 1rem;
-        }
-        .page-header {
-            margin-bottom: 0.5rem;
-        }
-        .page-title {
-            font-size: 1.8rem;
-            margin-top: 5px;
-        }
-        .hero-subtitle {
-            font-size: 0.85rem;
-            margin-top: 2px;
-        }
         .swiper {
             width: 100%;
-            max-width: 1300px;
-            height: 52vh; /* Hauteur ajustée pour un affichage 100% sans scroll */
-            border-radius: 14px;
+            max-width: 900px;
+            height: 480px;
+            border-radius: 16px;
             border: 1px solid rgba(56, 189, 248, 0.3);
             background: rgba(13, 18, 36, 0.85);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            margin: 10px auto;
+            margin: 15px auto;
+            position: relative;
         }
         .swiper-slide {
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
         }
         .swiper-slide img {
             width: 100%;
             height: 100%;
             object-fit: contain;
             background: #0b0f19;
+            cursor: pointer;
+        }
+        /* Bouton Zoom superposé sur l'image */
+        .zoom-btn {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(11, 15, 25, 0.85);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        .zoom-btn:hover {
+            background: var(--primary);
+            color: #0b0f19;
+            transform: scale(1.05);
         }
         .swiper-button-next, .swiper-button-prev {
             color: var(--primary);
         }
         .swiper-pagination-bullet-active {
             background: var(--primary);
+        }
+
+        /* Fenêtre Modale pour le Zoom Plein Écran */
+        .modal-zoom {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+            background: rgba(11, 15, 25, 0.95);
+            backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .modal-zoom.active {
+            display: flex;
+        }
+        .modal-zoom img {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 12px;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 40px rgba(0, 210, 255, 0.5);
+        }
+        .modal-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            color: #ffffff;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .modal-close:hover {
+            color: var(--primary);
         }
     </style>
 </head>
@@ -72,11 +103,9 @@
     <div class="background-container"></div>
 
     <div class="main-content">
-        <!-- Barre de navigation dynamique -->
         <div id="navbar-container"></div>
 
-        <!-- Contenu Principal -->
-        <main class="container" style="max-width: 95%; width: 100%;">
+        <main class="container">
             <section class="page-header">
                 <h1 class="page-title">TP de 1ère Année</h1>
                 <p class="hero-subtitle">Galerie de réalisations et captures de mes travaux pratiques</p>
@@ -85,51 +114,53 @@
             <!-- Carrousel Swiper.js -->
             <div class="swiper">
                 <div class="swiper-wrapper">
-                    <!-- Slide 1 -->
                     <div class="swiper-slide">
-                        <img src="images/1er_anne_IMAGE VOIP.png" alt="TP VOIP 1">
+                        <img src="images/1er_anne_IMAGE VOIP.png" alt="TP VOIP 1" onclick="openZoom(this.src)">
+                        <button class="zoom-btn" onclick="openZoom(this.previousElementSibling.src)"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</button>
                     </div>
-                    <!-- Slide 2 -->
                     <div class="swiper-slide">
-                        <img src="images/1er_annnee_SYNTHESE TP VOIP.png" alt="TP VOIP Synthèse">
+                        <img src="images/1er_annnee_SYNTHESE TP VOIP.png" alt="TP VOIP Synthèse" onclick="openZoom(this.src)">
+                        <button class="zoom-btn" onclick="openZoom(this.previousElementSibling.src)"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</button>
                     </div>
-                    <!-- Slide 3 -->
                     <div class="swiper-slide">
-                        <img src="images/1er_année_image tp_asa_dmz.png" alt="TP ASA DMZ">
+                        <img src="images/1er_année_image tp_asa_dmz.png" alt="TP ASA DMZ" onclick="openZoom(this.src)">
+                        <button class="zoom-btn" onclick="openZoom(this.previousElementSibling.src)"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</button>
                     </div>
-                    <!-- Slide 4 -->
                     <div class="swiper-slide">
-                        <img src="images/1er_annéee_Fiche_synthèse_ASA_DMZ.png" alt="TP ASA Synthèse">
+                        <img src="images/1er_annéee_Fiche_synthèse_ASA_DMZ.png" alt="TP ASA Synthèse" onclick="openZoom(this.src)">
+                        <button class="zoom-btn" onclick="openZoom(this.previousElementSibling.src)"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</button>
                     </div>
-                    <!-- Slide 5 -->
                     <div class="swiper-slide">
-                        <img src="images/1er_annee_image_tp_pfsense.jpg" alt="TP pfSense">
+                        <img src="images/1er_annee_image_tp_pfsense.jpg" alt="TP pfSense" onclick="openZoom(this.src)">
+                        <button class="zoom-btn" onclick="openZoom(this.previousElementSibling.src)"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</button>
                     </div>
-                    <!-- Slide 6 -->
                     <div class="swiper-slide">
-                        <img src="images/1er_annee-SYNTH7SE_pfsense.png" alt="TP pfSense Synthèse">
+                        <img src="images/1er_annee-SYNTH7SE_pfsense.png" alt="TP pfSense Synthèse" onclick="openZoom(this.src)">
+                        <button class="zoom-btn" onclick="openZoom(this.previousElementSibling.src)"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</button>
                     </div>
                 </div>
-                <!-- Boutons de navigation -->
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
-                <!-- Pagination -->
                 <div class="swiper-pagination"></div>
             </div>
 
-            <!-- Bouton de retour -->
-            <div style="text-align: center; margin-top: 10px;">
-                <a href="tp.html" class="btn-modern" style="padding: 8px 20px; font-size: 0.85rem;">
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="tp.html" class="btn-modern" style="padding: 10px 25px; font-size: 0.9rem;">
                     <i class="fa-solid fa-arrow-left"></i>
                     <span>Retour aux TP</span>
                 </a>
             </div>
         </main>
 
-        <!-- Footer -->
         <footer class="site-footer">
             <p>&copy; 2026 Arnaud HOLLEBECQUE — Portfolio BTS SIO</p>
         </footer>
+    </div>
+
+    <!-- Modale de Zoom -->
+    <div class="modal-zoom" id="imageModal" onclick="closeZoom()">
+        <span class="modal-close">&times;</span>
+        <img id="modalImg" src="" alt="Zoom image">
     </div>
 
     <!-- Swiper JS -->
@@ -137,15 +168,20 @@
     <script>
         const swiper = new Swiper('.swiper', {
             loop: true,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
+            pagination: { el: '.swiper-pagination', clickable: true },
+            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
         });
+
+        function openZoom(src) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImg');
+            modalImg.src = src;
+            modal.classList.add('active');
+        }
+
+        function closeZoom() {
+            document.getElementById('imageModal').classList.remove('active');
+        }
     </script>
     <script src="js/main.js"></script>
 </body>
