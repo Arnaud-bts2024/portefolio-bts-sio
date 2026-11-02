@@ -1,1 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Certifications - Portfolio BTS SIO</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Bibliothèque PageFlip -->
+    <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+    <style>
+        .reader-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin: 20px auto;
+        }
+        .book-viewport {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            min-height: 70vh;
+        }
+        #book {
+            display: none;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+        .page {
+            background-color: #ffffff;
+            overflow: hidden;
+        }
+        .page img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .reader-controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .btn-page {
+            padding: 10px 20px;
+            background: rgba(13, 22, 48, 0.85);
+            border: 1.5px solid var(--primary);
+            color: var(--text-main);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-page:hover {
+            background: var(--primary);
+            color: #0f172a;
+            box-shadow: 0 0 15px var(--glow-color);
+        }
+        #page-info {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
 
+    <div class="background-container"></div>
+
+    <div class="main-content">
+        <!-- Barre de navigation injectée par main.js -->
+        <div id="navbar-container"></div>
+
+        <main class="container">
+            <header class="page-header">
+                <h1 class="page-title">Mes Certifications</h1>
+                <p class="hero-subtitle">Consultez mes certifications professionnelles</p>
+            </header>
+
+            <section class="reader-section">
+                <div class="book-viewport">
+                    <div id="book">
+                        <!-- Les pages images seront injectées dynamiquement ici -->
+                    </div>
+                </div>
+
+                <div class="reader-controls">
+                    <button class="btn-page" id="prev-btn"><i class="fa-solid fa-arrow-left"></i> Précédent</button>
+                    <span id="page-info">Page 1 sur X</span>
+                    <button class="btn-page" id="next-btn">Suivant <i class="fa-solid fa-arrow-right"></i></button>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <p>&copy; 2026 Arnaud HOLLEBECQUE — Portfolio BTS SIO</p>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const bookElement = document.getElementById('book');
+            
+            // Chemins vers les images de vos certifications converties
+            // (Assurez-vous de ranger vos images dans un dossier "images/certifications/")
+            const pagesImages = [
+                "images/certifications/certif1_page1.jpg",
+                "images/certifications/certif1_page2.jpg",
+                "images/certifications/certif2_page1.jpg",
+                "images/certifications/certif2_page2.jpg"
+                // Ajoutez ou supprimez des lignes selon le nombre réel de pages de vos PDF
+            ];
+
+            // Injection des pages dans le conteneur du livre
+            pagesImages.forEach((imgPath, index) => {
+                const pageDiv = document.createElement('div');
+                pageDiv.className = 'page';
+                pageDiv.innerHTML = `<img src="${imgPath}" alt="Certification Page ${index + 1}" />`;
+                bookElement.appendChild(pageDiv);
+            });
+
+            bookElement.style.display = 'block';
+
+            // Initialisation de la bibliothèque PageFlip
+            const pageFlip = new St.PageFlip(bookElement, {
+                width: 500,
+                height: 700,
+                size: 'stretch',
+                minWidth: 280,
+                maxWidth: 800,
+                minHeight: 400,
+                maxHeight: 1000,
+                maxShadowOpacity: 0.5,
+                showCover: true,
+                mobileScrollSupport: true
+            });
+
+            pageFlip.loadFromHTML(document.querySelectorAll('.page'));
+
+            // Gestion des boutons de navigation
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const pageInfo = document.getElementById('page-info');
+
+            function updatePageInfo() {
+                const current = pageFlip.getCurrentPageIndex() + 1;
+                const total = pageFlip.getPageCount();
+                pageInfo.textContent = `Page ${current} sur ${total}`;
+            }
+
+            pageFlip.on('flip', () => {
+                updatePageInfo();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                pageFlip.flipPrev();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                pageFlip.flipNext();
+            });
+
+            setTimeout(updatePageInfo, 200);
+        });
+    </script>
+</body>
+</html>
