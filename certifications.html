@@ -103,21 +103,22 @@
         document.addEventListener("DOMContentLoaded", () => {
             const bookElement = document.getElementById('book');
             
-            // Chemins vers les images de vos certifications converties
-            // (Assurez-vous de ranger vos images dans un dossier "images/certifications/")
+            // LISTE DE VOS IMAGES :
+            // Mettez ici le chemin exact de vos images (ajoutez une image pour la couverture et une pour la fin si vous en avez)
             const pagesImages = [
+                "images/certifications/couverture.jpg", // 1. Votre page de couverture
                 "images/certifications/certif1_page1.jpg",
                 "images/certifications/certif1_page2.jpg",
                 "images/certifications/certif2_page1.jpg",
-                "images/certifications/certif2_page2.jpg"
-                // Ajoutez ou supprimez des lignes selon le nombre réel de pages de vos PDF
+                "images/certifications/certif2_page2.jpg",
+                "images/certifications/fin.jpg"         // 2. Votre page de fin (optionnel)
             ];
 
-            // Injection des pages dans le conteneur du livre
+            // Injection dynamique des pages dans le livre
             pagesImages.forEach((imgPath, index) => {
                 const pageDiv = document.createElement('div');
                 pageDiv.className = 'page';
-                pageDiv.innerHTML = `<img src="${imgPath}" alt="Certification Page ${index + 1}" />`;
+                pageDiv.innerHTML = `<img src="${imgPath}" alt="Page ${index + 1}" />`;
                 bookElement.appendChild(pageDiv);
             });
 
