@@ -6,6 +6,24 @@
     <title>Mon Projet - Portfolio BTS SIO</title>
     <link rel="stylesheet" href="css/style.css?v=10">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Grille centrée et largeur optimisée pour harmoniser avec les TP */
+        .projet-grid {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 30px auto;
+            align-items: center;
+        }
+        .projet-grid .card-box {
+            width: 100%;
+            padding: 1.5rem 2rem;
+            text-decoration: none;
+            display: block;
+        }
+    </style>
 </head>
 <body>
 
@@ -21,8 +39,8 @@
                 <p class="hero-subtitle">Découvrez mon projet de BTS SIO</p>
             </section>
 
-            <!-- Grille des Projets -->
-            <div class="grid-cards">
+            <!-- Grille des Projets optimisée -->
+            <div class="projet-grid">
                 <div class="card-box">
                     <h2><i class="fa-solid fa-diagram-project"></i> Mon Projet : Nom du projet</h2>
                     <p class="card-subtitle">Technologies : PHP, MySQL, JavaScript</p>
