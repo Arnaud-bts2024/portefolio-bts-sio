@@ -8,59 +8,174 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Bibliothèque PageFlip -->
     <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+
     <style>
+        /* ---------- Page sans scroll : tout tient dans l'écran ---------- */
+        html, body { height: 100%; overflow: hidden; }
+
+        .main-content {
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+        }
+
+        main.container {
+            flex: 1;
+            min-height: 0;
+            padding: 0.4rem 1rem 0.6rem 1rem;
+        }
+
+        .page-header { margin-bottom: 0.2rem; }
+        main h1.page-title { margin-top: 4px; font-size: 1.6rem; }
+        .page-header .hero-subtitle { margin-top: 2px; font-size: 0.85rem; }
+
+        @media (max-height: 700px) {
+            .page-header .hero-subtitle { display: none; }
+        }
+
+        /* ---------- Livre ---------- */
         .reader-section {
+            flex: 1;
+            min-height: 0;
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            width: 100%;
-            margin: 20px auto;
         }
+
         .book-viewport {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            flex: 1;
+            min-height: 0;
             width: 100%;
-            min-height: 70vh;
+            position: relative;
         }
+
         #book {
-            display: none;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            position: absolute;
+            inset: 0;
+            display: block;
         }
+
         .page {
             background-color: #ffffff;
             overflow: hidden;
         }
+
         .page img {
             width: 100%;
             height: 100%;
             object-fit: contain;
+            display: block;
+            pointer-events: none;
+            user-select: none;
         }
+
+        /* ---------- Contrôles ---------- */
         .reader-controls {
-            margin-top: 20px;
+            flex-shrink: 0;
+            margin-top: 10px;
             display: flex;
-            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
             align-items: center;
         }
+
         .btn-page {
-            padding: 10px 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
             background: rgba(13, 22, 48, 0.85);
             border: 1.5px solid var(--primary);
             color: var(--text-main);
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
         }
+
         .btn-page:hover {
             background: var(--primary);
             color: #0f172a;
             box-shadow: 0 0 15px var(--glow-color);
         }
+
         #page-info {
             color: var(--text-muted);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        /* ---------- Loupe (zoom plein écran) ---------- */
+        .zoom-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 10000;
+            background: rgba(5, 8, 18, 0.96);
+            display: none;
+            flex-direction: column;
+        }
+
+        .zoom-overlay.open { display: flex; }
+
+        .zoom-toolbar {
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .zoom-toolbar .btn-page { padding: 8px 14px; }
+
+        #zoom-level {
+            color: var(--text-muted);
+            min-width: 55px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .zoom-stage {
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: grab;
+            touch-action: none;
+        }
+
+        .zoom-stage.dragging { cursor: grabbing; }
+
+        .zoom-content {
+            display: flex;
+            transform-origin: center center;
+            will-change: transform;
+            user-select: none;
+        }
+
+        .zoom-content img {
+            display: block;
+            height: calc(100vh - 80px);
+            height: calc(100dvh - 80px);
+            width: auto;
+            max-width: 48vw;
+            object-fit: contain;
+            background: #ffffff;
+            pointer-events: none;
+            -webkit-user-drag: none;
+        }
+
+        .zoom-content.single img { max-width: 92vw; }
+
+        @media (max-width: 768px) {
+            .btn-page { padding: 8px 12px; font-size: 0.85rem; }
+            .zoom-content img { max-width: 92vw; }
         }
     </style>
 </head>
@@ -75,20 +190,19 @@
         <main class="container">
             <header class="page-header">
                 <h1 class="page-title">Mes Certifications</h1>
-                <p class="hero-subtitle">Consultez mes certifications professionnelles</p>
+                <p class="hero-subtitle">Feuilletez le livre — double-clic ou bouton « Loupe » pour zoomer</p>
             </header>
 
             <section class="reader-section">
                 <div class="book-viewport">
-                    <div id="book">
-                        <!-- Les pages images seront injectées dynamiquement ici -->
-                    </div>
+                    <div id="book"></div>
                 </div>
 
                 <div class="reader-controls">
                     <button class="btn-page" id="prev-btn"><i class="fa-solid fa-arrow-left"></i> Précédent</button>
                     <span id="page-info">Page 1 sur X</span>
                     <button class="btn-page" id="next-btn">Suivant <i class="fa-solid fa-arrow-right"></i></button>
+                    <button class="btn-page" id="zoom-btn"><i class="fa-solid fa-magnifying-glass-plus"></i> Loupe</button>
                 </div>
             </section>
         </main>
@@ -98,73 +212,104 @@
         </footer>
     </div>
 
+    <!-- Loupe : affichage agrandi des pages visibles -->
+    <div class="zoom-overlay" id="zoom-overlay">
+        <div class="zoom-toolbar">
+            <button class="btn-page" id="zoom-out" title="Dézoomer"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
+            <span id="zoom-level">100%</span>
+            <button class="btn-page" id="zoom-in" title="Zoomer"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+            <button class="btn-page" id="zoom-reset" title="Réinitialiser"><i class="fa-solid fa-expand"></i></button>
+            <button class="btn-page" id="zoom-close" title="Fermer (Échap)"><i class="fa-solid fa-xmark"></i> Fermer</button>
+        </div>
+        <div class="zoom-stage" id="zoom-stage">
+            <div class="zoom-content" id="zoom-content"></div>
+        </div>
+    </div>
+
     <script src="js/main.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const bookElement = document.getElementById('book');
-            
-            // LISTE DE VOS IMAGES :
-            // Mettez ici le chemin exact de vos images (ajoutez une image pour la couverture et une pour la fin si vous en avez)
-            const pagesImages = [
-                "images/certifications/couverture.jpg", // 1. Votre page de couverture
-                "images/certifications/certif1_page1.jpg",
-                "images/certifications/certif1_page2.jpg",
-                "images/certifications/certif2_page1.jpg",
-                "images/certifications/certif2_page2.jpg",
-                "images/certifications/fin.jpg"         // 2. Votre page de fin (optionnel)
+
+            /* ==================== CONFIGURATION ==================== */
+
+            // Dossier des images
+            const base = "images/certifications/";
+
+            // Ordre des pages (la 1ère = couverture seule, la dernière = fin seule)
+            const files = [
+                "page de présentation (1).png",          // couverture
+                "page blanche.png",                      // gauche
+                "certification cisco.png",               // droite
+                "page blanche_2.png",                    // gauche
+                "certification ccna.png",                // droite
+                "page blanche_3.png",                    // gauche
+                "certification pix numesecur rgpd.png",  // droite
+                "page de fin (1).png"                    // fin
             ];
 
-            // Injection dynamique des pages dans le livre
-            pagesImages.forEach((imgPath, index) => {
-                const pageDiv = document.createElement('div');
-                pageDiv.className = 'page';
-                pageDiv.innerHTML = `<img src="${imgPath}" alt="Page ${index + 1}" />`;
+            // Format d'UNE page (ratio de vos images). Exemples :
+            // portrait A4 : 500 x 707 | paysage 16:9 : 640 x 360
+            const PAGE_WIDTH = 500;
+            const PAGE_HEIGHT = 700;
+
+            /* ======================================================= */
+
+            const pages = files.map(f => base + encodeURI(f));
+            const bookElement = document.getElementById("book");
+
+            // Création des pages
+            pages.forEach((src, index) => {
+                const pageDiv = document.createElement("div");
+                pageDiv.className = "page";
+                // Couverture et dernière page rigides
+                if (index === 0 || index === pages.length - 1) {
+                    pageDiv.setAttribute("data-density", "hard");
+                }
+                pageDiv.innerHTML = `<img src="${src}" alt="${files[index]}">`;
                 bookElement.appendChild(pageDiv);
             });
 
-            bookElement.style.display = 'block';
-
-            // Initialisation de la bibliothèque PageFlip
+            // Initialisation de PageFlip (le livre s'adapte à l'espace disponible)
             const pageFlip = new St.PageFlip(bookElement, {
-                width: 500,
-                height: 700,
-                size: 'stretch',
-                minWidth: 280,
-                maxWidth: 800,
-                minHeight: 400,
-                maxHeight: 1000,
+                width: PAGE_WIDTH,
+                height: PAGE_HEIGHT,
+                size: "stretch",
+                minWidth: 200,
+                maxWidth: 2400,
+                minHeight: 280,
+                maxHeight: 3200,
                 maxShadowOpacity: 0.5,
                 showCover: true,
-                mobileScrollSupport: true
+                mobileScrollSupport: false
             });
 
-            pageFlip.loadFromHTML(document.querySelectorAll('.page'));
+            pageFlip.loadFromHTML(document.querySelectorAll(".page"));
 
-            // Gestion des boutons de navigation
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
-            const pageInfo = document.getElementById('page-info');
+            /* ---------- Navigation ---------- */
 
-            function updatePageInfo() {
-                const current = pageFlip.getCurrentPageIndex() + 1;
+            const prevBtn = document.getElementById("prev-btn");
+            const nextBtn = document.getElementById("next-btn");
+            const pageInfo = document.getElementById("page-info");
+
+            // Retourne les index des pages actuellement visibles
+            function getSpread() {
                 const total = pageFlip.getPageCount();
-                pageInfo.textContent = `Page ${current} sur ${total}`;
+                const idx = pageFlip.getCurrentPageIndex();
+                if (pageFlip.getOrientation() === "portrait") return [idx];
+                if (idx === 0) return [0];
+                const left = idx % 2 === 1 ? idx : idx - 1;
+                return left + 1 < total ? [left, left + 1] : [left];
             }
 
-            pageFlip.on('flip', () => {
-                updatePageInfo();
-            });
+            function updatePageInfo() {
+                const total = pageFlip.getPageCount();
+                const spread = getSpread();
+                pageInfo.textContent = spread.length === 2
+                    ? `Pages ${spread[0] + 1}-${spread[1] + 1} sur ${total}`
+                    : `Page ${spread[0] + 1} sur ${total}`;
+            }
 
-            prevBtn.addEventListener('click', () => {
-                pageFlip.flipPrev();
-            });
+            pageFlip.on("flip", updatePageInfo);
+            pageFlip.on("changeOrientation", updatePageInfo);
 
-            nextBtn.addEventListener('click', () => {
-                pageFlip.flipNext();
-            });
-
-            setTimeout(updatePageInfo, 200);
-        });
-    </script>
-</body>
-</html>
+            prevBtn.addEventListener("click", () => pageFlip.flipPrev());
