@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
 
     <style>
-        /* ---------- Page sans scroll : tout tient dans l'écran ---------- */
+        /* ---------- Page sans scroll ---------- */
         html, body { height: 100%; overflow: hidden; }
 
         .main-content {
@@ -35,26 +35,21 @@
 
         /* ---------- Livre ---------- */
         .reader-section {
-            flex: 1;
-            min-height: 0;
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
+        /* La hauteur est fixée en pixels par le JavaScript */
         .book-viewport {
-            flex: 1;
-            min-height: 0;
             width: 100%;
+            height: 450px;
             position: relative;
+            flex: none;
         }
 
-        #book {
-            position: absolute;
-            inset: 0;
-            display: block;
-        }
+        #book { width: 100%; height: 100%; }
 
         .page {
             background-color: #ffffff;
@@ -68,6 +63,19 @@
             display: block;
             pointer-events: none;
             user-select: none;
+        }
+
+        #error-box {
+            display: none;
+            max-width: 700px;
+            margin: 20px auto;
+            padding: 14px 18px;
+            background: rgba(120, 20, 20, 0.85);
+            border: 1.5px solid #ff6b6b;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 0.9rem;
+            text-align: left;
         }
 
         /* ---------- Contrôles ---------- */
@@ -109,7 +117,7 @@
             text-align: center;
         }
 
-        /* ---------- Loupe (zoom plein écran) ---------- */
+        /* ---------- Loupe ---------- */
         .zoom-overlay {
             position: fixed;
             inset: 0;
@@ -184,7 +192,6 @@
     <div class="background-container"></div>
 
     <div class="main-content">
-        <!-- Barre de navigation injectée par main.js -->
         <div id="navbar-container"></div>
 
         <main class="container">
@@ -193,12 +200,14 @@
                 <p class="hero-subtitle">Feuilletez le livre — double-clic ou bouton « Loupe » pour zoomer</p>
             </header>
 
-            <section class="reader-section">
-                <div class="book-viewport">
+            <section class="reader-section" id="reader-section">
+                <div class="book-viewport" id="book-viewport">
                     <div id="book"></div>
                 </div>
 
-                <div class="reader-controls">
+                <div id="error-box"></div>
+
+                <div class="reader-controls" id="reader-controls">
                     <button class="btn-page" id="prev-btn"><i class="fa-solid fa-arrow-left"></i> Précédent</button>
                     <span id="page-info">Page 1 sur X</span>
                     <button class="btn-page" id="next-btn">Suivant <i class="fa-solid fa-arrow-right"></i></button>
@@ -212,7 +221,7 @@
         </footer>
     </div>
 
-    <!-- Loupe : affichage agrandi des pages visibles -->
+    <!-- Loupe -->
     <div class="zoom-overlay" id="zoom-overlay">
         <div class="zoom-toolbar">
             <button class="btn-page" id="zoom-out" title="Dézoomer"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
@@ -228,88 +237,230 @@
 
     <script src="js/main.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
+        window.addEventListener("load", () => {
 
-            /* ==================== CONFIGURATION ==================== */
+            const errorBox = document.getElementById("error-box");
+            function showError(msg) {
+                errorBox.style.display = "block";
+                errorBox.innerHTML = "<strong>Erreur :</strong> " + msg;
+            }
 
-            // Dossier des images
-            const base = "images/certifications/";
+            try {
+                /* ==================== CONFIGURATION ==================== */
 
-            // Ordre des pages (la 1ère = couverture seule, la dernière = fin seule)
-            const files = [
-                "page de présentation (1).png",          // couverture
-                "page blanche.png",                      // gauche
-                "certification cisco.png",               // droite
-                "page blanche_2.png",                    // gauche
-                "certification ccna.png",                // droite
-                "page blanche_3.png",                    // gauche
-                "certification pix numesecur rgpd.png",  // droite
-                "page de fin (1).png"                    // fin
-            ];
+                const base = "images/certifications/";
 
-            // Format d'UNE page (ratio de vos images). Exemples :
-            // portrait A4 : 500 x 707 | paysage 16:9 : 640 x 360
-            const PAGE_WIDTH = 500;
-            const PAGE_HEIGHT = 700;
+                const files = [
+                    "page de présentation (1).png",          // couverture
+                    "page blanche.png",                      // gauche
+                    "certification cisco.png",               // droite
+                    "page blanche_2.png",                    // gauche
+                    "certification ccna.png",                // droite
+                    "page blanche_3.png",                    // gauche
+                    "certification pix numesecur rgpd.png",  // droite
+                    "page de fin (1).png"                    // fin
+                ];
 
-            /* ======================================================= */
+                // Format d'UNE page (ratio de vos images)
+                const PAGE_WIDTH = 500;
+                const PAGE_HEIGHT = 700;
 
-            const pages = files.map(f => base + encodeURI(f));
-            const bookElement = document.getElementById("book");
+                /* ======================================================= */
 
-            // Création des pages
-            pages.forEach((src, index) => {
-                const pageDiv = document.createElement("div");
-                pageDiv.className = "page";
-                // Couverture et dernière page rigides
-                if (index === 0 || index === pages.length - 1) {
-                    pageDiv.setAttribute("data-density", "hard");
+                if (typeof St === "undefined") {
+                    showError("la bibliothèque PageFlip n'a pas pu être chargée (connexion ou bloqueur de publicité ?). Rechargez la page avec Ctrl+F5.");
+                    return;
                 }
-                pageDiv.innerHTML = `<img src="${src}" alt="${files[index]}">`;
-                bookElement.appendChild(pageDiv);
-            });
 
-            // Initialisation de PageFlip (le livre s'adapte à l'espace disponible)
-            const pageFlip = new St.PageFlip(bookElement, {
-                width: PAGE_WIDTH,
-                height: PAGE_HEIGHT,
-                size: "stretch",
-                minWidth: 200,
-                maxWidth: 2400,
-                minHeight: 280,
-                maxHeight: 3200,
-                maxShadowOpacity: 0.5,
-                showCover: true,
-                mobileScrollSupport: false
-            });
+                const pages = files.map(f => base + encodeURI(f));
+                const bookElement = document.getElementById("book");
+                const viewport = document.getElementById("book-viewport");
+                const controls = document.getElementById("reader-controls");
+                const footer = document.querySelector(".site-footer");
 
-            pageFlip.loadFromHTML(document.querySelectorAll(".page"));
+                /* ---------- Hauteur disponible, en pixels ---------- */
+                function fitViewport() {
+                    const top = viewport.getBoundingClientRect().top;
+                    const h = window.innerHeight - top - controls.offsetHeight - footer.offsetHeight - 30;
+                    viewport.style.height = Math.max(250, h) + "px";
+                }
+                fitViewport();
 
-            /* ---------- Navigation ---------- */
+                /* ---------- Création des pages ---------- */
+                pages.forEach((src, index) => {
+                    const pageDiv = document.createElement("div");
+                    pageDiv.className = "page";
+                    if (index === 0 || index === pages.length - 1) {
+                        pageDiv.setAttribute("data-density", "hard");
+                    }
+                    const img = document.createElement("img");
+                    img.src = src;
+                    img.alt = files[index];
+                    img.onerror = () => console.error("Image introuvable : " + src);
+                    pageDiv.appendChild(img);
+                    bookElement.appendChild(pageDiv);
+                });
 
-            const prevBtn = document.getElementById("prev-btn");
-            const nextBtn = document.getElementById("next-btn");
-            const pageInfo = document.getElementById("page-info");
+                /* ---------- PageFlip ---------- */
+                const pageFlip = new St.PageFlip(bookElement, {
+                    width: PAGE_WIDTH,
+                    height: PAGE_HEIGHT,
+                    size: "stretch",
+                    minWidth: 200,
+                    maxWidth: 2400,
+                    minHeight: 280,
+                    maxHeight: 3200,
+                    maxShadowOpacity: 0.5,
+                    showCover: true,
+                    mobileScrollSupport: false
+                });
 
-            // Retourne les index des pages actuellement visibles
-            function getSpread() {
-                const total = pageFlip.getPageCount();
-                const idx = pageFlip.getCurrentPageIndex();
-                if (pageFlip.getOrientation() === "portrait") return [idx];
-                if (idx === 0) return [0];
-                const left = idx % 2 === 1 ? idx : idx - 1;
-                return left + 1 < total ? [left, left + 1] : [left];
+                pageFlip.loadFromHTML(document.querySelectorAll(".page"));
+
+                window.addEventListener("resize", () => {
+                    fitViewport();
+                    try { pageFlip.update(); } catch (e) {}
+                });
+
+                /* ---------- Navigation ---------- */
+                const prevBtn = document.getElementById("prev-btn");
+                const nextBtn = document.getElementById("next-btn");
+                const pageInfo = document.getElementById("page-info");
+
+                function getSpread() {
+                    const total = pageFlip.getPageCount();
+                    const idx = pageFlip.getCurrentPageIndex();
+                    if (pageFlip.getOrientation() === "portrait") return [idx];
+                    if (idx === 0) return [0];
+                    const left = idx % 2 === 1 ? idx : idx - 1;
+                    return left + 1 < total ? [left, left + 1] : [left];
+                }
+
+                function updatePageInfo() {
+                    const total = pageFlip.getPageCount();
+                    const spread = getSpread();
+                    pageInfo.textContent = spread.length === 2
+                        ? `Pages ${spread[0] + 1}-${spread[1] + 1} sur ${total}`
+                        : `Page ${spread[0] + 1} sur ${total}`;
+                }
+
+                pageFlip.on("flip", updatePageInfo);
+                pageFlip.on("changeOrientation", updatePageInfo);
+
+                prevBtn.addEventListener("click", () => pageFlip.flipPrev());
+                nextBtn.addEventListener("click", () => pageFlip.flipNext());
+
+                updatePageInfo();
+                setTimeout(updatePageInfo, 300);
+
+                /* ---------- Loupe ---------- */
+                const overlay = document.getElementById("zoom-overlay");
+                const stage = document.getElementById("zoom-stage");
+                const content = document.getElementById("zoom-content");
+                const levelLabel = document.getElementById("zoom-level");
+
+                const MIN_SCALE = 1;
+                const MAX_SCALE = 6;
+                let scale = 1, tx = 0, ty = 0;
+
+                function applyTransform() {
+                    content.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+                    levelLabel.textContent = Math.round(scale * 100) + "%";
+                }
+
+                function resetZoom() {
+                    scale = 1; tx = 0; ty = 0;
+                    applyTransform();
+                }
+
+                function zoomAt(newScale, mx, my) {
+                    newScale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, newScale));
+                    const r = stage.getBoundingClientRect();
+                    const px = mx - (r.left + r.width / 2);
+                    const py = my - (r.top + r.height / 2);
+                    tx = px - (px - tx) * (newScale / scale);
+                    ty = py - (py - ty) * (newScale / scale);
+                    scale = newScale;
+                    if (scale === 1) { tx = 0; ty = 0; }
+                    applyTransform();
+                }
+
+                function zoomCenter(factor) {
+                    const r = stage.getBoundingClientRect();
+                    zoomAt(scale * factor, r.left + r.width / 2, r.top + r.height / 2);
+                }
+
+                function openZoom() {
+                    const spread = getSpread();
+                    content.innerHTML = spread
+                        .map(i => `<img src="${pages[i]}" alt="${files[i]}">`)
+                        .join("");
+                    content.classList.toggle("single", spread.length === 1);
+                    resetZoom();
+                    overlay.classList.add("open");
+                }
+
+                function closeZoom() { overlay.classList.remove("open"); }
+
+                document.getElementById("zoom-btn").addEventListener("click", openZoom);
+                document.getElementById("zoom-close").addEventListener("click", closeZoom);
+                document.getElementById("zoom-in").addEventListener("click", () => zoomCenter(1.3));
+                document.getElementById("zoom-out").addEventListener("click", () => zoomCenter(1 / 1.3));
+                document.getElementById("zoom-reset").addEventListener("click", resetZoom);
+
+                viewport.addEventListener("dblclick", openZoom);
+
+                stage.addEventListener("wheel", (e) => {
+                    e.preventDefault();
+                    zoomAt(scale * (e.deltaY < 0 ? 1.15 : 1 / 1.15), e.clientX, e.clientY);
+                }, { passive: false });
+
+                stage.addEventListener("dblclick", (e) => {
+                    if (scale > 1) resetZoom();
+                    else zoomAt(2.5, e.clientX, e.clientY);
+                });
+
+                let dragging = false, lastX = 0, lastY = 0;
+
+                stage.addEventListener("pointerdown", (e) => {
+                    dragging = true;
+                    lastX = e.clientX;
+                    lastY = e.clientY;
+                    stage.classList.add("dragging");
+                    stage.setPointerCapture(e.pointerId);
+                });
+
+                stage.addEventListener("pointermove", (e) => {
+                    if (!dragging || scale === 1) return;
+                    tx += e.clientX - lastX;
+                    ty += e.clientY - lastY;
+                    lastX = e.clientX;
+                    lastY = e.clientY;
+                    applyTransform();
+                });
+
+                const stopDrag = () => {
+                    dragging = false;
+                    stage.classList.remove("dragging");
+                };
+                stage.addEventListener("pointerup", stopDrag);
+                stage.addEventListener("pointercancel", stopDrag);
+
+                /* ---------- Clavier ---------- */
+                document.addEventListener("keydown", (e) => {
+                    const zoomOpen = overlay.classList.contains("open");
+                    if (e.key === "Escape" && zoomOpen) closeZoom();
+                    else if (zoomOpen && (e.key === "+" || e.key === "=")) zoomCenter(1.3);
+                    else if (zoomOpen && e.key === "-") zoomCenter(1 / 1.3);
+                    else if (!zoomOpen && e.key === "ArrowLeft") pageFlip.flipPrev();
+                    else if (!zoomOpen && e.key === "ArrowRight") pageFlip.flipNext();
+                });
+
+            } catch (err) {
+                console.error(err);
+                showError(err.message + " (ouvrez la console avec F12 pour plus de détails)");
             }
-
-            function updatePageInfo() {
-                const total = pageFlip.getPageCount();
-                const spread = getSpread();
-                pageInfo.textContent = spread.length === 2
-                    ? `Pages ${spread[0] + 1}-${spread[1] + 1} sur ${total}`
-                    : `Page ${spread[0] + 1} sur ${total}`;
-            }
-
-            pageFlip.on("flip", updatePageInfo);
-            pageFlip.on("changeOrientation", updatePageInfo);
-
-            prevBtn.addEventListener("click", () => pageFlip.flipPrev());
+        });
+    </script>
+</body>
+</html>
