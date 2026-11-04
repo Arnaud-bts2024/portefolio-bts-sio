@@ -1,0 +1,301 @@
+/* ==========================================================================
+   PAGES : styles propres à chaque page
+   Accueil, Veille, BTS SIO, Mes TP, Contact, Mon parcours
+   ========================================================================== */
+
+/* --- Accueil (hero) --- */
+
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  min-height: calc(100vh - 160px);
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.hero-top {
+  margin-bottom: 0.5rem;
+}
+
+.hero-title-top {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--text-main);
+  text-shadow: 0 0 20px rgba(0, 162, 255, 0.6);
+}
+
+.hero-center {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  max-width: 800px;
+}
+
+.hero-name {
+  font-size: 3.2rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--text-main);
+  text-shadow: 0 0 25px rgba(56, 189, 248, 0.6);
+}
+
+/* complète la règle « .hero-subtitle, main p » de base.css */
+.hero-subtitle {
+  font-size: 1.1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+.hero-bottom {
+  margin-top: 1rem;
+}
+
+/* --- Veille technologique --- */
+
+.veille-section {
+  width: 100%;
+  max-width: 900px;
+  margin: 35px auto;
+  padding: 0 15px;
+}
+
+.veille-title {
+  margin-bottom: 25px;
+  font-size: 1.35rem;
+  color: var(--text-main);
+  text-align: center;
+}
+
+.lightning-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.lightning-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px;
+  font-size: 1rem;
+  text-decoration: none;
+  border: 1.5px solid var(--primary-hover);
+  border-radius: 12px;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 102, 255, 0.9) 0%,
+    rgba(0, 210, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0.95) 100%
+  );
+  box-shadow: 0 0 15px var(--glow-color);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lightning-item span {
+  flex: 1;
+  margin-left: 15px;
+  font-weight: 700;
+  color: #0f172a;
+  text-align: left;
+}
+
+.lightning-item i {
+  font-size: 1.2rem;
+  color: var(--text-main);
+}
+
+.lightning-item .arrow-icon {
+  color: #0f172a;
+}
+
+.lightning-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 25px rgba(0, 210, 255, 0.8);
+}
+
+/* --- Page BTS SIO : grille de cartes --- */
+
+.grid-cards {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+  gap: 1.4rem;
+  margin: 15px 0 1.5rem;
+}
+
+/* --- Page Mes TP : colonne de cartes de largeur réduite --- */
+
+.tp-grid {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 30px auto;
+}
+
+.tp-grid .card-box {
+  width: 100%;
+  padding: 1.5rem 2rem;
+}
+
+/* --- Page Contact --- */
+
+.contact-form-section {
+  width: 100%;
+  max-width: 650px;
+  margin: 25px auto 10px;
+  padding: 25px;
+  background: linear-gradient(180deg, rgba(13, 22, 48, 0.75) 0%, rgba(8, 12, 24, 0.85) 100%);
+  border: 1px solid rgba(0, 210, 255, 0.4);
+  border-radius: 20px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 210, 255, 0.15);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.contact-form label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 11px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--text-main);
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(0, 210, 255, 0.3);
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #64748b;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  background: rgba(15, 23, 42, 0.95);
+  border-color: var(--primary-hover);
+  box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
+}
+
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5px;
+}
+
+.booking-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 25px 0 30px;
+}
+
+/* --- Page Mon parcours --- */
+
+.parcours-grid {
+  width: 100%;
+  max-width: 850px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 15px auto 30px;
+}
+
+.parcours-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  text-decoration: none;
+  background: var(--card-bg);
+  border: 1.5px solid var(--border-accent);
+  border-radius: 14px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.parcours-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 50px;
+  padding: 12px;
+  font-size: 1.5rem;
+  color: var(--primary);
+  background: rgba(56, 189, 248, 0.1);
+  border-radius: 10px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.parcours-info {
+  flex: 1;
+  margin-left: 20px;
+  text-align: left;
+}
+
+.parcours-info h2 {
+  margin-bottom: 3px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.parcours-info p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  text-align: left;
+}
+
+.arrow-indicator {
+  font-size: 1.1rem;
+  color: var(--primary);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.parcours-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  background: rgba(18, 26, 52, 0.95);
+  border-color: var(--primary-hover);
+  box-shadow: 0 10px 30px rgba(0, 210, 255, 0.3);
+}
+
+.parcours-card:hover .parcours-icon {
+  background: var(--primary);
+  color: #0f172a;
+}
+
+.parcours-card:hover .arrow-indicator {
+  transform: translateX(6px);
+  color: var(--primary-hover);
+}
