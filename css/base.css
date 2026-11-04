@@ -1,0 +1,70 @@
+/* ==========================================================================
+   BASE : variables, reset, fond d'écran, typographie
+   À charger en premier (les autres fichiers utilisent ces variables)
+   ========================================================================== */
+
+:root {
+  --bg-dark: #0b0f19;
+  --card-bg: rgba(13, 18, 36, 0.85);
+  --primary: #38bdf8;
+  --primary-hover: #00d2ff;
+  --text-main: #ffffff;
+  --text-soft: #e2e8f0;
+  --text-muted: #94a3b8;
+  --border-light: rgba(255, 255, 255, 0.1);
+  --border-accent: rgba(56, 189, 248, 0.3);
+  --glow-color: rgba(0, 210, 255, 0.5);
+  --ease-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100vh;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: url('../images/fond-ecran.jpg') center / cover no-repeat fixed;
+}
+
+.background-container {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: url('../images/fond-ecran.jpg') center / cover no-repeat fixed;
+}
+
+/* --- Titres et textes --- */
+
+.page-header {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.page-title,
+main h1 {
+  margin-top: 15px;
+  font-size: 2.2rem;
+  color: var(--text-main);
+  text-align: center;
+  text-shadow: 0 0 15px rgba(0, 162, 255, 0.5);
+}
+
+.hero-subtitle,
+main p {
+  margin-top: 5px;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  text-align: center;
+}
