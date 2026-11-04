@@ -27,7 +27,7 @@ function initNavbar() {
                                 <li><a href="tp.html">Mes TP</a></li>
                                 <li><a href="certifications.html">Mes Certifications</a></li>
                                 <li><a href="stages.html">Mes Stages</a></li>
-                                <li><a href="documents/tableau-de-synthese.pdf" target="_blank">Tableau de Synthèse</a></li>
+                                <li><a href="images/tbl_de_synthèse/tableau.png" target="_blank">Tableau de Synthèse</a></li>
                             </ul>
                         </li>
                         <li><a href="projets.html">Projets</a></li>
