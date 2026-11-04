@@ -1,0 +1,22 @@
+/* ==========================================================================
+   RESPONSIVE : adaptations tablette et mobile
+   À charger en dernier (avant projet.css si besoin)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .main-nav > ul {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .btn-rdv {
+    width: 100%;
+    max-width: 350px;
+    padding: 12px 20px;
+    font-size: 0.95rem;
+  }
+}
