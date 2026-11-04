@@ -1,0 +1,263 @@
+/* ==========================================================================
+   COMPOSANTS : logo EPNAK, boutons, cartes
+   ========================================================================== */
+
+/* --- Logo EPNAK --- */
+
+.epnak-container {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0 5px;
+}
+
+.epnak-logo-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 22px;
+  background: rgba(13, 22, 48, 0.85);
+  border: 1.5px solid var(--primary);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.3s var(--ease-bounce), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.epnak-logo-img {
+  display: block;
+  max-height: 38px;
+  width: auto;
+  object-fit: contain;
+}
+
+.epnak-logo-link:hover {
+  transform: translateY(-4px) scale(1.04);
+  border-color: var(--primary-hover);
+  box-shadow: 0 0 25px rgba(0, 210, 255, 0.7);
+}
+
+.epnak-logo-link:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* --- Boutons : base commune --- */
+
+.btn-modern,
+.btn-rdv,
+.btn-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--text-main);
+  text-decoration: none;
+  border-radius: 50px;
+}
+
+/* Bouton d'accueil */
+
+.btn-modern {
+  gap: 12px;
+  padding: 16px 36px;
+  font-size: 1.05rem;
+  color: var(--text-main) !important;
+  background: rgba(13, 22, 48, 0.85);
+  border: 1.5px solid var(--primary-hover);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+  transition: all 0.35s var(--ease-bounce);
+}
+
+.btn-modern i {
+  font-size: 1.1rem;
+  transition: transform 0.3s ease;
+}
+
+.btn-modern:hover {
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  border-color: transparent;
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 0 35px rgba(0, 210, 255, 0.8), 0 10px 25px rgba(0, 114, 255, 0.5);
+}
+
+.btn-modern:hover i {
+  transform: translateX(6px);
+}
+
+/* Bouton rendez-vous */
+
+.btn-rdv {
+  gap: 12px;
+  padding: 14px 35px;
+  font-size: 1rem;
+  background: rgba(15, 23, 42, 0.8);
+  border: 2px solid var(--primary-hover);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+  transition: all 0.4s ease;
+}
+
+.btn-rdv i {
+  font-size: 1.1rem;
+  color: var(--primary-hover);
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.btn-rdv:hover {
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  border-color: transparent;
+  transform: translateY(-3px);
+  box-shadow: 0 0 30px rgba(0, 210, 255, 0.8), 0 8px 20px rgba(0, 114, 255, 0.5);
+}
+
+.btn-rdv:hover i {
+  color: var(--text-main);
+  transform: scale(1.15) rotate(-10deg);
+}
+
+.btn-rdv:active {
+  transform: translateY(-1px);
+}
+
+/* Bouton d'envoi (dégradé animé) */
+
+.btn-submit {
+  position: relative;
+  gap: 10px;
+  padding: 12px 28px;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  background: linear-gradient(270deg, #ff007f, #7f00ff, #00d2ff, #00ff87, #ff007f);
+  background-size: 400% 400%;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(0, 210, 255, 0.5);
+  animation: rainbowAnimation 6s ease infinite;
+  transition: transform 0.4s var(--ease-bounce), box-shadow 0.4s ease;
+}
+
+@keyframes rainbowAnimation {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.btn-submit i {
+  font-size: 1rem;
+  transition: transform 0.4s var(--ease-bounce);
+}
+
+.btn-submit:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 0 35px rgba(255, 0, 127, 0.8), 0 0 20px rgba(0, 210, 255, 0.9);
+}
+
+.btn-submit:hover i {
+  transform: translateX(6px) translateY(-2px) rotate(15deg);
+}
+
+.btn-submit:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* --- Cartes générales --- */
+
+.card-box {
+  position: relative;
+  padding: 1.25rem 1.4rem;
+  color: var(--text-main);
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.75) 0%, rgba(11, 15, 25, 0.85) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  transition: all 0.35s var(--ease-bounce);
+}
+
+.card-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.card-box:hover {
+  transform: translateY(-6px) scale(1.015);
+  border-color: rgba(0, 210, 255, 0.6);
+  box-shadow: 0 15px 35px rgba(0, 210, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.card-box:hover::before {
+  opacity: 1;
+  background: linear-gradient(90deg, #00d2ff, #38bdf8, #00ff87);
+}
+
+.card-box h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.65rem;
+  padding-bottom: 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: var(--primary-hover);
+  border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+}
+
+.card-subtitle {
+  margin-bottom: 0.5rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.card-box p {
+  margin-top: 0;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--text-soft);
+  text-align: left;
+}
+
+.card-box ul {
+  list-style-type: none;
+}
+
+.card-box ul li {
+  position: relative;
+  padding-left: 1.3rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--text-soft);
+  text-align: left;
+}
+
+.card-box ul li::before {
+  content: "▹";
+  position: absolute;
+  left: 0;
+  font-size: 0.95rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.card-highlight {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.2) 0%, rgba(13, 22, 48, 0.9) 100%);
+  border: 1.5px solid rgba(0, 210, 255, 0.5);
+}
+
+.card-highlight::before {
+  background: linear-gradient(90deg, #ff007f, #00d2ff);
+  opacity: 1;
+}
