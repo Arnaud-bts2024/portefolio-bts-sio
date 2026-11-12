@@ -1,6 +1,6 @@
 /* ==========================================================================
-   PAGE STAGE — css/stages.css
-   Reprend les variables de ton thème (--primary, --primary-hover, --bg-dark…)
+   PAGES STAGES — css/stages.css
+   Style « verre » : fond semi-transparent + flou, comme tes cartes du site
    ========================================================================== */
 
 /* ----- Barre de défilement aux couleurs du thème ----- */
@@ -18,10 +18,25 @@ html {
 }
 ::-webkit-scrollbar-thumb:hover { background: var(--primary-hover, #00d2ff); }
 
+/* ----- Page « Mes Stages » : gros boutons plus transparents ----- */
+.stage-hub .parcours-card {
+  background: linear-gradient(135deg, rgba(15, 23, 42, .5) 0%, rgba(11, 15, 25, .6) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.stage-hub .parcours-card:hover {
+  background: linear-gradient(135deg, rgba(20, 40, 80, .6) 0%, rgba(11, 25, 50, .7) 100%);
+}
+
 /* ----- Mise en page ----- */
 .stage-content { max-width: 960px; align-items: stretch; }
 .stage-content p { text-align: left; }
 .stage-content .page-header p { text-align: center; }
+
+/* Cartes plus transparentes sur la page de stage */
+.stage-content .card-box {
+  background: linear-gradient(135deg, rgba(15, 23, 42, .5) 0%, rgba(11, 15, 25, .6) 100%);
+}
 
 .back-link {
   align-self: flex-start;
@@ -89,23 +104,40 @@ html {
   display: grid; place-items: center;
   font-size: 1.2rem;
   color: var(--primary, #38bdf8);
-  background: rgba(56, 189, 248, .1);
+  background: rgba(56, 189, 248, .12);
   border-radius: 10px;
 }
 .mission p { font-size: .9rem !important; line-height: 1.5 !important; margin: 0; }
 
-/* ----- Accordéon ----- */
+/* ----- Accordéon (effet verre) ----- */
 .accordion { display: flex; flex-direction: column; gap: 14px; }
 .acc-item {
-  background: rgba(13, 18, 36, .92);
-  border: 1.5px solid rgba(56, 189, 248, .3);
-  border-radius: 14px;
+  position: relative;
+  background: linear-gradient(135deg, rgba(15, 23, 42, .5) 0%, rgba(11, 15, 25, .6) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(56, 189, 248, .35);
+  border-radius: 16px;
   overflow: hidden;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, .3);
-  transition: border-color .3s ease, box-shadow .3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 255, 255, .1);
+  transition: border-color .3s ease, box-shadow .3s ease, background .3s ease;
 }
-.acc-item:hover, .acc-item.open { border-color: var(--primary-hover, #00d2ff); box-shadow: 0 10px 30px rgba(0, 210, 255, .25); }
+.acc-item::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--primary, #38bdf8), transparent);
+  opacity: .6;
+  transition: opacity .3s ease;
+}
+.acc-item:hover, .acc-item.open {
+  border-color: rgba(0, 210, 255, .6);
+  box-shadow: 0 15px 35px rgba(0, 210, 255, .2), inset 0 1px 0 rgba(255, 255, 255, .2);
+}
+.acc-item:hover::before, .acc-item.open::before {
+  opacity: 1;
+  background: linear-gradient(90deg, #00d2ff, #38bdf8, #00ff87);
+}
+.acc-item.open { background: linear-gradient(135deg, rgba(14, 90, 140, .35) 0%, rgba(11, 25, 50, .6) 100%); }
 
 .acc-header {
   width: 100%;
@@ -120,7 +152,7 @@ html {
   width: 46px; height: 46px; display: grid; place-items: center;
   font-size: 1.4rem;
   color: var(--primary, #38bdf8);
-  background: rgba(56, 189, 248, .1);
+  background: rgba(56, 189, 248, .12);
   border-radius: 10px;
   transition: background .3s ease, color .3s ease;
 }
@@ -150,10 +182,10 @@ html {
   box-shadow: 0 0 10px rgba(0, 210, 255, .4);
 }
 
-pre { background: rgba(8, 12, 24, .9); border: 1px solid var(--border-light, rgba(255,255,255,.1)); border-radius: 8px; padding: 10px 14px; margin: 8px 0; overflow-x: auto; }
+pre { background: rgba(8, 12, 24, .55); border: 1px solid var(--border-light, rgba(255,255,255,.1)); border-radius: 8px; padding: 10px 14px; margin: 8px 0; overflow-x: auto; }
 code { font-family: Consolas, monospace; color: #7dd3fc; }
-kbd { background: rgba(8, 12, 24, .9); border: 1px solid rgba(255, 255, 255, .25); border-bottom-width: 2px; border-radius: 5px; padding: 1px 7px; font-size: .85em; }
-.note { margin-top: 14px; padding: 10px 14px; border-left: 4px solid var(--primary, #38bdf8); background: rgba(56, 189, 248, .08); border-radius: 6px; font-size: .88rem !important; color: #cbd5e1 !important; }
+kbd { background: rgba(8, 12, 24, .55); border: 1px solid rgba(255, 255, 255, .25); border-bottom-width: 2px; border-radius: 5px; padding: 1px 7px; font-size: .85em; }
+.note { margin-top: 14px; padding: 10px 14px; border-left: 4px solid var(--primary, #38bdf8); background: rgba(56, 189, 248, .1); border-radius: 6px; font-size: .88rem !important; color: #cbd5e1 !important; }
 .badge-pass { background: #7ed321; color: #0f172a; font-weight: 700; padding: 1px 8px; border-radius: 6px; }
 
 .pdf-link {
@@ -161,7 +193,9 @@ kbd { background: rgba(8, 12, 24, .9); border: 1px solid rgba(255, 255, 255, .25
   margin-top: 16px; padding: 10px 24px;
   font-weight: 700; font-size: .92rem;
   color: #fff; text-decoration: none;
-  background: rgba(13, 22, 48, .85);
+  background: rgba(13, 22, 48, .45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1.5px solid var(--primary-hover, #00d2ff);
   border-radius: 50px;
   box-shadow: 0 0 15px rgba(0, 210, 255, .3);
