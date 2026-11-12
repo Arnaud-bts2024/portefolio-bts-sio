@@ -1,1 +1,104 @@
 
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stage 1ère année - Portfolio BTS SIO</title>
+    <link rel="stylesheet" href="css/base.css?v=7">
+    <link rel="stylesheet" href="css/layout.css?v=7">
+    <link rel="stylesheet" href="css/components.css?v=7">
+    <link rel="stylesheet" href="css/pages.css?v=7">
+    <link rel="stylesheet" href="css/responsive.css?v=7">
+    <link rel="stylesheet" href="css/stages.css?v=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <div class="background-container"></div>
+
+    <div class="main-content">
+        <div id="navbar-container"></div>
+
+        <main class="container stage-content">
+
+            <a class="back-link" href="stages.html"><i class="fa-solid fa-arrow-left"></i> Retour aux stages</a>
+
+            <header class="page-header">
+                <h1 class="page-title">Stage de 1ère année</h1>
+            </header>
+
+            <!-- 1. PRÉSENTATION DE L'ENTREPRISE -->
+            <section class="stage-section">
+                <div class="card-box company-card">
+                    <h2><i class="fa-solid fa-building"></i> L'entreprise : Promatec</h2>
+
+                    <div class="company-top">
+                        <a class="company-logo reveal-late" style="--delay:.8s"
+                           href="https://www.promatec.tm.fr" target="_blank" rel="noopener"
+                           title="Visiter le site de Promatec">
+                            <img src="images/logo-promatec.png" alt="Logo Promatec">
+                        </a>
+
+                        <div class="company-text">
+                            <p>
+                                Promatec est une société de services informatiques (SSII) située dans la
+                                métropole lilloise. Elle accompagne les entreprises dans leur transformation
+                                numérique : sécurité, infrastructure réseau, serveurs, virtualisation, cloud,
+                                VoIP et messagerie. Elle propose aussi, depuis son datacenter, des solutions
+                                cloud, de l'hébergement et de l'infogérance.
+                            </p>
+                            <p class="hint"><i class="fa-solid fa-hand-pointer"></i> Clique sur le logo pour ouvrir le site de l'entreprise.</p>
+                        </div>
+                    </div>
+
+                    <div class="company-gallery">
+                        <figure class="reveal-late" style="--delay:1.3s">
+                            <img src="images/promatec-batiment.jpg" alt="Bâtiment de Promatec">
+                            <figcaption>Les locaux de Promatec</figcaption>
+                        </figure>
+                        <figure class="reveal-late" style="--delay:1.7s">
+                            <img src="images/promatec-plan.jpg" alt="Localisation de Promatec sur la carte">
+                            <figcaption>Localisation</figcaption>
+                        </figure>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. MISSIONS -->
+            <section class="stage-section">
+                <h2 class="section-title"><i class="fa-solid fa-screwdriver-wrench"></i> Mes missions</h2>
+                <div class="missions">
+                    <article class="card-box mission reveal"><i class="fa-solid fa-laptop"></i><p>Reconditionner et formater des PC, installer Windows 11, mettre à jour les postes, tester souris et claviers.</p></article>
+                    <article class="card-box mission reveal"><i class="fa-solid fa-location-dot"></i><p>Installation sur site et contrôle du fonctionnement par l'entreprise.</p></article>
+                    <article class="card-box mission reveal"><i class="fa-solid fa-file-lines"></i><p>Rédaction d'une procédure de mise en place de Windows 11, des mises à jour et de l'installation d'utilitaires.</p></article>
+                    <article class="card-box mission reveal"><i class="fa-solid fa-wrench"></i><p>SAV sur des tablettes et des PC.</p></article>
+                    <article class="card-box mission reveal"><i class="fa-solid fa-tablet-screen-button"></i><p>Rédaction d'une procédure de réinitialisation de tablettes.</p></article>
+                    <article class="card-box mission reveal"><i class="fa-solid fa-people-group"></i><p>Accompagnement de techniciens pour l'installation de PC et de téléphones IP.</p></article>
+                    <article class="card-box mission reveal"><i class="fa-solid fa-lock"></i><p>Sécurisation de PC par mot de passe.</p></article>
+                    <article class="card-box mission reveal"><i class="fa-solid fa-headset"></i><p>Écoute active de dépannages sur HelpDesk.</p></article>
+                    <article class="card-box mission reveal"><i class="fa-solid fa-boxes-packing"></i><p>Préparation de PC portables : installation de Windows 11 et du pack Office.</p></article>
+                    <article class="card-box mission reveal"><i class="fa-solid fa-server"></i><p>Montage et préparation de NAS pour des clients.</p></article>
+                </div>
+            </section>
+
+            <!-- 3. PROCÉDURES (ACCORDÉON) -->
+            <section class="stage-section">
+                <h2 class="section-title"><i class="fa-solid fa-book"></i> Mes procédures</h2>
+                <p class="section-intro">Clique sur une procédure pour la déplier.</p>
+
+                <div class="accordion">
+
+                    <div class="acc-item reveal">
+                        <button class="acc-header" aria-expanded="false" aria-controls="p1">
+                            <span class="acc-icon"><i class="fa-solid fa-heart-pulse"></i></span>
+                            <span class="acc-title">Vérifier l'état de santé d'un PC</span>
+                            <i class="fa-solid fa-chevron-down acc-chevron" aria-hidden="true"></i>
+                        </button>
+                        <div class="acc-panel" id="p1">
+                            <div class="acc-inner">
+                                <ol class="steps">
+                                    <li><strong>État général (1 min)</strong> — Windows, taper « fiabilité », ouvrir l'historique de fiabilité et repérer les croix rouges répétées.</li>
+                                    <li><strong>Performances (2 min)</strong> — <kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>Échap</kbd>, onglet Performances : processeur entre 1 et 15 % au repos, mémoire sous 80 %, disque qui ne reste pas à 100 %.</li>
+                                    <li><strong>Disque (1 min)</strong> — Disque local (C:) → Propriétés → Outils → Vérifier.</li>
+                                    <li><strong>Fichiers système (5 à 10 min)</strong> — Terminal (Admin), puis :<pre><code>sfc
