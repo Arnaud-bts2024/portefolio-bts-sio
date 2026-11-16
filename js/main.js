@@ -30,7 +30,7 @@ function initNavbar() {
                                 <li><a href="images/tbl_de_synthèse/tableau.png" target="_blank">Tableau de Synthèse</a></li>
                             </ul>
                         </li>
-                        <li><a href="projets.html">Projets</a></li>
+                        <li><a href="projets.html">Projet</a></li>
                         <li><a href="veille.html">Veille</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
