@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/components.css?v=7">
     <link rel="stylesheet" href="css/pages.css?v=7">
     <link rel="stylesheet" href="css/responsive.css?v=7">
-    <link rel="stylesheet" href="css/projet.css?v=1">
+    <link rel="stylesheet" href="css/projet.css?v=2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         .projet-grid {
@@ -46,6 +46,11 @@
                         <span>JavaScript</span>
                     </div>
 
+                    <figure class="project-doc">
+                        <img src="images/projet.png" alt="Document de mon projet" id="projectImg">
+                        <figcaption><i class="fa-solid fa-magnifying-glass-plus"></i> Clique sur l'image pour l'agrandir</figcaption>
+                    </figure>
+
                     <p>Description globale du projet, des objectifs et des résultats obtenus.</p>
                 </article>
             </div>
@@ -56,14 +61,35 @@
         </footer>
     </div>
 
+    <!-- Agrandissement de l'image (hors de la carte) -->
+    <div class="lightbox" id="lightbox">
+        <img src="" alt="Document de mon projet en grand">
+    </div>
+
     <script src="js/main.js"></script>
     <script>
+        // Effet spotlight qui suit la souris
         document.querySelectorAll(".project-card").forEach(card => {
             card.addEventListener("mousemove", e => {
                 const rect = card.getBoundingClientRect();
                 card.style.setProperty("--mx", (e.clientX - rect.left) + "px");
                 card.style.setProperty("--my", (e.clientY - rect.top) + "px");
             });
+        });
+
+        // Agrandissement de l'image au clic
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = lightbox.querySelector("img");
+
+        document.getElementById("projectImg").addEventListener("click", e => {
+            lightboxImg.src = e.target.src;
+            lightbox.classList.add("open");
+        });
+
+        lightbox.addEventListener("click", () => lightbox.classList.remove("open"));
+
+        document.addEventListener("keydown", e => {
+            if (e.key === "Escape") lightbox.classList.remove("open");
         });
     </script>
 </body>
