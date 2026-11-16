@@ -100,3 +100,75 @@
   line-height: 1.6;
   margin-top: 0;
 }
+
+/* ==========================================================================
+   IMAGE DU PROJET : apparition retardée + agrandissement au clic
+   ========================================================================== */
+
+.project-doc {
+  width: 100%;
+  margin: 0 0 1.2rem;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: docIn 0.9s ease forwards;
+  animation-delay: 1s; /* délai avant l'apparition */
+}
+
+@keyframes docIn {
+  to { opacity: 1; transform: none; }
+}
+
+.project-doc img {
+  display: block;
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--border-accent);
+  cursor: zoom-in;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-doc img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 25px rgba(0, 210, 255, 0.5);
+}
+
+.project-doc figcaption {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: rgba(5, 8, 18, 0.95);
+  backdrop-filter: blur(10px);
+  cursor: zoom-out;
+}
+
+.lightbox.open {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 94vw;
+  max-height: 92vh;
+  object-fit: contain;
+  border-radius: 12px;
+  border: 2px solid var(--primary);
+  box-shadow: 0 0 40px rgba(0, 210, 255, 0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-doc {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
