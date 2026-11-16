@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/components.css?v=7">
     <link rel="stylesheet" href="css/pages.css?v=7">
     <link rel="stylesheet" href="css/responsive.css?v=7">
-    <link rel="stylesheet" href="css/projet.css?v=2">
+    <link rel="stylesheet" href="css/projet.css?v=3">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         .projet-grid {
@@ -37,8 +37,13 @@
             </section>
 
             <div class="projet-grid">
-                <article class="project-card">
-                    <h2><i class="fa-solid fa-diagram-project"></i> Mon Projet : Nom du projet</h2>
+
+                <!-- Bouton 1 : ouvre le document PDF du projet -->
+                <a href="documents/projet/projet.pdf" target="_blank" rel="noopener noreferrer" class="project-card">
+                    <h2>
+                        <i class="fa-solid fa-diagram-project"></i> Mon Projet : Nom du projet
+                        <i class="fa-solid fa-arrow-up-right-from-square card-arrow"></i>
+                    </h2>
 
                     <div class="project-tags">
                         <span>PHP</span>
@@ -46,13 +51,16 @@
                         <span>JavaScript</span>
                     </div>
 
-                    <figure class="project-doc">
-                        <img src="images/projet/projet.png" alt="Document de mon projet" id="projectImg">
-                        <figcaption><i class="fa-solid fa-magnifying-glass-plus"></i> Clique sur l'image pour l'agrandir</figcaption>
-                    </figure>
-
                     <p>Description globale du projet, des objectifs et des résultats obtenus.</p>
-                </article>
+                </a>
+
+                <!-- Bouton 2 : image du projet (apparaît après 1 s, s'agrandit au clic) -->
+                <a href="images/projet/projet.png" class="project-card project-image-card" id="projectImgLink">
+                    <h2><i class="fa-solid fa-image"></i> Schéma du projet</h2>
+                    <img src="images/projet/projet.png" alt="Schéma de mon projet">
+                    <p class="image-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> Clique pour agrandir</p>
+                </a>
+
             </div>
         </main>
 
@@ -61,9 +69,9 @@
         </footer>
     </div>
 
-    <!-- Agrandissement de l'image (hors de la carte) -->
+    <!-- Agrandissement de l'image (hors des cartes) -->
     <div class="lightbox" id="lightbox">
-        <img src="" alt="Document de mon projet en grand">
+        <img src="" alt="Schéma de mon projet en grand">
     </div>
 
     <script src="js/main.js"></script>
@@ -77,12 +85,13 @@
             });
         });
 
-        // Agrandissement de l'image au clic
+        // Agrandissement de l'image au clic sur le 2e bouton
         const lightbox = document.getElementById("lightbox");
         const lightboxImg = lightbox.querySelector("img");
 
-        document.getElementById("projectImg").addEventListener("click", e => {
-            lightboxImg.src = e.target.src;
+        document.getElementById("projectImgLink").addEventListener("click", e => {
+            e.preventDefault();
+            lightboxImg.src = e.currentTarget.getAttribute("href");
             lightbox.classList.add("open");
         });
 
