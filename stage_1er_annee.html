@@ -3,160 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TP 1ère année - Portfolio BTS SIO</title>
+    <title>Stage 1ère année - Portfolio BTS SIO</title>
     <link rel="stylesheet" href="css/base.css?v=7">
     <link rel="stylesheet" href="css/layout.css?v=7">
     <link rel="stylesheet" href="css/components.css?v=7">
     <link rel="stylesheet" href="css/pages.css?v=7">
     <link rel="stylesheet" href="css/responsive.css?v=7">
+    <link rel="stylesheet" href="css/stages.css?v=2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <style>
-        .swiper {
-            width: 100%;
-            max-width: 900px;
-            height: 480px;
-            border-radius: 16px;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            background: rgba(13, 18, 36, 0.85);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            margin: 15px auto;
-            position: relative;
-        }
-        .swiper-slide {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-        .swiper-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            background: #0b0f19;
-            cursor: pointer;
-        }
-        /* Bouton Zoom superposé sur l'image */
-        .zoom-btn {
-            position: absolute;
-            bottom: 15px;
-            right: 15px;
-            background: rgba(11, 15, 25, 0.85);
-            color: var(--primary);
-            border: 1px solid var(--primary);
-            padding: 8px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
-            z-index: 10;
-        }
-        .zoom-btn:hover {
-            background: var(--primary);
-            color: #0b0f19;
-            transform: scale(1.05);
-        }
-        .swiper-button-next, .swiper-button-prev {
-            color: var(--primary);
-        }
-        .swiper-pagination-bullet-active {
-            background: var(--primary);
-        }
-
-        /* Fenêtre Modale pour le Zoom Plein Écran */
-        .modal-zoom {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 99999;
-            background: rgba(11, 15, 25, 0.95);
-            backdrop-filter: blur(10px);
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .modal-zoom.active {
-            display: flex;
-        }
-        .modal-zoom img {
-            max-width: 82%;
-            max-height: 86vh;
-            object-fit: contain;
-            border-radius: 12px;
-            border: 2px solid var(--primary);
-            box-shadow: 0 0 40px rgba(0, 210, 255, 0.5);
-        }
-
-        /* Flèches pour passer d'une image à l'autre en restant en zoom */
-        .zoom-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 52px;
-            height: 52px;
-            display: grid;
-            place-items: center;
-            font-size: 1.2rem;
-            color: var(--primary);
-            background: rgba(11, 15, 25, 0.85);
-            border: 1.5px solid var(--primary);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 2;
-        }
-        .zoom-nav:hover {
-            background: var(--primary);
-            color: #0b0f19;
-            box-shadow: 0 0 18px var(--glow-color);
-        }
-        .zoom-nav.prev { left: 25px; }
-        .zoom-nav.next { right: 25px; }
-
-        /* Bouton « Zoom - » pour quitter le mode zoom */
-        .zoom-exit {
-            position: absolute;
-            top: 22px;
-            right: 30px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 18px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #ffffff;
-            background: rgba(11, 15, 25, 0.85);
-            border: 1.5px solid var(--primary);
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 2;
-        }
-        .zoom-exit:hover {
-            background: linear-gradient(135deg, #00c6ff, #0072ff);
-            border-color: transparent;
-            box-shadow: 0 0 20px var(--glow-color);
-        }
-
-        .zoom-counter {
-            position: absolute;
-            bottom: 22px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        @media (max-width: 768px) {
-            .modal-zoom img { max-width: 100%; max-height: 78vh; }
-            .zoom-nav { width: 42px; height: 42px; }
-            .zoom-nav.prev { left: 8px; }
-            .zoom-nav.next { right: 8px; }
-            .zoom-exit { right: 12px; padding: 8px 14px; }
-        }
-    </style>
 </head>
 <body>
 
@@ -165,51 +19,161 @@
     <div class="main-content">
         <div id="navbar-container"></div>
 
-        <main class="container">
-            <section class="page-header">
-                <h1 class="page-title">TP de 1ère Année</h1>
-                <p class="hero-subtitle">Galerie de réalisations et captures de mes travaux pratiques</p>
-            </section>
+        <main class="container stage-content">
 
-            <!-- Carrousel Swiper.js -->
-            <div class="swiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="images/1er_anne_IMAGE VOIP.png" alt="TP VOIP 1" onclick="openZoom(this.src)">
-                        <button class="zoom-btn" onclick="openZoom(this.previousElementSibling.src)"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</button>
+            <a class="back-link" href="stages.html"><i class="fa-solid fa-arrow-left"></i> Retour aux stages</a>
+
+            <header class="page-header">
+                <h1 class="page-title">Stage de 1ère année</h1>
+            </header>
+
+            <!-- 1. PRÉSENTATION DE L'ENTREPRISE -->
+            <section class="stage-section">
+                <div class="card-box company-card">
+                    <h2><i class="fa-solid fa-building"></i> L'entreprise : Promatec</h2>
+
+                    <div class="company-top">
+                        <a class="company-logo reveal-late" style="--delay:.8s"
+                           href="https://www.promatec.tm.fr" target="_blank" rel="noopener"
+                           title="Visiter le site de Promatec">
+                            <img src="images/logo-promatec.png" alt="Logo Promatec">
+                        </a>
+
+                        <div class="company-text">
+                            <p>
+                                Promatec est une société de services informatiques (SSII) située dans la
+                                métropole lilloise. Elle accompagne les entreprises dans leur transformation
+                                numérique : sécurité, infrastructure réseau, serveurs, virtualisation, cloud,
+                                VoIP et messagerie. Elle propose aussi, depuis son datacenter, des solutions
+                                cloud, de l'hébergement et de l'infogérance.
+                            </p>
+                            <p class="hint"><i class="fa-solid fa-hand-pointer"></i> Clique sur le logo pour ouvrir le site de l'entreprise.</p>
+                        </div>
                     </div>
-                    <div class="swiper-slide">
-                        <img src="images/1er_annnee_SYNTHESE TP VOIP.png" alt="TP VOIP Synthèse" onclick="openZoom(this.src)">
-                        <button class="zoom-btn" onclick="openZoom(this.previousElementSibling.src)"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</button>
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/1er_année_image tp_asa_dmz.png" alt="TP ASA DMZ" onclick="openZoom(this.src)">
-                        <button class="zoom-btn" onclick="openZoom(this.previousElementSibling.src)"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</button>
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/1er_annéee_Fiche_synthèse_ASA_DMZ.png" alt="TP ASA Synthèse" onclick="openZoom(this.src)">
-                        <button class="zoom-btn" onclick="openZoom(this.previousElementSibling.src)"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</button>
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/1er_annee_image_tp_pfsense.jpg" alt="TP pfSense" onclick="openZoom(this.src)">
-                        <button class="zoom-btn" onclick="openZoom(this.previousElementSibling.src)"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</button>
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="images/1er_annee-SYNTH7SE_pfsense.png" alt="TP pfSense Synthèse" onclick="openZoom(this.src)">
-                        <button class="zoom-btn" onclick="openZoom(this.previousElementSibling.src)"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</button>
+
+                    <div class="company-gallery">
+                        <figure class="reveal-late" style="--delay:1.3s">
+                            <img src="images/promatec-batiment.jpg" alt="Bâtiment de Promatec">
+                            <figcaption>Les locaux de Promatec</figcaption>
+                        </figure>
+                        <figure class="reveal-late" style="--delay:1.7s">
+                            <img src="images/promatec-plan.jpg" alt="Localisation de Promatec sur la carte">
+                            <figcaption>Localisation</figcaption>
+                        </figure>
                     </div>
                 </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-pagination"></div>
-            </div>
+            </section>
 
-            <div style="text-align: center; margin-top: 20px;">
-                <a href="tp.html" class="btn-modern" style="padding: 10px 25px; font-size: 0.9rem;">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    <span>Retour aux TP</span>
-                </a>
-            </div>
+            <!-- 2. MISSIONS -->
+            <section class="stage-section">
+                <h2 class="section-title"><i class="fa-solid fa-screwdriver-wrench"></i> Mes missions</h2>
+                <div class="missions">
+                    <article class="card-box mission reveal"><i class="fa-solid fa-laptop"></i><p>Reconditionner et formater des PC, installer Windows 11, mettre à jour les postes, tester souris et claviers.</p></article>
+                    <article class="card-box mission reveal"><i class="fa-solid fa-location-dot"></i><p>Installation sur site et contrôle du fonctionnement par l'entreprise.</p></article>
+                    <article class="card-box mission reveal"><i class="fa-solid fa-file-lines"></i><p>Rédaction d'une procédure de mise en place de Windows 11, des mises à jour et de l'installation d'utilitaires.</p></article>
+                    <article class="card-box mission reveal"><i class="fa-solid fa-wrench"></i><p>SAV sur des tablettes et des PC.</p></article>
+                    <article class="card-box mission reveal"><i class="fa-solid fa-tablet-screen-button"></i><p>Rédaction d'une procédure de réinitialisation de tablettes.</p></article>
+                    <article class="card-box mission reveal"><i class="fa-solid fa-people-group"></i><p>Accompagnement de techniciens pour l'installation de PC et de téléphones IP.</p></article>
+                    <article class="card-box mission reveal"><i class="fa-solid fa-lock"></i><p>Sécurisation de PC par mot de passe.</p></article>
+                    <article class="card-box mission reveal"><i class="fa-solid fa-headset"></i><p>Écoute active de dépannages sur HelpDesk.</p></article>
+                    <article class="card-box mission reveal"><i class="fa-solid fa-boxes-packing"></i><p>Préparation de PC portables : installation de Windows 11 et du pack Office.</p></article>
+                    <article class="card-box mission reveal"><i class="fa-solid fa-server"></i><p>Montage et préparation de NAS pour des clients.</p></article>
+                </div>
+            </section>
+
+            <!-- 3. PROCÉDURES (ACCORDÉON) -->
+            <section class="stage-section">
+                <h2 class="section-title"><i class="fa-solid fa-book"></i> Mes procédures</h2>
+                <p class="section-intro">Clique sur une procédure pour la déplier.</p>
+
+                <div class="accordion">
+
+                    <div class="acc-item reveal">
+                        <button class="acc-header" aria-expanded="false" aria-controls="p1">
+                            <span class="acc-icon"><i class="fa-solid fa-heart-pulse"></i></span>
+                            <span class="acc-title">Vérifier l'état de santé d'un PC</span>
+                            <i class="fa-solid fa-chevron-down acc-chevron" aria-hidden="true"></i>
+                        </button>
+                        <div class="acc-panel" id="p1">
+                            <div class="acc-inner">
+                                <ol class="steps">
+                                    <li><strong>État général (1 min)</strong> — Windows, taper « fiabilité », ouvrir l'historique de fiabilité et repérer les croix rouges répétées.</li>
+                                    <li><strong>Performances (2 min)</strong> — <kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>Échap</kbd>, onglet Performances : processeur entre 1 et 15 % au repos, mémoire sous 80 %, disque qui ne reste pas à 100 %.</li>
+                                    <li><strong>Disque (1 min)</strong> — Disque local (C:) → Propriétés → Outils → Vérifier.</li>
+                                    <li><strong>Fichiers système (5 à 10 min)</strong> — Terminal (Admin), puis :<pre><code>sfc /scannow</code></pre></li>
+                                    <li><strong>Mises à jour</strong> — Paramètres → Windows Update, installer ce qui est disponible.</li>
+                                    <li><strong>Sécurité</strong> — Sécurité Windows, lancer une analyse rapide.</li>
+                                </ol>
+                                <p class="note">Pour aller plus loin : CrystalDiskInfo (santé du SSD ou du disque) et HWiNFO (températures du processeur et de la carte graphique).</p>
+                                <a class="pdf-link" href="documents/stage1/procedure-sante-pc.pdf" target="_blank" rel="noopener"><i class="fa-solid fa-file-pdf"></i> Ouvrir le PDF</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="acc-item reveal">
+                        <button class="acc-header" aria-expanded="false" aria-controls="p2">
+                            <span class="acc-icon"><i class="fa-solid fa-tablet-screen-button"></i></span>
+                            <span class="acc-title">Réinitialiser une tablette Samsung</span>
+                            <i class="fa-solid fa-chevron-down acc-chevron" aria-hidden="true"></i>
+                        </button>
+                        <div class="acc-panel" id="p2">
+                            <div class="acc-inner">
+                                <h3>Prérequis</h3>
+                                <ul>
+                                    <li>Pilotes Samsung USB Driver, Odin v3.14.4 (Android 10 à 14) et Frija.</li>
+                                    <li>Relever sur la tablette : modèle, code CSC, numéro de série / IMEI.</li>
+                                </ul>
+                                <h3>Étapes</h3>
+                                <ol class="steps">
+                                    <li><strong>Frija</strong> — mode Manuel, saisir modèle / CSC / IMEI, <em>Check Update</em>, puis télécharger le firmware dans un dossier créé sur le bureau et le décompresser.</li>
+                                    <li><strong>Odin</strong> (en administrateur) — charger les fichiers <em>BL</em>, <em>AP</em> et <em>CSC</em>.</li>
+                                    <li><strong>Mode recovery</strong> — tablette éteinte : volume bas + marche/arrêt, puis volume haut + marche/arrêt jusqu'au logo Samsung, et rester sur volume haut jusqu'au menu.</li>
+                                    <li><strong>Menu</strong> — <em>Wipe data/factory reset</em>, puis <em>Wipe cache partition</em>, puis <em>Reboot to bootloader</em>.</li>
+                                    <li><strong>Flash</strong> — cliquer sur <em>Start</em> dans Odin et attendre <span class="badge-pass">PASS !</span></li>
+                                </ol>
+                                <p class="note">La combinaison de touches peut varier selon le modèle de tablette.</p>
+                                <a class="pdf-link" href="documents/stage1/procedure-tablette-samsung.pdf" target="_blank" rel="noopener"><i class="fa-solid fa-file-pdf"></i> Ouvrir le PDF</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="acc-item reveal">
+                        <button class="acc-header" aria-expanded="false" aria-controls="p3">
+                            <span class="acc-icon"><i class="fa-brands fa-windows"></i></span>
+                            <span class="acc-title">Déployer un poste Windows 11 25H2</span>
+                            <i class="fa-solid fa-chevron-down acc-chevron" aria-hidden="true"></i>
+                        </button>
+                        <div class="acc-panel" id="p3">
+                            <div class="acc-inner">
+                                <h3>1. Créer la clé bootable</h3>
+                                <ul>
+                                    <li>Télécharger Rufus, choisir l'ISO Windows 11 25H2 et la clé USB, système de fichiers <strong>NTFS</strong>.</li>
+                                    <li>Personnaliser : compte local « USER », options régionales, collecte de données désactivée, édition Windows 11 Professionnel.</li>
+                                    <li>Valider les avertissements : l'installation silencieuse efface le disque.</li>
+                                </ul>
+                                <h3>2. Installer sur le nouveau PC</h3>
+                                <ul>
+                                    <li>Booter sur la clé : <kbd>F9</kbd> (HP), <kbd>F1</kbd> (Lenovo), <kbd>F12</kbd> (Dell), clé USB en 1<sup>re</sup> position, <kbd>F10</kbd> pour enregistrer.</li>
+                                    <li>Supprimer l'ancienne installation, sans toucher aux partitions de la clé (Win11_25H2 et RUFUS BOOT).</li>
+                                    <li>Choix de la région (France), du clavier (Français), deuxième disposition ignorée.</li>
+                                    <li>Si l'option « Je n'ai pas Internet » manque : <kbd>Shift</kbd>+<kbd>F10</kbd> puis <code>oobe\bypassnro</code>.</li>
+                                </ul>
+                                <h3>3. Préparer le poste</h3>
+                                <ol class="steps">
+                                    <li>Icônes du bureau : Ordinateur, Fichiers de l'utilisateur, Corbeille, Panneau de configuration.</li>
+                                    <li>Notifications et « Ne pas déranger » désactivées.</li>
+                                    <li>Diagnostics et commentaires : fréquence des commentaires sur « Jamais ».</li>
+                                    <li>Windows Update : tout installer, option de mises à jour anticipées activée.</li>
+                                    <li>Barre des tâches alignée à gauche, Mode jeu désactivé.</li>
+                                    <li>Installer Adobe Acrobat Reader, puis les applications via Ninite (Chrome, Firefox, Edge, 7-Zip, VLC, Java, .NET Desktop Runtime, TeamViewer) et le pack Office si demandé.</li>
+                                </ol>
+                                <a class="pdf-link" href="documents/stage1/procedure-windows-11-25h2.pdf" target="_blank" rel="noopener"><i class="fa-solid fa-file-pdf"></i> Ouvrir le PDF</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
         </main>
 
         <footer class="site-footer">
@@ -217,62 +181,7 @@
         </footer>
     </div>
 
-    <!-- Modale de Zoom : on reste en zoom, flèches pour changer d'image, « Zoom - » pour quitter -->
-    <div class="modal-zoom" id="imageModal">
-        <button type="button" class="zoom-nav prev" id="zoomPrev" title="Image précédente"><i class="fa-solid fa-chevron-left"></i></button>
-        <img id="modalImg" src="" alt="Zoom image">
-        <button type="button" class="zoom-nav next" id="zoomNext" title="Image suivante"><i class="fa-solid fa-chevron-right"></i></button>
-        <button type="button" class="zoom-exit" id="zoomExit" title="Quitter le zoom (Échap)"><i class="fa-solid fa-magnifying-glass-minus"></i> Zoom -</button>
-        <div class="zoom-counter" id="zoomCounter"></div>
-    </div>
-
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-        // Liste des images, relevée AVANT l'initialisation de Swiper (le mode loop duplique les slides)
-        const slideImages = Array.from(document.querySelectorAll('.swiper-slide img'))
-            .map(img => ({ src: img.src, alt: img.alt }));
-
-        const swiper = new Swiper('.swiper', {
-            loop: true,
-            pagination: { el: '.swiper-pagination', clickable: true },
-            navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
-        });
-
-        const modal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImg');
-        const counter = document.getElementById('zoomCounter');
-        let current = 0;
-
-        function showZoom(index) {
-            current = (index + slideImages.length) % slideImages.length;
-            modalImg.src = slideImages[current].src;
-            modalImg.alt = slideImages[current].alt;
-            counter.textContent = (current + 1) + ' / ' + slideImages.length;
-        }
-
-        function openZoom(src) {
-            const index = slideImages.findIndex(s => s.src === src);
-            showZoom(index >= 0 ? index : 0);
-            modal.classList.add('active');
-        }
-
-        function closeZoom() {
-            modal.classList.remove('active');
-            swiper.slideToLoop(current); // le carrousel se place sur l'image vue en dernier
-        }
-
-        document.getElementById('zoomPrev').addEventListener('click', () => showZoom(current - 1));
-        document.getElementById('zoomNext').addEventListener('click', () => showZoom(current + 1));
-        document.getElementById('zoomExit').addEventListener('click', closeZoom);
-
-        document.addEventListener('keydown', e => {
-            if (!modal.classList.contains('active')) return;
-            if (e.key === 'Escape') closeZoom();
-            else if (e.key === 'ArrowLeft') showZoom(current - 1);
-            else if (e.key === 'ArrowRight') showZoom(current + 1);
-        });
-    </script>
     <script src="js/main.js"></script>
+    <script src="js/stages.js"></script>
 </body>
 </html>
