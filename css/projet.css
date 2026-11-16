@@ -122,16 +122,6 @@
 
 .project-image-card {
   cursor: zoom-in;
-  /* "backwards" : l'état de départ est appliqué pendant le délai,
-     puis le survol (hover) redevient possible une fois l'animation finie */
-  animation: cardIn 0.9s ease 1s backwards;
-}
-
-@keyframes cardIn {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
 }
 
 .project-image-card img {
@@ -172,12 +162,6 @@
   border-radius: 12px;
   border: 2px solid var(--primary);
   box-shadow: 0 0 40px rgba(0, 210, 255, 0.5);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .project-image-card {
-    animation: none;
-  }
 }
 
 /* ==========================================================================
