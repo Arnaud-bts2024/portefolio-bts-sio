@@ -30,7 +30,7 @@ html {
 
 /* ----- Mise en page ----- */
 .stage-content { max-width: 960px; align-items: stretch; }
-.stage-content p { text-align: center; }
+.stage-content p { text-align: left; }
 .stage-content .page-header p { text-align: center; }
 
 /* Cartes plus transparentes sur la page de stage */
