@@ -213,8 +213,10 @@
   </main>
 
   <script src="js/main.js"></script>
-  <!-- Bibliothèque de tourne-page (StPageFlip). Si elle ne se charge pas, un visionneuse simple prend le relais. -->
-  <script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+  <!-- Bibliothèque de tourne-page (StPageFlip) : copie locale dans js/, sinon repli sur le CDN.
+       Si aucune des deux ne se charge, une visionneuse simple prend le relais. -->
+  <script src="js/page-flip.browser.js"></script>
+  <script>window.St || document.write('<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"><\/script>');</script>
   <script>
   (() => {
     /* =====================================================
