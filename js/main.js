@@ -23,7 +23,7 @@ function initNavbar() {
                         <li class="dropdown">
                             <a href="parcours.html">Mon parcours</a>
                             <ul class="submenu">
-                                <li><a href="documents/cv.pdf#zoom=78" target="_blank">Mon CV</a></li>
+                                <li><a href="cv.html">Mon CV</a></li>
                                 <li><a href="tp.html">Mes TP</a></li>
                                 <li><a href="certifications.html">Mes Certifications</a></li>
                                 <li><a href="stages.html">Mes Stages</a></li>
