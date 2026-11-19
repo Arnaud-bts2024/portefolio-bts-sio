@@ -1,94 +1,182 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon CV - Arnaud Hollebecque</title>
-    <link rel="stylesheet" href="css/style.css?v=6">
-    <style>
-        .cv-page {
-            min-height: 100vh;
-            padding: 110px 20px 60px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: linear-gradient(135deg, #e8f1fb 0%, #f4f8fd 45%, #dfeaf7 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        .cv-page::before,
-        .cv-page::after {
-            content: "";
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(70px);
-            opacity: .45;
-            z-index: 0;
-        }
-        .cv-page::before { width: 420px; height: 420px; background: #9cc3f0; top: -120px; left: -120px; }
-        .cv-page::after  { width: 380px; height: 380px; background: #b7d9f5; bottom: -100px; right: -100px; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon CV | Arnaud Hollebecque – BTS SIO SISR</title>
+  <meta name="description" content="Curriculum vitae d'Arnaud Hollebecque, étudiant en BTS SIO option SISR.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Feuille de style existante du portfolio (navbar, etc.) -->
+  <link rel="stylesheet" href="css/style.css?v=6">
 
-        .cv-header, .cv-viewer, .cv-actions { position: relative; z-index: 1; }
+  <style>
+    /* Tout est préfixé .cv- pour ne pas entrer en conflit avec style.css
+       (même ambiance que la page « Mes certifications ») */
+    .cv-page {
+      --cv-bg: #050b1f;
+      --cv-surface: rgba(14, 28, 66, .55);
+      --cv-border: rgba(90, 150, 255, .22);
+      --cv-text: #e8eefc;
+      --cv-muted: #9fb2d8;
+      --cv-accent: #3d9bff;
+      --cv-accent-2: #00e0ff;
+      position: relative;
+      min-height: 100vh;
+      color: var(--cv-text);
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(30, 90, 255, .35), transparent 60%),
+        radial-gradient(900px 500px at -10% 30%, rgba(0, 200, 255, .15), transparent 60%),
+        var(--cv-bg);
+      overflow-x: hidden;
+    }
+    .cv-page *, .cv-page *::before, .cv-page *::after { box-sizing: border-box; }
+    .cv-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
 
-        .cv-header { text-align: center; margin-bottom: 24px; }
-        .cv-header h1 { margin: 0 0 6px; font-size: 2rem; color: #1b3a5c; }
-        .cv-header p  { margin: 0; color: #4a6785; }
+    #cv-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
 
-        .cv-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 22px; }
-        .cv-btn {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 11px 22px; border-radius: 999px;
-            font-weight: 600; text-decoration: none;
-            transition: transform .2s ease, box-shadow .2s ease;
-        }
-        .cv-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(27, 58, 92, .2); }
-        .cv-btn-primary { background: #1b6fd1; color: #fff; }
-        .cv-btn-secondary { background: #fff; color: #1b6fd1; border: 2px solid #1b6fd1; }
+    /* ---------- Mise en page : tout tient dans l'écran, sans défilement ---------- */
+    .cv-page { --nav-h: 41px; --cv-pad: 22px; height: calc(100vh - var(--nav-h)); min-height: 0; }
+    .cv-layout {
+      height: 100%; max-width: 1180px; margin: 0 auto; padding: var(--cv-pad) 32px;
+      display: grid; grid-template-columns: minmax(260px, 400px) auto; justify-content: center;
+      align-items: center; column-gap: clamp(32px, 6vw, 80px);
+    }
 
-        .cv-viewer {
-            width: 70%;
-            max-width: 900px;
-            min-width: 300px;
-            height: 80vh;
-            background: #fff;
-            border-radius: 14px;
-            box-shadow: 0 18px 50px rgba(27, 58, 92, .25);
-            overflow: hidden;
-        }
-        .cv-viewer iframe, .cv-viewer object { width: 100%; height: 100%; border: 0; display: block; }
-        .cv-fallback { padding: 40px; text-align: center; color: #1b3a5c; }
+    /* ---------- Colonne gauche : titre + boutons ---------- */
+    .cv-hero { text-align: left; }
+    .cv-tag {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 8px 16px; border-radius: 999px;
+      background: rgba(0, 0, 0, .35); border: 1px solid var(--cv-border);
+      color: var(--cv-accent-2); font-size: .85rem;
+    }
+    .cv-hero h1 { margin: 20px 0 10px; font-size: clamp(2.4rem, 5vw, 3.8rem); line-height: 1.05; font-weight: 700; letter-spacing: -.03em; color: var(--cv-text); text-shadow: none; text-align: left; }
+    .cv-grad { background: linear-gradient(100deg, #7fc0ff 0%, var(--cv-accent-2) 45%, #7b8cff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .cv-lead { margin: 0; color: var(--cv-muted); font-size: 1.02rem; line-height: 1.6; text-align: left; }
 
-        @media (max-width: 768px) {
-            .cv-viewer { width: 95%; height: 70vh; }
-        }
-    </style>
+    /* ---------- Boutons (mêmes que la page certifications) ---------- */
+    .cv-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; margin: 26px 0 0; }
+    .cv-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 12px 22px; border-radius: 999px; border: 1px solid transparent;
+      background: linear-gradient(100deg, var(--cv-accent), var(--cv-accent-2));
+      color: #04122e; font: inherit; font-weight: 700; font-size: .95rem;
+      text-decoration: none; cursor: pointer; transition: transform .2s, filter .2s, border-color .2s;
+    }
+    .cv-btn:hover { filter: brightness(1.12); transform: translateY(-2px); }
+    .cv-btn.ghost { background: transparent; color: var(--cv-text); border-color: var(--cv-border); }
+    .cv-btn.ghost:hover { border-color: var(--cv-accent); }
+    .cv-btn:focus-visible { outline: 2px solid var(--cv-accent-2); outline-offset: 3px; }
+    .cv-foot { margin: 30px 0 0; color: var(--cv-muted); font-size: .8rem; text-align: left; }
+
+    /* ---------- CV : une page entière, hauteur = hauteur disponible ---------- */
+    .cv-stage { display: flex; justify-content: center; align-items: center; }
+    .cv-frame {
+      --h: calc(100vh - var(--nav-h) - 2 * var(--cv-pad));   /* hauteur du cadre */
+      --pad: 10px;
+      height: var(--h);
+      width: calc((var(--h) - 2 * var(--pad)) * 1406 / 1988 + 2 * var(--pad));   /* ratio A4 du CV */
+      padding: var(--pad); border-radius: 18px;
+      background: var(--cv-surface); border: 1px solid var(--cv-border);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 30px 80px rgba(0, 20, 80, .55), 0 0 0 1px rgba(61, 155, 255, .08), 0 0 60px rgba(0, 160, 255, .12);
+      opacity: 0; transform: translateY(14px);
+      animation: cv-in .8s .1s ease forwards;
+    }
+    @keyframes cv-in { to { opacity: 1; transform: none; } }
+    .cv-frame a { display: block; width: 100%; height: 100%; line-height: 0; border-radius: 8px; overflow: hidden; cursor: zoom-in; }
+    .cv-frame img { width: 100%; height: 100%; object-fit: contain; display: block; background: #fff; }
+
+    /* ---------- Petits écrans (téléphone / fenêtre étroite ou très basse) : empilé + défilement ---------- */
+    @media (max-width: 900px), (max-height: 520px) {
+      .cv-page { height: auto; min-height: calc(100vh - var(--nav-h)); }
+      .cv-layout { height: auto; grid-template-columns: 1fr; row-gap: 28px; padding: 40px 18px 50px; }
+      .cv-hero, .cv-hero h1, .cv-lead, .cv-foot { text-align: center; }
+      .cv-actions { flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: center; }
+      .cv-foot { margin-top: 18px; }
+      .cv-frame { --h: auto; height: auto; width: min(100%, 560px); padding: 8px; }
+      .cv-frame a, .cv-frame img { height: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) { .cv-frame { animation: none; opacity: 1; transform: none; } }
+  </style>
 </head>
 <body>
-    <div id="background-container"></div>
-    <div id="navbar-container"></div>
 
-    <main class="cv-page">
-        <header class="cv-header">
-            <h1>Mon CV</h1>
-            <p>Arnaud Hollebecque — BTS SIO option SISR</p>
-        </header>
+  <!-- Navbar du portfolio (injectée par js/main.js) -->
+  <div id="navbar-container"></div>
 
+  <main class="cv-page">
+    <canvas id="cv-canvas" aria-hidden="true"></canvas>
+
+    <div class="cv-layout">
+      <header class="cv-hero">
+        <span class="cv-tag cv-mono">&gt; cat cv.pdf</span>
+        <h1>Mon <span class="cv-grad">CV</span></h1>
+        <p class="cv-lead">Arnaud Hollebecque — étudiant en BTS SIO option SISR. Clique sur le CV pour l'ouvrir en grand.</p>
         <div class="cv-actions">
-            <a class="cv-btn cv-btn-primary" href="documents/cv.pdf" download="CV-Arnaud-Hollebecque.pdf">⬇ Télécharger mon CV</a>
-            <a class="cv-btn cv-btn-secondary" href="documents/cv.pdf" target="_blank" rel="noopener">Ouvrir dans un nouvel onglet</a>
+          <a class="cv-btn" href="documents/cv.pdf" download>Télécharger le PDF</a>
+          <a class="cv-btn ghost" href="documents/cv.pdf" target="_blank" rel="noopener noreferrer">Ouvrir en grand</a>
+          <a class="cv-btn ghost" href="parcours.html">← Mon parcours</a>
         </div>
+        <p class="cv-foot">© 2026 Arnaud HOLLEBECQUE — Portfolio BTS SIO</p>
+      </header>
 
-        <div class="cv-viewer">
-            <object data="documents/cv.pdf#toolbar=0&navpanes=0" type="application/pdf">
-                <div class="cv-fallback">
-                    <p>Votre navigateur ne peut pas afficher le PDF.</p>
-                    <a class="cv-btn cv-btn-primary" href="documents/cv.pdf" download>Télécharger le CV</a>
-                </div>
-            </object>
+      <section class="cv-stage" aria-label="Curriculum vitae">
+        <div class="cv-frame">
+          <a href="documents/cv.pdf" target="_blank" rel="noopener noreferrer" title="Ouvrir le CV en PDF">
+            <img src="images/cv/cv.png" alt="Curriculum vitae d'Arnaud Hollebecque" width="1406" height="1988">
+          </a>
         </div>
-    </main>
+      </section>
+    </div>
+  </main>
 
-    <script src="js/main.js"></script>
-    <script src="js/animations.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+  (() => {
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    /* Hauteur réelle de la navbar (injectée par main.js) : le CV tient exactement dans le reste de l'écran */
+    const page = document.querySelector(".cv-page");
+    function navH() {
+      const nb = document.getElementById("navbar-container");
+      if (nb && nb.offsetHeight) page.style.setProperty("--nav-h", nb.offsetHeight + "px");
+    }
+    document.addEventListener("DOMContentLoaded", () => { navH(); setTimeout(() => { navH(); size(); }, 50); });
+    addEventListener("resize", navH);
+
+    /* ---------- Fond animé : réseau de nœuds (même effet que « Mes certifications ») ---------- */
+    const cv = document.getElementById("cv-canvas"), ctx = cv.getContext("2d");
+    let W, H, pts = [];
+    function size() {
+      const r = cv.parentElement.getBoundingClientRect();
+      W = cv.width = r.width; H = cv.height = Math.min(r.height, 1600);
+      const n = Math.min(Math.floor(W / 14), 90);
+      pts = Array.from({ length: n }, () => ({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .35, vy: (Math.random() - .5) * .35 }));
+    }
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      for (const p of pts) {
+        if (!reduce) { p.x += p.vx; p.y += p.vy; }
+        if (p.x < 0 || p.x > W) p.vx *= -1;
+        if (p.y < 0 || p.y > H) p.vy *= -1;
+        ctx.beginPath(); ctx.arc(p.x, p.y, 1.6, 0, 7); ctx.fillStyle = "rgba(120,190,255,.8)"; ctx.fill();
+      }
+      for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) {
+        const d = Math.hypot(pts[i].x - pts[j].x, pts[i].y - pts[j].y);
+        if (d < 130) {
+          ctx.strokeStyle = `rgba(61,155,255,${.28 * (1 - d / 130)})`;
+          ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y); ctx.stroke();
+        }
+      }
+      if (!reduce) requestAnimationFrame(draw);
+    }
+    size(); draw();
+    let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { size(); if (reduce) draw(); }, 200); });
+  })();
+  </script>
 </body>
 </html>
