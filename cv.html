@@ -166,4 +166,17 @@
         ctx.beginPath(); ctx.arc(p.x, p.y, 1.6, 0, 7); ctx.fillStyle = "rgba(120,190,255,.8)"; ctx.fill();
       }
       for (let i = 0; i < pts.length; i++) for (let j = i + 1; j < pts.length; j++) {
-        const d =
+        const d = Math.hypot(pts[i].x - pts[j].x, pts[i].y - pts[j].y);
+        if (d < 130) {
+          ctx.strokeStyle = `rgba(61,155,255,${.28 * (1 - d / 130)})`;
+          ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y); ctx.stroke();
+        }
+      }
+      if (!reduce) requestAnimationFrame(draw);
+    }
+    size(); draw();
+    let rt; addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { size(); if (reduce) draw(); }, 200); });
+  })();
+  </script>
+</body>
+</html>
