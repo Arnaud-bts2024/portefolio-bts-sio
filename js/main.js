@@ -97,4 +97,25 @@ function initLeaveConfirm() {
     const yes = overlay.querySelector("#leave-yes");
     const no = overlay.querySelector("#leave-no");
     const urlText = overlay.querySelector("#leave-url");
-    const close = () =>
+    const close = () => overlay.classList.remove("open");
+
+    no.addEventListener("click", close);
+    yes.addEventListener("click", close);
+    overlay.addEventListener("click", e => { if (e.target === overlay) close(); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape") close(); });
+
+    // Interception des clics sur les liens externes
+    document.addEventListener("click", e => {
+        const a = e.target.closest("a[href]");
+        if (!a) return;
+        if (a.closest(".leave-overlay")) return;          // ne pas intercepter le bouton « Oui »
+        let url;
+        try { url = new URL(a.href, location.href); } catch { return; }
+        if (!/^https?:$/.test(url.protocol)) return;      // ignore mailto:, tel:, etc.
+        if (url.hostname === location.hostname) return;   // lien interne : pas de message
+        e.preventDefault();
+        urlText.textContent = url.href;
+        yes.href = url.href;
+        overlay.classList.add("open");
+    });
+}
