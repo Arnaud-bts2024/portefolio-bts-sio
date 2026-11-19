@@ -12,8 +12,8 @@
 
     // Réglages : modifie ces valeurs pour ajuster l'ambiance
     const COLOR = "56, 189, 248";   // même bleu que --primary
-    const DENSITY = 11000;          // plus grand = moins de points
-    const MAX_POINTS = 110;
+    const DENSITY = 9000;           // plus grand = moins de points
+    const MAX_POINTS = 140;
     const LINK_DISTANCE = 140;      // distance max d'une ligne entre 2 points
     const MOUSE_DISTANCE = 170;
     const SPEED = 0.18;             // vitesse de dérive (zen = lent)
@@ -38,7 +38,7 @@
             y: Math.random() * height,
             vx: (Math.random() - 0.5) * SPEED * 2,
             vy: (Math.random() - 0.5) * SPEED * 2,
-            r: Math.random() * 1.2 + 0.6,
+            r: Math.random() * 1.4 + 0.9,
             phase: Math.random() * Math.PI * 2   // scintillement doux
         }));
     }
@@ -55,7 +55,7 @@
                 if (p.y < -20) p.y = height + 20;
                 if (p.y > height + 20) p.y = -20;
             }
-            const twinkle = 0.55 + 0.35 * Math.sin(time / 1800 + p.phase);
+            const twinkle = 0.7 + 0.3 * Math.sin(time / 1800 + p.phase);
             ctx.beginPath();
             ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
             ctx.fillStyle = `rgba(${COLOR}, ${twinkle})`;
@@ -66,14 +66,14 @@
         ctx.shadowBlur = 0;
 
         // Lignes entre points proches
-        ctx.lineWidth = 0.7;
+        ctx.lineWidth = 0.8;
         for (let i = 0; i < points.length; i++) {
             for (let j = i + 1; j < points.length; j++) {
                 const dx = points[i].x - points[j].x;
                 const dy = points[i].y - points[j].y;
                 const dist = Math.hypot(dx, dy);
                 if (dist < LINK_DISTANCE) {
-                    ctx.strokeStyle = `rgba(${COLOR}, ${(1 - dist / LINK_DISTANCE) * 0.35})`;
+                    ctx.strokeStyle = `rgba(${COLOR}, ${(1 - dist / LINK_DISTANCE) * 0.55})`;
                     ctx.beginPath();
                     ctx.moveTo(points[i].x, points[i].y);
                     ctx.lineTo(points[j].x, points[j].y);
@@ -86,7 +86,7 @@
                 const my = points[i].y - mouse.y;
                 const md = Math.hypot(mx, my);
                 if (md < MOUSE_DISTANCE) {
-                    ctx.strokeStyle = `rgba(${COLOR}, ${(1 - md / MOUSE_DISTANCE) * 0.5})`;
+                    ctx.strokeStyle = `rgba(${COLOR}, ${(1 - md / MOUSE_DISTANCE) * 0.8})`;
                     ctx.beginPath();
                     ctx.moveTo(points[i].x, points[i].y);
                     ctx.lineTo(mouse.x, mouse.y);
