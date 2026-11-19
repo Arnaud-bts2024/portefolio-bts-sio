@@ -48,8 +48,16 @@ body {
 .constellation {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: 0;              /* devant le fond d'écran du body */
   pointer-events: none;
+  /* voile sombre : l'image reste visible en texture, l'animation ressort */
+  background: radial-gradient(ellipse at center, rgba(8, 12, 28, 0.55) 0%, rgba(4, 6, 16, 0.88) 100%);
+}
+
+/* le contenu (menu, titres, bouton) passe au-dessus du calque */
+.constellation + .main-content {
+  position: relative;
+  z-index: 1;
 }
 
 /* --- Titres et textes --- */
