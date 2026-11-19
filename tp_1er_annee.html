@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TP 2eme année - Portfolio BTS SIO</title>
+    <title>TP 1ère année - Portfolio BTS SIO</title>
     <link rel="stylesheet" href="css/base.css?v=7">
     <link rel="stylesheet" href="css/layout.css?v=7">
     <link rel="stylesheet" href="css/components.css?v=7">
@@ -37,6 +37,7 @@
             background: #0b0f19;
             cursor: pointer;
         }
+        /* Bouton Zoom superposé sur l'image */
         .zoom-btn {
             position: absolute;
             bottom: 15px;
@@ -166,7 +167,7 @@
 
         <main class="container">
             <section class="page-header">
-                <h1 class="page-title">TP de 2eme Année</h1>
+                <h1 class="page-title">TP de 1ère Année</h1>
                 <p class="hero-subtitle">Galerie de réalisations et captures de mes travaux pratiques</p>
             </section>
 
@@ -174,23 +175,30 @@
             <div class="swiper">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <img src="images/2eme_annee_image_ospf.jpg" alt="tp ospf" onclick="openZoom(this.src)">
+                        <img src="images/1er_anne_IMAGE VOIP.png" alt="TP VOIP 1" onclick="openZoom(this.src)">
                         <button class="zoom-btn" onclick="openZoom(this.previousElementSibling.src)"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</button>
                     </div>
                     <div class="swiper-slide">
-                        <img src="images/2eme_annee_sythèse_ospf.jpg" alt="tp ospf synthèse" onclick="openZoom(this.src)">
+                        <img src="images/1er_annnee_SYNTHESE TP VOIP.png" alt="TP VOIP Synthèse" onclick="openZoom(this.src)">
                         <button class="zoom-btn" onclick="openZoom(this.previousElementSibling.src)"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</button>
                     </div>
                     <div class="swiper-slide">
-                        <img src="images/2eme_annee_image_HSRP.png" alt="tp hsrp" onclick="openZoom(this.src)">
+                        <img src="images/1er_année_image tp_asa_dmz.png" alt="TP ASA DMZ" onclick="openZoom(this.src)">
                         <button class="zoom-btn" onclick="openZoom(this.previousElementSibling.src)"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</button>
                     </div>
                     <div class="swiper-slide">
-                        <img src="images/2eme_annee_synthèse_HSRP.png" alt="tp hsrp synthèse" onclick="openZoom(this.src)">
+                        <img src="images/1er_annéee_Fiche_synthèse_ASA_DMZ.png" alt="TP ASA Synthèse" onclick="openZoom(this.src)">
+                        <button class="zoom-btn" onclick="openZoom(this.previousElementSibling.src)"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</button>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/1er_annee_image_tp_pfsense.jpg" alt="TP pfSense" onclick="openZoom(this.src)">
+                        <button class="zoom-btn" onclick="openZoom(this.previousElementSibling.src)"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</button>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="images/1er_annee-SYNTH7SE_pfsense.png" alt="TP pfSense Synthèse" onclick="openZoom(this.src)">
                         <button class="zoom-btn" onclick="openZoom(this.previousElementSibling.src)"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom</button>
                     </div>
                 </div>
-
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-pagination"></div>
@@ -250,14 +258,14 @@
             modal.classList.add('active');
         }
 
-        function closeZoom() {
+        function closeZoom(target = current) {
             modal.classList.remove('active');
-            swiper.slideToLoop(current); // le carrousel se place sur l'image vue en dernier
+            swiper.slideToLoop(target); // par défaut le carrousel se place sur l'image vue en dernier
         }
 
-        // Dernière image : « suivant » quitte le zoom au lieu de reboucler sur la première
+        // Dernière image : « suivant » quitte le zoom et le carrousel revient à la première image
         function goNext() {
-            if (current >= slideImages.length - 1) closeZoom();
+            if (current >= slideImages.length - 1) closeZoom(0);
             else showZoom(current + 1);
         }
         function goPrev() {
@@ -266,7 +274,7 @@
 
         document.getElementById('zoomPrev').addEventListener('click', goPrev);
         document.getElementById('zoomNext').addEventListener('click', goNext);
-        document.getElementById('zoomExit').addEventListener('click', closeZoom);
+        document.getElementById('zoomExit').addEventListener('click', () => closeZoom());
 
         document.addEventListener('keydown', e => {
             if (!modal.classList.contains('active')) return;
