@@ -250,14 +250,14 @@
             modal.classList.add('active');
         }
 
-        function closeZoom() {
+        function closeZoom(target = current) {
             modal.classList.remove('active');
-            swiper.slideToLoop(current); // le carrousel se place sur l'image vue en dernier
+            swiper.slideToLoop(target); // par défaut le carrousel se place sur l'image vue en dernier
         }
 
-        // Dernière image : « suivant » quitte le zoom au lieu de reboucler sur la première
+        // Dernière image : « suivant » quitte le zoom et le carrousel revient à la première image
         function goNext() {
-            if (current >= slideImages.length - 1) closeZoom();
+            if (current >= slideImages.length - 1) closeZoom(0);
             else showZoom(current + 1);
         }
         function goPrev() {
@@ -266,7 +266,7 @@
 
         document.getElementById('zoomPrev').addEventListener('click', goPrev);
         document.getElementById('zoomNext').addEventListener('click', goNext);
-        document.getElementById('zoomExit').addEventListener('click', closeZoom);
+        document.getElementById('zoomExit').addEventListener('click', () => closeZoom());
 
         document.addEventListener('keydown', e => {
             if (!modal.classList.contains('active')) return;
