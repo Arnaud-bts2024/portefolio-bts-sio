@@ -1,94 +1,198 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon CV - Arnaud Hollebecque</title>
-    <link rel="stylesheet" href="css/style.css?v=6">
-    <style>
-        .cv-page {
-            min-height: 100vh;
-            padding: 110px 20px 60px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background: linear-gradient(135deg, #e8f1fb 0%, #f4f8fd 45%, #dfeaf7 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        .cv-page::before,
-        .cv-page::after {
-            content: "";
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(70px);
-            opacity: .45;
-            z-index: 0;
-        }
-        .cv-page::before { width: 420px; height: 420px; background: #9cc3f0; top: -120px; left: -120px; }
-        .cv-page::after  { width: 380px; height: 380px; background: #b7d9f5; bottom: -100px; right: -100px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon CV - Arnaud Hollebecque</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=6">
+<style>
+    .cv-stage {
+        position: relative; min-height: 100vh; padding: 90px 16px 40px;
+        display: flex; flex-direction: column; align-items: center; gap: 18px;
+        background: radial-gradient(ellipse at 20% 10%, #12306b 0, transparent 55%),
+                    linear-gradient(160deg, #050b1f, #0a1840 60%, #07122e);
+        font-family: 'Fira Sans', system-ui, sans-serif; overflow: hidden;
+    }
+    #cv-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
 
-        .cv-header, .cv-viewer, .cv-actions { position: relative; z-index: 1; }
+    .cv-frame { position: relative; z-index: 1; width: min(94vw, 660px); }
+    .cv-sheet {
+        container-type: inline-size; position: relative; overflow: hidden;
+        width: 100%; aspect-ratio: 1 / 1.414; min-height: 0;
+        background: linear-gradient(160deg, #060d26 0%, #0b1d52 55%, #112a7a 100%);
+        color: #dbe7ff; box-shadow: 0 25px 70px rgba(0,0,0,.6), 0 0 0 1px rgba(120,170,255,.15);
+    }
+    .cv-sheet canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+    .cv-sheet::before, .cv-sheet::after { content: ""; position: absolute; border-radius: 50%; background: rgba(60,130,255,.09); z-index: 0; }
+    .cv-sheet::before { width: 62%; aspect-ratio: 1; top: -8%; right: -22%; }
+    .cv-sheet::after  { width: 70%; aspect-ratio: 1; bottom: -22%; left: -28%; }
 
-        .cv-header { text-align: center; margin-bottom: 24px; }
-        .cv-header h1 { margin: 0 0 6px; font-size: 2rem; color: #1b3a5c; }
-        .cv-header p  { margin: 0; color: #4a6785; }
+    .cv-content { position: relative; z-index: 1; height: 100%; padding: 7cqw 7cqw 5cqw; display: flex; flex-direction: column; }
+    .term { font: 400 1.9cqw 'Fira Code', monospace; color: #22d3ee; }
+    .bar { width: 7cqw; height: .55cqw; background: #22d3ee; margin: 1.4cqw 0 2.2cqw; border-radius: 2px; }
+    h1 { margin: 0; font-weight: 700; font-size: 8.6cqw; line-height: 1.02; color: #fff; }
+    h1 span { color: #7cc4ff; }
+    .sub { margin: 1.6cqw 0 0; font-size: 2.3cqw; font-weight: 300; color: #a9bddf; }
 
-        .cv-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 22px; }
-        .cv-btn {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 11px 22px; border-radius: 999px;
-            font-weight: 600; text-decoration: none;
-            transition: transform .2s ease, box-shadow .2s ease;
-        }
-        .cv-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(27, 58, 92, .2); }
-        .cv-btn-primary { background: #1b6fd1; color: #fff; }
-        .cv-btn-secondary { background: #fff; color: #1b6fd1; border: 2px solid #1b6fd1; }
+    .cols { display: grid; grid-template-columns: 1.25fr 1fr; gap: 5cqw; margin-top: 4.2cqw; flex: 1; }
+    h2 { margin: 0 0 1.2cqw; font: 600 1.9cqw 'Fira Sans'; letter-spacing: .3cqw; text-transform: uppercase; color: #7cc4ff;
+         padding-bottom: .8cqw; border-bottom: 1px solid rgba(124,196,255,.3); }
+    .blk { margin-bottom: 3cqw; }
+    p, li { font-size: 2.05cqw; line-height: 1.5; margin: 0 0 1cqw; color: #dbe7ff; }
+    ul { margin: 0; padding-left: 2.6cqw; }
+    li::marker { color: #22d3ee; }
+    b { color: #fff; font-weight: 600; }
+    .todo { color: #8fa6cf; font-style: italic; }
 
-        .cv-viewer {
-            width: 70%;
-            max-width: 900px;
-            min-width: 300px;
-            height: 80vh;
-            background: #fff;
-            border-radius: 14px;
-            box-shadow: 0 18px 50px rgba(27, 58, 92, .25);
-            overflow: hidden;
-        }
-        .cv-viewer iframe, .cv-viewer object { width: 100%; height: 100%; border: 0; display: block; }
-        .cv-fallback { padding: 40px; text-align: center; color: #1b3a5c; }
+    .foot { display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid rgba(255,255,255,.15); padding-top: 3cqw; }
+    .who b { font-size: 3cqw; display: block; }
+    .who small { font-size: 1.8cqw; color: #a9bddf; }
+    .stats { display: flex; gap: 1.6cqw; }
+    .stat { width: 11.5cqw; padding: 1.8cqw 0; text-align: center; border-radius: 1.4cqw;
+            background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.18); }
+    .stat b { display: block; font-size: 3.4cqw; }
+    .stat small { font-size: 1.45cqw; color: #a9bddf; }
+    .maj { position: absolute; right: 7cqw; bottom: 1.6cqw; font-size: 1.4cqw; color: #7488b0; z-index: 1; }
 
-        @media (max-width: 768px) {
-            .cv-viewer { width: 95%; height: 70vh; }
-        }
-    </style>
+    .cv-actions { position: relative; z-index: 1; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .cv-btn { cursor: pointer; border: 0; padding: 12px 24px; border-radius: 10px; font: 600 15px 'Fira Sans', sans-serif;
+              color: #fff; text-decoration: none; background: linear-gradient(135deg, #1d6fd8, #06b6d4); transition: transform .2s, box-shadow .2s; }
+    .cv-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(6,182,212,.35); }
+
+    @media (max-width: 560px) { .cols { grid-template-columns: 1fr; } .cv-sheet { aspect-ratio: auto; } }
+    @media print {
+        @page { size: A4; margin: 0; }
+        body * { visibility: hidden; }
+        .cv-frame, .cv-frame * { visibility: visible; }
+        .cv-frame { position: fixed; inset: 0; width: 210mm; }
+        .cv-sheet { box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+</style>
 </head>
 <body>
-    <div id="background-container"></div>
-    <div id="navbar-container"></div>
+<div id="background-container"></div>
+<div id="navbar-container"></div>
 
-    <main class="cv-page">
-        <header class="cv-header">
-            <h1>Mon CV</h1>
-            <p>Arnaud Hollebecque — BTS SIO option SISR</p>
-        </header>
+<main class="cv-stage">
+    <canvas id="cv-bg"></canvas>
 
-        <div class="cv-actions">
-            <a class="cv-btn cv-btn-primary" href="documents/cv.pdf" download="CV-Arnaud-Hollebecque.pdf">⬇ Télécharger mon CV</a>
-            <a class="cv-btn cv-btn-secondary" href="documents/cv.pdf" target="_blank" rel="noopener">Ouvrir dans un nouvel onglet</a>
-        </div>
+    <div class="cv-frame" id="cvFrame">
+        <article class="cv-sheet">
+            <canvas id="cv-sheet-bg"></canvas>
+            <div class="cv-content">
+                <div class="term">$ cat mon_cv.txt</div>
+                <div class="bar"></div>
+                <h1>Arnaud<br><span>Hollebecque</span></h1>
+                <p class="sub">Étudiant BTS SIO option SISR · Réseaux · Cybersécurité</p>
 
-        <div class="cv-viewer">
-            <object data="documents/cv.pdf#toolbar=0&navpanes=0" type="application/pdf">
-                <div class="cv-fallback">
-                    <p>Votre navigateur ne peut pas afficher le PDF.</p>
-                    <a class="cv-btn cv-btn-primary" href="documents/cv.pdf" download>Télécharger le CV</a>
+                <div class="cols">
+                    <div>
+                        <div class="blk">
+                            <h2>Profil</h2>
+                            <p>Étudiant en BTS SIO, option Solutions d'Infrastructure, Systèmes et Réseaux. Je conçois et documente des infrastructures complètes en laboratoire. Je recherche un stage / une alternance en administration systèmes et réseaux.</p>
+                        </div>
+                        <div class="blk">
+                            <h2>Formation</h2>
+                            <p><b>BTS SIO option SISR</b> — EPNAK<br>en cours</p>
+                        </div>
+                        <div class="blk">
+                            <h2>Projets</h2>
+                            <ul>
+                                <li><b>Infrastructure Cisco ASA</b> : failover actif/standby, HSRP, VLAN 10/20/99, 2 FAI avec IP SLA</li>
+                                <li><b>Labo GNS3 / VMware</b> : pfSense, Debian, Nextcloud, GLPI, Zabbix, Windows Server 2025</li>
+                                <li><b>Portfolio</b> en ligne sur GitHub</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="blk">
+                            <h2>Compétences</h2>
+                            <ul>
+                                <li>VLAN, HSRP, routage</li>
+                                <li>Pare-feu Cisco ASA</li>
+                                <li>Virtualisation, GNS3</li>
+                                <li>Windows Server, Debian</li>
+                                <li>Supervision, GLPI</li>
+                            </ul>
+                        </div>
+                        <div class="blk">
+                            <h2>Certifications</h2>
+                            <ul>
+                                <li>Cisco CCNA 1 à 3</li>
+                                <li>Cybersécurité Cisco</li>
+                                <li>IBM SkillsBuild</li>
+                                <li>SecNumacadémie ANSSI</li>
+                                <li>CNIL · Pix Indépendant 2</li>
+                            </ul>
+                        </div>
+                        <div class="blk">
+                            <h2>Contact</h2>
+                            <p class="todo">[e-mail à compléter]<br>[téléphone à compléter]<br>GitHub : Arnaud-bts2024</p>
+                        </div>
+                    </div>
                 </div>
-            </object>
-        </div>
-    </main>
 
-    <script src="js/main.js"></script>
-    <script src="js/animations.js"></script>
+                <div class="foot">
+                    <div class="who"><b>Arnaud Hollebecque</b><small>BTS SIO option SISR · EPNAK</small></div>
+                    <div class="stats">
+                        <div class="stat"><b>11</b><small>attestations</small></div>
+                        <div class="stat"><b>5</b><small>organismes</small></div>
+                        <div class="stat"><b>3</b><small>domaines</small></div>
+                    </div>
+                </div>
+            </div>
+            <div class="maj">Mis à jour en novembre 2026</div>
+        </article>
+    </div>
+
+    <div class="cv-actions">
+        <button class="cv-btn" id="btnFull">Plein écran</button>
+        <button class="cv-btn" onclick="window.print()">Télécharger le PDF</button>
+    </div>
+</main>
+
+<script>
+/* Constellation : points reliés par des lignes */
+function constellation(canvas, opts) {
+    var ctx = canvas.getContext('2d'), pts = [], raf;
+    function size() {
+        var r = canvas.getBoundingClientRect(), d = window.devicePixelRatio || 1;
+        canvas.width = r.width * d; canvas.height = r.height * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+        pts = []; var n = Math.round(r.width * r.height / opts.density);
+        for (var i = 0; i < n; i++) pts.push({ x: Math.random() * r.width, y: Math.random() * r.height,
+            vx: (Math.random() - .5) * opts.speed, vy: (Math.random() - .5) * opts.speed });
+        draw(r.width, r.height);
+    }
+    function draw(w, h) {
+        ctx.clearRect(0, 0, w, h);
+        for (var i = 0; i < pts.length; i++) {
+            for (var j = i + 1; j < pts.length; j++) {
+                var dx = pts[i].x - pts[j].x, dy = pts[i].y - pts[j].y, dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < opts.link) { ctx.strokeStyle = 'rgba(110,170,255,' + (.35 * (1 - dist / opts.link)) + ')';
+                    ctx.beginPath(); ctx.moveTo(pts[i].x, pts[i].y); ctx.lineTo(pts[j].x, pts[j].y); ctx.stroke(); }
+            }
+            ctx.fillStyle = 'rgba(150,200,255,.85)'; ctx.beginPath(); ctx.arc(pts[i].x, pts[i].y, 1.4, 0, 6.3); ctx.fill();
+        }
+    }
+    function tick() {
+        var r = canvas.getBoundingClientRect();
+        pts.forEach(function (p) { p.x += p.vx; p.y += p.vy;
+            if (p.x < 0 || p.x > r.width) p.vx *= -1; if (p.y < 0 || p.y > r.height) p.vy *= -1; });
+        draw(r.width, r.height); raf = requestAnimationFrame(tick);
+    }
+    size(); window.addEventListener('resize', size);
+    if (opts.animate && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) tick();
+}
+constellation(document.getElementById('cv-bg'), { density: 9000, speed: .25, link: 130, animate: true });
+constellation(document.getElementById('cv-sheet-bg'), { density: 3200, speed: 0, link: 95, animate: false });
+
+document.getElementById('btnFull').addEventListener('click', function () {
+    var f = document.getElementById('cvFrame');
+    if (document.fullscreenElement) document.exitFullscreen(); else if (f.requestFullscreen) f.requestFullscreen();
+});
+</script>
+<script src="js/main.js"></script>
 </body>
 </html>
