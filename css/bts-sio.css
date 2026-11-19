@@ -1,25 +1,101 @@
-/* Compactage léger pour éviter l'apparition d'un scroll */
-.page-header {
-    margin-bottom: 14px;
+/* Tout faire tenir sur une seule hauteur d'écran sur desktop */
+@media (min-width: 1024px) {
+    html, body {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .main-content {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+
+    .container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        min-height: 0;
+    }
+
+    .page-header {
+        margin-bottom: 10px;
+    }
+
+    .page-title {
+        font-size: 1.75rem;
+        margin-bottom: 4px;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+    }
+
+    .epnak-container {
+        margin-top: 4px;
+    }
+
+    .epnak-logo-img {
+        max-height: 34px;
+        width: auto;
+    }
+
+    .grid-cards {
+        gap: 10px;
+    }
+
+    .card-box {
+        padding: 12px 14px;
+    }
+
+    .card-box h2 {
+        font-size: 0.98rem;
+        margin-bottom: 6px;
+    }
+
+    .card-box p,
+    .card-box li,
+    .card-subtitle {
+        font-size: 0.82rem;
+        line-height: 1.32;
+    }
+
+    .card-box ul {
+        margin-top: 4px;
+        padding-left: 16px;
+    }
+
+    .card-box li {
+        margin-bottom: 2px;
+    }
+
+    .parcours-cta-wrapper {
+        padding: 12px 16px 4px;
+    }
+
+    .btn-arc-en-ciel {
+        padding: 10px 26px;
+        font-size: 0.92rem;
+    }
+
+    .site-footer {
+        padding: 8px 16px;
+        font-size: 0.78rem;
+    }
 }
 
-.epnak-container {
-    margin-top: 8px;
-}
-
-.grid-cards {
-    gap: 14px;
-}
-
-.card-box {
-    padding: 16px 18px;
-}
-
+/* Styles de base du bouton arc-en-ciel (valables sur toutes tailles d'écran) */
 .parcours-cta-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 18px 16px 8px;
+    padding: 16px;
     width: 100%;
 }
 
