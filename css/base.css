@@ -44,14 +44,19 @@ body {
   background: url('../images/fond-ecran.jpg') center / cover no-repeat fixed;
 }
 
-/* Constellation (accueil) : calque animé au-dessus du fond d'écran */
+/* Constellation (accueil) : calque animé, devant le fond d'écran du body.
+   Son fond dégradé reprend les bleus/violets de l'image des autres pages. */
 .constellation {
   position: fixed;
   inset: 0;
-  z-index: 0;              /* devant le fond d'écran du body */
+  z-index: 0;
   pointer-events: none;
-  /* voile sombre : l'image reste visible en texture, l'animation ressort */
-  background: radial-gradient(ellipse at center, rgba(8, 12, 28, 0.55) 0%, rgba(4, 6, 16, 0.88) 100%);
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 100%, rgba(37, 99, 235, 0.75), transparent 72%),
+    radial-gradient(ellipse 55% 50% at 12% 95%, rgba(56, 189, 248, 0.45), transparent 70%),
+    radial-gradient(ellipse 55% 50% at 90% 85%, rgba(79, 70, 229, 0.50), transparent 70%),
+    radial-gradient(ellipse 60% 45% at 50% 30%, rgba(30, 64, 175, 0.35), transparent 72%),
+    linear-gradient(180deg, #0a0626 0%, #0c1650 55%, #0f2a8f 100%);
 }
 
 /* le contenu (menu, titres, bouton) passe au-dessus du calque */
