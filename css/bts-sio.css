@@ -1,8 +1,25 @@
+/* Compactage léger pour éviter l'apparition d'un scroll */
+.page-header {
+    margin-bottom: 14px;
+}
+
+.epnak-container {
+    margin-top: 8px;
+}
+
+.grid-cards {
+    gap: 14px;
+}
+
+.card-box {
+    padding: 16px 18px;
+}
+
 .parcours-cta-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 36px 16px 20px;
+    padding: 18px 16px 8px;
     width: 100%;
 }
 
@@ -11,9 +28,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 14px 32px;
+    padding: 11px 28px;
     font-family: inherit;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: #ffffff;
     text-decoration: none;
