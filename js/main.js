@@ -50,72 +50,32 @@ function initNavbar() {
 }
 
 /**
- * Fenêtre « Êtes-vous sûr de vouloir quitter ce site ? » (liens externes uniquement)
+ * Confirmation « Êtes-vous sûr de vouloir quitter ce site ? »
+ * - Les liens vers d'autres sites s'ouvrent directement (nouvel onglet), sans message.
+ * - Le message ne s'affiche que si l'on quitte réellement le portfolio
+ *   (fermeture de l'onglet/de la fenêtre, saisie d'une autre adresse, retour vers un autre site...).
+ * - Naviguer entre les pages du portfolio ne déclenche pas le message.
  */
 function initLeaveConfirm() {
-    // Style de la fenêtre
-    const style = document.createElement("style");
-    style.textContent = `
-        .leave-overlay {
-            position: fixed; inset: 0; z-index: 99999;
-            display: none; align-items: center; justify-content: center;
-            background: rgba(2, 6, 20, .7); backdrop-filter: blur(4px);
-        }
-        .leave-overlay.open { display: flex; }
-        .leave-box {
-            width: min(92vw, 420px); padding: 28px; border-radius: 18px;
-            background: #0b1534; border: 1px solid rgba(90, 150, 255, .3);
-            color: #e8eefc; font-family: 'Space Grotesk', system-ui, sans-serif;
-            text-align: center; box-shadow: 0 30px 80px rgba(0, 20, 80, .6);
-        }
-        .leave-box h2 { margin: 0 0 8px; font-size: 1.3rem; }
-        .leave-box p { margin: 0 0 22px; color: #9fb2d8; font-size: .95rem; word-break: break-all; }
-        .leave-actions { display: flex; gap: 12px; justify-content: center; }
-        .leave-actions button, .leave-actions a {
-            padding: 10px 26px; border-radius: 999px; font: inherit; font-weight: 700;
-            cursor: pointer; text-decoration: none; border: 1px solid rgba(90, 150, 255, .3);
-        }
-        .leave-yes { background: linear-gradient(100deg, #3d9bff, #00e0ff); color: #04122e; border-color: transparent !important; }
-        .leave-no { background: transparent; color: #e8eefc; }
-    `;
-    document.head.appendChild(style);
+    let internalNavigation = false;
 
-    // Fenêtre
-    const overlay = document.createElement("div");
-    overlay.className = "leave-overlay";
-    overlay.innerHTML = `
-        <div class="leave-box" role="dialog" aria-modal="true" aria-labelledby="leave-title">
-            <h2 id="leave-title">Êtes-vous sûr de vouloir quitter ce site ?</h2>
-            <p id="leave-url"></p>
-            <div class="leave-actions">
-                <a class="leave-yes" id="leave-yes" target="_blank" rel="noopener noreferrer">Oui</a>
-                <button class="leave-no" id="leave-no" type="button">Non</button>
-            </div>
-        </div>`;
-    document.body.appendChild(overlay);
-
-    const yes = overlay.querySelector("#leave-yes");
-    const no = overlay.querySelector("#leave-no");
-    const urlText = overlay.querySelector("#leave-url");
-    const close = () => overlay.classList.remove("open");
-
-    no.addEventListener("click", close);
-    yes.addEventListener("click", close);
-    overlay.addEventListener("click", e => { if (e.target === overlay) close(); });
-    document.addEventListener("keydown", e => { if (e.key === "Escape") close(); });
-
-    // Interception des clics sur les liens externes
+    // Navigation interne (menu, boutons...) : pas de message
     document.addEventListener("click", e => {
         const a = e.target.closest("a[href]");
         if (!a) return;
-        if (a.closest(".leave-overlay")) return;          // ne pas intercepter le bouton « Oui »
         let url;
         try { url = new URL(a.href, location.href); } catch { return; }
-        if (!/^https?:$/.test(url.protocol)) return;      // ignore mailto:, tel:, etc.
-        if (url.hostname === location.hostname) return;   // lien interne : pas de message
+        if (url.origin !== location.origin) return;        // lien externe : géré à part
+        if (a.target === "_blank" || a.hasAttribute("download")) return;
+        internalNavigation = true;
+        // Si la navigation est annulée (ex. Ctrl+clic), on réarme la confirmation
+        setTimeout(() => { internalNavigation = false; }, 1500);
+    });
+
+    // Quitter le portfolio par inattention : demande de confirmation
+    window.addEventListener("beforeunload", e => {
+        if (internalNavigation) return;
         e.preventDefault();
-        urlText.textContent = url.href;
-        yes.href = url.href;
-        overlay.classList.add("open");
+        e.returnValue = "";   // requis par certains navigateurs pour afficher la fenêtre
     });
 }
