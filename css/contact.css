@@ -31,3 +31,76 @@
   border-color: #7dd3fc;
   box-shadow: 0 0 18px rgba(125, 211, 252, 0.7);
 }
+
+/* ==========================================================================
+   Bouton « Prendre un rendez-vous » : même effet arc-en-ciel animé
+   que le bouton « Envie de voir mon parcours ? » (css/bts-sio.css)
+   ========================================================================== */
+
+.btn-rdv {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  border: none;
+  background: transparent;
+  backdrop-filter: none;
+  box-shadow: none;
+  font-weight: 600;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Contour arc-en-ciel animé */
+.btn-rdv::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    #ff2a5f,
+    #ff9f1c,
+    #ffea00,
+    #2ec4b6,
+    #3a86ff,
+    #9b5de5,
+    #ff2a5f
+  );
+  background-size: 300% 300%;
+  animation: arcEnCielRdv 5s linear infinite;
+  z-index: -2;
+}
+
+/* Fond sombre intérieur */
+.btn-rdv::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border-radius: inherit;
+  background: rgba(11, 24, 46, 0.92);
+  z-index: -1;
+  transition: background 0.25s ease;
+}
+
+.btn-rdv:hover {
+  background: transparent;
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 22px rgba(58, 134, 255, 0.45), 0 0 32px rgba(255, 42, 95, 0.25);
+}
+
+.btn-rdv:hover::after {
+  background: rgba(16, 34, 64, 0.82);
+}
+
+.btn-rdv:active {
+  transform: translateY(0) scale(0.99);
+}
+
+@keyframes arcEnCielRdv {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-rdv::before { animation: none; }
+}
