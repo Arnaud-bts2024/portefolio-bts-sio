@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Livret du projet | Arnaud Hollebecque – BTS SIO SISR</title>
+  <meta name="description" content="Livret interactif du projet d'infrastructure réseau d'Arnaud Hollebecque (BTS SIO SISR) : pare-feu Cisco ASA en failover, cœur L3 avec HSRP, VLAN et double accès Internet.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Feuille de style du portfolio (barre de navigation) -->
+  <link rel="stylesheet" href="css/style.css?v=6">
+  <!-- Habillage de la page + pages du livret -->
+  <link rel="stylesheet" href="css/livret-projet.css?v=1">
+</head>
+<body>
+
+  <!-- Navbar du portfolio (injectée par js/main.js) -->
+  <div id="navbar-container"></div>
+
+  <main class="cert-page">
+    <canvas id="cert-canvas" aria-hidden="true"></canvas>
+
+    <!-- ================= HERO ================= -->
+    <header class="cert-hero cert-wrap">
+      <div class="cert-terminal cert-mono" aria-hidden="true">
+        <span id="cert-typed"></span><span class="cert-caret"></span>
+      </div>
+      <h1>Infrastructure <span class="cert-grad">sécurisée et redondante</span></h1>
+      <p class="cert-lead">
+        Deux pare-feu Cisco ASA en failover, un cœur L3 avec HSRP, quatre VLAN et deux accès Internet,
+        simulés sous GNS3. Un livret à feuilleter pour comprendre chaque choix.
+      </p>
+      <p class="cert-id"><strong>Arnaud Hollebecque</strong> · BTS SIO SISR · EPNAK</p>
+      <!-- Chiffres clés : modifie les nombres (data-n) et les libellés si le projet évolue. -->
+      <div class="cert-stats" id="cert-stats">
+        <div class="cert-stat"><b data-n="2">0</b><span>Pare-feu ASA</span></div>
+        <div class="cert-stat"><b data-n="4">0</b><span>VLAN</span></div>
+        <div class="cert-stat"><b data-n="2">0</b><span>Accès Internet</span></div>
+        <div class="cert-stat"><b data-n="auto">0</b><span>Pages à feuilleter</span></div>
+      </div>
+    </header>
+
+    <!-- ================= LIVRE ================= -->
+    <section class="cert-section cert-wrap" id="livre">
+      <h2>Feuillette mon livret</h2>
+      <p class="cert-sub">Présentation, topologie, explication des technologies, configurations, tests de panne, dépannage et questions du jury.</p>
+
+      <div class="cert-bookwrap" id="cert-bookwrap">
+        <div class="cert-stage" id="cert-stage" tabindex="0" aria-label="Livret du projet, utiliser les flèches gauche et droite pour tourner les pages">
+          <div class="cert-loading">Chargement du livret…</div>
+        </div>
+
+        <div class="cert-controls">
+          <button class="cert-btn ghost" id="cert-prev" type="button" aria-label="Page précédente">‹ Précédent</button>
+          <div class="cert-ind cert-mono" id="cert-ind" aria-live="polite">Couverture</div>
+          <button class="cert-btn ghost" id="cert-next" type="button" aria-label="Page suivante">Suivant ›</button>
+          <button class="cert-btn" id="cert-full" type="button" hidden>Plein écran</button>
+          <button class="cert-btn" id="lv-pdf" type="button">Télécharger le PDF</button>
+        </div>
+        <p class="cert-hint"><span class="cert-hint-desktop">Clique sur un coin de page, glisse avec la souris ou utilise les flèches ← → du clavier.</span> Sur mobile, fais glisser la page avec le doigt.</p>
+        <p class="lv-print-hint">Pour le PDF, choisis « Enregistrer au format PDF » dans la fenêtre d'impression (marges : aucune, graphiques d'arrière-plan : activés).</p>
+      </div>
+    </section>
+
+    <!-- ================= CHAPITRES (remplis automatiquement depuis les pages du livret) ================= -->
+    <section class="cert-section cert-wrap" id="chapitres">
+      <h2>Les chapitres du livret</h2>
+      <p class="cert-sub">Ouvre un chapitre directement à sa page dans le livret.</p>
+      <div class="cert-grid" id="cert-grid"></div>
+    </section>
+
+    <!-- ================= CTA ================= -->
+    <div class="cert-wrap">
+      <div class="cert-cta">
+        <h2>Un projet, des compétences</h2>
+        <p>Les certifications Cisco et cybersécurité qui sous-tendent ce projet, et la page de présentation du projet.</p>
+        <a class="cert-btn" href="projets.html">← Retour à Mon Projet</a>
+        <a class="cert-btn" href="certifications.html">Mes certifications →</a>
+        <a class="cert-btn ghost" href="contact.html">Me contacter</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- =====================================================================================
+       PAGES DU LIVRET  (c'est ICI qu'on modifie le livret)
+
+       Une page = un bloc <section class="lv-sheet"> ... </section>   (format 750 x 1000 px)
+
+       • Modifier un texte : change-le directement dans la page concernée.
+       • Ajouter une page   : copie un bloc <section> existant, colle-le à l'endroit voulu
+                              (avant la 4e de couverture), change son titre et son contenu.
+       • Supprimer / déplacer une page : supprime ou déplace le bloc <section>.
+       • Le sommaire, les numéros de page, la liste des chapitres sous le livre et le PDF
+         se mettent à jour tout seuls.
+       • Attributs de chaque page :
+           data-title  = nom de la page (indicateur du livre, accessibilité)
+           data-toc    = titre affiché dans le sommaire (sans cet attribut : absente du sommaire)
+           data-group  = groupe du sommaire : Comprendre / Réseau interne / Pare-feu et Internet / Valider et présenter
+           data-icon, data-desc, data-tags = carte du chapitre sous le livre (sans data-desc : pas de carte)
+       • Blocs de code : <pre class="lv-code"> ... </pre> ; les lignes qui commencent par ! sont
+         grisées automatiquement. Dans le code, écris les commentaires sans accent.
+       • Si le nombre de pages est impair, une page blanche est ajoutée avant la 4e de couverture.
+       • Si un texte dépasse de la page, la console du navigateur (F12) l'indique.
+       ===================================================================================== -->
+  <div id="lv-source">
+
+    <!-- ============ 1. COUVERTURE ============ -->
+    <section class="lv-sheet lv-cover" data-title="Couverture">
+      <div class="lv-cover-inner">
+        <div class="lv-term lv-mono">$ show infrastructure --all</div>
+        <div class="lv-bar"></div>
+        <h1>Infrastructure réseau <em>sécurisée et redondante</em></h1>
+        <p class="lv-subtitle">Pare-feu Cisco ASA en failover · cœur L3 avec HSRP · VLAN · double accès Internet</p>
+      </div>
+      <div class="lv-cover-foot">
+        <div class="lv-cover-id">
+          <b>Arnaud Hollebecque</b>
+          <span>BTS SIO option SISR · EPNAK</span>
+        </div>
+        <div class="lv-tiles">
+          <div class="lv-tile"><b>2</b><span>pare-feu ASA<br>en failover</span></div>
+          <div class="lv-tile"><b>4</b><span>VLAN</span></div>
+          <div class="lv-tile"><b>2</b><span>accès<br>Internet</span></div>
+        </div>
+      </div>
+      <div class="lv-cover-date">Mis à jour en novembre 2026</div>
+    </section>
+
+    <!-- ============ 2. SOMMAIRE (rempli automatiquement) ============ -->
+    <section class="lv-sheet" data-title="Sommaire">
+      <div class="lv-body" style="padding-top:56px">
+        <p class="lv-eyebrow" style="color:#2f7de0">// Sommaire</p>
+        <h2 style="font-size:40px;line-height:1.1;font-weight:700;color:#0a1840;margin:6px 0 6px;letter-spacing:-.01em">Vue d'ensemble</h2>
+        <p class="lv-muted" style="margin-bottom:22px" id="lv-toc-sub">Du besoin de l'entreprise aux tests de panne.</p>
+        <div class="lv-toc" id="lv-toc"></div>
+      </div>
+      <footer class="lv-foot"><span>Arnaud Hollebecque · BTS SIO SISR</span><span class="lv-num"></span></footer>
+    </section>
+
+    <!-- ============ 3. PRÉSENTATION ============ -->
+    <section class="lv-sheet" data-title="Présentation du projet" data-toc="Présentation du projet" data-group="Comprendre"
+             data-icon="🎯" data-desc="Le contexte de l'entreprise fictive, son besoin en trois phrases et les quatre objectifs du projet."
+             data-tags="Contexte,Objectifs,Disponibilité">
+      <header class="lv-band">
+        <p class="lv-eyebrow">// Comprendre le projet</p>
+        <h2>Présentation du projet</h2>
+      </header>
+      <div class="lv-body">
+        <p class="lv-lead">Ce projet reproduit, dans le simulateur <strong>GNS3</strong>, le réseau d'une petite entreprise fictive : un service <strong>Direction</strong> (VLAN 10), un service <strong>Administration / informatique</strong> (VLAN 20) et des <strong>serveurs</strong> (VLAN 99).</p>
+        <div class="lv-chips lv-gap-s">
+          <span class="lv-chip">GLPI · gestion de parc et helpdesk</span>
+          <span class="lv-chip">Nextcloud · partage de fichiers</span>
+          <span class="lv-chip">Windows Server 2025 · annuaire et DNS</span>
+          <span class="lv-chip">Zabbix · supervision</span>
+        </div>
+
+        <h3 class="lv-h3 lv-gap">Le besoin tient en trois phrases</h3>
+        <div class="lv-grid3">
+          <div class="lv-card c-blue"><h4>1 · Toujours en ligne</h4><p>Internet ne doit jamais être coupé.</p></div>
+          <div class="lv-card c-cyan"><h4>2 · Cloisonné</h4><p>Le réseau interne est séparé par service.</p></div>
+          <div class="lv-card c-green"><h4>3 · Résistant</h4><p>La panne d'un équipement unique n'arrête ni les serveurs ni les utilisateurs.</p></div>
+        </div>
+
+        <h3 class="lv-h3 lv-gap">Quatre objectifs</h3>
+        <div class="lv-grid2">
+          <div class="lv-card c-blue"><h4>Disponibilité</h4><p>La panne d'un seul équipement (un ASA, un switch du cœur, un FAI, un câble) ne coupe pas le service.</p></div>
+          <div class="lv-card c-orange"><h4>Sécurité</h4><p>Tout le trafic vers Internet passe par les pare-feu ASA (NAT/PAT, inspection). Chaque service a son VLAN et le trafic entre VLAN peut être filtré par des ACL.</p></div>
+          <div class="lv-card c-cyan"><h4>Simplicité</h4><p>Le routage entre VLAN est fait par les deux switchs L3 du cœur (IOU1 et IOU2), sans routeurs dédiés : moins d'équipements à configurer et à superviser.</p></div>
+          <div class="lv-card c-green"><h4>Exploitation</h4><p>GLPI pour l'inventaire et les tickets, Zabbix pour la supervision, Nextcloud pour le partage de fichiers.</p></div>
+        </div>
+
+        <div class="lv-strip lv-gap">
+          <p class="lv-eyebrow">En résumé</p>
+          <strong>Chaque fonction critique est doublée</strong>
+          <span>Pare-feu · cœur du réseau · accès Internet</span>
+        </div>
+      </div>
+      <footer class="lv-foot"><span>Arnaud Hollebecque · BTS SIO SISR</span><span class="lv-num"></span></footer>
+    </section>
+
+    <!-- ============ 4. MATÉRIEL ET CHOIX TECHNIQUES ============ -->
+    <section class="lv-sheet" data-title="Matériel et choix techniques" data-toc="Matériel et choix techniques" data-group="Comprendre"
+             data-icon="🧰" data-desc="Les nœuds GNS3 utilisés et ce qui a changé par rapport à la première version : routeurs supprimés, VLAN 99, VLAN 100 de transit."
+             data-tags="GNS3,ASAv,IOU">
+      <header class="lv-band">
+        <p class="lv-eyebrow">// Comprendre le projet</p>
+        <h2>Matériel et choix techniques</h2>
+      </header>
+      <div class="lv-body">
+        <h3 class="lv-h3">Ce qui change par rapport à la première version</h3>
+        <ul class="lv-list">
+          <li><strong>Routeurs R1 et R2 supprimés</strong> : IOU1 et IOU2 font le routage (SVI) et la redondance de passerelle (HSRP).</li>
+          <li>Le VLAN des serveurs est le <strong>VLAN 99</strong> (le schéma GNS3 d'origine affichait 90).</li>
+          <li>Un <strong>VLAN 100 de transit</strong> relie les ASA aux IOU.</li>
+          <li>Le routage est <strong>statique</strong> : OSPF n'est plus utilisé (voir le chapitre sur le routage).</li>
+          <li>Le <strong>câblage d'ASA-2</strong> est corrigé, sans quoi le failover ne peut pas fonctionner.</li>
+        </ul>
+
+        <h3 class="lv-h3 lv-gap">Nœuds GNS3 utilisés</h3>
+        <table class="lv-table">
+          <thead><tr><th style="width:21%">Nœud</th><th style="width:30%">Rôle</th><th>Image ou type</th></tr></thead>
+          <tbody>
+            <tr><td>ASA-1, ASA-2</td><td>Pare-feu en failover</td><td>Cisco ASAv (QEMU), au moins 6 adaptateurs : Management0/0 puis Gi0/0 à Gi0/4</td></tr>
+            <tr><td>IOU1, IOU2</td><td>Cœur L3 : routage inter-VLAN, HSRP, root bridge</td><td>IOU L2 (<code>i86bi-linux-l2-adventerprisek9</code>), se comporte en switch multicouche : <code>ip routing</code>, SVI et HSRP</td></tr>
+            <tr><td>IOU3, IOU4</td><td>Switchs côté FAI (un par FAI)</td><td>IOU L2</td></tr>
+            <tr><td>Switch1, 2, 3</td><td>Switchs d'accès (serveurs, admin, direction)</td><td>IOU L2 : le switch Ethernet intégré de GNS3 ne fait pas de spanning tree</td></tr>
+            <tr><td>NAT1</td><td>FAI 1</td><td>Nœud NAT de GNS3 : réseau en DHCP, en général 192.168.122.0/24, passerelle .1</td></tr>
+            <tr><td>Cloud1</td><td>FAI 2</td><td>Nœud Cloud relié à une carte réseau du PC (eth0) : sortie par le réseau de la box</td></tr>
+            <tr><td>Serveurs et postes</td><td>GLPI, Nextcloud, WinServer2025, Zabbix, WIN10, PC1, PC_Direction</td><td>VPCS sur le schéma, à remplacer par les vraies machines virtuelles</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <footer class="lv-foot"><span>Arnaud Hollebecque · BTS SIO SISR</span><span class="lv-num"></span></footer>
+    </section>
+
+    <!-- ============ 5. TOPOLOGIE ============ -->
+    <section class="lv-sheet" data-title="Topologie du réseau" data-toc="Topologie du réseau" data-group="Comprendre"
+             data-icon="🗺️" data-desc="Le schéma du réseau en quatre zones : Internet, pare-feu, cœur et accès, avec le câblage corrigé d'ASA-2."
+             data-tags="Schéma,4 zones,Câblage">
+      <header class="lv-band">
+        <p class="lv-eyebrow">// Comprendre le projet</p>
+        <h2>Le réseau en <em>quatre zones</em></h2>
+      </header>
+      <div class="lv-body" style="padding-top:18px">
+        <figure class="lv-figure">
+          <svg viewBox="0 0 670 540" role="img" aria-label="Topologie : deux FAI, deux ASA en failover, deux switchs de cœur IOU1 et IOU2 en EtherChannel, trois switchs d'accès par VLAN">
+            <!-- Zones -->
+            <rect x="6" y="6" width="658" height="146" rx="12" fill="#eaf2ff"/>
+            <rect x="6" y="176" width="658" height="106" rx="12" fill="#fff1e3"/>
+            <rect x="6" y="306" width="658" height="88" rx="12" fill="#e4f6fb"/>
+            <rect x="6" y="418" width="658" height="118" rx="12" fill="#eef0fb"/>
+            <g font-family="JetBrains Mono, DejaVu Sans Mono, monospace" font-size="9.5" font-weight="600" letter-spacing="1" fill="#6c7fa8">
+              <text x="16" y="24">INTERNET</text><text x="16" y="194">PARE-FEU</text>
+              <text x="16" y="324">CŒUR L3</text><text x="16" y="436">ACCÈS</text>
+            </g>
+
+            <!-- Liaisons FAI 1 (cyan) et FAI 2 (orange, pointillé) -->
+            <g stroke-width="2.4" fill="none" stroke-linecap="round">
+              <line x1="170" y1="52" x2="170" y2="102" stroke="#00a9d6"/>
+              <line x1="500" y1="52" x2="500" y2="102" stroke="#e8863a" stroke-dasharray="6 4"/>
+              <line x1="140" y1="138" x2="185" y2="206" stroke="#00a9d6"/>
+              <line x1="200" y1="138" x2="415" y2="206" stroke="#00a9d6"/>
+              <line x1="445" y1="138" x2="255" y2="206" stroke="#e8863a" stroke-dasharray="6 4"/>
+              <line x1="470" y1="138" x2="485" y2="206" stroke="#e8863a" stroke-dasharray="6 4"/>
+            </g>
+            <!-- Failover + état (violet) -->
+            <g stroke="#6b4de0" stroke-width="2.4" stroke-linecap="round">
+              <line x1="290" y1="222" x2="380" y2="222"/><line x1="290" y1="238" x2="380" y2="238"/>
+            </g>
+            <!-- ASA vers cœur (VLAN 100, bleu) -->
+            <g stroke="#2f7de0" stroke-width="2.4" stroke-linecap="round">
+              <line x1="220" y1="252" x2="220" y2="324"/><line x1="450" y1="252" x2="450" y2="324"/>
+            </g>
+            <!-- EtherChannel -->
+            <g stroke="#2f7de0" stroke-width="2.4" stroke-linecap="round">
+              <line x1="290" y1="336" x2="380" y2="336"/><line x1="290" y1="352" x2="380" y2="352"/>
+            </g>
+            <!-- Uplinks d'accès -->
+            <g stroke="#7f93bd" stroke-width="1.6" fill="none" stroke-linecap="round">
+              <line x1="75" y1="440" x2="170" y2="364"/><line x1="115" y1="440" x2="400" y2="364"/>
+              <line x1="315" y1="440" x2="220" y2="364"/><line x1="355" y1="440" x2="450" y2="364"/>
+              <line x1="555" y1="440" x2="270" y2="364"/><line x1="595" y1="440" x2="500" y2="364"/>
+            </g>
+
+            <!-- Zones VLAN -->
+            <rect x="28" y="426" width="134" height="102" rx="10" fill="#d9d9ff" stroke="#9a9af0"/>
+            <rect x="268" y="426" width="134" height="102" rx="10" fill="#cdf3f7" stroke="#7fd3de"/>
+            <rect x="508" y="426" width="134" height="102" rx="10" fill="#d4f5c3" stroke="#92d778"/>
+
+            <!-- Nœuds -->
+            <g font-family="Fira Sans, Arial, sans-serif" text-anchor="middle">
+              <g fill="#fff" stroke="#00a9d6" stroke-width="1.6"><rect x="105" y="16" width="130" height="36" rx="18"/></g>
+              <g fill="#fff" stroke="#e8863a" stroke-width="1.6"><rect x="435" y="16" width="130" height="36" rx="18"/></g>
+              <text x="170" y="38" font-size="12.5" font-weight="700" fill="#0a1840">NAT1 · FAI 1</text>
+              <text x="500" y="38" font-size="12.5" font-weight="700" fill="#0a1840">Cloud1 · FAI 2</text>
+
+              <g fill="#fff" stroke="#7f93bd" stroke-width="1.6"><rect x="105" y="102" width="130" height="36" rx="9"/><rect x="435" y="102" width="130" height="36" rx="9"/></g>
+              <text x="170" y="125" font-size="12.5" font-weight="700" fill="#0a1840">IOU3</text>
+              <text x="500" y="125" font-size="12.5" font-weight="700" fill="#0a1840">IOU4</text>
+
+              <g fill="#0d2160"><rect x="150" y="206" width="140" height="46" rx="10"/><rect x="380" y="206" width="140" height="46" rx="10"/></g>
+              <text x="220" y="227" font-size="13" font-weight="700" fill="#fff">ASA-1</text><text x="220" y="243" font-size="10" fill="#9fb8f0">primaire · actif</text>
+              <text x="450" y="227" font-size="13" font-weight="700" fill="#fff">ASA-2</text><text x="450" y="243" font-size="10" fill="#9fb8f0">secondaire · standby</text>
+
+              <g fill="#fff" stroke="#2f7de0" stroke-width="2"><rect x="150" y="324" width="140" height="40" rx="10"/><rect x="380" y="324" width="140" height="40" rx="10"/></g>
+              <text x="220" y="349" font-size="13" font-weight="700" fill="#0a1840">IOU2</text>
+              <text x="450" y="349" font-size="13" font-weight="700" fill="#0a1840">IOU1</text>
+
+              <g fill="#fff" stroke="#7f93bd" stroke-width="1.6"><rect x="40" y="440" width="110" height="34" rx="8"/><rect x="280" y="440" width="110" height="34" rx="8"/><rect x="520" y="440" width="110" height="34" rx="8"/></g>
+              <text x="95" y="461" font-size="12" font-weight="700" fill="#0a1840">Switch3</text>
+              <text x="335" y="461" font-size="12" font-weight="700" fill="#0a1840">Switch2</text>
+              <text x="575" y="461" font-size="12" font-weight="700" fill="#0a1840">Switch1</text>
+
+              <g font-size="10.5" fill="#26345c">
+                <text x="95" y="492">PC_Direction</text>
+                <text x="335" y="492">WIN10 · PC1</text>
+                <text x="575" y="487">GLPI · Nextcloud</text><text x="575" y="500">WinServer 2025 · Zabbix</text>
+              </g>
+              <g font-size="10.5" font-weight="700" fill="#3b3bb5"><text x="95" y="518">VLAN 10 · Direction</text></g>
+              <g font-size="10.5" font-weight="700" fill="#0b7c8c"><text x="335" y="518">VLAN 20 · Admin</text></g>
+              <g font-size="10.5" font-weight="700" fill="#3f8a1f"><text x="575" y="518">VLAN 99 · Serveurs</text></g>
+
+              <!-- Étiquettes des liens -->
+              <g font-size="9.5" fill="#5b6b8f">
+                <text x="335" y="216" fill="#6b4de0" font-weight="600">FOLINK · Gi0/3</text>
+                <text x="335" y="256" fill="#6b4de0" font-weight="600">STATELINK · Gi0/4</text>
+                <text x="220" y="300" text-anchor="end" dx="-6">Gi0/0 → e0/2</text>
+                <text x="220" y="313" text-anchor="end" dx="-6">VLAN 100</text>
+                <text x="450" y="300" dx="6" text-anchor="start">Gi0/0 → e0/2</text>
+                <text x="450" y="313" dx="6" text-anchor="start">VLAN 100</text>
+                <text x="335" y="330" fill="#2f7de0" font-weight="600">Port-channel 1</text>
+                <text x="335" y="372" fill="#2f7de0" font-weight="600">LACP · e0/1 + e0/3</text>
+                <text x="162" y="75" text-anchor="end">e0/2</text>
+                <text x="508" y="75" text-anchor="start">e0/2</text>
+              </g>
+            </g>
+          </svg>
+          <figcaption>Câblage tel qu'il doit être après correction : Gi0/1 des deux ASA sur le FAI 1, Gi0/2 sur le FAI 2.</figcaption>
+        </figure>
+
+        <div class="lv-chips lv-gap-s" style="justify-content:center">
+          <span class="lv-chip" style="border-color:#00a9d6;color:#006f8c">━ FAI 1 (principal)</span>
+          <span class="lv-chip" style="border-color:#e8863a;color:#a85a14">╌ FAI 2 (secours)</span>
+          <span class="lv-chip" style="border-color:#6b4de0;color:#4a2fb8">━ failover et état</span>
+          <span class="lv-chip">━ VLAN 100 et EtherChannel</span>
+        </div>
+
+        <div class="lv-grid2 lv-gap-s lv-small" style="gap:6px 18px">
+          <p><strong>Internet</strong> : deux FAI (NAT1 et Cloud1), chacun isolé par un switch (IOU3 et IOU4).</p>
+          <p><strong>Pare-feu</strong> : deux ASA reliés aux deux FAI et entre eux.</p>
+          <p><strong>Cœur</strong> : IOU1 et IOU2, reliés en EtherChannel, qui routent entre les VLAN.</p>
+          <p><strong>Accès</strong> : trois switchs, un par VLAN, chacun relié aux deux switchs du cœur.</p>
+        </div>
+      </div>
+      <footer class="lv-foot"><span>Arnaud Hollebecque · BTS SIO SISR</span><span class="lv-num"></span></footer>
+    </section>
+
+    <!-- ============ 6. LIAISONS ============ -->
+    <section class="lv-sheet" data-title="Tableau des liaisons" data-toc="Tableau des liaisons" data-group="Comprendre"
+             data-icon="🔌" data-desc="Toutes les liaisons du réseau, port par port, et la correction de câblage à faire sur ASA-2 pour que le failover fonctionne."
+             data-tags="Câblage,Ports,ASA-2">
+      <header class="lv-band">
+        <p class="lv-eyebrow">// Comprendre le projet</p>
+        <h2>Tableau des <em>liaisons</em></h2>
+      </header>
+      <div class="lv-body" style="padding-top:20px">
+        <table class="lv-table tight">
+          <thead><tr><th style="width:19%">Liaison</th><th style="width:25%">Extrémité A</th><th style="width:25%">Extrémité B</th><th>Rôle</th></tr></thead>
+          <tbody>
+            <tr><td>FAI 1</td><td>NAT1 nat0</td><td>IOU3 e0/2</td><td>Accès Internet principal</td></tr>
+            <tr><td>FAI 2</td><td>Cloud1 eth0</td><td>IOU4 e0/2</td><td>Accès de secours</td></tr>
+            <tr><td>Outside</td><td>ASA-1 Gi0/1</td><td>IOU3 e0/0</td><td>Réseau du FAI 1</td></tr>
+            <tr><td>Outside</td><td>ASA-2 Gi0/1</td><td>IOU3 e0/1</td><td>Réseau du FAI 1</td></tr>
+            <tr><td>Outside backup</td><td>ASA-1 Gi0/2</td><td>IOU4 e0/1</td><td>Réseau du FAI 2</td></tr>
+            <tr><td>Outside backup</td><td>ASA-2 Gi0/2</td><td>IOU4 e0/0</td><td>Réseau du FAI 2</td></tr>
+            <tr><td>Inside</td><td>ASA-1 Gi0/0</td><td>IOU2 e0/2</td><td>VLAN 100 (transit)</td></tr>
+            <tr><td>Inside</td><td>ASA-2 Gi0/0</td><td>IOU1 e0/2</td><td>VLAN 100 (transit)</td></tr>
+            <tr><td>Lien failover</td><td>ASA-1 Gi0/3</td><td>ASA-2 Gi0/3</td><td>Messages de surveillance</td></tr>
+            <tr><td>Lien d'état</td><td>ASA-1 Gi0/4</td><td>ASA-2 Gi0/4</td><td>Copie des sessions</td></tr>
+            <tr><td>EtherChannel</td><td>IOU1 e0/1 et e0/3</td><td>IOU2 e0/1 et e0/3</td><td>Trunk LACP entre les cœurs</td></tr>
+            <tr><td>Serveurs</td><td>Switch1 e4</td><td>IOU1 e0/0</td><td>Uplink VLAN 99</td></tr>
+            <tr><td>Serveurs</td><td>Switch1 e5</td><td>IOU2 e1/1</td><td>Uplink VLAN 99</td></tr>
+            <tr><td>Admin</td><td>Switch2 e2</td><td>IOU1 e1/0</td><td>Uplink VLAN 20</td></tr>
+            <tr><td>Admin</td><td>Switch2 e3</td><td>IOU2 e1/0</td><td>Uplink VLAN 20</td></tr>
+            <tr><td>Direction</td><td>Switch3 e1</td><td>IOU2 e0/0</td><td>Uplink VLAN 10</td></tr>
+            <tr><td>Direction</td><td>Switch3 e2</td><td>IOU1 e1/1</td><td>Uplink VLAN 10</td></tr>
+          </tbody>
+        </table>
+
+        <div class="lv-note warn lv-gap-s">
+          <b>Important</b>
+          <div>Le failover associe les interfaces <strong>par leur nom</strong> : Gi0/1 d'ASA-1 et Gi0/1 d'ASA-2 doivent être sur le même réseau. Sur le schéma d'origine, ASA-2 était câblé dans l'autre sens et la bascule n'aurait pas fonctionné. Les deux câbles d'ASA-2 sont donc déplacés : <code>Gi0/1</code> vers <code>IOU3 e0/1</code> et <code>Gi0/2</code> vers <code>IOU4 e0/0</code>.</div>
+        </div>
+        <p class="lv-small lv-gap-s"><strong>Pourquoi les deux ASA sont-ils reliés aux deux FAI ?</strong> Parce que, quel que soit l'ASA actif, il doit pouvoir sortir par l'un ou l'autre FAI : si ASA-1 tombe, ASA-2 reprend l'IP outside et envoie le trafic vers le même switch de FAI.</p>
+      </div>
+      <footer class="lv-foot"><span>Arnaud Hollebecque · BTS SIO SISR</span><span class="lv-num"></span></footer>
+    </section>
+
+    <!-- ============ 7. NOTIONS CLÉS (1/2) ============ -->
+    <section class="lv-sheet" data-title="Notions clés (1/2)" data-toc="Notions clés (1/2) : réseau interne" data-group="Comprendre"
+             data-icon="📚" data-desc="Le glossaire du réseau interne : VLAN, trunk, EtherChannel, spanning tree, SVI et HSRP, expliqués puis reliés au projet."
+             data-tags="VLAN,STP,HSRP">
+      <header class="lv-band">
+        <p class="lv-eyebrow">// Notions clés · 1/2</p>
+        <h2>Le réseau interne <em>expliqué</em></h2>
+      </header>
+      <div class="lv-body">
+        <div class="lv-grid2" style="gap:12px">
+          <div class="lv-card c-blue"><h4>VLAN</h4><p>Réseau local virtuel : un switch physique est découpé en plusieurs réseaux logiques isolés. Deux machines de VLAN différents ne se voient pas sans passer par un routeur.</p><span class="lv-tag">VLAN 10 Direction, 20 Admin, 99 Serveurs, 100 Transit</span></div>
+          <div class="lv-card c-cyan"><h4>Trunk 802.1Q et port d'accès</h4><p>Le trunk transporte plusieurs VLAN sur un seul câble : chaque trame porte une étiquette. Un port d'accès appartient à un seul VLAN et ne porte pas d'étiquette.</p><span class="lv-tag">Trunks entre switchs, ports d'accès vers PC, serveurs et ASA</span></div>
+          <div class="lv-card c-violet"><h4>EtherChannel / LACP</h4><p>Regroupe plusieurs câbles en un seul lien logique : plus de débit, et le lien survit à la panne d'un câble. LACP (802.3ad) négocie ce regroupement.</p><span class="lv-tag">Port-channel 1 entre IOU1 et IOU2 (e0/1 + e0/3)</span></div>
+          <div class="lv-card c-green"><h4>Spanning tree et Rapid-PVST+</h4><p>Évite les boucles de niveau 2 : un root bridge est élu et les liens en trop sont bloqués. Rapid-PVST+ converge en quelques secondes, avec un root différent possible par VLAN.</p><span class="lv-tag">IOU1 root des VLAN 10, 99, 100 · IOU2 root du VLAN 20</span></div>
+          <div class="lv-card c-orange"><h4>SVI</h4><p>Interface virtuelle d'un VLAN sur un switch L3. Elle porte l'adresse IP de passerelle du VLAN et permet de router entre VLAN.</p><span class="lv-tag">Vlan10, Vlan20, Vlan99, Vlan100 sur IOU1 et IOU2</span></div>
+          <div class="lv-card c-blue"><h4>HSRP</h4><p>Protocole Cisco qui fait partager une adresse IP virtuelle (la passerelle) à deux équipements. L'un est Active, l'autre Standby : si l'Active tombe, le Standby reprend la même IP.</p><span class="lv-tag">Passerelles 192.168.10.1, .20.1, .99.1 et 10.0.100.5</span></div>
+        </div>
+        <div class="lv-note lv-gap">
+          <b>Pour l'oral</b>
+          <div>Cette section sert de glossaire : le jury demande souvent pourquoi tel mécanisme a été choisi. Chaque notion est reliée à ce qu'elle fait concrètement dans le projet.</div>
+        </div>
+      </div>
+      <footer class="lv-foot"><span>Arnaud Hollebecque · BTS SIO SISR</span><span class="lv-num"></span></footer>
+    </section>
+
+    <!-- ============ 8. NOTIONS CLÉS (2/2) ============ -->
+    <section class="lv-sheet" data-title="Notions clés (2/2)" data-toc="Notions clés (2/2) : pare-feu et Internet" data-group="Comprendre"
+             data-icon="🛡️" data-desc="Le glossaire du pare-feu et d'Internet : failover, liens d'état, NAT/PAT, IP SLA, route flottante et routage statique."
+             data-tags="Failover,NAT,IP SLA">
+      <header class="lv-band">
+        <p class="lv-eyebrow">// Notions clés · 2/2</p>
+        <h2>Pare-feu et Internet <em>expliqués</em></h2>
+      </header>
+      <div class="lv-body">
+        <div class="lv-grid2" style="gap:12px">
+          <div class="lv-card c-orange"><h4>Failover ASA actif / standby</h4><p>Deux pare-feu identiques : un seul traite le trafic, l'autre le surveille et prend le relais en cas de panne. Ils partagent la même configuration et les mêmes adresses IP (IP active et IP standby).</p><span class="lv-tag">ASA-1 primaire, ASA-2 secondaire</span></div>
+          <div class="lv-card c-violet"><h4>Lien de failover et lien d'état</h4><p>Le lien de failover (FOLINK) porte les messages « je suis vivant ». Le lien d'état (STATELINK) copie la table des connexions pour que les sessions en cours survivent à la bascule.</p><span class="lv-tag">ASA Gi0/3 (FOLINK) et Gi0/4 (STATELINK)</span></div>
+          <div class="lv-card c-blue"><h4>NAT / PAT</h4><p>Traduction des adresses privées en adresse publique. Avec le PAT, des centaines de machines partagent une seule adresse publique grâce aux numéros de port.</p><span class="lv-tag">Le trafic interne sort avec l'IP de l'interface outside</span></div>
+          <div class="lv-card c-cyan"><h4>IP SLA et track</h4><p>L'IP SLA envoie un test régulier (ici un ping vers 8.8.8.8). Le track traduit le résultat en « vrai / faux » et peut activer ou retirer une route.</p><span class="lv-tag">Détecte la panne du FAI 1</span></div>
+          <div class="lv-card c-green"><h4>Route flottante</h4><p>Route de secours avec une distance administrative plus élevée (100 au lieu de 1). Elle n'est utilisée que si la route principale disparaît.</p><span class="lv-tag">Route par défaut vers le FAI 2</span></div>
+          <div class="lv-card c-blue"><h4>Routage statique</h4><p>Routes écrites à la main : simples et prévisibles, adaptées à un petit réseau avec une seule sortie.</p><span class="lv-tag">Routes par défaut des IOU, routes de retour des ASA</span></div>
+        </div>
+      </div>
+      <footer class="lv-foot"><span>Arnaud Hollebecque · BTS SIO SISR</span><span class="lv-num"></span></footer>
+    </section>
+
+    <!-- ============ 9. ADRESSAGE ============ -->
+    <section class="lv-sheet" data-title="Plan d'adressage et VLAN" data-toc="Plan d'adressage et VLAN" data-group="Réseau interne"
+             data-icon="🧮" data-desc="Les quatre VLAN, leurs passerelles HSRP, le rôle du VLAN 100 de transit et les adresses de tous les équipements."
+             data-tags="VLAN 10/20/99/100,HSRP,/29">
+      <header class="lv-band">
+        <p class="lv-eyebrow">// Réseau interne</p>
+        <h2>Plan d'adressage et <em>VLAN</em></h2>
+      </header>
+      <div class="lv-body" style="padding-top:20px">
+        <h3 class="lv-h3">Les quatre VLAN</h3>
+        <table class="lv-table">
+          <thead><tr><th>VLAN</th><th>Nom</th><th>Réseau</th><th>Passerelle HSRP</th><th>IOU1</th><th>IOU2</th><th>HSRP actif</th></tr></thead>
+          <tbody>
+            <tr><td>10</td><td>DIRECTION</td><td><code>192.168.10.0/24</code></td><td><code>192.168.10.1</code></td><td>.2</td><td>.3</td><td>IOU1</td></tr>
+            <tr><td>20</td><td>ADMIN</td><td><code>192.168.20.0/24</code></td><td><code>192.168.20.1</code></td><td>.2</td><td>.3</td><td>IOU2</td></tr>
+            <tr><td>99</td><td>SERVEURS</td><td><code>192.168.99.0/24</code></td><td><code>192.168.99.1</code></td><td>.2</td><td>.3</td><td>IOU1</td></tr>
+            <tr><td>100</td><td>TRANSIT-ASA</td><td><code>10.0.100.0/29</code></td><td><code>10.0.100.5</code></td><td>.3</td><td>.4</td><td>IOU1</td></tr>
+          </tbody>
+        </table>
+
+        <div class="lv-note lv-gap-s">
+          <b>VLAN 100</b>
+          <div>Un <strong>VLAN de transit</strong> : il ne contient que les interfaces inside des ASA et les SVI des IOU. Les deux ASA étant branchés sur deux switchs différents, il leur faut un réseau commun de niveau 2, étendu sur le trunk entre les cœurs.</div>
+        </div>
+        <p class="lv-small lv-gap-s">Le masque /29 offre 6 adresses : <code>10.0.100.1</code> (ASA actif), <code>.2</code> (ASA standby), <code>.3</code> (IOU1), <code>.4</code> (IOU2) et <code>.5</code> (IP virtuelle HSRP). Une adresse reste libre (<code>.6</code>). Dans les VLAN utilisateurs, la passerelle virtuelle est toujours <code>.1</code>, IOU1 prend <code>.2</code> et IOU2 <code>.3</code> : on retrouve les adresses sans documentation.</p>
+
+        <h3 class="lv-h3 lv-gap">Adresses des autres équipements</h3>
+        <table class="lv-table tight">
+          <thead><tr><th style="width:27%">Équipement</th><th style="width:30%">Adresse</th><th>Remarque</th></tr></thead>
+          <tbody>
+            <tr><td>ASA inside (Gi0/0)</td><td><code>10.0.100.1/29</code></td><td>Standby : 10.0.100.2</td></tr>
+            <tr><td>ASA outside (Gi0/1)</td><td><code>192.168.122.10/24</code></td><td>Standby .11, passerelle 192.168.122.1</td></tr>
+            <tr><td>ASA outside_backup (Gi0/2)</td><td><code>192.168.1.10/24</code></td><td>Standby .11, passerelle 192.168.1.1</td></tr>
+            <tr><td>Lien failover (Gi0/3)</td><td><code>10.0.254.1/30</code></td><td>Standby : 10.0.254.2</td></tr>
+            <tr><td>Lien d'état (Gi0/4)</td><td><code>10.0.253.1/30</code></td><td>Standby : 10.0.253.2</td></tr>
+            <tr><td>Serveurs (VLAN 99)</td><td><code>192.168.99.10 à .13</code></td><td>GLPI .10 · Nextcloud .11 · Windows Server .12 · Zabbix .13</td></tr>
+            <tr><td>Postes Admin (VLAN 20)</td><td><code>192.168.20.10 et .11</code></td><td>WIN10 (PC_ADMIN) .10 · PC1 .11</td></tr>
+            <tr><td>PC_Direction (VLAN 10)</td><td><code>192.168.10.10/24</code></td><td>Passerelle 192.168.10.1</td></tr>
+          </tbody>
+        </table>
+        <p class="lv-small lv-muted lv-gap-s">Les réseaux des FAI dépendent de GNS3 : 192.168.122.0/24 est la valeur habituelle du nœud NAT et 192.168.1.0/24 un exemple pour la box.</p>
+      </div>
+      <footer class="lv-foot"><span>Arnaud Hollebecque · BTS SIO SISR</span><span class="lv-num"></span></footer>
+    </section>
+
+    <!-- ============ 10. COUCHE 2 ============ -->
+    <section class="lv-sheet" data-title="Couche 2 : EtherChannel et spanning tree" data-toc="Couche 2 : EtherChannel et spanning tree" data-group="Réseau interne"
+             data-icon="🔀" data-desc="Découper (VLAN), regrouper (EtherChannel LACP) et éviter les boucles (Rapid-PVST+, PortFast, BPDU Guard, Root Guard)."
+             data-tags="LACP,Rapid-PVST+,BPDU Guard">
+      <header class="lv-band">
+        <p class="lv-eyebrow">// Réseau interne · couche 2</p>
+        <h2>EtherChannel et <em>spanning tree</em></h2>
+      </header>
+      <div class="lv-body" style="padding-top:18px">
+        <div class="lv-grid2" style="gap:12px">
+          <div class="lv-card c-violet"><h4>EtherChannel LACP</h4><p>IOU1 et IOU2 sont reliés par deux câbles (e0/1 et e0/3). Sans EtherChannel, le spanning tree en bloquerait un. Avec LACP, ils forment un seul lien, Port-channel 1 : si un câble tombe, l'autre continue sans reconvergence.</p></div>
+          <div class="lv-card c-green"><h4>Spanning tree</h4><p>Chaque switch d'accès est branché sur IOU1 et IOU2, qui sont reliés entre eux : c'est un triangle, donc une boucle. Sans spanning tree, une trame de diffusion tournerait indéfiniment (tempête de diffusion).</p></div>
+        </div>
+
+        <h3 class="lv-h3 lv-gap-s" style="margin-top:14px">Un root bridge par VLAN</h3>
+        <table class="lv-table tight">
+          <thead><tr><th>VLAN</th><th>Root bridge</th><th>Root secondaire</th><th>HSRP actif</th></tr></thead>
+          <tbody>
+            <tr><td>10</td><td>IOU1</td><td>IOU2</td><td>IOU1</td></tr>
+            <tr><td>20</td><td>IOU2</td><td>IOU1</td><td>IOU2</td></tr>
+            <tr><td>99</td><td>IOU1</td><td>IOU2</td><td>IOU1</td></tr>
+            <tr><td>100</td><td>IOU1</td><td>IOU2</td><td>IOU1</td></tr>
+          </tbody>
+        </table>
+        <div class="lv-note ok lv-gap-s">
+          <b>À retenir</b>
+          <div>Le root bridge d'un VLAN doit être le même switch que le HSRP actif de ce VLAN. Sinon le trafic ferait un détour inutile sur le lien entre les cœurs.</div>
+        </div>
+
+        <div class="lv-grid3 lv-gap-s">
+          <div class="lv-card c-cyan" style="padding-top:9px;padding-bottom:9px"><h4 style="font-size:13px">PortFast</h4><p style="font-size:11.5px">Ports vers postes, serveurs et ASA : le port passe en transmission tout de suite.</p></div>
+          <div class="lv-card c-orange" style="padding-top:9px;padding-bottom:9px"><h4 style="font-size:13px">BPDU Guard</h4><p style="font-size:11.5px">Un switch branché sur un port d'accès coupe le port (err-disabled).</p></div>
+          <div class="lv-card c-blue" style="padding-top:9px;padding-bottom:9px"><h4 style="font-size:13px">Root Guard</h4><p style="font-size:11.5px">Ports du cœur vers les switchs d'accès : interdit de devenir root.</p></div>
+        </div>
+
+        <p class="lv-code-title lv-gap-s" style="margin-top:14px">Extrait de configuration d'IOU1</p>
+        <pre class="lv-code">
+          spanning-tree mode rapid-pvst
+          spanning-tree vlan 10,99,100 root primary
+          spanning-tree vlan 20 root secondary
+          !
+          interface range Ethernet0/1 , Ethernet0/3
+           switchport trunk encapsulation dot1q
+           switchport mode trunk
+           channel-group 1 mode active
+          !
+          interface Port-channel1
+           description Trunk vers IOU2
+           switchport trunk allowed vlan 10,20,99,100
+        </pre>
+        <div class="lv-chips lv-gap-s">
+          <span class="lv-chip">show vlan brief</span><span class="lv-chip">show interfaces trunk</span>
+          <span class="lv-chip">show etherchannel summary</span><span class="lv-chip">show spanning-tree vlan 99</span>
+        </div>
+      </div>
+      <footer class="lv-foot"><span>Arnaud Hollebecque · BTS SIO SISR</span><span class="lv-num"></span></footer>
+    </section>
+
+    <!-- ============ 11. CŒUR L3 ============ -->
+    <section class="lv-sheet" data-title="Cœur L3 : SVI et HSRP" data-toc="Cœur L3 : SVI et HSRP" data-group="Réseau interne"
+             data-icon="🧠" data-desc="IOU1 et IOU2 remplacent les routeurs : une SVI par VLAN pour router, HSRP pour que la passerelle survive à une panne."
+             data-tags="SVI,HSRP,Inter-VLAN">
+      <header class="lv-band">
+        <p class="lv-eyebrow">// Réseau interne · couche 3</p>
+        <h2>Cœur L3 : <em>SVI et HSRP</em></h2>
+      </header>
+      <div class="lv-body" style="padding-top:18px">
+        <div class="lv-grid2" style="gap:12px">
+          <div class="lv-card c-orange"><h4>Les SVI</h4><p>Elles donnent à chaque VLAN une adresse IP sur le switch : c'est la passerelle. Le switch route alors tout seul entre deux VLAN qu'il connaît directement.</p></div>
+          <div class="lv-card c-blue"><h4>HSRP</h4><p>IOU1 et IOU2 partagent une adresse IP virtuelle par VLAN : les postes l'utilisent comme passerelle et ne remarquent rien si un switch tombe.</p></div>
+        </div>
+
+        <h3 class="lv-h3 lv-gap-s" style="margin-top:14px">Comment fonctionne HSRP</h3>
+        <ul class="lv-list">
+          <li>Pour chaque groupe (10, 20, 99, 100), les deux switchs échangent des « hello » toutes les <strong>3 secondes</strong>. Le plus prioritaire est <strong>Active</strong>, l'autre <strong>Standby</strong>.</li>
+          <li>Si l'Active ne répond plus pendant <strong>10 secondes</strong>, le Standby reprend l'IP virtuelle et sa MAC virtuelle : les postes gardent leur passerelle.</li>
+          <li><code>priority 110</code> bat la priorité par défaut (100) ; <code>preempt</code> rend son rôle au switch prioritaire dès son retour ; <code>standby version 2</code> doit être identique des deux côtés.</li>
+        </ul>
+
+        <p class="lv-code-title" style="margin-top:14px">Extrait de configuration d'IOU1</p>
+        <pre class="lv-code">
+          ip routing
+          !
+          interface Vlan10
+           description GW DIRECTION
+           ip address 192.168.10.2 255.255.255.0
+           standby version 2
+           standby 10 ip 192.168.10.1
+           standby 10 priority 110
+           standby 10 preempt
+           no shutdown
+          !
+          ! Vlan20 (priorite 100) et Vlan99 (priorite 110) : meme principe
+          interface Vlan100
+           description TRANSIT vers ASA
+           ip address 10.0.100.3 255.255.255.248
+           standby version 2
+           standby 100 ip 10.0.100.5
+           standby 100 priority 110
+           standby 100 preempt
+           no shutdown
+          !
+          ip route 0.0.0.0 0.0.0.0 10.0.100.1
+        </pre>
+        <p class="lv-small lv-gap-s"><strong>IOU2</strong> a les mêmes SVI en <code>.3</code> (et <code>10.0.100.4</code> pour le VLAN 100), avec les priorités inversées : 110 pour le VLAN 20, 100 pour les autres.</p>
+        <div class="lv-chips lv-gap-s">
+          <span class="lv-chip">show standby brief</span><span class="lv-chip">show ip interface brief</span><span class="lv-chip">show ip route</span>
+        </div>
+      </div>
+      <footer class="lv-foot"><span>Arnaud Hollebecque · BTS SIO SISR</span><span class="lv-num"></span></footer>
+    </section>
+
+    <!-- ============ 12. FILTRAGE ET ROUTAGE ============ -->
+    <section class="lv-sheet" data-title="Filtrage entre VLAN et routage statique" data-toc="Filtrage entre VLAN et routage statique" data-group="Réseau interne"
+             data-icon="🧱" data-desc="Une ACL pour limiter la Direction aux services utiles, les routes du projet et pourquoi OSPF n'est pas nécessaire."
+             data-tags="ACL,Routes statiques,OSPF">
+      <header class="lv-band">
+        <p class="lv-eyebrow">// Réseau interne</p>
+        <h2>Filtrage entre VLAN et <em>routage statique</em></h2>
+      </header>
+      <div class="lv-body" style="padding-top:18px">
+        <h3 class="lv-h3">Filtrer le trafic entre VLAN</h3>
+        <p class="lv-small">Le trafic entre VLAN est routé par les IOU : il ne traverse pas les ASA, qui ne le voient donc pas. Une <strong>ACL</strong> est placée sur la SVI du VLAN 10, dans le sens entrant, sur IOU1 et IOU2.</p>
+        <pre class="lv-code lv-gap-s">
+          ip access-list extended DIRECTION-IN
+           ! HTTPS vers GLPI (.10) et Nextcloud (.11)
+           permit tcp 192.168.10.0 0.0.0.255 host 192.168.99.10 eq 443
+           permit tcp 192.168.10.0 0.0.0.255 host 192.168.99.11 eq 443
+           ! DNS vers le serveur Windows (.12)
+           permit udp 192.168.10.0 0.0.0.255 host 192.168.99.12 eq 53
+           permit tcp 192.168.10.0 0.0.0.255 host 192.168.99.12 eq 53
+           ! Tout le reste du reseau interne est interdit
+           deny ip 192.168.10.0 0.0.0.255 192.168.0.0 0.0.255.255
+           ! Internet reste autorise
+           permit ip any any
+          !
+          interface Vlan10
+           ip access-group DIRECTION-IN in
+        </pre>
+        <p class="lv-small lv-gap-s">Une ACL se lit de haut en bas et s'arrête à la première règle qui correspond : les <code>permit</code> précis passent avant le <code>deny</code> général. <code>0.0.0.255</code> est un masque inverse.</p>
+
+        <h3 class="lv-h3 lv-gap">Les routes du projet</h3>
+        <table class="lv-table tight">
+          <thead><tr><th style="width:17%">Équipement</th><th style="width:20%">Destination</th><th style="width:33%">Prochain saut</th><th>Rôle</th></tr></thead>
+          <tbody>
+            <tr><td>IOU1 et IOU2</td><td><code>0.0.0.0/0</code></td><td>10.0.100.1 (ASA inside)</td><td>Tout Internet vers l'ASA actif</td></tr>
+            <tr><td>ASA</td><td>VLAN 10, 20, 99</td><td>10.0.100.5 (HSRP VLAN 100)</td><td>Retour vers les VLAN</td></tr>
+            <tr><td>ASA</td><td><code>0.0.0.0/0</code></td><td>192.168.122.1 (FAI 1), distance 1, track</td><td>Sortie principale</td></tr>
+            <tr><td>ASA</td><td><code>0.0.0.0/0</code></td><td>192.168.1.1 (FAI 2), distance 100</td><td>Sortie de secours</td></tr>
+          </tbody>
+        </table>
+        <div class="lv-note lv-gap-s">
+          <b>Pourquoi pas OSPF ?</b>
+          <div>Toutes les routes pointent vers des adresses <strong>virtuelles</strong> (IP partagée des ASA, IP HSRP) : quand un équipement tombe, son partenaire reprend la même adresse et les tables n'ont rien à changer. Il n'y a qu'une sortie et quatre réseaux connectés : OSPF ajouterait des voisinages à sécuriser et dépanner, sans changer le résultat.</div>
+        </div>
+      </div>
+      <footer class="lv-foot"><span>Arnaud Hollebecque · BTS SIO SISR</span><span class="lv-num"></span></footer>
+    </section>
+
+    <!-- ============ 13. ASA : FAILOVER ============ -->
+    <section class="lv-sheet" data-title="Pare-feu ASA : le failover" data-toc="Pare-feu ASA : le failover" data-group="Pare-feu et Internet"
+             data-icon="🔥" data-desc="Deux ASA actif/standby : adresses active et standby, liens de failover et d'état, configuration d'ASA-1 et ordre de démarrage."
+             data-tags="Failover,security-level,ASA-1">
+      <header class="lv-band">
+        <p class="lv-eyebrow">// Pare-feu et Internet</p>
+        <h2>Pare-feu ASA : <em>le failover</em></h2>
+      </header>
+      <div class="lv-body" style="padding-top:18px">
+        <p class="lv-small"><strong>ASA-1</strong> est le primaire, <strong>ASA-2</strong> le secondaire. Au démarrage, le primaire devient Active et traite tout le trafic ; le secondaire reste Standby et l'observe. Les deux partagent la même configuration : on ne configure que l'ASA actif, la configuration est copiée sur l'autre.</p>
+        <ul class="lv-list lv-gap-s">
+          <li>Chaque interface a <strong>deux adresses IP</strong> (active et standby) : à la bascule, l'ASA qui devient actif prend l'IP active et sa MAC.</li>
+          <li>Le <strong>lien de failover</strong> (Gi0/3) porte la surveillance : l'actif est déclaré en panne après environ 15 s sans réponse.</li>
+          <li>Le <strong>lien d'état</strong> (Gi0/4) copie la table des connexions : les sessions ouvertes survivent à la bascule.</li>
+        </ul>
+
+        <p class="lv-code-title" style="margin-top:14px">Configuration d'ASA-1 (interfaces et failover)</p>
+        <pre class="lv-code">
+          interface GigabitEthernet0/0
+           nameif inside
+           security-level 100
+           ip address 10.0.100.1 255.255.255.248 standby 10.0.100.2
+           no shutdown
+          !
+          interface GigabitEthernet0/1
+           nameif outside
+           security-level 0
+           ip address 192.168.122.10 255.255.255.0 standby 192.168.122.11
+           no shutdown
+          !
+          ! Gi0/2 (outside_backup, FAI 2) : meme principe, 192.168.1.10 standby .11
+          ! Gi0/3 et Gi0/4 : dediees au failover, sans nameif, no shutdown
+          failover lan unit primary
+          failover lan interface FOLINK GigabitEthernet0/3
+          failover link STATELINK GigabitEthernet0/4
+          failover interface ip FOLINK 10.0.254.1 255.255.255.252 standby 10.0.254.2
+          failover interface ip STATELINK 10.0.253.1 255.255.255.252 standby 10.0.253.2
+          failover key ChangeMoi
+          failover
+        </pre>
+        <p class="lv-small lv-gap-s">Le <strong>security-level</strong> classe les interfaces de 0 (non fiable) à 100 (très fiable) : le trafic va du niveau haut vers le bas sans règle (inside vers outside) et le trafic inverse est bloqué tant qu'aucune ACL ne l'autorise. <code>failover key</code> chiffre les échanges : à remplacer par un vrai secret, identique sur les deux ASA.</p>
+        <div class="lv-note warn lv-gap-s">
+          <b>Important</b>
+          <div>Sur <strong>ASA-2</strong>, on saisit seulement Gi0/3 et Gi0/4 en <code>no shutdown</code>, puis <code>failover lan unit secondary</code> et les mêmes lignes de failover : il reçoit ensuite la configuration d'ASA-1. Il faut lancer le failover sur ASA-1 <strong>d'abord</strong>, sinon ASA-2 peut devenir actif avec une configuration vide et écraser celle d'ASA-1.</div>
+        </div>
+      </div>
+      <footer class="lv-foot"><span>Arnaud Hollebecque · BTS SIO SISR</span><span class="lv-num"></span></footer>
+    </section>
+
+    <!-- ============ 14. DOUBLE FAI ET NAT ============ -->
+    <section class="lv-sheet" data-title="Double accès Internet et NAT" data-toc="Double accès Internet et NAT" data-group="Pare-feu et Internet"
+             data-icon="🌐" data-desc="Route principale surveillée par IP SLA, route de secours vers le FAI 2, NAT dynamique et inspection ICMP sur l'ASA."
+             data-tags="IP SLA,Track,NAT/PAT">
+      <header class="lv-band">
+        <p class="lv-eyebrow">// Pare-feu et Internet</p>
+        <h2>Double accès Internet et <em>NAT</em></h2>
+      </header>
+      <div class="lv-body" style="padding-top:18px">
+        <p class="lv-code-title">À saisir sur ASA-1 uniquement (la configuration est répliquée)</p>
+        <pre class="lv-code">
+          ! Routes de retour vers les VLAN, via l'IP virtuelle HSRP
+          route inside 192.168.10.0 255.255.255.0 10.0.100.5 1
+          route inside 192.168.20.0 255.255.255.0 10.0.100.5 1
+          route inside 192.168.99.0 255.255.255.0 10.0.100.5 1
+          ! Sonde 8.8.8.8 toujours via le FAI 1, route principale avec track, route de secours
+          route outside 8.8.8.8 255.255.255.255 192.168.122.1 1
+          route outside 0.0.0.0 0.0.0.0 192.168.122.1 1 track 1
+          route outside_backup 0.0.0.0 0.0.0.0 192.168.1.1 100
+          ! IP SLA : un ping toutes les 10 s vers 8.8.8.8, puis track
+          sla monitor 1
+           type echo protocol ipIcmpEcho 8.8.8.8 interface outside
+           num-packets 3
+           frequency 10
+          sla monitor schedule 1 life forever start-time now
+          track 1 rtr 1 reachability
+          ! NAT dynamique (PAT) : une regle par FAI
+          object-group network LAN-INTERNES
+           network-object 192.168.10.0 255.255.255.0
+           network-object 192.168.20.0 255.255.255.0
+           network-object 192.168.99.0 255.255.255.0
+          nat (inside,outside) source dynamic LAN-INTERNES interface
+          nat (inside,outside_backup) source dynamic LAN-INTERNES interface
+          ! Autoriser le retour des reponses de ping
+          policy-map global_policy
+           class inspection_default
+            inspect icmp
+        </pre>
+
+        <h3 class="lv-h3 lv-gap">À quoi sert chaque mécanisme</h3>
+        <div class="lv-grid3" style="gap:9px">
+          <div class="lv-card c-blue" style="padding:9px 12px 9px 16px"><h4 style="font-size:12.5px">Routes de retour</h4><p style="font-size:11.3px;line-height:1.38">Sans elles, l'ASA reçoit les requêtes mais ne sait pas où renvoyer les réponses. Le saut est l'IP HSRP : le retour marche quel que soit l'IOU actif.</p></div>
+          <div class="lv-card c-orange" style="padding:9px 12px 9px 16px"><h4 style="font-size:12.5px">Route hôte 8.8.8.8</h4><p style="font-size:11.3px;line-height:1.38">Sans elle, la sonde partirait par le FAI 2 et réussirait : la route principale clignoterait en permanence.</p></div>
+          <div class="lv-card c-cyan" style="padding:9px 12px 9px 16px"><h4 style="font-size:12.5px">Route avec track</h4><p style="font-size:11.3px;line-height:1.38">Elle n'existe que si le track est vrai. Après 3 sondes ratées, soit environ 30 s, elle disparaît.</p></div>
+          <div class="lv-card c-green" style="padding:9px 12px 9px 16px"><h4 style="font-size:12.5px">Route de secours</h4><p style="font-size:11.3px;line-height:1.38">Toujours présente, distance 100 : dès que la route principale disparaît, le trafic sort par le FAI 2.</p></div>
+          <div class="lv-card c-violet" style="padding:9px 12px 9px 16px"><h4 style="font-size:12.5px">NAT dynamique (PAT)</h4><p style="font-size:11.3px;line-height:1.38">Les adresses internes deviennent l'IP de l'interface de sortie, avec un port différent par session. Une règle par FAI.</p></div>
+          <div class="lv-card c-blue" style="padding:9px 12px 9px 16px"><h4 style="font-size:12.5px"><code style="font-size:11px">inspect icmp</code></h4><p style="font-size:11.3px;line-height:1.38">Par défaut, l'ASA laisse passer les réponses TCP et UDP mais pas ICMP : indispensable pour voir les pings aboutir.</p></div>
+        </div>
+        <div class="lv-chips lv-gap-s">
+          <span class="lv-chip">show failover</span><span class="lv-chip">show route</span><span class="lv-chip">show track</span>
+          <span class="lv-chip">show sla monitor operational-state</span><span class="lv-chip">show nat</span><span class="lv-chip">show xlate</span>
+        </div>
+      </div>
+      <footer class="lv-foot"><span>Arnaud Hollebecque · BTS SIO SISR</span><span class="lv-num"></span></footer>
+    </section>
+
+    <!-- ============ 15. TESTS ============ -->
+    <section class="lv-sheet" data-title="Tests et scénarios de panne" data-toc="Tests et scénarios de panne" data-group="Valider et présenter"
+             data-icon="🧪" data-desc="Huit tests pour prouver que le réseau bascule : accès Internet, filtrage, panne d'un ASA, d'un FAI, d'un IOU ou d'un lien."
+             data-tags="Failover,Pannes,Preuves">
+      <header class="lv-band">
+        <p class="lv-eyebrow">// Valider et présenter</p>
+        <h2>Tests et <em>scénarios de panne</em></h2>
+      </header>
+      <div class="lv-body" style="padding-top:18px">
+        <p class="lv-small">Une infrastructure redondante ne vaut que si l'on a prouvé qu'elle bascule. Pour chaque test : lancer un <strong>ping continu</strong> depuis un poste (<code>ping -t 8.8.8.8</code>), provoquer la panne, noter combien de pings sont perdus, puis faire une capture d'écran qui sert de preuve dans le dossier.</p>
+        <table class="lv-table lv-gap-s">
+          <thead><tr><th style="width:15%">Test</th><th style="width:27%">Action</th><th style="width:33%">Résultat attendu</th><th>Vérification</th></tr></thead>
+          <tbody>
+            <tr><td>Accès Internet</td><td>Ping de PC_Direction vers 8.8.8.8</td><td>Réponse ; l'adresse source est traduite en IP outside</td><td><code>show xlate</code> sur l'ASA</td></tr>
+            <tr><td>Inter-VLAN</td><td>Ping de PC_ADMIN vers GLPI (192.168.99.10)</td><td>Réponse, routée par la SVI</td><td><code>show ip route</code> sur IOU1</td></tr>
+            <tr><td>Filtrage</td><td>Ping de PC_Direction vers PC_ADMIN</td><td>Bloqué par l'ACL</td><td><code>show access-lists</code> sur IOU1</td></tr>
+            <tr><td>Panne de l'ASA actif</td><td>Éteindre ASA-1</td><td>ASA-2 passe Active ; quelques pings perdus (environ 15 s) puis reprise</td><td><code>show failover</code> sur ASA-2</td></tr>
+            <tr><td>Panne du FAI 1</td><td>Couper la liaison IOU3 e0/2</td><td>Bascule sur le FAI 2 après environ 30 s</td><td><code>show track</code>, <code>show route</code></td></tr>
+            <tr><td>Panne d'IOU1</td><td>Éteindre IOU1</td><td>IOU2 devient Active partout ; STP reconverge</td><td><code>show standby brief</code> sur IOU2</td></tr>
+            <tr><td>Panne d'un lien du cœur</td><td><code>shutdown</code> sur IOU1 e0/1</td><td>Aucune perte : le trunk continue sur e0/3</td><td><code>show etherchannel summary</code></td></tr>
+            <tr><td>Retour à la normale</td><td>Rallumer IOU1 et ASA-1</td><td>IOU1 reprend le rôle actif (preempt) ; ASA-2 reste Active</td><td><code>show standby brief</code>, <code>show failover</code></td></tr>
+          </tbody>
+        </table>
+        <div class="lv-note lv-gap-s">
+          <b>Remarque</b>
+          <div>Après une bascule, l'ASA qui était primaire revient Standby : le failover n'est pas préemptif par défaut. Pour remettre ASA-1 en actif, taper <code>failover active</code> sur ASA-1. C'est volontaire : on évite une seconde coupure.</div>
+        </div>
+      </div>
+      <footer class="lv-foot"><span>Arnaud Hollebecque · BTS SIO SISR</span><span class="lv-num"></span></footer>
+    </section>
+
+    <!-- ============ 16. DÉPANNAGE ============ -->
+    <section class="lv-sheet" data-title="Dépannage" data-toc="Dépannage : erreurs fréquentes" data-group="Valider et présenter"
+             data-icon="🛠️" data-desc="Les neuf erreurs fréquentes : symptôme, cause probable et vérification, de l'EtherChannel au failover en passant par le NAT."
+             data-tags="Diagnostic,Erreurs,Solutions">
+      <header class="lv-band">
+        <p class="lv-eyebrow">// Valider et présenter</p>
+        <h2>Dépannage : <em>erreurs fréquentes</em></h2>
+      </header>
+      <div class="lv-body" style="padding-top:18px">
+        <table class="lv-table">
+          <thead><tr><th style="width:27%">Symptôme</th><th style="width:30%">Cause probable</th><th>Vérification ou solution</th></tr></thead>
+          <tbody>
+            <tr><td>Po1 reste en état SD ou ports en I (indépendants)</td><td>Modes LACP incompatibles, ou VLAN autorisés différents des deux côtés</td><td>Même <code>channel-group 1 mode active</code> des deux côtés ; mêmes <code>allowed vlan</code> ; <code>show etherchannel summary</code></td></tr>
+            <tr><td>Les deux IOU sont Active pour un VLAN</td><td>Les messages hello ne passent pas : VLAN absent du trunk entre les cœurs</td><td>Vérifier <code>allowed vlan</code> sur Port-channel1 ; <code>show interfaces trunk</code></td></tr>
+            <tr><td>Un port se met en err-disabled</td><td>BPDU Guard a détecté un switch branché sur un port d'accès</td><td>Retirer le switch puis <code>shutdown</code> / <code>no shutdown</code> sur le port</td></tr>
+            <tr><td>Failover « Failed » ou « Cable status: Unknown »</td><td>Gi0/3 ou Gi0/4 en shutdown, ou câblage incorrect entre les ASA</td><td><code>no shutdown</code> sur les deux interfaces ; vérifier les liens ; <code>show failover</code></td></tr>
+            <tr><td>ASA-2 reste Standby Failed</td><td>Câblage d'ASA-2 inversé sur les interfaces outside</td><td>Corriger le câblage ; <code>show failover</code> indique l'interface en échec</td></tr>
+            <tr><td>Les postes joignent leurs serveurs mais pas Internet</td><td>Route de retour absente sur l'ASA, NAT manquant, ou route par défaut absente sur les IOU</td><td><code>show route</code> sur l'ASA et IOU1 ; <code>show nat</code> ; ping 10.0.100.1 depuis IOU1</td></tr>
+            <tr><td>Le ping vers 8.8.8.8 part mais la réponse ne revient pas</td><td>Absence de <code>inspect icmp</code></td><td>Ajouter la commande vue au chapitre sur la double sortie Internet</td></tr>
+            <tr><td>La route par défaut bascule sans arrêt</td><td>Route hôte vers 8.8.8.8 oubliée</td><td>Ajouter <code>route outside 8.8.8.8 255.255.255.255 …</code></td></tr>
+            <tr><td>Un poste n'obtient pas de réseau après branchement</td><td>Port d'accès sans PortFast (attente de STP), ou mauvais VLAN</td><td><code>show vlan brief</code> ; ajouter <code>spanning-tree portfast</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <footer class="lv-foot"><span>Arnaud Hollebecque · BTS SIO SISR</span><span class="lv-num"></span></footer>
+    </section>
+
+    <!-- ============ 17. ORAL ============ -->
+    <section class="lv-sheet" data-title="Préparer l'oral" data-toc="Préparer l'oral : questions du jury" data-group="Valider et présenter"
+             data-icon="🎤" data-desc="Les huit questions probables du jury avec des réponses courtes, et les évolutions possibles du projet."
+             data-tags="Oral,Justifier,Évolutions">
+      <header class="lv-band">
+        <p class="lv-eyebrow">// Valider et présenter</p>
+        <h2>Préparer l'oral : <em>questions du jury</em></h2>
+      </header>
+      <div class="lv-body" style="padding-top:18px">
+        <div class="lv-grid2" style="gap:10px">
+          <div class="lv-card lv-qa c-blue"><p class="q">Pourquoi deux pare-feu ?</p><p>Pour éliminer le point de défaillance unique : si l'ASA actif tombe, l'autre prend le relais avec la même configuration et les mêmes IP. Le lien d'état conserve les sessions.</p></div>
+          <div class="lv-card lv-qa c-orange"><p class="q">Pourquoi deux FAI ?</p><p>Pour que la perte d'un accès Internet ne coupe pas l'entreprise. La route principale est surveillée par un IP SLA ; en cas d'échec, la route de secours prend le relais.</p></div>
+          <div class="lv-card lv-qa c-cyan"><p class="q">Pourquoi supprimer les routeurs ?</p><p>Les switchs L3 du cœur savent déjà faire du routage inter-VLAN. Moins d'équipements, moins de configuration, moins de pannes possibles, et HSRP donne la même redondance.</p></div>
+          <div class="lv-card lv-qa c-green"><p class="q">Pourquoi pas OSPF ?</p><p>Il n'y a qu'une sortie et quatre réseaux directement connectés : des routes statiques vers des adresses virtuelles suffisent. OSPF serait utile avec plusieurs sites ou routeurs.</p></div>
+          <div class="lv-card lv-qa c-violet"><p class="q">Pourquoi le root STP est-il sur IOU1 ?</p><p>Il doit être au cœur et coïncider avec le HSRP actif pour éviter un détour sur le lien entre cœurs. IOU2 est root du VLAN 20 pour répartir la charge.</p></div>
+          <div class="lv-card lv-qa c-blue"><p class="q">Que se passe-t-il si IOU1 tombe ?</p><p>HSRP passe Active sur IOU2 en environ 10 s, Rapid-PVST+ réactive le lien bloqué en quelques secondes et l'ASA continue de joindre le réseau par l'IP virtuelle.</p></div>
+          <div class="lv-card lv-qa c-orange"><p class="q">À quoi sert le VLAN 100 ?</p><p>À créer un réseau commun de niveau 2 entre l'interface inside des deux ASA et les SVI des IOU, alors que les ASA sont branchés sur deux switchs différents.</p></div>
+          <div class="lv-card lv-qa c-cyan"><p class="q">Quelles sont les limites ?</p><p>Projet simulé, un seul site, pas de DMZ ni de VPN, pas de filtrage à l'intérieur d'un même VLAN.</p></div>
+        </div>
+
+        <h3 class="lv-h3 lv-gap">Évolutions possibles</h3>
+        <div class="lv-chips">
+          <span class="lv-chip ok">DMZ pour exposer un service</span>
+          <span class="lv-chip ok">VPN site à site</span>
+          <span class="lv-chip ok">OSPF avec plusieurs sites</span>
+          <span class="lv-chip ok">Sauvegardes</span>
+        </div>
+      </div>
+      <footer class="lv-foot"><span>Arnaud Hollebecque · BTS SIO SISR</span><span class="lv-num"></span></footer>
+    </section>
+
+    <!-- ============ 18. QUATRIÈME DE COUVERTURE ============ -->
+    <section class="lv-sheet lv-back" data-title="Quatrième de couverture">
+      <div class="lv-back-inner">
+        <div class="lv-term lv-mono">$ exit 0</div>
+        <h2>Merci de votre lecture</h2>
+        <div class="lv-bar"></div>
+        <b>Arnaud Hollebecque</b>
+        <span>BTS SIO option SISR · EPNAK</span>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="js/main.js"></script>
+  <!-- Bibliothèque de tourne-page (StPageFlip) : copie locale dans js/, sinon repli sur le CDN.
+       Si aucune des deux ne se charge, une visionneuse simple prend le relais. -->
+  <script src="js/page-flip.browser.js"></script>
+  <script>window.St || document.write('<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"><\/script>');</script>
+  <script src="js/livret-projet.js?v=1"></script>
+</body>
+</html>
