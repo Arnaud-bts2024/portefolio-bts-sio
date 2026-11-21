@@ -1,0 +1,385 @@
+/* ==========================================================================
+   LIVRET DU PROJET  (css/livret-projet.css)
+   1) Habillage de la page : repris de la page « Mes certifications » (classes .cert-*)
+   2) Pages du livret : classes .lv-*  (chaque page fait 750 x 1000 px)
+   ========================================================================== */
+    /* Tout est préfixé .cert- pour ne pas entrer en conflit avec style.css */
+    .cert-page {
+      --cert-bg: #050b1f;
+      --cert-surface: rgba(14, 28, 66, .55);
+      --cert-border: rgba(90, 150, 255, .22);
+      --cert-text: #e8eefc;
+      --cert-muted: #9fb2d8;
+      --cert-accent: #3d9bff;
+      --cert-accent-2: #00e0ff;
+      position: relative;
+      min-height: 100vh;
+      color: var(--cert-text);
+      font-family: 'Space Grotesk', system-ui, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(30, 90, 255, .35), transparent 60%),
+        radial-gradient(900px 500px at -10% 30%, rgba(0, 200, 255, .15), transparent 60%),
+        var(--cert-bg);
+      overflow-x: hidden;
+    }
+    .cert-page *, .cert-page *::before, .cert-page *::after { box-sizing: border-box; }
+    .cert-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+    #cert-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+    .cert-wrap { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+    /* ---------- HERO ---------- */
+    .cert-hero { padding: 100px 0 40px; text-align: center; }
+    .cert-terminal {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 8px 16px; border-radius: 999px;
+      background: rgba(0, 0, 0, .35); border: 1px solid var(--cert-border);
+      color: var(--cert-accent-2); font-size: .85rem; min-height: 38px;
+    }
+    .cert-terminal .cert-caret { width: 8px; height: 16px; background: var(--cert-accent-2); animation: cert-blink 1s steps(1) infinite; }
+    @keyframes cert-blink { 50% { opacity: 0; } }
+
+    .cert-hero h1 { margin: 26px 0 14px; font-size: clamp(2.6rem, 7vw, 5rem); line-height: 1.02; font-weight: 700; letter-spacing: -.03em; }
+    .cert-grad { background: linear-gradient(100deg, #7fc0ff 0%, var(--cert-accent-2) 45%, #7b8cff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .cert-hero p.cert-lead { max-width: 680px; margin: 0 auto; color: var(--cert-muted); font-size: 1.15rem; line-height: 1.65; }
+    .cert-id { margin-top: 18px; color: var(--cert-muted); font-size: .95rem; }
+    .cert-id strong { color: var(--cert-text); }
+
+    .cert-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin: 44px auto 0; max-width: 860px; }
+    .cert-stat { padding: 20px 14px; border-radius: 18px; background: var(--cert-surface); border: 1px solid var(--cert-border); backdrop-filter: blur(10px); }
+    .cert-stat b { display: block; font-size: 2.4rem; font-weight: 700; line-height: 1; color: #fff; }
+    .cert-stat span { display: block; margin-top: 8px; color: var(--cert-muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; }
+
+    /* ---------- SECTIONS ---------- */
+    .cert-section { padding: 50px 0; }
+    .cert-section h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin: 0 0 10px; letter-spacing: -.02em; }
+    .cert-section h2::before { content: '//'; margin-right: 12px; color: var(--cert-accent); font-family: 'JetBrains Mono', monospace; }
+    .cert-sub { color: var(--cert-muted); margin: 0 0 26px; max-width: 700px; line-height: 1.6; }
+
+    /* ---------- LIVRE ---------- */
+    .cert-bookwrap {
+      position: relative; padding: 28px 16px 20px; border-radius: 28px;
+      background: radial-gradient(900px 420px at 50% 0%, rgba(40, 110, 255, .22), transparent 70%), rgba(6, 14, 38, .55);
+      border: 1px solid var(--cert-border);
+    }
+    .cert-bookwrap:fullscreen { display: flex; flex-direction: column; justify-content: center; border-radius: 0; background: var(--cert-bg); padding: 16px; }
+    .cert-stage { position: relative; margin: 0 auto; width: 100%; filter: drop-shadow(0 30px 40px rgba(0, 0, 0, .55)); user-select: none; -webkit-user-select: none; outline: none; }
+    .cert-stage .page { background: #fff; overflow: hidden; }
+    .cert-stage .page img { display: block; width: 100%; height: 100%; object-fit: fill; pointer-events: none; -webkit-user-drag: none; }
+    .cert-loading { text-align: center; color: var(--cert-muted); padding: 120px 0; }
+
+    /* styles de base de la bibliothèque de tourne-page (au cas où ils ne seraient pas injectés) */
+    .stf__parent { position: relative; display: block; box-sizing: border-box; transform: translateZ(0); touch-action: pan-y; }
+    .sft__wrapper, .stf__wrapper { position: relative; width: 100%; box-sizing: border-box; }
+    .stf__parent canvas { position: absolute; width: 100%; height: 100%; left: 0; top: 0; }
+    .stf__block { position: absolute; width: 100%; height: 100%; box-sizing: border-box; perspective: 2000px; }
+    .stf__item { display: none; position: absolute; transform-style: preserve-3d; }
+    .stf__outerShadow, .stf__innerShadow, .stf__hardShadow, .stf__hardInnerShadow { position: absolute; left: 0; top: 0; }
+
+    .cert-controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; margin-top: 22px; }
+    .cert-ind { min-width: 150px; text-align: center; font-size: .9rem; color: var(--cert-text); }
+    .cert-hint { text-align: center; color: var(--cert-muted); font-size: .85rem; margin: 14px 0 0; }
+
+    .cert-btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 12px; border: 0; cursor: pointer;
+      text-decoration: none; font: inherit; font-size: .88rem; font-weight: 700;
+      color: #04112b; background: linear-gradient(100deg, var(--cert-accent), var(--cert-accent-2)); transition: .25s;
+    }
+    .cert-btn:hover:not(:disabled) { filter: brightness(1.12); transform: translateY(-2px); }
+    .cert-btn:disabled { opacity: .35; cursor: default; }
+    .cert-btn.ghost { background: transparent; color: var(--cert-text); border: 1px solid var(--cert-border); }
+    .cert-btn.ghost:hover:not(:disabled) { border-color: var(--cert-accent); }
+    .cert-btn:focus-visible, .cert-chip:focus-visible { outline: 2px solid var(--cert-accent-2); outline-offset: 3px; }
+
+    /* ---------- FILTRES + CARTES ---------- */
+    .cert-filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
+    .cert-chip { cursor: pointer; padding: 9px 18px; border-radius: 999px; font: inherit; font-size: .9rem; color: var(--cert-muted); background: transparent; border: 1px solid var(--cert-border); transition: .25s; }
+    .cert-chip:hover { color: #fff; border-color: var(--cert-accent); }
+    .cert-chip.active { color: #04112b; background: linear-gradient(100deg, var(--cert-accent), var(--cert-accent-2)); border-color: transparent; font-weight: 700; }
+
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .cert-card {
+      position: relative; padding: 22px; border-radius: 20px; overflow: hidden;
+      background: var(--cert-surface); border: 1px solid var(--cert-border); backdrop-filter: blur(12px);
+      display: flex; flex-direction: column; gap: 12px; transition: transform .3s, border-color .3s, box-shadow .3s;
+      opacity: 0; transform: translateY(22px);
+    }
+    .cert-card.in { opacity: 1; transform: none; transition: opacity .6s, transform .6s, border-color .3s, box-shadow .3s; }
+    .cert-card::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 0%), rgba(61, 155, 255, .18), transparent 45%); opacity: 0; transition: opacity .3s; }
+    .cert-card:hover { border-color: var(--cert-accent); box-shadow: 0 20px 50px -20px rgba(30, 120, 255, .6); transform: translateY(-5px); }
+    .cert-card:hover::before { opacity: 1; }
+    .cert-card.hide { display: none; }
+    .cert-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+    .cert-icon { width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center; font-size: 1.4rem; background: linear-gradient(135deg, rgba(61, 155, 255, .35), rgba(0, 224, 255, .12)); border: 1px solid var(--cert-border); }
+    .cert-badge { font-size: .72rem; font-weight: 700; padding: 5px 11px; border-radius: 999px; letter-spacing: .04em; color: #2ee6a6; background: rgba(46, 230, 166, .12); border: 1px solid rgba(46, 230, 166, .4); white-space: nowrap; }
+    .cert-card h3 { margin: 0; font-size: 1.12rem; line-height: 1.3; }
+    .cert-org { color: var(--cert-accent-2); font-size: .78rem; }
+    .cert-card p { margin: 0; color: var(--cert-muted); font-size: .9rem; line-height: 1.55; }
+    .cert-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .cert-tags span { font-size: .72rem; padding: 4px 10px; border-radius: 8px; color: #bcd3ff; background: rgba(61, 155, 255, .12); border: 1px solid rgba(61, 155, 255, .25); }
+    .cert-foot { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 4px; font-size: .8rem; color: var(--cert-muted); gap: 10px; }
+    .cert-foot .cert-btn { padding: 8px 14px; font-size: .8rem; }
+
+    /* CTA */
+    .cert-cta { margin: 30px 0 90px; padding: 46px 30px; text-align: center; border-radius: 26px; background: linear-gradient(135deg, rgba(30, 90, 255, .35), rgba(0, 224, 255, .12)); border: 1px solid var(--cert-border); }
+    .cert-cta h2 { margin: 0 0 10px; }
+    .cert-cta h2::before { content: none; }
+    .cert-cta p { color: var(--cert-muted); margin: 0 auto 24px; max-width: 540px; }
+    .cert-cta .cert-btn { margin: 4px 6px; }
+
+    @media (max-width: 600px) {
+      .cert-hero { padding-top: 80px; }
+      .cert-grid { grid-template-columns: 1fr; }
+      .cert-bookwrap { padding: 18px 6px 16px; border-radius: 20px; }
+      .cert-hint .cert-hint-desktop { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cert-card { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .cert-terminal .cert-caret { animation: none; }
+    }
+  
+
+/* ==========================================================================
+   PAGES DU LIVRET  (.lv-*)
+   Chaque page = <section class="lv-sheet"> de 750 x 1000 px.
+   Les pages sont écrites dans livret-projet.html, dans <div id="lv-source">.
+   ========================================================================== */
+
+#lv-source { display: none; }
+
+.lv-sheet {
+  --lv-ink: #0a1840;
+  --lv-text: #26345c;
+  --lv-muted: #5b6b8f;
+  --lv-line: #d9e2f6;
+  --lv-paper: #f6f8ff;
+  --lv-blue: #2f7de0;
+  --lv-cyan: #00b4d8;
+  --lv-green: #12a37f;
+  --lv-violet: #6b4de0;
+  --lv-orange: #e8863a;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 750px;
+  height: 1000px;
+  overflow: hidden;
+  background: var(--lv-paper);
+  color: var(--lv-text);
+  font-family: 'Fira Sans', 'Space Grotesk', system-ui, sans-serif;
+  font-size: 13.5px;
+  line-height: 1.5;
+  text-align: left;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.lv-sheet, .lv-sheet *, .lv-sheet *::before, .lv-sheet *::after { box-sizing: border-box; }
+.lv-sheet :where(p, h1, h2, h3, h4, ul, ol, li, table, pre, figure, dl, dd) { margin: 0; padding: 0; }
+.lv-sheet :where(ul, ol) { list-style: none; }
+.lv-mono, .lv-sheet code, .lv-code, .lv-eyebrow, .lv-chip, .lv-num {
+  font-family: 'JetBrains Mono', ui-monospace, 'DejaVu Sans Mono', Menlo, Consolas, monospace;
+}
+
+/* ----- En-tête sombre, corps clair, pied de page ----- */
+.lv-band {
+  flex: none;
+  height: 170px;
+  padding: 42px 56px 0;
+  color: #fff;
+  background:
+    url("../images/livret-projet/band-net.svg") center / cover no-repeat,
+    linear-gradient(100deg, #050b1f 0%, #0b1d5c 60%, #10298a 100%);
+}
+.lv-eyebrow { font-size: 12px; letter-spacing: .09em; text-transform: uppercase; color: #4de6ff; }
+.lv-band h2 { margin-top: 10px; font-size: 33px; line-height: 1.12; font-weight: 700; letter-spacing: -.01em; }
+.lv-band h2 em { font-style: normal; color: #7fc0ff; }
+
+.lv-body { flex: 1; min-height: 0; overflow: hidden; padding: 24px 56px 0; }
+.lv-foot {
+  flex: none; height: 54px; padding: 0 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 11.5px; color: var(--lv-muted);
+}
+.lv-foot .lv-num { font-size: 11.5px; font-weight: 600; color: var(--lv-ink); }
+
+/* ----- Textes ----- */
+.lv-sheet p + p { margin-top: 8px; }
+.lv-sheet strong { color: var(--lv-ink); font-weight: 600; }
+.lv-lead { font-size: 14.5px; line-height: 1.55; color: var(--lv-text); }
+.lv-h3 {
+  display: flex; align-items: center; gap: 10px;
+  margin: 0 0 8px; font-size: 16.5px; font-weight: 700; color: var(--lv-ink); line-height: 1.25;
+}
+.lv-h3::before { content: ""; flex: none; width: 5px; height: 17px; border-radius: 3px; background: var(--c, var(--lv-blue)); }
+.lv-gap { margin-top: 16px; }
+.lv-gap-s { margin-top: 10px; }
+.lv-small { font-size: 12.5px; line-height: 1.45; }
+.lv-muted { color: var(--lv-muted); }
+.lv-sheet code {
+  font-size: .9em; padding: 1px 5px; border-radius: 5px;
+  background: #e6efff; color: #0c3b91; white-space: nowrap;
+}
+.lv-list { display: grid; gap: 5px; }
+.lv-list li { position: relative; padding-left: 16px; font-size: 13px; line-height: 1.45; }
+.lv-list li::before { content: ""; position: absolute; left: 1px; top: .55em; width: 6px; height: 6px; border-radius: 50%; background: var(--c, var(--lv-blue)); }
+
+/* ----- Cartes, grilles, pastilles ----- */
+.lv-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.lv-grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.lv-card {
+  position: relative; overflow: hidden;
+  padding: 12px 15px 12px 19px;
+  background: #fff; border: 1px solid var(--lv-line); border-radius: 14px;
+}
+.lv-card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px; background: var(--c, var(--lv-blue)); }
+.lv-card h4 { font-size: 14.5px; font-weight: 700; color: var(--lv-ink); line-height: 1.25; margin-bottom: 4px; }
+.lv-card p { font-size: 12.5px; line-height: 1.45; }
+.lv-card .lv-tag {
+  display: inline-block; margin-top: 7px; padding: 2px 8px; border-radius: 7px;
+  font-size: 11px; font-weight: 500; color: var(--c, var(--lv-blue));
+  background: color-mix(in srgb, var(--c, var(--lv-blue)) 11%, #fff);
+  border: 1px solid color-mix(in srgb, var(--c, var(--lv-blue)) 28%, #fff);
+}
+.c-blue { --c: var(--lv-blue); } .c-cyan { --c: var(--lv-cyan); } .c-green { --c: var(--lv-green); }
+.c-violet { --c: var(--lv-violet); } .c-orange { --c: var(--lv-orange); }
+
+.lv-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.lv-chip {
+  padding: 3px 9px; border-radius: 8px; font-size: 11px; line-height: 1.5;
+  color: #1b4fa8; background: #e6f0ff; border: 1px solid #c7dbfb;
+}
+.lv-chip.ok { color: #0b6b53; background: #e1f6ef; border-color: #b3e6d6; }
+
+/* ----- Encadrés ----- */
+.lv-note {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 11px 14px; border-radius: 12px; font-size: 12.8px; line-height: 1.48;
+  color: var(--lv-text); background: #eaf2ff; border: 1px solid #c7dbfb;
+}
+.lv-note b { flex: none; font-weight: 700; color: var(--lv-blue); text-transform: uppercase; font-size: 11px; letter-spacing: .06em; padding-top: 2px; }
+.lv-note.warn { background: #fff4e8; border-color: #f6d3ac; } .lv-note.warn b { color: #c76a14; }
+.lv-note.ok { background: #e9f8f2; border-color: #bfe8d8; } .lv-note.ok b { color: #0f8a6a; }
+.lv-strip {
+  padding: 14px 18px; border-radius: 6px 14px 14px 6px; color: #fff;
+  background: linear-gradient(100deg, #0d2160, #050b1f); border-left: 4px solid #00e0ff;
+}
+.lv-strip .lv-eyebrow { font-size: 11px; }
+.lv-strip strong { display: block; color: #fff; font-size: 15px; margin: 3px 0 2px; }
+.lv-strip span { color: #b9c9ec; font-size: 12.5px; }
+
+/* ----- Tableaux ----- */
+.lv-table {
+  width: 100%; border-collapse: separate; border-spacing: 0; overflow: hidden;
+  font-size: 12px; line-height: 1.38; background: #fff;
+  border: 1px solid var(--lv-line); border-radius: 12px;
+}
+.lv-table th {
+  padding: 7px 10px; text-align: left; font-size: 11px; font-weight: 600; letter-spacing: .04em;
+  color: #fff; background: #0d2160;
+}
+.lv-table td { padding: 5px 10px; vertical-align: top; border-top: 1px solid var(--lv-line); }
+.lv-table tbody tr:nth-child(even) td { background: #f3f7ff; }
+.lv-table td:first-child { font-weight: 600; color: var(--lv-ink); }
+.lv-table.tight td { padding: 3.5px 9px; }
+.lv-table.nofirst td:first-child { font-weight: 400; color: inherit; }
+
+/* ----- Blocs de code (colorés automatiquement par js/livret-projet.js) ----- */
+.lv-code {
+  padding: 11px 14px; overflow: hidden; white-space: pre;
+  font-size: 10.8px; line-height: 1.46; color: #d6e6ff;
+  background: #0a1534; border: 1px solid #1b2d66; border-radius: 12px;
+}
+.lv-code .k { color: #8fd0ff; }
+.lv-code .c { color: #6f8cc6; }
+.lv-code-title {
+  display: flex; align-items: center; gap: 8px; margin: 0 0 5px;
+  font-size: 11px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--lv-muted);
+}
+.lv-code-title::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #00e0ff; box-shadow: 0 0 0 3px rgba(0, 224, 255, .2); }
+
+/* ----- Questions du jury ----- */
+.lv-qa { display: flex; flex-direction: column; }
+.lv-qa .q { font-size: 13.5px; font-weight: 700; color: var(--lv-ink); line-height: 1.3; margin-bottom: 5px; }
+.lv-qa .q::before { content: "Q. "; font-family: 'JetBrains Mono', monospace; color: var(--c, var(--lv-blue)); }
+
+/* ----- Schéma ----- */
+.lv-figure { background: #fff; border: 1px solid var(--lv-line); border-radius: 14px; padding: 8px; }
+.lv-figure svg { display: block; width: 100%; height: auto; }
+.lv-figure figcaption { padding: 6px 8px 2px; text-align: center; font-size: 11.5px; color: var(--lv-muted); }
+
+/* ----- Sommaire (rempli automatiquement) ----- */
+.lv-toc { display: grid; gap: 14px; }
+.lv-toc-group h3 {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 4px;
+  font-size: 13.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--lv-ink);
+}
+.lv-toc-group h3::before { content: ""; width: 5px; height: 18px; border-radius: 3px; background: var(--c, var(--lv-blue)); }
+.lv-toc-row {
+  display: flex; align-items: baseline; gap: 12px; padding: 4px 0 4px 15px;
+  border-bottom: 1px dotted #c6d3ee; font-size: 13.5px; color: var(--lv-ink);
+}
+.lv-toc-row .n { flex: none; width: 24px; font-size: 11.5px; color: var(--c, var(--lv-blue)); }
+.lv-toc-row .t { flex: 1; font-weight: 500; }
+.lv-toc-row .p { flex: none; font-weight: 700; }
+
+/* ----- Couverture et quatrième de couverture ----- */
+.lv-cover, .lv-back {
+  color: #fff;
+  background:
+    url("../images/livret-projet/cover-net.svg") center / cover no-repeat,
+    linear-gradient(160deg, #050b1f 0%, #0b1d5c 55%, #10298a 100%);
+}
+.lv-back { background:
+    url("../images/livret-projet/back-net.svg") center / cover no-repeat,
+    linear-gradient(160deg, #050b1f 0%, #0b1d5c 55%, #10298a 100%); }
+.lv-cover::before { content: ""; position: absolute; right: -200px; top: -120px; width: 620px; height: 620px; border-radius: 50%; background: rgba(40, 130, 210, .16); }
+.lv-cover::after { content: ""; position: absolute; left: -260px; bottom: -200px; width: 560px; height: 560px; border-radius: 50%; background: rgba(40, 90, 230, .18); }
+.lv-cover-inner { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; padding: 0 56px; }
+.lv-cover .lv-term { margin-top: 290px; font-size: 13px; color: #4de6ff; }
+.lv-cover .lv-bar { width: 56px; height: 5px; margin: 14px 0 28px; border-radius: 3px; background: #00e0ff; }
+.lv-cover h1 { font-size: 56px; line-height: 1.06; font-weight: 700; letter-spacing: -.02em; }
+.lv-cover h1 em { display: block; font-style: normal; color: #7fc0ff; }
+.lv-cover .lv-subtitle { margin-top: 22px; max-width: 560px; font-size: 17px; line-height: 1.5; font-weight: 300; color: #c9d8f5; }
+.lv-cover-foot { position: relative; z-index: 1; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; padding: 0 56px 40px; }
+.lv-cover-id { padding-top: 22px; border-top: 1px solid rgba(160, 190, 255, .3); min-width: 270px; }
+.lv-cover-id b { display: block; font-size: 23px; font-weight: 700; }
+.lv-cover-id span { font-size: 13.5px; color: #b9c9ec; }
+.lv-tiles { display: flex; gap: 12px; }
+.lv-tile {
+  width: 104px; height: 96px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  border-radius: 16px; background: rgba(120, 160, 255, .14); border: 1px solid rgba(160, 190, 255, .3);
+}
+.lv-tile b { font-size: 34px; line-height: 1; font-weight: 700; }
+.lv-tile span { margin-top: 6px; font-size: 11px; color: #b9c9ec; text-align: center; line-height: 1.25; }
+.lv-cover-date { position: absolute; z-index: 1; right: 56px; bottom: 14px; font-size: 11px; color: #8fa6d6; }
+
+.lv-back::before { content: ""; position: absolute; left: 50%; top: 50%; width: 560px; height: 560px; margin: -310px 0 0 -280px; border-radius: 50%; background: rgba(40, 130, 210, .15); }
+.lv-back-inner { position: relative; z-index: 1; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding-bottom: 40px; }
+.lv-back .lv-term { font-size: 13px; color: #4de6ff; }
+.lv-back h2 { margin: 14px 0 20px; font-size: 40px; font-weight: 700; }
+.lv-back .lv-bar { width: 56px; height: 5px; margin-bottom: 20px; border-radius: 3px; background: #00e0ff; }
+.lv-back b { font-size: 21px; }
+.lv-back span { margin-top: 4px; font-size: 13.5px; color: #b9c9ec; }
+
+/* ----- Page blanche (ajoutée toute seule si le nombre de pages est impair) ----- */
+.lv-blank .lv-body { display: flex; align-items: center; justify-content: center; color: #9aa9cc; font-size: 13px; }
+
+/* ==========================================================================
+   LIVRE À L'ÉCRAN : chaque page est réduite à la taille de la vitrine
+   ========================================================================== */
+.cert-stage .page { position: relative; overflow: hidden; background: #f6f8ff; }
+.cert-stage .page .lv-scale { position: absolute; left: 0; top: 0; width: 750px; height: 1000px; transform-origin: 0 0; transform: scale(var(--k, .8)); }
+.cert-stage .page .lv-scale .lv-sheet { box-shadow: none; }
+.lv-print-hint { margin: 10px auto 0; text-align: center; font-size: .82rem; color: var(--cert-muted); }
+
+/* ==========================================================================
+   IMPRESSION / PDF : une page du livret par feuille (menu Imprimer > Enregistrer en PDF)
+   ========================================================================== */
+@page { size: 750px 1000px; margin: 0; }
+@media print {
+  html, body { margin: 0 !important; padding: 0 !important; background: #fff !important; }
+  body > *:not(#lv-source) { display: none !important; }
+  #lv-source { display: block !important; }
+  #lv-source .lv-sheet { break-after: page; page-break-after: always; break-inside: avoid; }
+  #lv-source .lv-sheet:last-child { break-after: auto; page-break-after: auto; }
+}
