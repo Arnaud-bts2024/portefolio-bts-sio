@@ -219,68 +219,6 @@ kbd { background: rgba(8, 12, 24, .55); border: 1px solid rgba(255, 255, 255, .2
   .reveal-late, .reveal { animation: none; transition: none; opacity: 1; transform: none; }
   .acc-panel { transition: none; }
 }
-
-/* ----- Bouton « descendre » qui rebondit comme une petite balle ----- */
-.scroll-down {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 26px;
-  margin-inline: auto;
-  width: 52px;
-  height: 52px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 50;
-  cursor: pointer;
-  color: var(--primary-hover, #00d2ff);
-  font-size: 1.2rem;
-  background: rgba(13, 22, 48, .78);
-  border: 1.5px solid var(--primary-hover, #00d2ff);
-  border-radius: 50%;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 0 18px var(--glow-color, rgba(0, 210, 255, .5)), inset 0 0 10px rgba(0, 210, 255, .15);
-  transform-origin: 50% 100%;
-  animation: ballBounce 1.3s infinite;
-  transition: opacity .35s ease, visibility .35s ease, background .25s ease, color .25s ease, box-shadow .25s ease;
-}
-.scroll-down:hover,
-.scroll-down:focus-visible {
-  animation-play-state: paused;
-  color: #04122e;
-  background: linear-gradient(135deg, #00c6ff, #0072ff);
-  border-color: transparent;
-  box-shadow: 0 0 30px rgba(0, 210, 255, .8), 0 8px 20px rgba(0, 114, 255, .5);
-  outline: none;
-}
-.scroll-down.is-hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-/* Rebond : écrasement au sol, étirement en l'air (montée freinée, descente accélérée) */
-@keyframes ballBounce {
-  0%, 100% {
-    transform: translateY(0) scale(1.12, .88);
-    animation-timing-function: cubic-bezier(.2, .6, .35, 1);
-  }
-  50% {
-    transform: translateY(-22px) scale(.96, 1.04);
-    animation-timing-function: cubic-bezier(.65, 0, .8, .4);
-  }
-}
-
-@media (max-width: 600px) {
-  .scroll-down { bottom: 16px; width: 46px; height: 46px; font-size: 1.1rem; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .scroll-down { animation: none; }
-}
-
 /* ----- Bouton « Retour aux stages » (bas de page) : contour arc-en-ciel animé ----- */
 .retour-stages-wrapper {
   display: flex;
