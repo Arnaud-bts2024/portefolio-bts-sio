@@ -116,14 +116,15 @@
         <span class="cv-tag cv-mono">&gt; cat cv.pdf</span>
         <h1>Mon <span class="cv-grad">CV</span></h1>
         <div class="cv-actions">
-          <a class="cv-btn" href="documents/cv.pdf" download>Télécharger le PDF</a>
+          <!-- Le PDF documents/cv.pdf renvoyait un 404 : on télécharge l'image du CV, qui s'affiche déjà sur la page -->
+          <a class="cv-btn" href="images/CV.png" download="CV-Arnaud-Hollebecque.png">Télécharger le CV</a>
           <a class="cv-btn ghost" href="parcours.html">← Mon parcours</a>
         </div>
       </header>
 
       <section class="cv-stage" aria-label="Curriculum vitae">
         <div class="cv-frame">
-          <a href="documents/cv.pdf" target="_blank" rel="noopener noreferrer" title="Ouvrir le CV en PDF">
+          <a href="images/CV.png" target="_blank" rel="noopener noreferrer" title="Ouvrir le CV en grand">
             <img src="images/CV.png" alt="Curriculum vitae d'Arnaud Hollebecque" width="1406" height="1988">
           </a>
         </div>
