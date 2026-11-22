@@ -1,0 +1,295 @@
+/* ==========================================================================
+   PAGES STAGES — css/stages.css
+   Style « verre » : fond semi-transparent + flou, comme tes cartes du site
+   ========================================================================== */
+
+/* ----- Barre de défilement aux couleurs du thème ----- */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary, #38bdf8) var(--bg-dark, #0b0f19);
+}
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-track { background: var(--bg-dark, #0b0f19); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary, #38bdf8), var(--primary-hover, #00d2ff));
+  border-radius: 10px;
+  border: 2px solid var(--bg-dark, #0b0f19);
+  box-shadow: 0 0 10px var(--glow-color, rgba(0, 210, 255, .5));
+}
+::-webkit-scrollbar-thumb:hover { background: var(--primary-hover, #00d2ff); }
+
+/* ----- Page « Mes Stages » : gros boutons plus transparents ----- */
+.stage-hub .parcours-card {
+  background: linear-gradient(135deg, rgba(15, 23, 42, .5) 0%, rgba(11, 15, 25, .6) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.stage-hub .parcours-card:hover {
+  background: linear-gradient(135deg, rgba(20, 40, 80, .6) 0%, rgba(11, 25, 50, .7) 100%);
+}
+
+/* ----- Mise en page ----- */
+.stage-content { max-width: 960px; align-items: stretch; }
+.stage-content p { text-align: left; }
+.stage-content .page-header p { text-align: center; }
+
+/* Cartes plus transparentes sur la page de stage */
+.stage-content .card-box {
+  background: linear-gradient(135deg, rgba(15, 23, 42, .5) 0%, rgba(11, 15, 25, .6) 100%);
+}
+
+.back-link {
+  align-self: flex-start;
+  margin: 10px 0 5px;
+  color: var(--primary, #38bdf8);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: .95rem;
+  transition: color .2s ease;
+}
+.back-link:hover { color: var(--primary-hover, #00d2ff); }
+
+.stage-section { width: 100%; margin-bottom: 3.5rem; }
+.section-title {
+  text-align: center;
+  font-size: 1.6rem;
+  margin-bottom: .5rem;
+  color: var(--text-main, #fff);
+  text-shadow: 0 0 15px rgba(0, 162, 255, .5);
+}
+.section-title i { color: var(--primary, #38bdf8); margin-right: 8px; }
+.section-intro { text-align: center !important; margin-bottom: 1.4rem; }
+
+/* ----- Entreprise ----- */
+.company-card { padding: 1.6rem 1.8rem; }
+.company-top { display: grid; grid-template-columns: 190px 1fr; gap: 1.6rem; align-items: center; margin-bottom: 1.4rem; }
+.company-logo {
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px;
+  background: #fff;
+  border: 1.5px solid var(--primary, #38bdf8);
+  border-radius: 14px;
+  box-shadow: 0 0 15px rgba(56, 189, 248, .3);
+  transition: transform .3s cubic-bezier(.175, .885, .32, 1.275), box-shadow .3s ease;
+}
+.company-logo:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 0 25px rgba(0, 210, 255, .7); }
+.company-logo img { max-width: 100%; max-height: 80px; object-fit: contain; display: block; }
+.company-text p { font-size: .95rem; line-height: 1.6; margin: 0 0 .6rem; }
+.hint { color: var(--text-muted, #94a3b8) !important; font-size: .82rem !important; }
+.hint i { color: var(--primary, #38bdf8); margin-right: 4px; }
+
+.company-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; }
+.company-gallery figure { margin: 0; }
+.company-gallery img {
+  width: 100%; height: 240px; object-fit: cover; display: block;
+  border-radius: 12px;
+  border: 1px solid var(--border-accent, rgba(56, 189, 248, .3));
+}
+.company-gallery figcaption { margin-top: 6px; text-align: center; font-size: .8rem; color: var(--text-muted, #94a3b8); }
+
+/* Apparition retardée des images après l'ouverture de la page */
+.reveal-late { opacity: 0; transform: translateY(16px); animation: lateIn .9s ease forwards; animation-delay: var(--delay, .8s); }
+@keyframes lateIn { to { opacity: 1; transform: none; } }
+
+/* Apparition au scroll */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ----- Missions ----- */
+.missions { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; margin-top: 1.2rem; }
+.mission { display: flex; align-items: flex-start; gap: 14px; }
+.mission > i {
+  flex: 0 0 auto;
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  font-size: 1.2rem;
+  color: var(--primary, #38bdf8);
+  background: rgba(56, 189, 248, .12);
+  border-radius: 10px;
+}
+.mission p { font-size: .9rem !important; line-height: 1.5 !important; margin: 0; }
+
+/* ----- Accordéon (effet verre) ----- */
+.accordion { display: flex; flex-direction: column; gap: 14px; }
+.acc-item {
+  position: relative;
+  background: linear-gradient(135deg, rgba(15, 23, 42, .5) 0%, rgba(11, 15, 25, .6) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(56, 189, 248, .35);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .3), inset 0 1px 0 rgba(255, 255, 255, .1);
+  transition: border-color .3s ease, box-shadow .3s ease, background .3s ease;
+}
+.acc-item::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, var(--primary, #38bdf8), transparent);
+  opacity: .6;
+  transition: opacity .3s ease;
+}
+.acc-item:hover, .acc-item.open {
+  border-color: rgba(0, 210, 255, .6);
+  box-shadow: 0 15px 35px rgba(0, 210, 255, .2), inset 0 1px 0 rgba(255, 255, 255, .2);
+}
+.acc-item:hover::before, .acc-item.open::before {
+  opacity: 1;
+  background: linear-gradient(90deg, #00d2ff, #38bdf8, #00ff87);
+}
+.acc-item.open { background: linear-gradient(135deg, rgba(14, 90, 140, .35) 0%, rgba(11, 25, 50, .6) 100%); }
+
+.acc-header {
+  width: 100%;
+  display: flex; align-items: center; gap: 16px;
+  padding: 18px 24px;
+  background: transparent;
+  color: var(--text-main, #fff);
+  border: 0; cursor: pointer;
+  font: inherit; font-size: 1.1rem; font-weight: 600; text-align: left;
+}
+.acc-icon {
+  width: 46px; height: 46px; display: grid; place-items: center;
+  font-size: 1.4rem;
+  color: var(--primary, #38bdf8);
+  background: rgba(56, 189, 248, .12);
+  border-radius: 10px;
+  transition: background .3s ease, color .3s ease;
+}
+.acc-item:hover .acc-icon, .acc-item.open .acc-icon { background: var(--primary, #38bdf8); color: #0f172a; }
+.acc-title { flex: 1; }
+.acc-chevron { color: var(--primary, #38bdf8); transition: transform .3s ease; }
+.acc-header[aria-expanded="true"] .acc-chevron { transform: rotate(180deg); }
+.acc-header:focus-visible { outline: 2px solid var(--primary-hover, #00d2ff); outline-offset: -2px; }
+
+.acc-panel { max-height: 0; overflow: hidden; transition: max-height .45s ease; }
+.acc-inner { padding: 4px 24px 24px; font-size: .92rem; line-height: 1.6; color: #e2e8f0; }
+.acc-inner h3 { margin: 18px 0 8px; color: var(--primary-hover, #00d2ff); font-size: 1rem; }
+.acc-inner ul { list-style: none; padding-left: 0; }
+.acc-inner ul li { position: relative; padding-left: 1.3rem; margin-bottom: .45rem; }
+.acc-inner ul li::before { content: "▹"; position: absolute; left: 0; color: var(--primary, #38bdf8); font-weight: bold; }
+.acc-inner p { font-size: .92rem; }
+
+.steps { counter-reset: s; list-style: none; padding-left: 0; }
+.steps li { counter-increment: s; position: relative; padding-left: 40px; margin-bottom: .7rem; }
+.steps li::before {
+  content: counter(s);
+  position: absolute; left: 0; top: 0;
+  width: 28px; height: 28px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: .82rem; font-weight: 700; color: #fff;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  box-shadow: 0 0 10px rgba(0, 210, 255, .4);
+}
+
+pre { background: rgba(8, 12, 24, .55); border: 1px solid var(--border-light, rgba(255,255,255,.1)); border-radius: 8px; padding: 10px 14px; margin: 8px 0; overflow-x: auto; }
+code { font-family: Consolas, monospace; color: #7dd3fc; }
+kbd { background: rgba(8, 12, 24, .55); border: 1px solid rgba(255, 255, 255, .25); border-bottom-width: 2px; border-radius: 5px; padding: 1px 7px; font-size: .85em; }
+.note { margin-top: 14px; padding: 10px 14px; border-left: 4px solid var(--primary, #38bdf8); background: rgba(56, 189, 248, .1); border-radius: 6px; font-size: .88rem !important; color: #cbd5e1 !important; }
+.badge-pass { background: #7ed321; color: #0f172a; font-weight: 700; padding: 1px 8px; border-radius: 6px; }
+
+.pdf-link {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-top: 16px; padding: 10px 24px;
+  font-weight: 700; font-size: .92rem;
+  color: #fff; text-decoration: none;
+  background: rgba(13, 22, 48, .45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid var(--primary-hover, #00d2ff);
+  border-radius: 50px;
+  box-shadow: 0 0 15px rgba(0, 210, 255, .3);
+  transition: all .35s cubic-bezier(.175, .885, .32, 1.275);
+}
+.pdf-link:hover {
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  border-color: transparent;
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(0, 210, 255, .7);
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 700px) {
+  .company-top { grid-template-columns: 1fr; }
+  .company-logo { max-width: 220px; margin: 0 auto; }
+  .acc-header { padding: 14px 16px; font-size: 1rem; }
+  .acc-inner { padding: 4px 16px 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-late, .reveal { animation: none; transition: none; opacity: 1; transform: none; }
+  .acc-panel { transition: none; }
+}
+/* ----- Bouton « Retour aux stages » (bas de page) : contour arc-en-ciel animé ----- */
+.retour-stages-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 1rem 0 2.5rem;
+}
+
+.btn-retour-stages {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 30px;
+  font-family: inherit;
+  font-size: .98rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 999px;
+  overflow: hidden;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.btn-retour-stages i {
+  color: var(--primary-hover, #00d2ff);
+  transition: transform .25s ease;
+}
+
+/* Contour arc-en-ciel animé */
+.btn-retour-stages::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #ff2a5f, #ff9f1c, #ffea00, #2ec4b6, #3a86ff, #9b5de5, #ff2a5f);
+  background-size: 300% 300%;
+  animation: arcEnCielStages 5s linear infinite;
+  z-index: -2;
+}
+
+/* Fond sombre intérieur */
+.btn-retour-stages::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border-radius: inherit;
+  background: rgba(11, 24, 46, .92);
+  z-index: -1;
+  transition: background .25s ease;
+}
+
+.btn-retour-stages:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 0 22px rgba(58, 134, 255, .45), 0 0 32px rgba(255, 42, 95, .25);
+}
+.btn-retour-stages:hover::after { background: rgba(16, 34, 64, .82); }
+.btn-retour-stages:hover i { transform: translateX(-4px); }
+.btn-retour-stages:active { transform: translateY(0) scale(.99); }
+
+@keyframes arcEnCielStages {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-retour-stages::before { animation: none; }
+}
+
+/* ----- Ancienne flèche « descendre » supprimée : on masque l'élément resté dans le HTML (il créait un vide sous le pied de page) ----- */
+.scroll-down { display: none !important; }
