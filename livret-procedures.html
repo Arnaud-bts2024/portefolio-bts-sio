@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Livret des procédures | Arnaud Hollebecque – BTS SIO SISR</title>
+  <meta name="description" content="Livret interactif des procédures rédigées pendant le stage de 1ère année d'Arnaud Hollebecque (BTS SIO SISR) : santé d'un PC, réinitialisation d'une tablette Samsung, déploiement de Windows 11 25H2.">
+  <!-- Polices hébergées dans le dossier fonts/ (aucun appel à Google, fonctionne sans Internet) -->
+  <link rel="stylesheet" href="css/fonts.css?v=1">
+  <!-- Feuille de style du portfolio (barre de navigation) -->
+  <link rel="stylesheet" href="css/style.css?v=6">
+  <!-- Habillage de la page + pages du livret (même feuille que le livret du projet) -->
+  <link rel="stylesheet" href="css/livret-projet.css?v=1">
+</head>
+<body>
+
+  <!-- Navbar du portfolio (injectée par js/main.js) -->
+  <div id="navbar-container"></div>
+
+  <main class="cert-page">
+    <canvas id="cert-canvas" aria-hidden="true"></canvas>
+
+    <!-- ================= HERO ================= -->
+    <header class="cert-hero cert-wrap">
+      <div class="cert-terminal cert-mono" aria-hidden="true">
+        <span id="cert-typed" data-cmd="$ ls procedures/"></span><span class="cert-caret"></span>
+      </div>
+      <h1>Mes procédures <span class="cert-grad">de stage</span></h1>
+      <p class="cert-lead">
+        Trois procédures rédigées pendant mon stage de 1ère année : contrôler la santé d'un PC,
+        réinitialiser une tablette Samsung et déployer un poste Windows 11 25H2. Un livret à feuilleter.
+      </p>
+      <p class="cert-id"><strong>Arnaud Hollebecque</strong> · BTS SIO SISR · EPNAK</p>
+      <div class="cert-stats" id="cert-stats">
+        <div class="cert-stat"><b data-n="3">0</b><span>Procédures</span></div>
+        <div class="cert-stat"><b data-n="auto">0</b><span>Pages à feuilleter</span></div>
+        <div class="cert-stat"><b data-n="3">0</b><span>PDF à télécharger</span></div>
+      </div>
+    </header>
+
+    <!-- ================= LIVRE ================= -->
+    <section class="cert-section cert-wrap" id="livre">
+      <h2>Feuillette mon livret</h2>
+      <p class="cert-sub">Vue d'ensemble des outils, puis chaque procédure pas à pas.</p>
+
+      <div class="cert-bookwrap" id="cert-bookwrap">
+        <div class="cert-stage" id="cert-stage" tabindex="0" aria-label="Livret des procédures, utiliser les flèches gauche et droite pour tourner les pages">
+          <div class="cert-loading">Chargement du livret…</div>
+        </div>
+
+        <div class="cert-controls">
+          <button class="cert-btn ghost" id="cert-prev" type="button" aria-label="Page précédente">‹ Précédent</button>
+          <div class="cert-ind cert-mono" id="cert-ind" aria-live="polite">Couverture</div>
+          <button class="cert-btn ghost" id="cert-next" type="button" aria-label="Page suivante">Suivant ›</button>
+          <button class="cert-btn" id="cert-full" type="button" hidden>Plein écran</button>
+          <button class="cert-btn" id="lv-pdf" type="button">Télécharger le PDF</button>
+        </div>
+        <p class="cert-hint"><span class="cert-hint-desktop">Clique sur un coin de page, glisse avec la souris ou utilise les flèches ← → du clavier.</span> Sur mobile, fais glisser la page avec le doigt.</p>
+        <p class="lv-print-hint">Pour le PDF, choisis « Enregistrer au format PDF » dans la fenêtre d'impression (marges : aucune, graphiques d'arrière-plan : activés).</p>
+      </div>
+    </section>
+
+    <!-- ================= CHAPITRES (remplis automatiquement depuis les pages du livret) ================= -->
+    <section class="cert-section cert-wrap" id="chapitres">
+      <h2>Les chapitres du livret</h2>
+      <p class="cert-sub">Ouvre un chapitre directement à sa page dans le livret.</p>
+      <div class="cert-grid" id="cert-grid"></div>
+    </section>
+
+    <!-- ================= CTA : PDF d'origine ================= -->
+    <div class="cert-wrap">
+      <div class="cert-cta">
+        <h2>Les procédures en PDF</h2>
+        <p>Les documents d'origine, à ouvrir ou à télécharger.</p>
+        <a class="cert-btn" href="documents/stage1/procedure-sante-pc.pdf" target="_blank" rel="noopener noreferrer">Santé d'un PC</a>
+        <a class="cert-btn" href="documents/stage1/procedure-tablette-samsung.pdf" target="_blank" rel="noopener noreferrer">Tablette Samsung</a>
+        <a class="cert-btn" href="documents/stage1/procedure-windows-11-25h2.pdf" target="_blank" rel="noopener noreferrer">Windows 11 25H2</a>
+        <a class="cert-btn ghost" href="stage_1er_annee.html">← Retour au stage</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- =====================================================================================
+       PAGES DU LIVRET  (c'est ICI qu'on modifie le livret)
+       Même fonctionnement que livret-projet.html : une page = un bloc <section class="lv-sheet">.
+       Le sommaire, les numéros, la liste des chapitres et le PDF se mettent à jour tout seuls.
+       Si le nombre de pages est impair, une page blanche est ajoutée avant la 4e de couverture.
+       ===================================================================================== -->
+  <div id="lv-source">
+
+    <!-- ============ 1. COUVERTURE ============ -->
+    <section class="lv-sheet lv-cover" data-title="Couverture">
+      <div class="lv-cover-inner">
+        <div class="lv-term lv-mono">$ ls procedures/</div>
+        <div class="lv-bar"></div>
+        <h1>Mes procédures <em>de stage</em></h1>
+        <p class="lv-subtitle">Santé d'un PC · réinitialisation d'une tablette Samsung · déploiement de Windows 11 25H2</p>
+      </div>
+      <div class="lv-cover-foot">
+        <div class="lv-cover-id">
+          <b>Arnaud Hollebecque</b>
+          <span>BTS SIO option SISR · EPNAK</span>
+        </div>
+        <div class="lv-tiles">
+          <div class="lv-tile"><b>3</b><span>procédures</span></div>
+          <div class="lv-tile"><b>1re</b><span>année<br>de stage</span></div>
+        </div>
+      </div>
+      <div class="lv-cover-date">Mis à jour en novembre 2026</div>
+    </section>
+
+    <!-- ============ 2. SOMMAIRE (rempli automatiquement) ============ -->
+    <section class="lv-sheet" data-title="Sommaire">
+      <div class="lv-body" style="padding-top:56px">
+        <p class="lv-eyebrow" style="color:#2f7de0">// Sommaire</p>
+        <h2 style="font-size:40px;line-height:1.1;font-weight:700;color:#0a1840;margin:6px 0 6px;letter-spacing:-.01em">Au programme</h2>
+        <p class="lv-muted" style="margin-bottom:22px" id="lv-toc-sub" data-tail=" · de la vérification d'un PC au déploiement de Windows 11">Trois procédures de stage.</p>
+        <div class="lv-toc" id="lv-toc"></div>
+      </div>
+      <footer class="lv-foot"><span>Arnaud Hollebecque · BTS SIO SISR</span><span class="lv-num"></span></footer>
+    </section>
+
+    <!-- ============ 3. VUE D'ENSEMBLE ET OUTILS ============ -->
+    <section class="lv-sheet" data-title="Vue d'ensemble et outils" data-toc="Vue d'ensemble et outils" data-group="Avant de commencer"
+             data-icon="🧰" data-desc="Les trois procédures en un coup d'œil et les outils utilisés dans chacune : Rufus, Ninite, Odin, Frija, CrystalDiskInfo, HWiNFO."
+             data-tags="Rufus,Ninite,Odin,Frija">
+      <header class="lv-band">
+        <p class="lv-eyebrow">// Avant de commencer</p>
+        <h2>Vue d'ensemble <em>et outils</em></h2>
+      </header>
+      <div class="lv-body">
+        <h3 class="lv-h3">Trois procédures</h3>
+        <div class="lv-grid3">
+          <div class="lv-card c-blue"><h4>1 · Santé d'un PC</h4><p>Contrôler un poste en six étapes.</p></div>
+          <div class="lv-card c-green"><h4>2 · Tablette Samsung</h4><p>Réinitialiser avec Frija et Odin.</p></div>
+          <div class="lv-card c-violet"><h4>3 · Windows 11 25H2</h4><p>Clé bootable, installation, réglages du poste.</p></div>
+        </div>
+
+        <h3 class="lv-h3 lv-gap">Les outils utilisés</h3>
+        <table class="lv-table">
+          <thead><tr><th style="width:27%">Outil</th><th style="width:23%">Procédure</th><th>Rôle</th></tr></thead>
+          <tbody>
+            <tr><td>Outils Windows</td><td>Santé d'un PC</td><td>Fiabilité, Gestionnaire des tâches, <code>sfc /scannow</code>, Sécurité Windows</td></tr>
+            <tr><td>CrystalDiskInfo</td><td>Santé d'un PC</td><td>Santé du SSD ou du disque</td></tr>
+            <tr><td>HWiNFO</td><td>Santé d'un PC</td><td>Températures du processeur et de la carte graphique</td></tr>
+            <tr><td>Samsung USB Driver</td><td>Tablette Samsung</td><td>Pilotes USB de la tablette</td></tr>
+            <tr><td>Frija</td><td>Tablette Samsung</td><td>Télécharger le firmware (modèle, CSC, IMEI)</td></tr>
+            <tr><td>Odin v3.14.4</td><td>Tablette Samsung</td><td>Flasher le firmware (fichiers BL, AP, CSC)</td></tr>
+            <tr><td>Rufus</td><td>Windows 11</td><td>Créer la clé USB bootable à partir de l'ISO 25H2</td></tr>
+            <tr><td>Adobe Acrobat Reader</td><td>Windows 11</td><td>Lecture des PDF, installé avant les autres applications</td></tr>
+            <tr><td>Ninite</td><td>Windows 11</td><td>Installer les applications du poste en une fois</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <footer class="lv-foot"><span>Arnaud Hollebecque · BTS SIO SISR</span><span class="lv-num"></span></footer>
+    </section>
+
+    <!-- ============ 4. SANTÉ D'UN PC ============ -->
+    <section class="lv-sheet" data-title="Vérifier l'état de santé d'un PC" data-toc="Vérifier l'état de santé d'un PC" data-group="Procédures"
+             data-icon="🩺" data-desc="Six étapes pour contrôler un poste : fiabilité, performances, disque, fichiers système, mises à jour et sécurité."
+             data-tags="Fiabilité,sfc /scannow,CrystalDiskInfo">
+      <header class="lv-band">
+        <p class="lv-eyebrow">// Procédure 1</p>
+        <h2>Vérifier l'état de <em>santé d'un PC</em></h2>
+      </header>
+      <div class="lv-body">
+        <p class="lv-lead">Six étapes, de l'état général à la sécurité, pour contrôler un poste.</p>
+
+        <h3 class="lv-h3 lv-gap">Les six étapes</h3>
+        <div class="lv-grid2">
+          <div class="lv-card c-blue"><h4>1 · État général (1 min)</h4><p>Windows, taper « fiabilité », ouvrir l'historique de fiabilité et repérer les croix rouges répétées.</p></div>
+          <div class="lv-card c-cyan"><h4>2 · Performances (2 min)</h4><p><code>Ctrl</code>+<code>Maj</code>+<code>Échap</code>, onglet Performances : processeur entre 1 et 15 % au repos, mémoire sous 80 %, disque qui ne reste pas à 100 %.</p></div>
+          <div class="lv-card c-green"><h4>3 · Disque (1 min)</h4><p>Disque local (C:) → Propriétés → Outils → Vérifier.</p></div>
+          <div class="lv-card c-violet"><h4>4 · Fichiers système (5 à 10 min)</h4><p>Terminal (Admin), puis la commande ci-dessous.</p></div>
+          <div class="lv-card c-orange"><h4>5 · Mises à jour</h4><p>Paramètres → Windows Update, installer ce qui est disponible.</p></div>
+          <div class="lv-card c-blue"><h4>6 · Sécurité</h4><p>Sécurité Windows, lancer une analyse rapide.</p></div>
+        </div>
+
+        <p class="lv-code-title lv-gap">Terminal (administrateur)</p>
+        <pre class="lv-code">sfc /scannow</pre>
+
+        <div class="lv-note ok lv-gap"><b>Aller plus loin</b><div>CrystalDiskInfo (santé du SSD ou du disque) et HWiNFO (températures du processeur et de la carte graphique).</div></div>
+      </div>
+      <footer class="lv-foot"><span>Arnaud Hollebecque · BTS SIO SISR</span><span class="lv-num"></span></footer>
+    </section>
+
+    <!-- ============ 5. TABLETTE SAMSUNG ============ -->
+    <section class="lv-sheet" data-title="Réinitialiser une tablette Samsung" data-toc="Réinitialiser une tablette Samsung" data-group="Procédures"
+             data-icon="📱" data-desc="Récupérer le firmware avec Frija, le flasher avec Odin et passer par le mode recovery."
+             data-tags="Odin,Frija,Recovery">
+      <header class="lv-band">
+        <p class="lv-eyebrow">// Procédure 2</p>
+        <h2>Réinitialiser une <em>tablette Samsung</em></h2>
+      </header>
+      <div class="lv-body">
+        <h3 class="lv-h3">Prérequis</h3>
+        <ul class="lv-list">
+          <li>Pilotes Samsung USB Driver, Odin v3.14.4 (Android 10 à 14) et Frija.</li>
+          <li>Relever sur la tablette : modèle, code CSC, numéro de série / IMEI.</li>
+        </ul>
+
+        <h3 class="lv-h3 lv-gap">Étapes</h3>
+        <div style="display:grid;gap:9px">
+          <div class="lv-card c-blue"><h4>1 · Frija</h4><p>Mode Manuel, saisir modèle / CSC / IMEI, <strong>Check Update</strong>, puis télécharger le firmware dans un dossier créé sur le bureau et le décompresser.</p></div>
+          <div class="lv-card c-cyan"><h4>2 · Odin (en administrateur)</h4><p>Charger les fichiers <strong>BL</strong>, <strong>AP</strong> et <strong>CSC</strong>.</p></div>
+          <div class="lv-card c-green"><h4>3 · Mode recovery</h4><p>Tablette éteinte : volume bas + marche/arrêt, puis volume haut + marche/arrêt jusqu'au logo Samsung, et rester sur volume haut jusqu'au menu.</p></div>
+          <div class="lv-card c-violet"><h4>4 · Menu</h4><p><strong>Wipe data/factory reset</strong>, puis <strong>Wipe cache partition</strong>, puis <strong>Reboot to bootloader</strong>.</p></div>
+          <div class="lv-card c-orange"><h4>5 · Flash</h4><p>Cliquer sur <strong>Start</strong> dans Odin et attendre <span class="lv-chip ok">PASS !</span></p></div>
+        </div>
+
+        <div class="lv-note warn lv-gap"><b>Attention</b><div>La combinaison de touches peut varier selon le modèle de tablette.</div></div>
+      </div>
+      <footer class="lv-foot"><span>Arnaud Hollebecque · BTS SIO SISR</span><span class="lv-num"></span></footer>
+    </section>
+
+    <!-- ============ 6. WINDOWS 11 (1/2) ============ -->
+    <section class="lv-sheet" data-title="Windows 11 25H2 : clé bootable et installation" data-toc="Windows 11 25H2 : clé et installation" data-group="Procédures"
+             data-icon="💿" data-desc="Créer la clé bootable avec Rufus, démarrer dessus et installer Windows 11 25H2 sur le nouveau PC."
+             data-tags="Rufus,NTFS,Boot">
+      <header class="lv-band">
+        <p class="lv-eyebrow">// Procédure 3 · 1/2</p>
+        <h2>Déployer <em>Windows 11 25H2</em></h2>
+      </header>
+      <div class="lv-body">
+        <h3 class="lv-h3">1. Créer la clé bootable</h3>
+        <ul class="lv-list">
+          <li>Télécharger Rufus, choisir l'ISO Windows 11 25H2 et la clé USB, système de fichiers <strong>NTFS</strong>.</li>
+          <li>Personnaliser : compte local « USER », options régionales, collecte de données désactivée, édition Windows 11 Professionnel.</li>
+        </ul>
+        <div class="lv-note warn lv-gap-s"><b>Attention</b><div>Valider les avertissements : l'installation silencieuse efface le disque.</div></div>
+
+        <h3 class="lv-h3 lv-gap">2. Installer sur le nouveau PC</h3>
+        <p class="lv-small">Booter sur la clé avec la touche du constructeur, clé USB en 1<sup>re</sup> position, puis <code>F10</code> pour enregistrer.</p>
+        <table class="lv-table tight lv-gap-s">
+          <thead><tr><th style="width:50%">Constructeur</th><th>Touche de démarrage</th></tr></thead>
+          <tbody>
+            <tr><td>HP</td><td><code>F9</code></td></tr>
+            <tr><td>Lenovo</td><td><code>F1</code></td></tr>
+            <tr><td>Dell</td><td><code>F12</code></td></tr>
+          </tbody>
+        </table>
+        <ul class="lv-list lv-gap-s">
+          <li>Supprimer l'ancienne installation, sans toucher aux partitions de la clé (Win11_25H2 et RUFUS BOOT).</li>
+          <li>Choix de la région (France), du clavier (Français), deuxième disposition ignorée.</li>
+          <li>Si l'option « Je n'ai pas Internet » manque : <code>Shift</code>+<code>F10</code> puis la commande ci-dessous.</li>
+        </ul>
+        <p class="lv-code-title lv-gap-s">Invite de commandes</p>
+        <pre class="lv-code">oobe\bypassnro</pre>
+      </div>
+      <footer class="lv-foot"><span>Arnaud Hollebecque · BTS SIO SISR</span><span class="lv-num"></span></footer>
+    </section>
+
+    <!-- ============ 7. WINDOWS 11 (2/2) ============ -->
+    <section class="lv-sheet" data-title="Windows 11 25H2 : préparation du poste" data-toc="Windows 11 25H2 : préparation du poste" data-group="Procédures"
+             data-icon="⚙️" data-desc="Réglages du bureau, des notifications et de Windows Update, puis installation des applications avec Ninite."
+             data-tags="Windows Update,Ninite,Office">
+      <header class="lv-band">
+        <p class="lv-eyebrow">// Procédure 3 · 2/2</p>
+        <h2>Préparer <em>le poste</em></h2>
+      </header>
+      <div class="lv-body">
+        <h3 class="lv-h3">3. Les réglages</h3>
+        <div class="lv-grid2">
+          <div class="lv-card c-blue"><h4>1 · Icônes du bureau</h4><p>Ordinateur, Fichiers de l'utilisateur, Corbeille, Panneau de configuration.</p></div>
+          <div class="lv-card c-cyan"><h4>2 · Notifications</h4><p>Notifications et « Ne pas déranger » désactivées.</p></div>
+          <div class="lv-card c-green"><h4>3 · Diagnostics</h4><p>Diagnostics et commentaires : fréquence des commentaires sur « Jamais ».</p></div>
+          <div class="lv-card c-violet"><h4>4 · Windows Update</h4><p>Tout installer, option de mises à jour anticipées activée.</p></div>
+          <div class="lv-card c-orange"><h4>5 · Affichage</h4><p>Barre des tâches alignée à gauche, Mode jeu désactivé.</p></div>
+          <div class="lv-card c-blue"><h4>6 · Applications</h4><p>Installer Adobe Acrobat Reader, puis les applications via Ninite, et le pack Office si demandé.</p></div>
+        </div>
+
+        <h3 class="lv-h3 lv-gap">Applications installées avec Ninite</h3>
+        <div class="lv-chips">
+          <span class="lv-chip">Chrome</span>
+          <span class="lv-chip">Firefox</span>
+          <span class="lv-chip">Edge</span>
+          <span class="lv-chip">7-Zip</span>
+          <span class="lv-chip">VLC</span>
+          <span class="lv-chip">Java</span>
+          <span class="lv-chip">.NET Desktop Runtime</span>
+          <span class="lv-chip">TeamViewer</span>
+        </div>
+
+        <div class="lv-strip lv-gap">
+          <p class="lv-eyebrow">En résumé</p>
+          <strong>Clé bootable, installation, réglages, applications</strong>
+          <span>Windows 11 Professionnel 25H2</span>
+        </div>
+      </div>
+      <footer class="lv-foot"><span>Arnaud Hollebecque · BTS SIO SISR</span><span class="lv-num"></span></footer>
+    </section>
+
+    <!-- ============ 8. QUATRIÈME DE COUVERTURE ============ -->
+    <section class="lv-sheet lv-back" data-title="Quatrième de couverture">
+      <div class="lv-back-inner">
+        <div class="lv-term lv-mono">$ exit 0</div>
+        <h2>Merci de votre lecture</h2>
+        <div class="lv-bar"></div>
+        <b>Arnaud Hollebecque</b>
+        <span>BTS SIO option SISR · EPNAK</span>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="js/main.js"></script>
+  <!-- Bibliothèque de tourne-page (StPageFlip) : copie locale dans js/, sinon repli sur le CDN. -->
+  <script src="js/page-flip.browser.js"></script>
+  <script>window.St || document.write('<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"><\/script>');</script>
+  <script src="js/livret-projet.js?v=2"></script>
+</body>
+</html>
