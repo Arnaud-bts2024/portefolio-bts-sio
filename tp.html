@@ -10,6 +10,27 @@
     <link rel="stylesheet" href="css/pages.css?v=7">
     <link rel="stylesheet" href="css/responsive.css?v=7">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Cartes de la page « Mes TP » : texte centré et plus grand */
+        .card-box.tp-card {
+            padding: 2rem 2rem;
+        }
+        .card-box.tp-card h2 {
+            justify-content: center;
+            font-size: 1.9rem;
+            margin-bottom: 0.9rem;
+            padding-bottom: 0.8rem;
+        }
+        .card-box.tp-card p {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-top: 0.4rem;
+        }
+        @media (max-width: 768px) {
+            .card-box.tp-card h2 { font-size: 1.5rem; }
+            .card-box.tp-card p { font-size: 1.05rem; }
+        }
+    </style>
 </head>
 <body>
 
@@ -28,22 +49,18 @@
 
             <!-- Grille des TP centrée et aérée -->
             <div style="width: 100%; max-width: 850px; display: flex; flex-direction: column; align-items: center; gap: 40px; margin: 20px auto 40px auto;">
-                
-                <!-- TP 1ère année (Pointe vers tp_1er_annee.html) -->
-                <a href="tp_1er_annee.html" class="card-box" style="width: 100%; text-decoration: none; display: block; color: inherit;">
-                    <h2><i class="fa-solid fa-code"></i> TP 1er année : Exemple de TP</h2>
-                    <p class="card-subtitle">Technologies : VOIP CISCO, Parfeu ASA, PFESENSE</p>
+
+                <!-- TP 1re année (pointe vers tp_1er_annee.html) -->
+                <a href="tp_1er_annee.html" class="card-box tp-card" style="width: 100%; text-decoration: none; display: block; color: inherit;">
+                    <h2><i class="fa-solid fa-code"></i> TP 1re année</h2>
                     <p>Cliquer pour en savoir plus</p>
                 </a>
 
-                <!-- TP 2ème année -->
-
-                  <a href="tp_2eme_annee.html" class="card-box" style="width: 100%; text-decoration: none; display: block; color: inherit;">
-                    <h2><i class="fa-solid fa-code"></i> TP 2eme année : Exemple de TP</h2>
-                    <p class="card-subtitle">Technologies : OSPF, HSRP </p>
-                    <p>Cliquez ici pour en savoir plus</p>
+                <!-- TP 2e année -->
+                <a href="tp_2eme_annee.html" class="card-box tp-card" style="width: 100%; text-decoration: none; display: block; color: inherit;">
+                    <h2><i class="fa-solid fa-code"></i> TP 2e année</h2>
+                    <p>Cliquer pour en savoir plus</p>
                 </a>
-            
 
             </div>
         </main>
