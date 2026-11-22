@@ -308,3 +308,17 @@ kbd { background: rgba(8, 12, 24, .55); border: 1px solid rgba(255, 255, 255, .2
   font-weight: 700;
 }
 .btn-projet-stages:hover i { transform: translateX(4px); }
+
+/* ----- Missions : une seule carte, regroupées par thème ----- */
+.missions-card { padding: 1.6rem 1.8rem; }
+.card-box.missions-card:hover { transform: none; }
+.missions-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.8rem 2.4rem; }
+.mission-group h3 {
+  display: flex; align-items: center; gap: .6rem;
+  margin: 0 0 .8rem; padding-bottom: .5rem;
+  font-size: 1.05rem; font-weight: 700;
+  color: var(--primary-hover, #00d2ff);
+  border-bottom: 1px solid rgba(56, 189, 248, .18);
+}
+.mission-group h3 i { color: var(--primary, #38bdf8); }
+.mission-group ul li { font-size: .92rem; line-height: 1.5; margin-bottom: .5rem; }
