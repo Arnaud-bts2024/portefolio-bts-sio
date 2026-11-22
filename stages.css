@@ -293,3 +293,18 @@ kbd { background: rgba(8, 12, 24, .55); border: 1px solid rgba(255, 255, 255, .2
 
 /* ----- Ancienne flèche « descendre » supprimée : on masque l'élément resté dans le HTML (il créait un vide sous le pied de page) ----- */
 .scroll-down { display: none !important; }
+
+/* ----- Bouton « Cliquer pour voir Mon Projet » (bas de page de stage) : même contour arc-en-ciel que « Retour aux stages » ----- */
+.projet-stages-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 2.5rem 0 0;
+}
+.btn-projet-stages {
+  padding: 16px 40px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.btn-projet-stages:hover i { transform: translateX(4px); }
