@@ -38,9 +38,9 @@
     #cv-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
 
     /* ---------- Mise en page : tout tient dans l'écran, sans défilement ---------- */
-    .cv-page { --nav-h: 41px; --cv-pad: 22px; height: calc(100vh - var(--nav-h)); min-height: 0; }
+    .cv-page { --nav-h: 41px; --cv-pad: 22px; --cv-foot-h: 40px; height: calc(100vh - var(--nav-h)); min-height: 0; }
     .cv-layout {
-      height: 100%; max-width: 1180px; margin: 0 auto; padding: var(--cv-pad) 32px;
+      height: calc(100% - var(--cv-foot-h)); max-width: 1180px; margin: 0 auto; padding: var(--cv-pad) 32px;
       display: grid; grid-template-columns: minmax(260px, 400px) auto; justify-content: center;
       align-items: center; column-gap: clamp(32px, 6vw, 80px);
     }
@@ -70,12 +70,12 @@
     .cv-btn.ghost { background: transparent; color: var(--cv-text); border-color: var(--cv-border); }
     .cv-btn.ghost:hover { border-color: var(--cv-accent); }
     .cv-btn:focus-visible { outline: 2px solid var(--cv-accent-2); outline-offset: 3px; }
-    .cv-foot { margin: 30px 0 0; color: var(--cv-muted); font-size: .8rem; text-align: left; }
+    .cv-foot { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; height: var(--cv-foot-h); display: flex; align-items: center; justify-content: center; color: var(--cv-muted); font-size: .8rem; text-align: center; }
 
     /* ---------- CV : une page entière, hauteur = hauteur disponible ---------- */
     .cv-stage { display: flex; justify-content: center; align-items: center; }
     .cv-frame {
-      --h: calc(100vh - var(--nav-h) - 2 * var(--cv-pad));   /* hauteur du cadre */
+      --h: calc(100vh - var(--nav-h) - var(--cv-foot-h) - 2 * var(--cv-pad));   /* hauteur du cadre */
       --pad: 10px;
       height: var(--h);
       width: calc((var(--h) - 2 * var(--pad)) * 1406 / 1988 + 2 * var(--pad));   /* ratio A4 du CV */
@@ -94,9 +94,9 @@
     @media (max-width: 900px), (max-height: 520px) {
       .cv-page { height: auto; min-height: calc(100vh - var(--nav-h)); }
       .cv-layout { height: auto; grid-template-columns: 1fr; row-gap: 28px; padding: 40px 18px 50px; }
-      .cv-hero, .cv-hero h1, .cv-lead, .cv-foot { text-align: center; }
+      .cv-hero, .cv-hero h1, .cv-lead { text-align: center; }
       .cv-actions { flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: center; }
-      .cv-foot { margin-top: 18px; }
+      .cv-foot { position: relative; height: auto; padding: 0 18px 28px; }
       .cv-frame { --h: auto; height: auto; width: min(100%, 560px); padding: 8px; }
       .cv-frame a, .cv-frame img { height: auto; }
     }
@@ -115,13 +115,10 @@
       <header class="cv-hero">
         <span class="cv-tag cv-mono">&gt; cat cv.pdf</span>
         <h1>Mon <span class="cv-grad">CV</span></h1>
-        <p class="cv-lead">Arnaud Hollebecque — étudiant en BTS SIO option SISR. Clique sur le CV pour l'ouvrir en grand.</p>
         <div class="cv-actions">
           <a class="cv-btn" href="documents/cv.pdf" download>Télécharger le PDF</a>
-          <a class="cv-btn ghost" href="documents/cv.pdf" target="_blank" rel="noopener noreferrer">Ouvrir en grand</a>
           <a class="cv-btn ghost" href="parcours.html">← Mon parcours</a>
         </div>
-        <p class="cv-foot">© 2026 Arnaud HOLLEBECQUE — Portfolio BTS SIO</p>
       </header>
 
       <section class="cv-stage" aria-label="Curriculum vitae">
@@ -132,6 +129,8 @@
         </div>
       </section>
     </div>
+
+    <footer class="cv-foot">© 2026 Arnaud HOLLEBECQUE — Portfolio BTS SIO</footer>
   </main>
 
   <script src="js/main.js"></script>
