@@ -79,14 +79,29 @@
         .modal-zoom.active {
             display: flex;
         }
-        .modal-zoom img {
-            max-width: 82%;
-            max-height: 86vh;
+        .zoom-stage {
+            width: 82vw;
+            height: 86vh;
+            overflow: auto;
+            display: flex;
+            border-radius: 12px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary) transparent;
+        }
+        .zoom-stage.is-zoomed { cursor: grab; }
+        .zoom-stage.dragging { cursor: grabbing; user-select: none; }
+        .zoom-stage img {
+            margin: auto;
+            max-width: 100%;
+            max-height: 100%;
             object-fit: contain;
+            box-sizing: border-box;
             border-radius: 12px;
             border: 2px solid var(--primary);
             box-shadow: 0 0 40px rgba(0, 210, 255, 0.5);
+            -webkit-user-drag: none;
         }
+        .zoom-stage img.zoomed { max-width: none; max-height: none; flex: none; }
 
         /* Flèches pour passer d'une image à l'autre en restant en zoom */
         .zoom-nav {
@@ -114,11 +129,16 @@
         .zoom-nav.prev { left: 25px; }
         .zoom-nav.next { right: 25px; }
 
-        /* Bouton « Zoom - » pour quitter le mode zoom */
-        .zoom-exit {
+        /* Boutons « Zoom + » et « Zoom - » (en haut à droite) */
+        .zoom-tools {
             position: absolute;
             top: 22px;
             right: 30px;
+            display: flex;
+            gap: 10px;
+            z-index: 3;
+        }
+        .zoom-exit, .zoom-in {
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -133,11 +153,13 @@
             transition: all 0.3s ease;
             z-index: 2;
         }
-        .zoom-exit:hover {
+        .zoom-exit:hover, .zoom-in:hover:not(:disabled) {
             background: linear-gradient(135deg, #00c6ff, #0072ff);
             border-color: transparent;
             box-shadow: 0 0 20px var(--glow-color);
         }
+
+        .zoom-in:disabled { opacity: 0.4; cursor: not-allowed; }
 
         .zoom-counter {
             position: absolute;
@@ -149,11 +171,12 @@
         }
 
         @media (max-width: 768px) {
-            .modal-zoom img { max-width: 100%; max-height: 78vh; }
+            .zoom-stage { width: 100%; height: 78vh; }
             .zoom-nav { width: 42px; height: 42px; }
             .zoom-nav.prev { left: 8px; }
             .zoom-nav.next { right: 8px; }
-            .zoom-exit { right: 12px; padding: 8px 14px; }
+            .zoom-tools { right: 12px; }
+            .zoom-exit, .zoom-in { padding: 8px 14px; }
         }
     </style>
 </head>
@@ -212,9 +235,12 @@
     <!-- Modale de Zoom : on reste en zoom, flèches pour changer d'image, « Zoom - » pour quitter -->
     <div class="modal-zoom" id="imageModal">
         <button type="button" class="zoom-nav prev" id="zoomPrev" title="Image précédente"><i class="fa-solid fa-chevron-left"></i></button>
-        <img id="modalImg" src="" alt="Zoom image">
+        <div class="zoom-stage" id="zoomStage"><img id="modalImg" src="" alt="Zoom image"></div>
         <button type="button" class="zoom-nav next" id="zoomNext" title="Image suivante"><i class="fa-solid fa-chevron-right"></i></button>
-        <button type="button" class="zoom-exit" id="zoomExit" title="Quitter le zoom (Échap)"><i class="fa-solid fa-magnifying-glass-minus"></i> Zoom -</button>
+        <div class="zoom-tools">
+            <button type="button" class="zoom-in" id="zoomIn" title="Agrandir (touche +)"><i class="fa-solid fa-magnifying-glass-plus"></i> Zoom +</button>
+            <button type="button" class="zoom-exit" id="zoomExit" title="Réduire, puis quitter le zoom (Échap)"><i class="fa-solid fa-magnifying-glass-minus"></i> Zoom -</button>
+        </div>
         <div class="zoom-counter" id="zoomCounter"></div>
     </div>
 
@@ -242,7 +268,63 @@
             modalImg.src = slideImages[current].src;
             modalImg.alt = slideImages[current].alt;
             counter.textContent = (current + 1) + ' / ' + slideImages.length;
+            resetScale();
         }
+
+        // ----- Zoom + / Zoom - : agrandissement par paliers, image déplaçable à la souris -----
+        const stage = document.getElementById('zoomStage');
+        const zoomInBtn = document.getElementById('zoomIn');
+        const SCALES = [1, 1.5, 2, 3, 4];
+        let scaleIdx = 0, baseW = 0, baseH = 0;
+
+        function setScale(idx) {
+            // garde le même point au centre de l'écran pendant le zoom
+            const cx = (stage.scrollLeft + stage.clientWidth / 2) / (stage.scrollWidth || 1);
+            const cy = (stage.scrollTop + stage.clientHeight / 2) / (stage.scrollHeight || 1);
+            scaleIdx = idx;
+            const s = SCALES[scaleIdx];
+            if (s === 1) {
+                modalImg.classList.remove('zoomed');
+                modalImg.style.width = '';
+                modalImg.style.height = '';
+            } else {
+                modalImg.classList.add('zoomed');
+                modalImg.style.width = (baseW * s) + 'px';
+                modalImg.style.height = (baseH * s) + 'px';
+            }
+            stage.classList.toggle('is-zoomed', s > 1);
+            zoomInBtn.disabled = scaleIdx === SCALES.length - 1;
+            stage.scrollLeft = cx * stage.scrollWidth - stage.clientWidth / 2;
+            stage.scrollTop = cy * stage.scrollHeight - stage.clientHeight / 2;
+        }
+        function resetScale() { setScale(0); stage.scrollTo(0, 0); }
+        function zoomIn() {
+            if (scaleIdx >= SCALES.length - 1) return;
+            if (scaleIdx === 0) { baseW = modalImg.offsetWidth; baseH = modalImg.offsetHeight; }
+            setScale(scaleIdx + 1);
+        }
+        // « Zoom - » : réduit d'un palier, puis quitte le zoom une fois revenu à la taille normale
+        function zoomOut() {
+            if (scaleIdx > 0) setScale(scaleIdx - 1);
+            else closeZoom();
+        }
+
+        // Déplacer l'image agrandie en la faisant glisser
+        let drag = null;
+        stage.addEventListener('pointerdown', e => {
+            if (scaleIdx === 0 || e.pointerType === 'touch') return;
+            drag = { x: e.clientX, y: e.clientY, l: stage.scrollLeft, t: stage.scrollTop };
+            stage.setPointerCapture(e.pointerId);
+            stage.classList.add('dragging');
+        });
+        stage.addEventListener('pointermove', e => {
+            if (!drag) return;
+            stage.scrollLeft = drag.l - (e.clientX - drag.x);
+            stage.scrollTop = drag.t - (e.clientY - drag.y);
+        });
+        const endDrag = () => { drag = null; stage.classList.remove('dragging'); };
+        stage.addEventListener('pointerup', endDrag);
+        stage.addEventListener('pointercancel', endDrag);
 
         function openZoom(src) {
             const index = slideImages.findIndex(s => s.src === src);
@@ -266,13 +348,16 @@
 
         document.getElementById('zoomPrev').addEventListener('click', goPrev);
         document.getElementById('zoomNext').addEventListener('click', goNext);
-        document.getElementById('zoomExit').addEventListener('click', () => closeZoom());
+        zoomInBtn.addEventListener('click', zoomIn);
+        document.getElementById('zoomExit').addEventListener('click', zoomOut);
 
         document.addEventListener('keydown', e => {
             if (!modal.classList.contains('active')) return;
             if (e.key === 'Escape') closeZoom();
             else if (e.key === 'ArrowLeft') goPrev();
             else if (e.key === 'ArrowRight') goNext();
+            else if (e.key === '+' || e.key === '=') zoomIn();
+            else if (e.key === '-' && scaleIdx > 0) zoomOut();
         });
     </script>
     <script src="js/main.js"></script>
