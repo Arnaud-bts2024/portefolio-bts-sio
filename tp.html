@@ -30,6 +30,63 @@
             .card-box.tp-card h2 { font-size: 1.5rem; }
             .card-box.tp-card p { font-size: 1.05rem; }
         }
+
+        /* Bouton « Cliquer pour voir Mes certifications » : contour arc-en-ciel animé */
+        .btn-projet {
+            position: relative;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 40px;
+            font-family: inherit;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 999px;
+            overflow: hidden;
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+        .btn-projet i {
+            color: var(--primary-hover, #00d2ff);
+            transition: transform .25s ease;
+        }
+        .btn-projet::before {
+            content: "";
+            position: absolute;
+            inset: -3px;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #ff2a5f, #ff9f1c, #ffea00, #2ec4b6, #3a86ff, #9b5de5, #ff2a5f);
+            background-size: 300% 300%;
+            animation: arcEnCielProjet 5s linear infinite;
+            z-index: -2;
+        }
+        .btn-projet::after {
+            content: "";
+            position: absolute;
+            inset: 2px;
+            border-radius: inherit;
+            background: rgba(11, 24, 46, .92);
+            z-index: -1;
+            transition: background .25s ease;
+        }
+        .btn-projet:hover {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 0 22px rgba(58, 134, 255, .45), 0 0 32px rgba(255, 42, 95, .25);
+        }
+        .btn-projet:hover::after { background: rgba(16, 34, 64, .82); }
+        .btn-projet:hover i { transform: translateX(5px); }
+        .btn-projet:active { transform: translateY(0) scale(.99); }
+        @keyframes arcEnCielProjet {
+            0%   { background-position: 0% 50%; }
+            50%  { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .btn-projet::before { animation: none; }
+        }
     </style>
 </head>
 <body>
@@ -60,6 +117,12 @@
                 <a href="tp_2eme_annee.html" class="card-box tp-card" style="width: 100%; text-decoration: none; display: block; color: inherit;">
                     <h2><i class="fa-solid fa-code"></i> TP 2e année</h2>
                     <p>Cliquer pour en savoir plus</p>
+                </a>
+
+                <!-- Bouton vers les certifications (contour arc-en-ciel) -->
+                <a href="certifications.html" class="btn-projet">
+                    <span>Cliquer pour voir Mes certifications</span>
+                    <i class="fa-solid fa-arrow-right"></i>
                 </a>
 
             </div>
