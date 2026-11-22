@@ -290,3 +290,6 @@ kbd { background: rgba(8, 12, 24, .55); border: 1px solid rgba(255, 255, 255, .2
 @media (prefers-reduced-motion: reduce) {
   .btn-retour-stages::before { animation: none; }
 }
+
+/* ----- Ancienne flèche « descendre » supprimée : on masque l'élément resté dans le HTML (il créait un vide sous le pied de page) ----- */
+.scroll-down { display: none !important; }
