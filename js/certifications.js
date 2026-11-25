@@ -90,7 +90,7 @@
 
   const TOTAL = PAGE_ALTS.length;
   const IMG = n => `images/livret/page-${String(n).padStart(2, "0")}.jpg`;
-  const ZOOM_STEPS = [1, 1.35, 1.65];
+  const ZOOM_STEPS = [1, 1.35, 1.65, 2, 2.5];
 
   const $ = (s, r = document) => r.querySelector(s);
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
