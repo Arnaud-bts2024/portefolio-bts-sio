@@ -100,7 +100,7 @@
 
     .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
     .cert-card {
-      position: relative; padding: 22px; border-radius: 20px; overflow: hidden;
+      position: relative; padding: 22px; border-radius: 20px; overflow: hidden; cursor: pointer;
       background: var(--cert-surface); border: 1px solid var(--cert-border); backdrop-filter: blur(12px);
       display: flex; flex-direction: column; gap: 12px; transition: transform .3s, border-color .3s, box-shadow .3s;
       opacity: 0; transform: translateY(22px);
@@ -120,6 +120,54 @@
     .cert-tags span { font-size: .72rem; padding: 4px 10px; border-radius: 8px; color: #bcd3ff; background: rgba(61, 155, 255, .12); border: 1px solid rgba(61, 155, 255, .25); }
     .cert-foot { display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 4px; font-size: .8rem; color: var(--cert-muted); gap: 10px; }
     .cert-foot .cert-btn { padding: 8px 14px; font-size: .8rem; }
+
+    /* ---------- MODALE ZOOM ATTESTATION ---------- */
+    .cert-zoom-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 20px;
+      background: rgba(3, 8, 22, 0.9);
+      backdrop-filter: blur(8px);
+    }
+    .cert-zoom-modal.open { display: flex; }
+    .cert-zoom-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      z-index: 2;
+    }
+    .cert-zoom-viewport {
+      position: relative;
+      width: min(92vw, 780px);
+      height: min(78vh, 980px);
+      overflow: auto;
+      border-radius: 16px;
+      background: #0b1636;
+      border: 1px solid var(--cert-border);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.75);
+      display: grid;
+      place-items: center;
+    }
+    .cert-zoom-img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      display: block;
+      transform-origin: center center;
+      transition: transform 0.2s ease;
+      cursor: zoom-in;
+      user-select: none;
+    }
+    .cert-zoom-img.is-zoomed { cursor: zoom-out; }
 
     /* CTA */
     .cert-cta { margin: 30px 0 90px; padding: 46px 30px; text-align: center; border-radius: 26px; background: linear-gradient(135deg, rgba(30, 90, 255, .35), rgba(0, 224, 255, .12)); border: 1px solid var(--cert-border); }
@@ -173,17 +221,17 @@
           <div class="cert-ind cert-mono" id="cert-ind" aria-live="polite">Couverture</div>
           <button class="cert-btn ghost" id="cert-next" type="button" aria-label="Page suivante">Suivant ›</button>
           <button class="cert-btn" id="cert-full" type="button" hidden>Plein écran</button>
-          <a class="cert-btn" href="documents/livret-certifications.pdf" download>Télécharger le PDF</a>
+          <a class="cert-btn" href="certifications.htlm/livret-certifications.pdf" download>Télécharger le PDF</a>
         </div>
         <p class="cert-hint"><span class="cert-hint-desktop">Clique sur un coin de page, glisse avec la souris ou utilise les flèches ← → du clavier.</span> Sur mobile, fais glisser la page avec le doigt.</p>
-        <noscript><p class="cert-hint">JavaScript est désactivé : <a href="documents/livret-certifications.pdf" style="color:#00e0ff">ouvrir le livret en PDF</a>.</p></noscript>
+        <noscript><p class="cert-hint">JavaScript est désactivé : <a href="certifications.htlm/livret-certifications.pdf" style="color:#00e0ff">ouvrir le livret en PDF</a>.</p></noscript>
       </div>
     </section>
 
     <!-- ================= ATTESTATIONS ================= -->
     <section class="cert-section cert-wrap" id="attestations">
       <h2>Toutes mes attestations</h2>
-      <p class="cert-sub">Filtre par domaine, puis ouvre une attestation directement à sa page dans le livret.</p>
+      <p class="cert-sub">Filtre par domaine, puis clique sur une attestation pour l'ouvrir en zoom.</p>
       <div class="cert-filters" id="cert-filters" role="group" aria-label="Filtrer par domaine"></div>
       <div class="cert-grid" id="cert-grid"></div>
     </section>
@@ -194,11 +242,12 @@
         <h2>Des certifications mises en pratique</h2>
         <p>Retrouve les projets où j'applique ces compétences : infrastructure Cisco ASA, virtualisation, supervision…</p>
         <a class="cert-btn" href="stages.html">Voir Mes stages →</a>
-        <a class="cert-btn" href="projets.html">Voir mon Projet→</a>
+        <a class="cert-btn" href="projets.html">Voir mon Projet →</a>
         <a class="cert-btn ghost" href="images/tbl_de_synthèse/tableau.png">Tableau de synthèse</a>
         <a class="cert-btn ghost" href="contact.html">Me contacter</a>
       </div>
     </div>
+
     <!-- ================= MODALE ZOOM ================= -->
     <div class="cert-zoom-modal" id="cert-zoom-modal" role="dialog" aria-modal="true" aria-labelledby="cert-zoom-title">
       <div class="cert-zoom-bar">
@@ -363,7 +412,6 @@
       show(0);
     }
 
-    /* enregistré avant la bibliothèque : la taille du livre est mise à jour avant son propre recalcul */
     addEventListener("resize", () => { layout(); api && api.update(); });
     if (window.St && St.PageFlip) { try { initFlip(); } catch (e) { console.warn(e); initFallback(); } }
     else initFallback();
@@ -374,6 +422,7 @@
     let bookVisible = false;
     new IntersectionObserver(en => { bookVisible = en[0].isIntersecting; }, { threshold: .25 }).observe(wrap);
     addEventListener("keydown", e => {
+      if ($("#cert-zoom-modal").classList.contains("open")) return;
       if (!bookVisible || /input|textarea|select/i.test(e.target.tagName)) return;
       if (e.key === "ArrowRight") api.next();
       else if (e.key === "ArrowLeft") api.prev();
@@ -407,7 +456,7 @@
         <div class="cert-tags">${c.tags.map(t => `<span>${t}</span>`).join("")}</div>
         <div class="cert-foot">
           <span class="cert-mono">${c.date}</span>
-          <button class="cert-btn" type="button" data-page="${c.page}">Voir dans le livre</button>
+          <button class="cert-btn" type="button" data-page="${c.page}">Zoomer</button>
         </div>
       </article>`).join("");
 
@@ -417,11 +466,72 @@
       card.style.setProperty("--mx", (e.clientX - r.left) + "px");
       card.style.setProperty("--my", (e.clientY - r.top) + "px");
     });
+
+    /* ---------- Modale zoom au clic sur une attestation ---------- */
+    const zoomModal = $("#cert-zoom-modal");
+    const zoomImg = $("#cert-zoom-img");
+    const zoomTitle = $("#cert-zoom-title");
+    const zoomLevelEl = $("#cert-zoom-level");
+    const zoomViewport = $("#cert-zoom-viewport");
+    let scale = 1.5;
+
+    function applyZoom(val) {
+      scale = Math.max(1, Math.min(3.5, Number(val.toFixed(2))));
+      zoomImg.style.transform = `scale(${scale})`;
+      zoomImg.classList.toggle("is-zoomed", scale > 1);
+      zoomLevelEl.textContent = `${Math.round(scale * 100)}%`;
+    }
+
+    function openCertZoom(pageNum, titleText) {
+      const pageIndex = Math.max(0, Math.min(TOTAL - 1, (+pageNum || 1) - 1));
+      api.go(pageIndex);
+
+      zoomImg.src = IMG(pageIndex + 1);
+      zoomImg.alt = titleText || PAGE_ALTS[pageIndex];
+      zoomTitle.textContent = titleText ? `${titleText} (Page ${pageIndex + 1})` : `Page ${pageIndex + 1}`;
+      zoomViewport.scrollTop = 0;
+      zoomViewport.scrollLeft = 0;
+      applyZoom(1.5);
+      zoomModal.classList.add("open");
+    }
+
+    function closeCertZoom() {
+      zoomModal.classList.remove("open");
+    }
+
     grid.addEventListener("click", e => {
-      const b = e.target.closest("[data-page]"); if (!b) return;
-      wrap.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
-      setTimeout(() => api.go(+b.dataset.page - 1), reduce ? 0 : 450);
+      const card = e.target.closest(".cert-card");
+      if (!card) return;
+      const btn = card.querySelector("[data-page]");
+      if (!btn) return;
+      const title = card.querySelector("h3")?.textContent?.trim() || "";
+      openCertZoom(btn.dataset.page, title);
     });
+
+    $("#cert-zoom-in").addEventListener("click", () => applyZoom(scale + 0.25));
+    $("#cert-zoom-out").addEventListener("click", () => applyZoom(scale - 0.25));
+    $("#cert-zoom-reset").addEventListener("click", () => applyZoom(1));
+    $("#cert-zoom-close").addEventListener("click", closeCertZoom);
+
+    zoomImg.addEventListener("click", () => {
+      applyZoom(scale > 1 ? 1 : 2);
+    });
+
+    zoomViewport.addEventListener("wheel", e => {
+      e.preventDefault();
+      applyZoom(scale + (e.deltaY < 0 ? 0.2 : -0.2));
+    }, { passive: false });
+
+    zoomModal.addEventListener("click", e => {
+      if (e.target === zoomModal) closeCertZoom();
+    });
+
+    addEventListener("keydown", e => {
+      if (e.key === "Escape" && zoomModal.classList.contains("open")) {
+        closeCertZoom();
+      }
+    });
+
     filters.addEventListener("click", e => {
       const b = e.target.closest(".cert-chip"); if (!b) return;
       filters.querySelectorAll(".cert-chip").forEach(x => x.classList.toggle("active", x === b));
