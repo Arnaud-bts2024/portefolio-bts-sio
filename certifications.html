@@ -39,16 +39,8 @@
 
     /* ---------- HERO ---------- */
     .cert-hero { padding: 100px 0 40px; text-align: center; }
-    .cert-terminal {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 8px 16px; border-radius: 999px;
-      background: rgba(0, 0, 0, .35); border: 1px solid var(--cert-border);
-      color: var(--cert-accent-2); font-size: .85rem; min-height: 38px;
-    }
-    .cert-terminal .cert-caret { width: 8px; height: 16px; background: var(--cert-accent-2); animation: cert-blink 1s steps(1) infinite; }
-    @keyframes cert-blink { 50% { opacity: 0; } }
 
-    .cert-hero h1 { margin: 26px 0 14px; font-size: clamp(2.6rem, 7vw, 5rem); line-height: 1.02; font-weight: 700; letter-spacing: -.03em; }
+    .cert-hero h1 { margin: 0 0 14px; font-size: clamp(2.6rem, 7vw, 5rem); line-height: 1.02; font-weight: 700; letter-spacing: -.03em; }
     .cert-grad { background: linear-gradient(100deg, #7fc0ff 0%, var(--cert-accent-2) 45%, #7b8cff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
     .cert-hero p.cert-lead { max-width: 680px; margin: 0 auto; color: var(--cert-muted); font-size: 1.15rem; line-height: 1.65; }
     .cert-id { margin-top: 18px; color: var(--cert-muted); font-size: .95rem; }
@@ -144,7 +136,6 @@
     }
     @media (prefers-reduced-motion: reduce) {
       .cert-card { opacity: 1 !important; transform: none !important; transition: none !important; }
-      .cert-terminal .cert-caret { animation: none; }
     }
   </style>
 </head>
@@ -158,9 +149,6 @@
 
     <!-- ================= HERO ================= -->
     <header class="cert-hero cert-wrap">
-      <div class="cert-terminal cert-mono" aria-hidden="true">
-        <span id="cert-typed"></span><span class="cert-caret"></span>
-      </div>
       <h1>Mes <span class="cert-grad">certifications</span></h1>
       <p class="cert-lead">
         Onze attestations officielles en réseaux, cybersécurité et compétences numériques,
@@ -172,11 +160,11 @@
 
     <!-- ================= LIVRE ================= -->
     <section class="cert-section cert-wrap" id="livre">
-      <h2>Feuillette mon livret</h2>
+      <h2>Voir mon livret</h2>
       <p class="cert-sub">Couverture, sommaire, lien avec le référentiel du BTS, chronologie, puis chaque attestation reproduite à l'identique.</p>
 
       <div class="cert-bookwrap" id="cert-bookwrap">
-        <div class="cert-stage" id="cert-stage" tabindex="0" aria-label="Livret de certifications, utiliser les flèches gauche et droite pour tourner les pages">
+        <div class="cert-stage" id="cert-stage" tabindex="0" aria-label="Livret de certifications, utiliser les flèches gauche et droite pour consulter les pages">
           <div class="cert-loading">Chargement du livret…</div>
         </div>
 
@@ -267,17 +255,12 @@
     const $ = (s, r = document) => r.querySelector(s);
     const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    /* ---------- Effet "terminal" ---------- */
-    const typedEl = $("#cert-typed"), cmd = "$ show certifications --all";
-    if (reduce) typedEl.textContent = cmd;
-    else { let i = 0; (function t() { typedEl.textContent = cmd.slice(0, ++i); if (i < cmd.length) setTimeout(t, 65); })(); }
-
     /* ---------- Statistiques ---------- */
     const stats = [
       [CERTS.length, "Attestations"],
       [new Set(CERTS.map(c => c.orgKey)).size, "Organismes"],
       [new Set(CERTS.map(c => c.cat)).size, "Domaines"],
-      [TOTAL, "Pages à feuilleter"]
+      [TOTAL, "Pages à consulter"]
     ];
     $("#cert-stats").innerHTML = stats.map(([n, l]) => `<div class="cert-stat"><b data-n="${n}">0</b><span>${l}</span></div>`).join("");
     document.querySelectorAll(".cert-stat b").forEach(el => {
