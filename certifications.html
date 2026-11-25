@@ -199,6 +199,20 @@
         <a class="cert-btn ghost" href="contact.html">Me contacter</a>
       </div>
     </div>
+    <!-- ================= MODALE ZOOM ================= -->
+    <div class="cert-zoom-modal" id="cert-zoom-modal" role="dialog" aria-modal="true" aria-labelledby="cert-zoom-title">
+      <div class="cert-zoom-bar">
+        <span class="cert-mono" id="cert-zoom-title" style="font-size:.85rem;color:#cfe0ff;"></span>
+        <button class="cert-btn ghost" id="cert-zoom-out" type="button" aria-label="Dézoomer">−</button>
+        <span class="cert-mono" id="cert-zoom-level" style="min-width:54px;text-align:center;font-size:.85rem;">150%</span>
+        <button class="cert-btn ghost" id="cert-zoom-in" type="button" aria-label="Zoomer">+</button>
+        <button class="cert-btn ghost" id="cert-zoom-reset" type="button">100%</button>
+        <button class="cert-btn" id="cert-zoom-close" type="button" aria-label="Fermer le zoom">✕ Fermer</button>
+      </div>
+      <div class="cert-zoom-viewport" id="cert-zoom-viewport">
+        <img class="cert-zoom-img" id="cert-zoom-img" src="" alt="">
+      </div>
+    </div>
   </main>
 
   <script src="js/main.js"></script>
