@@ -149,7 +149,7 @@
 /* ---------- LIVRE ---------- */
 .cert-bookwrap {
   position: relative;
-  padding: 28px 16px 20px;
+  padding: 28px 16px 24px;
   border-radius: 28px;
   overflow: hidden;
   background:
@@ -158,26 +158,17 @@
   border: 1px solid var(--cert-border);
 }
 
-.cert-bookwrap:fullscreen {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-radius: 0;
-  background: var(--cert-bg);
-  padding: 16px;
-  overflow: hidden;
-}
-
 .cert-stage {
   position: relative;
   margin: 0 auto;
   width: 100%;
-  filter: drop-shadow(0 30px 40px rgba(0, 0, 0, .55));
+  filter: drop-shadow(0 24px 36px rgba(0, 0, 0, .5));
   user-select: none;
   -webkit-user-select: none;
   outline: none;
   cursor: zoom-in;
-  transition: transform .2s ease-out;
+  transform-origin: center center;
+  transition: transform .18s ease;
 }
 
 .cert-stage.is-zoomed {
@@ -258,13 +249,14 @@
 
 .cert-controls {
   position: relative;
-  z-index: 2;
+  z-index: 10;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
   margin-top: 22px;
+  padding-top: 6px;
 }
 
 .cert-ind {
@@ -274,9 +266,16 @@
   color: var(--cert-text);
 }
 
+.cert-zoom-ind {
+  min-width: 52px;
+  text-align: center;
+  font-size: .88rem;
+  color: var(--cert-text);
+}
+
 .cert-hint {
   position: relative;
-  z-index: 2;
+  z-index: 10;
   text-align: center;
   color: var(--cert-muted);
   font-size: .85rem;
@@ -318,12 +317,6 @@
 
 .cert-btn.ghost:hover:not(:disabled) {
   border-color: var(--cert-accent);
-}
-
-.cert-btn.active-zoom {
-  border-color: var(--cert-accent-2);
-  background: rgba(0, 224, 255, .16);
-  color: #fff;
 }
 
 .cert-btn:focus-visible,
