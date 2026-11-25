@@ -90,7 +90,7 @@
 
   const TOTAL = PAGE_ALTS.length;
   const IMG = n => `images/livret/page-${String(n).padStart(2, "0")}.jpg`;
-  const ZOOM_STEPS = [1, 1.25, 1.5, 1.75];
+  const ZOOM_STEPS = [1, 1.35, 1.65];
 
   const $ = (s, r = document) => r.querySelector(s);
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -121,7 +121,7 @@
     })(t0);
   });
 
-  /* ---------- Livret & zoom contrôlé (100% au démarrage) ---------- */
+  /* ---------- Livret & zoom via boutons Zoom + / Zoom - uniquement ---------- */
   const MINW = 240;
   const wrap = $("#cert-bookwrap");
   const stage = $("#cert-stage");
@@ -136,13 +136,12 @@
   let api = null;
   let pf = null;
 
-  let zoomIndex = 0; // 0 => 100% bloqué au démarrage
+  let zoomIndex = 0; // 0 = 100% au démarrage
   let panX = 0;
   let panY = 0;
   let isDragging = false;
   let dragOriginX = 0;
   let dragOriginY = 0;
-  let didDragMove = false;
 
   function clampPan() {
     const scale = ZOOM_STEPS[zoomIndex];
@@ -157,7 +156,7 @@
     panY = Math.max(-maxY, Math.min(maxY, panY));
   }
 
-  function applyBookZoom(nextIndex, clientX = null, clientY = null) {
+  function applyBookZoom(nextIndex) {
     zoomIndex = Math.max(0, Math.min(ZOOM_STEPS.length - 1, nextIndex));
     const scale = ZOOM_STEPS[zoomIndex];
 
@@ -167,13 +166,6 @@
       stage.style.transform = "";
       stage.classList.remove("is-zoomed", "is-dragging");
     } else {
-      if (clientX !== null && clientY !== null) {
-        const rect = stage.getBoundingClientRect();
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-        panX = (cx - clientX) * 0.35;
-        panY = (cy - clientY) * 0.35;
-      }
       clampPan();
       stage.style.transform = `translate(${Math.round(panX)}px, ${Math.round(panY)}px) scale(${scale})`;
       stage.classList.add("is-zoomed");
@@ -310,39 +302,19 @@
     applyBookZoom(zoomIndex - 1);
   });
 
-  // Clic sur la page : active le zoom (palier suivant) ou revient à 100% au palier max
-  stage.addEventListener("click", e => {
-    if (didDragMove) {
-      didDragMove = false;
-      e.stopPropagation();
-      e.preventDefault();
-      return;
-    }
-    const nextIdx = zoomIndex < ZOOM_STEPS.length - 1 ? zoomIndex + 1 : 0;
-    applyBookZoom(nextIdx, e.clientX, e.clientY);
-    e.stopPropagation();
-    e.preventDefault();
-  }, true);
-
-  // Déplacement uniquement quand zoomé
+  // Glisser-déplacer uniquement quand un zoom est actif
   stage.addEventListener("mousedown", e => {
     if (ZOOM_STEPS[zoomIndex] <= 1) return;
     isDragging = true;
-    didDragMove = false;
     dragOriginX = e.clientX - panX;
     dragOriginY = e.clientY - panY;
     stage.classList.add("is-dragging");
-  }, true);
+  });
 
   addEventListener("mousemove", e => {
     if (!isDragging) return;
-    const nextX = e.clientX - dragOriginX;
-    const nextY = e.clientY - dragOriginY;
-    if (Math.abs(nextX - panX) > 4 || Math.abs(nextY - panY) > 4) {
-      didDragMove = true;
-    }
-    panX = nextX;
-    panY = nextY;
+    panX = e.clientX - dragOriginX;
+    panY = e.clientY - dragOriginY;
     clampPan();
     stage.style.transform = `translate(${Math.round(panX)}px, ${Math.round(panY)}px) scale(${ZOOM_STEPS[zoomIndex]})`;
   });
@@ -404,7 +376,7 @@
       <div class="cert-tags">${c.tags.map(t => `<span>${t}</span>`).join("")}</div>
       <div class="cert-foot">
         <span class="cert-mono">${c.date}</span>
-        <button class="cert-btn" type="button" data-page="${c.page}">Voir en zoom</button>
+        <button class="cert-btn" type="button" data-page="${c.page}">Voir dans le livret</button>
       </div>
     </article>`).join("");
 
@@ -426,7 +398,6 @@
     wrap.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
     setTimeout(() => {
       api.go(pageNum - 1);
-      setTimeout(() => applyBookZoom(2), reduce ? 0 : 450); // 150%
     }, reduce ? 0 : 350);
   });
 
