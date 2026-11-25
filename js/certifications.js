@@ -90,7 +90,7 @@
 
   const TOTAL = PAGE_ALTS.length;
   const IMG = n => `images/livret/page-${String(n).padStart(2, "0")}.jpg`;
-  const ZOOM_LEVEL = 1.75;
+  const ZOOM_STEPS = [1, 1.25, 1.5, 1.75];
 
   const $ = (s, r = document) => r.querySelector(s);
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -121,21 +121,22 @@
     })(t0);
   });
 
-  /* ---------- Livret & zoom direct sur la page ---------- */
+  /* ---------- Livret & zoom contrôlé (100% au démarrage) ---------- */
   const MINW = 240;
   const wrap = $("#cert-bookwrap");
   const stage = $("#cert-stage");
   const indEl = $("#cert-ind");
   const prevBtn = $("#cert-prev");
   const nextBtn = $("#cert-next");
-  const zoomBtn = $("#cert-book-zoom");
-  const fullBtn = $("#cert-full");
+  const zoomInBtn = $("#cert-zoom-in");
+  const zoomOutBtn = $("#cert-zoom-out");
+  const zoomIndEl = $("#cert-zoom-ind");
 
   let forcePortrait = false;
   let api = null;
   let pf = null;
 
-  let currentZoom = 1;
+  let zoomIndex = 0; // 0 => 100% bloqué au démarrage
   let panX = 0;
   let panY = 0;
   let isDragging = false;
@@ -143,41 +144,49 @@
   let dragOriginY = 0;
   let didDragMove = false;
 
-  function renderZoomTransform() {
-    if (currentZoom <= 1) {
-      stage.style.transform = "";
-      stage.classList.remove("is-zoomed", "is-dragging");
-      zoomBtn.textContent = "🔍 Zoom (100%)";
-      zoomBtn.classList.remove("active-zoom");
-      zoomBtn.setAttribute("aria-pressed", "false");
-    } else {
-      stage.style.transform = `translate(${Math.round(panX)}px, ${Math.round(panY)}px) scale(${currentZoom})`;
-      stage.classList.add("is-zoomed");
-      zoomBtn.textContent = `🔍 Zoom (${Math.round(currentZoom * 100)}%)`;
-      zoomBtn.classList.add("active-zoom");
-      zoomBtn.setAttribute("aria-pressed", "true");
-    }
-  }
-
-  function setBookZoom(level, clientX = null, clientY = null) {
-    currentZoom = level <= 1 ? 1 : level;
-    if (currentZoom === 1) {
+  function clampPan() {
+    const scale = ZOOM_STEPS[zoomIndex];
+    if (scale <= 1) {
       panX = 0;
       panY = 0;
-    } else if (clientX !== null && clientY !== null) {
-      const rect = stage.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      panX = (cx - clientX) * 0.45;
-      panY = (cy - clientY) * 0.45;
+      return;
     }
-    renderZoomTransform();
+    const maxX = Math.max(0, (stage.offsetWidth * (scale - 1)) / 2);
+    const maxY = Math.max(0, (stage.offsetHeight * (scale - 1)) / 2);
+    panX = Math.max(-maxX, Math.min(maxX, panX));
+    panY = Math.max(-maxY, Math.min(maxY, panY));
+  }
+
+  function applyBookZoom(nextIndex, clientX = null, clientY = null) {
+    zoomIndex = Math.max(0, Math.min(ZOOM_STEPS.length - 1, nextIndex));
+    const scale = ZOOM_STEPS[zoomIndex];
+
+    if (scale === 1) {
+      panX = 0;
+      panY = 0;
+      stage.style.transform = "";
+      stage.classList.remove("is-zoomed", "is-dragging");
+    } else {
+      if (clientX !== null && clientY !== null) {
+        const rect = stage.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        panX = (cx - clientX) * 0.35;
+        panY = (cy - clientY) * 0.35;
+      }
+      clampPan();
+      stage.style.transform = `translate(${Math.round(panX)}px, ${Math.round(panY)}px) scale(${scale})`;
+      stage.classList.add("is-zoomed");
+    }
+
+    zoomIndEl.textContent = `${Math.round(scale * 100)}%`;
+    zoomOutBtn.disabled = zoomIndex === 0;
+    zoomInBtn.disabled = zoomIndex === ZOOM_STEPS.length - 1;
   }
 
   function layout() {
-    const fs = !!document.fullscreenElement;
-    const availW = fs ? innerWidth - 40 : wrap.clientWidth - 32;
-    const maxH = fs ? innerHeight - 130 : Math.max(480, innerHeight - 210);
+    const availW = wrap.clientWidth - 32;
+    const maxH = Math.max(480, innerHeight - 210);
     const portrait = forcePortrait || availW < 2 * MINW;
     let w, h;
     if (portrait) {
@@ -253,6 +262,7 @@
       update: () => { try { pf.update && pf.update(); } catch (e) {} }
     };
     refresh(0);
+    applyBookZoom(0);
   }
 
   function initFallback() {
@@ -277,10 +287,12 @@
       update: () => {}
     };
     show(0);
+    applyBookZoom(0);
   }
 
   addEventListener("resize", () => {
     layout();
+    clampPan();
     api && api.update();
   });
 
@@ -290,12 +302,15 @@
     initFallback();
   }
 
-  // Bouton Zoom dans les contrôles
-  zoomBtn.addEventListener("click", () => {
-    setBookZoom(currentZoom > 1 ? 1 : ZOOM_LEVEL);
+  zoomInBtn.addEventListener("click", () => {
+    applyBookZoom(zoomIndex + 1);
   });
 
-  // Interception en phase de capture : cliquer sur une page zoome/dézoome au lieu de tourner la page
+  zoomOutBtn.addEventListener("click", () => {
+    applyBookZoom(zoomIndex - 1);
+  });
+
+  // Clic sur la page : active le zoom (palier suivant) ou revient à 100% au palier max
   stage.addEventListener("click", e => {
     if (didDragMove) {
       didDragMove = false;
@@ -303,18 +318,15 @@
       e.preventDefault();
       return;
     }
-    if (currentZoom > 1) {
-      setBookZoom(1);
-    } else {
-      setBookZoom(ZOOM_LEVEL, e.clientX, e.clientY);
-    }
+    const nextIdx = zoomIndex < ZOOM_STEPS.length - 1 ? zoomIndex + 1 : 0;
+    applyBookZoom(nextIdx, e.clientX, e.clientY);
     e.stopPropagation();
     e.preventDefault();
   }, true);
 
-  // Glisser-déplacer quand zoomé
+  // Déplacement uniquement quand zoomé
   stage.addEventListener("mousedown", e => {
-    if (currentZoom <= 1) return;
+    if (ZOOM_STEPS[zoomIndex] <= 1) return;
     isDragging = true;
     didDragMove = false;
     dragOriginX = e.clientX - panX;
@@ -331,7 +343,8 @@
     }
     panX = nextX;
     panY = nextY;
-    renderZoomTransform();
+    clampPan();
+    stage.style.transform = `translate(${Math.round(panX)}px, ${Math.round(panY)}px) scale(${ZOOM_STEPS[zoomIndex]})`;
   });
 
   addEventListener("mouseup", () => {
@@ -340,14 +353,13 @@
     stage.classList.remove("is-dragging");
   });
 
-  // Navigation propre (réinitialise le zoom quand on change de page)
   prevBtn.addEventListener("click", () => {
-    setBookZoom(1);
+    applyBookZoom(0);
     api.prev();
   });
 
   nextBtn.addEventListener("click", () => {
-    setBookZoom(1);
+    applyBookZoom(0);
     api.next();
   });
 
@@ -359,31 +371,15 @@
   addEventListener("keydown", e => {
     if (!bookVisible || /input|textarea|select/i.test(e.target.tagName)) return;
     if (e.key === "ArrowRight") {
-      setBookZoom(1);
+      applyBookZoom(0);
       api.next();
     } else if (e.key === "ArrowLeft") {
-      setBookZoom(1);
+      applyBookZoom(0);
       api.prev();
-    } else if (e.key === "Escape" && currentZoom > 1) {
-      setBookZoom(1);
+    } else if (e.key === "Escape" && zoomIndex > 0) {
+      applyBookZoom(0);
     }
   });
-
-  if (wrap.requestFullscreen) {
-    fullBtn.hidden = false;
-    fullBtn.addEventListener("click", () => {
-      document.fullscreenElement ? document.exitFullscreen() : wrap.requestFullscreen();
-    });
-    document.addEventListener("fullscreenchange", () => {
-      fullBtn.textContent = document.fullscreenElement ? "Quitter le plein écran" : "Plein écran";
-      setBookZoom(1);
-      setTimeout(() => {
-        layout();
-        api.update();
-        dispatchEvent(new Event("resize"));
-      }, 60);
-    });
-  }
 
   /* ---------- Filtres + cartes ---------- */
   const cats = ["Tout", ...new Set(CERTS.map(c => c.cat))];
@@ -426,11 +422,11 @@
     const pageNum = +(card.dataset.page || e.target.closest("[data-page]")?.dataset.page);
     if (!pageNum) return;
 
-    setBookZoom(1);
+    applyBookZoom(0);
     wrap.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
     setTimeout(() => {
       api.go(pageNum - 1);
-      setTimeout(() => setBookZoom(ZOOM_LEVEL), reduce ? 0 : 450);
+      setTimeout(() => applyBookZoom(2), reduce ? 0 : 450); // 150%
     }, reduce ? 0 : 350);
   });
 
