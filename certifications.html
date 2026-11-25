@@ -8,11 +8,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-  <!-- Feuille de style existante du portfolio (navbar, etc.) -->
   <link rel="stylesheet" href="css/style.css?v=6">
 
   <style>
-    /* Tout est préfixé .cert- pour ne pas entrer en conflit avec style.css */
     .cert-page {
       --cert-bg: #050b1f;
       --cert-surface: rgba(14, 28, 66, .55);
@@ -39,7 +37,6 @@
 
     /* ---------- HERO ---------- */
     .cert-hero { padding: 100px 0 40px; text-align: center; }
-
     .cert-hero h1 { margin: 0 0 14px; font-size: clamp(2.6rem, 7vw, 5rem); line-height: 1.02; font-weight: 700; letter-spacing: -.03em; }
     .cert-grad { background: linear-gradient(100deg, #7fc0ff 0%, var(--cert-accent-2) 45%, #7b8cff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
     .cert-hero p.cert-lead { max-width: 680px; margin: 0 auto; color: var(--cert-muted); font-size: 1.15rem; line-height: 1.65; }
@@ -69,7 +66,6 @@
     .cert-stage .page img { display: block; width: 100%; height: 100%; object-fit: fill; pointer-events: none; -webkit-user-drag: none; }
     .cert-loading { text-align: center; color: var(--cert-muted); padding: 120px 0; }
 
-    /* styles de base de la bibliothèque de tourne-page (au cas où ils ne seraient pas injectés) */
     .stf__parent { position: relative; display: block; box-sizing: border-box; transform: translateZ(0); touch-action: pan-y; }
     .sft__wrapper, .stf__wrapper { position: relative; width: 100%; box-sizing: border-box; }
     .stf__parent canvas { position: absolute; width: 100%; height: 100%; left: 0; top: 0; }
@@ -125,14 +121,14 @@
     .cert-zoom-modal {
       position: fixed;
       inset: 0;
-      z-index: 10000;
+      z-index: 20000;
       display: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 14px;
       padding: 20px;
-      background: rgba(3, 8, 22, 0.9);
+      background: rgba(3, 8, 22, 0.92);
       backdrop-filter: blur(8px);
     }
     .cert-zoom-modal.open { display: flex; }
@@ -146,28 +142,37 @@
     }
     .cert-zoom-viewport {
       position: relative;
-      width: min(92vw, 780px);
-      height: min(78vh, 980px);
+      width: min(92vw, 820px);
+      height: min(78vh, 960px);
       overflow: auto;
       border-radius: 16px;
       background: #0b1636;
       border: 1px solid var(--cert-border);
-      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.75);
-      display: grid;
-      place-items: center;
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8);
+      padding: 16px;
+    }
+    .cert-zoom-inner {
+      min-width: 100%;
+      min-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .cert-zoom-img {
-      max-width: 100%;
-      max-height: 100%;
-      width: auto;
-      height: auto;
       display: block;
-      transform-origin: center center;
-      transition: transform 0.2s ease;
-      cursor: zoom-in;
+      max-width: none;
+      height: auto;
+      border-radius: 8px;
       user-select: none;
+      -webkit-user-drag: none;
+      cursor: zoom-in;
     }
-    .cert-zoom-img.is-zoomed { cursor: zoom-out; }
+    .cert-zoom-img.is-zoomed {
+      cursor: grab;
+    }
+    .cert-zoom-img.is-dragging {
+      cursor: grabbing;
+    }
 
     /* CTA */
     .cert-cta { margin: 30px 0 90px; padding: 46px 30px; text-align: center; border-radius: 26px; background: linear-gradient(135deg, rgba(30, 90, 255, .35), rgba(0, 224, 255, .12)); border: 1px solid var(--cert-border); }
@@ -189,7 +194,6 @@
 </head>
 <body>
 
-  <!-- Navbar du portfolio (injectée par js/main.js) -->
   <div id="navbar-container"></div>
 
   <main class="cert-page">
@@ -221,10 +225,10 @@
           <div class="cert-ind cert-mono" id="cert-ind" aria-live="polite">Couverture</div>
           <button class="cert-btn ghost" id="cert-next" type="button" aria-label="Page suivante">Suivant ›</button>
           <button class="cert-btn" id="cert-full" type="button" hidden>Plein écran</button>
-          <a class="cert-btn" href="certifications.htlm/livret-certifications.pdf" download>Télécharger le PDF</a>
+          <a class="cert-btn" href="documents/livret-certifications.pdf" download>Télécharger le PDF</a>
         </div>
         <p class="cert-hint"><span class="cert-hint-desktop">Clique sur un coin de page, glisse avec la souris ou utilise les flèches ← → du clavier.</span> Sur mobile, fais glisser la page avec le doigt.</p>
-        <noscript><p class="cert-hint">JavaScript est désactivé : <a href="certifications.htlm/livret-certifications.pdf" style="color:#00e0ff">ouvrir le livret en PDF</a>.</p></noscript>
+        <noscript><p class="cert-hint">JavaScript est désactivé : <a href="documents/livret-certifications.pdf" style="color:#00e0ff">ouvrir le livret en PDF</a>.</p></noscript>
       </div>
     </section>
 
@@ -253,28 +257,24 @@
       <div class="cert-zoom-bar">
         <span class="cert-mono" id="cert-zoom-title" style="font-size:.85rem;color:#cfe0ff;"></span>
         <button class="cert-btn ghost" id="cert-zoom-out" type="button" aria-label="Dézoomer">−</button>
-        <span class="cert-mono" id="cert-zoom-level" style="min-width:54px;text-align:center;font-size:.85rem;">150%</span>
+        <span class="cert-mono" id="cert-zoom-level" style="min-width:54px;text-align:center;font-size:.85rem;">160%</span>
         <button class="cert-btn ghost" id="cert-zoom-in" type="button" aria-label="Zoomer">+</button>
         <button class="cert-btn ghost" id="cert-zoom-reset" type="button">100%</button>
         <button class="cert-btn" id="cert-zoom-close" type="button" aria-label="Fermer le zoom">✕ Fermer</button>
       </div>
       <div class="cert-zoom-viewport" id="cert-zoom-viewport">
-        <img class="cert-zoom-img" id="cert-zoom-img" src="" alt="">
+        <div class="cert-zoom-inner">
+          <img class="cert-zoom-img" id="cert-zoom-img" src="" alt="">
+        </div>
       </div>
     </div>
   </main>
 
   <script src="js/main.js"></script>
-  <!-- Bibliothèque de tourne-page (StPageFlip) : copie locale dans js/, sinon repli sur le CDN.
-       Si aucune des deux ne se charge, une visionneuse simple prend le relais. -->
   <script src="js/page-flip.browser.js"></script>
   <script>window.St || document.write('<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"><\/script>');</script>
   <script>
   (() => {
-    /* =====================================================
-       Livret : 16 images dans images/livret/page-01.jpg … page-16.jpg
-       Les numéros de page ci-dessous correspondent à ces images.
-       ===================================================== */
     const CERTS = [
       { page: 5,  cat: "Réseaux", icon: "🌐", title: "Premiers pas avec Cisco Packet Tracer", org: "Cisco Networking Academy", orgKey: "Cisco", date: "29 décembre 2025",
         desc: "Prise en main du simulateur réseau de Cisco : construire une topologie, configurer les équipements et tester les échanges.",
@@ -310,9 +310,11 @@
         desc: "Notions fondamentales de l'intelligence artificielle, de ses principaux usages et de ses enjeux.",
         tags: ["Intelligence artificielle", "Usages"] }
     ];
-    const PAGE_ALTS = ["Couverture du livret de certifications", "Sommaire", "Lien avec le référentiel BTS SIO SISR", "Chronologie",
-      ...CERTS.map(c => "Attestation : " + c.title), "Quatrième de couverture"];
-    const TOTAL = PAGE_ALTS.length;           // 16
+    const PAGE_ALTS = [
+      "Couverture du livret de certifications", "Sommaire", "Lien avec le référentiel BTS SIO SISR", "Chronologie",
+      ...CERTS.map(c => "Attestation : " + c.title), "Quatrième de couverture"
+    ];
+    const TOTAL = PAGE_ALTS.length;
     const IMG = n => `images/livret/page-${String(n).padStart(2, "0")}.jpg`;
 
     const $ = (s, r = document) => r.querySelector(s);
@@ -330,16 +332,169 @@
       const end = +el.dataset.n;
       if (reduce) { el.textContent = end; return; }
       const t0 = performance.now();
-      (function f(t) { const p = Math.min((t - t0) / 1100, 1); el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(f); })(t0);
+      (function f(t) {
+        const p = Math.min((t - t0) / 1100, 1);
+        el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3)));
+        if (p < 1) requestAnimationFrame(f);
+      })(t0);
     });
 
-    /* =====================================================
-       LIVRE
-       ===================================================== */
-    const MINW = 240;                          // largeur mini d'une page (bascule en mode une page)
+    /* ---------- Modale zoom (initialisée en premier pour garantir son fonctionnement) ---------- */
+    const zoomModal = $("#cert-zoom-modal");
+    const zoomImg = $("#cert-zoom-img");
+    const zoomTitle = $("#cert-zoom-title");
+    const zoomLevelEl = $("#cert-zoom-level");
+    const zoomViewport = $("#cert-zoom-viewport");
+    let zoomRatio = 1.6;
+    let baseWidth = 600;
+    let isDragging = false;
+    let dragStartX = 0, dragStartY = 0, scrollStartX = 0, scrollStartY = 0;
+
+    function computeBaseWidth() {
+      const vw = Math.max(280, zoomViewport.clientWidth - 32);
+      const vh = Math.max(280, zoomViewport.clientHeight - 32);
+      // Ratio portrait standard (3:4) si non encore chargé
+      const ratio = (zoomImg.naturalWidth && zoomImg.naturalHeight)
+        ? (zoomImg.naturalWidth / zoomImg.naturalHeight)
+        : 0.75;
+      baseWidth = Math.min(vw, vh * ratio);
+    }
+
+    function applyZoom(val) {
+      zoomRatio = Math.max(1, Math.min(3.5, Number(val.toFixed(2))));
+      computeBaseWidth();
+      zoomImg.style.width = `${Math.round(baseWidth * zoomRatio)}px`;
+      zoomImg.classList.toggle("is-zoomed", zoomRatio > 1);
+      zoomLevelEl.textContent = `${Math.round(zoomRatio * 100)}%`;
+    }
+
+    let api = { go: () => {}, next: () => {}, prev: () => {}, update: () => {} };
+
+    function openCertZoom(pageNum, titleText) {
+      const pageIndex = Math.max(0, Math.min(TOTAL - 1, (+pageNum || 1) - 1));
+      try { api.go(pageIndex); } catch (e) {}
+
+      zoomModal.classList.add("open");
+      zoomImg.alt = titleText || PAGE_ALTS[pageIndex];
+      zoomTitle.textContent = titleText ? `${titleText} (Page ${pageIndex + 1})` : `Page ${pageIndex + 1}`;
+      zoomViewport.scrollTop = 0;
+      zoomViewport.scrollLeft = 0;
+
+      zoomImg.onload = () => {
+        applyZoom(1.6);
+      };
+      zoomImg.src = IMG(pageIndex + 1);
+      applyZoom(1.6);
+    }
+
+    function closeCertZoom() {
+      zoomModal.classList.remove("open");
+      isDragging = false;
+      zoomImg.classList.remove("is-dragging");
+    }
+
+    $("#cert-zoom-in").addEventListener("click", () => applyZoom(zoomRatio + 0.25));
+    $("#cert-zoom-out").addEventListener("click", () => applyZoom(zoomRatio - 0.25));
+    $("#cert-zoom-reset").addEventListener("click", () => applyZoom(1));
+    $("#cert-zoom-close").addEventListener("click", closeCertZoom);
+
+    zoomImg.addEventListener("click", e => {
+      if (isDragging) return;
+      applyZoom(zoomRatio > 1 ? 1 : 1.8);
+    });
+
+    zoomImg.addEventListener("mousedown", e => {
+      if (zoomRatio <= 1) return;
+      isDragging = true;
+      zoomImg.classList.add("is-dragging");
+      dragStartX = e.clientX;
+      dragStartY = e.clientY;
+      scrollStartX = zoomViewport.scrollLeft;
+      scrollStartY = zoomViewport.scrollTop;
+      e.preventDefault();
+    });
+
+    addEventListener("mousemove", e => {
+      if (!isDragging) return;
+      zoomViewport.scrollLeft = scrollStartX - (e.clientX - dragStartX);
+      zoomViewport.scrollTop = scrollStartY - (e.clientY - dragStartY);
+    });
+
+    addEventListener("mouseup", () => {
+      if (!isDragging) return;
+      setTimeout(() => { isDragging = false; }, 0);
+      zoomImg.classList.remove("is-dragging");
+    });
+
+    zoomViewport.addEventListener("wheel", e => {
+      e.preventDefault();
+      applyZoom(zoomRatio + (e.deltaY < 0 ? 0.2 : -0.2));
+    }, { passive: false });
+
+    zoomModal.addEventListener("click", e => {
+      if (e.target === zoomModal) closeCertZoom();
+    });
+
+    addEventListener("keydown", e => {
+      if (e.key === "Escape" && zoomModal.classList.contains("open")) {
+        closeCertZoom();
+      }
+    });
+
+    /* ---------- Filtres + cartes ---------- */
+    const cats = ["Tout", ...new Set(CERTS.map(c => c.cat))];
+    const filters = $("#cert-filters"), grid = $("#cert-grid");
+    filters.innerHTML = cats.map((c, i) => `<button class="cert-chip${i === 0 ? " active" : ""}" data-cat="${c}" type="button">${c}</button>`).join("");
+    grid.innerHTML = CERTS.map(c => `
+      <article class="cert-card in" data-cat="${c.cat}" data-page="${c.page}">
+        <div class="cert-top">
+          <div class="cert-icon" aria-hidden="true">${c.icon}</div>
+          <span class="cert-badge">✔ Obtenue</span>
+        </div>
+        <div>
+          <div class="cert-org cert-mono">${c.org}</div>
+          <h3>${c.title}</h3>
+        </div>
+        <p>${c.desc}</p>
+        <div class="cert-tags">${c.tags.map(t => `<span>${t}</span>`).join("")}</div>
+        <div class="cert-foot">
+          <span class="cert-mono">${c.date}</span>
+          <button class="cert-btn" type="button" data-page="${c.page}">Zoomer</button>
+        </div>
+      </article>`).join("");
+
+    grid.addEventListener("pointermove", e => {
+      const card = e.target.closest(".cert-card");
+      if (!card) return;
+      const r = card.getBoundingClientRect();
+      card.style.setProperty("--mx", (e.clientX - r.left) + "px");
+      card.style.setProperty("--my", (e.clientY - r.top) + "px");
+    });
+
+    grid.addEventListener("click", e => {
+      const card = e.target.closest(".cert-card");
+      if (!card) return;
+      const page = card.dataset.page || e.target.closest("[data-page]")?.dataset.page;
+      if (!page) return;
+      const title = card.querySelector("h3")?.textContent?.trim() || "";
+      openCertZoom(page, title);
+    });
+
+    filters.addEventListener("click", e => {
+      const b = e.target.closest(".cert-chip");
+      if (!b) return;
+      filters.querySelectorAll(".cert-chip").forEach(x => x.classList.toggle("active", x === b));
+      grid.querySelectorAll(".cert-card").forEach(card => {
+        const show = b.dataset.cat === "Tout" || card.dataset.cat === b.dataset.cat;
+        card.classList.toggle("hide", !show);
+      });
+    });
+
+    /* ---------- Livret ---------- */
+    const MINW = 240;
     const wrap = $("#cert-bookwrap"), stage = $("#cert-stage");
     const indEl = $("#cert-ind"), prevBtn = $("#cert-prev"), nextBtn = $("#cert-next"), fullBtn = $("#cert-full");
-    let forcePortrait = false, api = null, pf = null;
+    let forcePortrait = false, pf = null;
 
     function layout() {
       const fs = !!document.fullscreenElement;
@@ -400,7 +555,6 @@
       refresh(0);
     }
 
-    /* Visionneuse de secours si la bibliothèque n'est pas disponible */
     function initFallback() {
       forcePortrait = true; layout();
       stage.innerHTML = ""; let idx = 0;
@@ -412,23 +566,25 @@
       show(0);
     }
 
-    addEventListener("resize", () => { layout(); api && api.update(); });
+    addEventListener("resize", () => {
+      layout();
+      api && api.update();
+      if (zoomModal.classList.contains("open")) applyZoom(zoomRatio);
+    });
     if (window.St && St.PageFlip) { try { initFlip(); } catch (e) { console.warn(e); initFallback(); } }
     else initFallback();
     prevBtn.addEventListener("click", () => api.prev());
     nextBtn.addEventListener("click", () => api.next());
 
-    /* Clavier (uniquement quand le livre est visible) */
     let bookVisible = false;
     new IntersectionObserver(en => { bookVisible = en[0].isIntersecting; }, { threshold: .25 }).observe(wrap);
     addEventListener("keydown", e => {
-      if ($("#cert-zoom-modal").classList.contains("open")) return;
+      if (zoomModal.classList.contains("open")) return;
       if (!bookVisible || /input|textarea|select/i.test(e.target.tagName)) return;
       if (e.key === "ArrowRight") api.next();
       else if (e.key === "ArrowLeft") api.prev();
     });
 
-    /* Plein écran */
     if (wrap.requestFullscreen) {
       fullBtn.hidden = false;
       fullBtn.addEventListener("click", () => document.fullscreenElement ? document.exitFullscreen() : wrap.requestFullscreen());
@@ -438,115 +594,7 @@
       });
     }
 
-    /* ---------- Filtres + cartes ---------- */
-    const cats = ["Tout", ...new Set(CERTS.map(c => c.cat))];
-    const filters = $("#cert-filters"), grid = $("#cert-grid");
-    filters.innerHTML = cats.map((c, i) => `<button class="cert-chip${i === 0 ? " active" : ""}" data-cat="${c}" type="button">${c}</button>`).join("");
-    grid.innerHTML = CERTS.map(c => `
-      <article class="cert-card" data-cat="${c.cat}">
-        <div class="cert-top">
-          <div class="cert-icon" aria-hidden="true">${c.icon}</div>
-          <span class="cert-badge">✔ Obtenue</span>
-        </div>
-        <div>
-          <div class="cert-org cert-mono">${c.org}</div>
-          <h3>${c.title}</h3>
-        </div>
-        <p>${c.desc}</p>
-        <div class="cert-tags">${c.tags.map(t => `<span>${t}</span>`).join("")}</div>
-        <div class="cert-foot">
-          <span class="cert-mono">${c.date}</span>
-          <button class="cert-btn" type="button" data-page="${c.page}">Zoomer</button>
-        </div>
-      </article>`).join("");
-
-    grid.addEventListener("pointermove", e => {
-      const card = e.target.closest(".cert-card"); if (!card) return;
-      const r = card.getBoundingClientRect();
-      card.style.setProperty("--mx", (e.clientX - r.left) + "px");
-      card.style.setProperty("--my", (e.clientY - r.top) + "px");
-    });
-
-    /* ---------- Modale zoom au clic sur une attestation ---------- */
-    const zoomModal = $("#cert-zoom-modal");
-    const zoomImg = $("#cert-zoom-img");
-    const zoomTitle = $("#cert-zoom-title");
-    const zoomLevelEl = $("#cert-zoom-level");
-    const zoomViewport = $("#cert-zoom-viewport");
-    let scale = 1.5;
-
-    function applyZoom(val) {
-      scale = Math.max(1, Math.min(3.5, Number(val.toFixed(2))));
-      zoomImg.style.transform = `scale(${scale})`;
-      zoomImg.classList.toggle("is-zoomed", scale > 1);
-      zoomLevelEl.textContent = `${Math.round(scale * 100)}%`;
-    }
-
-    function openCertZoom(pageNum, titleText) {
-      const pageIndex = Math.max(0, Math.min(TOTAL - 1, (+pageNum || 1) - 1));
-      api.go(pageIndex);
-
-      zoomImg.src = IMG(pageIndex + 1);
-      zoomImg.alt = titleText || PAGE_ALTS[pageIndex];
-      zoomTitle.textContent = titleText ? `${titleText} (Page ${pageIndex + 1})` : `Page ${pageIndex + 1}`;
-      zoomViewport.scrollTop = 0;
-      zoomViewport.scrollLeft = 0;
-      applyZoom(1.5);
-      zoomModal.classList.add("open");
-    }
-
-    function closeCertZoom() {
-      zoomModal.classList.remove("open");
-    }
-
-    grid.addEventListener("click", e => {
-      const card = e.target.closest(".cert-card");
-      if (!card) return;
-      const btn = card.querySelector("[data-page]");
-      if (!btn) return;
-      const title = card.querySelector("h3")?.textContent?.trim() || "";
-      openCertZoom(btn.dataset.page, title);
-    });
-
-    $("#cert-zoom-in").addEventListener("click", () => applyZoom(scale + 0.25));
-    $("#cert-zoom-out").addEventListener("click", () => applyZoom(scale - 0.25));
-    $("#cert-zoom-reset").addEventListener("click", () => applyZoom(1));
-    $("#cert-zoom-close").addEventListener("click", closeCertZoom);
-
-    zoomImg.addEventListener("click", () => {
-      applyZoom(scale > 1 ? 1 : 2);
-    });
-
-    zoomViewport.addEventListener("wheel", e => {
-      e.preventDefault();
-      applyZoom(scale + (e.deltaY < 0 ? 0.2 : -0.2));
-    }, { passive: false });
-
-    zoomModal.addEventListener("click", e => {
-      if (e.target === zoomModal) closeCertZoom();
-    });
-
-    addEventListener("keydown", e => {
-      if (e.key === "Escape" && zoomModal.classList.contains("open")) {
-        closeCertZoom();
-      }
-    });
-
-    filters.addEventListener("click", e => {
-      const b = e.target.closest(".cert-chip"); if (!b) return;
-      filters.querySelectorAll(".cert-chip").forEach(x => x.classList.toggle("active", x === b));
-      grid.querySelectorAll(".cert-card").forEach(card => {
-        const show = b.dataset.cat === "Tout" || card.dataset.cat === b.dataset.cat;
-        card.classList.toggle("hide", !show);
-        if (show) card.classList.add("in");
-      });
-    });
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
-    }, { threshold: .12 });
-    document.querySelectorAll(".cert-card").forEach(el => io.observe(el));
-
-    /* ---------- Fond animé : réseau de nœuds ---------- */
+    /* ---------- Fond animé ---------- */
     const cv = $("#cert-canvas"), ctx = cv.getContext("2d");
     let W, H, pts = [];
     function size() {
